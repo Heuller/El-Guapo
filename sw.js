@@ -14,7 +14,19 @@ const ASSETS_TO_CACHE = [
     '/',
     '/index.html',
     '/manifest.json',
-    '/sw.js'
+    '/sw.js',
+    '/images/el-guapo-img-01.webp',
+    '/images/el-guapo-img-02.webp',
+    '/images/el-guapo-img-03.webp',
+    '/images/el-guapo-img-04.webp',
+    '/images/el-guapo-img-05.webp',
+    '/images/el-guapo-img-06.webp',
+    '/images/el-guapo-img-07.webp',
+    '/images/el-guapo-img-08.webp',
+    '/images/el-guapo-img-09.webp',
+    '/images/el-guapo-img-10.webp',
+    '/images/el-guapo-img-11.webp',
+    '/images/el-guapo-img-12.webp'
 ];
 
 // Evento de instalação: cachear assets críticos

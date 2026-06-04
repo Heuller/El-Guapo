@@ -45,7 +45,10 @@
     <title>El Guapo — Caderno de Receitas</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+    </noscript>
 
     <style>
         /* ═══════════════════════════════════════════════
@@ -155,10 +158,13 @@
         .nav-links a:hover { color: var(--terra); }
         .nav-links a:hover::after { transform: scaleX(1); }
         .nav-links a:focus-visible,
-        .nav-brand:focus-visible {
+        .nav-brand:focus-visible,
+        .rc-head:focus-visible,
+        button:focus-visible {
             outline: 2px solid var(--terra);
             outline-offset: 4px;
             border-radius: 1px;
+            box-shadow: 0 0 0 6px var(--paper), 0 0 0 8px var(--terra);
         }
 
         /* ═══════════════════════════════════════════════
@@ -1174,7 +1180,7 @@
            MODO COZINHA
         ═══════════════════════════════════════════════ */
         .kitchen-btn {
-            width: 32px; height: 32px;
+            width: 38px; height: 38px; /* Aumentado para 2026 UX */
             border: 1px solid var(--line);
             background: none;
             cursor: pointer;
@@ -1183,11 +1189,22 @@
             justify-content: center;
             flex-shrink: 0;
             color: var(--ink-soft);
-            transition: background 0.4s cubic-bezier(0.25,0.1,0.25,1), border-color 0.4s, color 0.3s;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-radius: 4px;
+        }
+        .kitchen-btn:hover {
+            transform: scale(1.1);
+            border-color: var(--terra);
+            color: var(--terra);
+        }
+        .kitchen-btn--on {
+            background: var(--terra) !important;
+            border-color: var(--terra) !important;
+            color: var(--paper) !important;
+            box-shadow: 0 0 15px var(--terra-dim);
         }
 
-        .kitchen-btn:hover { border-color: var(--terra); color: var(--terra); }
-        .kitchen-btn--on { background: var(--terra); border-color: var(--terra); color: var(--paper-cream); }
+
 
         .recipe-card.kitchen { background: var(--paper-cream); }
         .recipe-card.kitchen .rc-step { padding: 1.65rem 0; }
