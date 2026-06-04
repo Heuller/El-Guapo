@@ -1646,53 +1646,6 @@
             color: var(--ink-soft);
             text-align: center;
         }
-
-        /* ═══════════════════════════════════════════════
-           COOKING MODE ENHANCEMENTS (ONE HAND OPTIMIZED)
-        ═══════════════════════════════════════════════ */
-        .kitchen-mode-overlay button {
-            min-height: 56px !important; /* Touch target otimizado */
-            min-width: 56px !important;
-            font-size: 1.2rem !important;
-            border-radius: 50% !important;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2) !important;
-            transition: all 0.2s ease !important;
-        }
-
-        .kitchen-mode-overlay button:active {
-            transform: scale(0.9) !important;
-        }
-
-        /* Botões de navegação gigantes nas laterais para uso com dedão */
-        .kitchen-nav-giant {
-            position: fixed;
-            bottom: 2rem;
-            display: flex;
-            gap: 1.5rem;
-            z-index: 10000;
-            width: 100%;
-            justify-content: center;
-            padding: 0 2rem;
-        }
-
-        .kitchen-nav-giant button {
-            flex: 1;
-            max-width: 150px;
-            border-radius: 30px !important;
-            background: var(--terra) !important;
-            color: var(--paper) !important;
-            font-weight: bold !important;
-            border: none !important;
-        }
-
-        /* Indicador de progresso gigante */
-        .kitchen-progress-giant {
-            font-size: 1.5rem !important;
-            font-weight: bold !important;
-            color: var(--terra) !important;
-            text-align: center;
-            margin-bottom: 1rem;
-        }
 </style>
 
     <link rel="manifest" href="manifest.json">
@@ -4886,7 +4839,27 @@
 
 })();
 
+</script>
 
+<!-- ═══ MODO FOCO NA COZINHA ═══ -->
+<div class="kitchen-mode-overlay" id="kitchen-mode-overlay">
+    <div class="kitchen-mode-header">
+        <span class="kitchen-mode-recipe-name" id="kitchen-mode-recipe-name"></span>
+        <button class="kitchen-mode-close" id="kitchen-mode-close">Fechar</button>
+    </div>
+    <div class="kitchen-mode-content">
+        <div class="kitchen-mode-step-number" id="kitchen-mode-step-number"></div>
+        <div class="kitchen-mode-step-text" id="kitchen-mode-step-text"></div>
+        <div class="kitchen-mode-navigation">
+            <button class="kitchen-mode-btn" id="kitchen-mode-prev">← Anterior</button>
+            <button class="kitchen-mode-btn" id="kitchen-mode-next">Próximo →</button>
+        </div>
+    </div>
+    <div class="kitchen-mode-progress" id="kitchen-mode-progress"></div>
+</div>
+
+
+<script>
 // ═══════════════════════════════════════════════
 // WAKE LOCK API FOR COOKING MODE
 // ═══════════════════════════════════════════════
@@ -4907,45 +4880,38 @@ function releaseWakeLock() {
     if (wakeLock) {
         wakeLock.release().then(() => {
             wakeLock = null;
-            console.log('✓ Wake Lock liberado - Tela pode apagar');
+            console.log('✓ Wake Lock liberado');
         });
     }
 }
 
-// Integrar com os eventos do Modo Cozinha
+// Integrar com os botões do Modo Cozinha
 document.addEventListener('DOMContentLoaded', () => {
-    const kitchenButtons = document.querySelectorAll('[hint="Modo cozinha"]');
+    // Procurar por botões que abrem o Modo Cozinha
+    const kitchenButtons = document.querySelectorAll('[hint*="cozinha"], button:has-text("👨‍🍳")');
     kitchenButtons.forEach(btn => {
         btn.addEventListener('click', () => {
-            requestWakeLock();
+            setTimeout(requestWakeLock, 100);
         });
     });
+});
 
-    const closeKitchenBtn = document.querySelector('.kitchen-mode-close');
-    if (closeKitchenBtn) {
-        closeKitchenBtn.addEventListener('click', () => {
-            releaseWakeLock();
+// Liberar Wake Lock ao sair do Modo Cozinha (se houver um botão de fechar)
+document.addEventListener('DOMContentLoaded', () => {
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.removedNodes.length > 0) {
+                mutation.removedNodes.forEach(node => {
+                    if (node.classList && node.classList.contains('kitchen-mode-overlay')) {
+                        releaseWakeLock();
+                    }
+                });
+            }
         });
-    }
+    });
+    
+    observer.observe(document.body, { childList: true, subtree: true });
 });
 </script>
-
-<!-- ═══ MODO FOCO NA COZINHA ═══ -->
-<div class="kitchen-mode-overlay" id="kitchen-mode-overlay">
-    <div class="kitchen-mode-header">
-        <span class="kitchen-mode-recipe-name" id="kitchen-mode-recipe-name"></span>
-        <button class="kitchen-mode-close" id="kitchen-mode-close">Fechar</button>
-    </div>
-    <div class="kitchen-mode-content">
-        <div class="kitchen-mode-step-number" id="kitchen-mode-step-number"></div>
-        <div class="kitchen-mode-step-text" id="kitchen-mode-step-text"></div>
-        <div class="kitchen-mode-navigation">
-            <button class="kitchen-mode-btn" id="kitchen-mode-prev">← Anterior</button>
-            <button class="kitchen-mode-btn" id="kitchen-mode-next">Próximo →</button>
-        </div>
-    </div>
-    <div class="kitchen-mode-progress" id="kitchen-mode-progress"></div>
-</div>
-
 </body>
 </html>
