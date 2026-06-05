@@ -4467,11 +4467,24 @@
                 }
             };
 
-                recognition.onstart = () => {
-                    voiceControlBtn.classList.add('voice-control-btn--on');
-                    voiceControlBtn.setAttribute('title', 'Controle por Voz Ativo');
-                    console.log('Reconhecimento de voz iniciado.');
-                };
+            recognition.onstart = () => {
+                voiceControlBtn.classList.add('voice-control-btn--on');
+                voiceControlBtn.setAttribute('title', 'Controle por Voz Ativo');
+                voiceControlBtn.style.backgroundColor = ''; // Limpa o feedback temporário
+                
+                // Toast notification simples
+                const toast = document.createElement('div');
+                toast.style = 'position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:var(--terra); color:white; padding:10px 20px; border-radius:30px; z-index:9999; font-family:Jost; font-size:0.9rem; box-shadow:0 4px 12px rgba(0,0,0,0.2); pointer-events:none; opacity:0; transition:opacity 0.3s;';
+                toast.textContent = '🎙️ Ouvindo: diga "Próximo" ou "Voltar"';
+                document.body.appendChild(toast);
+                requestAnimationFrame(() => toast.style.opacity = '1');
+                setTimeout(() => {
+                    toast.style.opacity = '0';
+                    setTimeout(() => toast.remove(), 300);
+                }, 3000);
+                
+                console.log('Reconhecimento de voz iniciado.');
+            };
 
                 recognition.onend = () => {
                     voiceControlBtn.classList.remove('voice-control-btn--on');
@@ -4485,15 +4498,27 @@
                     voiceControlBtn.setAttribute('title', 'Controle por Voz Inativo (Erro)');
                 };
 
-                voiceControlBtn.addEventListener('click', () => {
-                    if (voiceControlBtn.classList.contains('voice-control-btn--on')) {
-                        recognition.stop();
-                    } else {
-                        currentRecipeCard = card; // Define o card atual para navegação
-                        currentStepIndex = 0; // Reseta o índice do passo
+            voiceControlBtn.addEventListener('click', () => {
+                if (voiceControlBtn.classList.contains('voice-control-btn--on')) {
+                    recognition.stop();
+                } else {
+                    // Feedback visual imediato antes da permissão
+                    voiceControlBtn.style.borderColor = 'var(--terra)';
+                    voiceControlBtn.style.backgroundColor = 'var(--terra-dim)';
+                    
+                    currentRecipeCard = card;
+                    currentStepIndex = 0;
+                    
+                    try {
                         recognition.start();
+                    } catch (e) {
+                        console.error("Erro ao iniciar reconhecimento:", e);
+                        // Tentar reiniciar se já estiver rodando
+                        recognition.stop();
+                        setTimeout(() => recognition.start(), 300);
                     }
-                });
+                }
+            });
             }
         } else if (voiceControlBtn) {
             voiceControlBtn.style.display = 'none'; // Esconde o botão se a API não for suportada
