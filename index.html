@@ -4411,16 +4411,21 @@
             (typeof SpeechRecognition !== 'undefined') ||
             (typeof webkitSpeechRecognition !== 'undefined')
         )) {
-            const SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
-            recognition = new SpeechRecognition();
-            recognition.continuous = false; // Mudar para true se quiser ouvir continuamente
-            recognition.interimResults = false;
-            recognition.lang = 'pt-BR';
+            const SpeechRecognitionClass = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (SpeechRecognitionClass) {
+                recognition = new SpeechRecognitionClass();
+            }
+            if (recognition) {
+                recognition.continuous = false;
+                recognition.interimResults = false;
+                recognition.lang = 'pt-BR';
+            }
 
             let currentRecipeCard = null;
             let currentStepIndex = 0;
 
-            recognition.onresult = (event) => {
+            if (recognition) {
+                recognition.onresult = (event) => {
                 const transcript = Array.from(event.results)
                     .map(result => result[0].transcript)
                     .join('');
@@ -4462,33 +4467,34 @@
                 }
             };
 
-            recognition.onstart = () => {
-                voiceControlBtn.classList.add('voice-control-btn--on');
-                voiceControlBtn.setAttribute('title', 'Controle por Voz Ativo');
-                console.log('Reconhecimento de voz iniciado.');
-            };
+                recognition.onstart = () => {
+                    voiceControlBtn.classList.add('voice-control-btn--on');
+                    voiceControlBtn.setAttribute('title', 'Controle por Voz Ativo');
+                    console.log('Reconhecimento de voz iniciado.');
+                };
 
-            recognition.onend = () => {
-                voiceControlBtn.classList.remove('voice-control-btn--on');
-                voiceControlBtn.setAttribute('title', 'Controle por Voz Inativo');
-                console.log('Reconhecimento de voz parado.');
-            };
+                recognition.onend = () => {
+                    voiceControlBtn.classList.remove('voice-control-btn--on');
+                    voiceControlBtn.setAttribute('title', 'Controle por Voz Inativo');
+                    console.log('Reconhecimento de voz parado.');
+                };
 
-            recognition.onerror = (event) => {
-                console.error('Erro no reconhecimento de voz:', event.error);
-                voiceControlBtn.classList.remove('voice-control-btn--on');
-                voiceControlBtn.setAttribute('title', 'Controle por Voz Inativo (Erro)');
-            };
+                recognition.onerror = (event) => {
+                    console.error('Erro no reconhecimento de voz:', event.error);
+                    voiceControlBtn.classList.remove('voice-control-btn--on');
+                    voiceControlBtn.setAttribute('title', 'Controle por Voz Inativo (Erro)');
+                };
 
-            voiceControlBtn.addEventListener('click', () => {
-                if (voiceControlBtn.classList.contains('voice-control-btn--on')) {
-                    recognition.stop();
-                } else {
-                    currentRecipeCard = card; // Define o card atual para navegação
-                    currentStepIndex = 0; // Reseta o índice do passo
-                    recognition.start();
-                }
-            });
+                voiceControlBtn.addEventListener('click', () => {
+                    if (voiceControlBtn.classList.contains('voice-control-btn--on')) {
+                        recognition.stop();
+                    } else {
+                        currentRecipeCard = card; // Define o card atual para navegação
+                        currentStepIndex = 0; // Reseta o índice do passo
+                        recognition.start();
+                    }
+                });
+            }
         } else if (voiceControlBtn) {
             voiceControlBtn.style.display = 'none'; // Esconde o botão se a API não for suportada
         }
