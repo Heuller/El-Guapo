@@ -1204,6 +1204,32 @@
             box-shadow: 0 0 15px var(--terra-dim);
         }
 
+        .voice-control-btn {
+            width: 38px; height: 38px;
+            border: 1px solid var(--line);
+            background: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--ink-soft);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-radius: 4px;
+            margin-right: 8px; /* Espaçamento entre botões */
+        }
+        .voice-control-btn:hover {
+            transform: scale(1.1);
+            border-color: var(--terra);
+            color: var(--terra);
+        }
+        .voice-control-btn--on {
+            background: var(--terra) !important;
+            border-color: var(--terra) !important;
+            color: var(--paper) !important;
+            box-shadow: 0 0 15px var(--terra-dim);
+        }
+
 
 
         .recipe-card.kitchen { background: var(--paper-cream); }
@@ -1832,6 +1858,7 @@
                         <span class="rc-meta-value">65%</span>
                     </div>
                 </div>
+                <button class="voice-control-btn" aria-label="Ativar controle por voz" title="Controle por Voz"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg></button>
                 <span class="rc-toggle" aria-hidden="true">+</span>
             </div>
 
@@ -2003,6 +2030,7 @@
                         <span class="rc-meta-value">4–6 h</span>
                     </div>
                 </div>
+                <button class="voice-control-btn" aria-label="Ativar controle por voz" title="Controle por Voz"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg></button>
                 <span class="rc-toggle" aria-hidden="true">+</span>
             </div>
 
@@ -2217,6 +2245,7 @@
                         <span class="rc-meta-value">4–6h (ou 18h c/ cold retard)</span>
                     </div>
                 </div>
+                <button class="voice-control-btn" aria-label="Ativar controle por voz" title="Controle por Voz"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg></button>
                 <span class="rc-toggle" aria-hidden="true">+</span>
             </div>
             <div class="rc-body">
@@ -2415,6 +2444,7 @@
                         <span class="rc-meta-value">4–6h (ou 18h c/ cold retard)</span>
                     </div>
                 </div>
+                <button class="voice-control-btn" aria-label="Ativar controle por voz" title="Controle por Voz"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg></button>
                 <span class="rc-toggle" aria-hidden="true">+</span>
             </div>
             <div class="rc-body">
@@ -2628,6 +2658,7 @@
                         <span class="rc-meta-value">10–15 min (+ 30 min geladeira)</span>
                     </div>
                 </div>
+                <button class="voice-control-btn" aria-label="Ativar controle por voz" title="Controle por Voz"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg></button>
                 <span class="rc-toggle" aria-hidden="true">+</span>
             </div>
             <div class="rc-body">
@@ -2741,6 +2772,7 @@
                         <span class="rc-meta-value">10–15 min (+ 30 min geladeira)</span>
                     </div>
                 </div>
+                <button class="voice-control-btn" aria-label="Ativar controle por voz" title="Controle por Voz"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg></button>
                 <span class="rc-toggle" aria-hidden="true">+</span>
             </div>
             <div class="rc-body">
@@ -2895,6 +2927,7 @@
                         <span class="rc-meta-value">180°C · 25–30 min</span>
                     </div>
                 </div>
+                <button class="voice-control-btn" aria-label="Ativar controle por voz" title="Controle por Voz"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg></button>
                 <span class="rc-toggle" aria-hidden="true">+</span>
             </div>
             <div class="rc-body">
@@ -3041,6 +3074,7 @@
                         <span class="rc-meta-value">180°C · 25–30 min</span>
                     </div>
                 </div>
+                <button class="voice-control-btn" aria-label="Ativar controle por voz" title="Controle por Voz"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg></button>
                 <span class="rc-toggle" aria-hidden="true">+</span>
             </div>
             <div class="rc-body">
@@ -3188,6 +3222,7 @@
                         <span class="rc-meta-value">15–20 min + 2h geladeira</span>
                     </div>
                 </div>
+                <button class="voice-control-btn" aria-label="Ativar controle por voz" title="Controle por Voz"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg></button>
                 <span class="rc-toggle" aria-hidden="true">+</span>
             </div>
             <div class="rc-body">
@@ -3295,6 +3330,7 @@
                         <span class="rc-meta-value">15–20 min + 2h geladeira</span>
                     </div>
                 </div>
+                <button class="voice-control-btn" aria-label="Ativar controle por voz" title="Controle por Voz"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg></button>
                 <span class="rc-toggle" aria-hidden="true">+</span>
             </div>
             <div class="rc-body">
@@ -3420,6 +3456,7 @@
                         <span class="rc-meta-value">Média</span>
                     </div>
                 </div>
+                <button class="voice-control-btn" aria-label="Ativar controle por voz" title="Controle por Voz"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg></button>
                 <span class="rc-toggle" aria-hidden="true">+</span>
             </div>
             <div class="rc-body">
@@ -3592,6 +3629,7 @@
                         <span class="rc-meta-value">~53%</span>
                     </div>
                 </div>
+                <button class="voice-control-btn" aria-label="Ativar controle por voz" title="Controle por Voz"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg></button>
                 <span class="rc-toggle" aria-hidden="true">+</span>
             </div>
             <div class="rc-body">
@@ -3761,6 +3799,7 @@
                         <span class="rc-meta-value">1h + 12–18h fermentação</span>
                     </div>
                 </div>
+                <button class="voice-control-btn" aria-label="Ativar controle por voz" title="Controle por Voz"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg></button>
                 <span class="rc-toggle" aria-hidden="true">+</span>
             </div>
             <div class="rc-body">
@@ -3975,6 +4014,7 @@
                         <span class="rc-meta-value">20 min + 50–60 min forno</span>
                     </div>
                 </div>
+                <button class="voice-control-btn" aria-label="Ativar controle por voz" title="Controle por Voz"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg></button>
                 <span class="rc-toggle" aria-hidden="true">+</span>
             </div>
             <div class="rc-body">
@@ -4363,7 +4403,97 @@
         const ingCol  = card.querySelector('.rc-ingredients');
         const rcBody  = card.querySelector('.rc-body');
 
-        /* ── 9a. BOTÃO MODO COZINHA ── */
+        /* ── 9a. CONTROLE POR VOZ (Web Speech API) ── */
+        const voiceControlBtn = card.querySelector(".voice-control-btn");
+        let recognition;
+
+        if (voiceControlBtn && (
+            (typeof SpeechRecognition !== 'undefined') ||
+            (typeof webkitSpeechRecognition !== 'undefined')
+        )) {
+            const SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+            recognition = new SpeechRecognition();
+            recognition.continuous = false; // Mudar para true se quiser ouvir continuamente
+            recognition.interimResults = false;
+            recognition.lang = 'pt-BR';
+
+            let currentRecipeCard = null;
+            let currentStepIndex = 0;
+
+            recognition.onresult = (event) => {
+                const transcript = Array.from(event.results)
+                    .map(result => result[0].transcript)
+                    .join('');
+                const command = transcript.toLowerCase().trim();
+                console.log('Comando de voz:', command);
+
+                const steps = card.querySelectorAll('.rc-step');
+
+                if (command.includes('próximo passo') || command.includes('próximo')) {
+                    if (currentStepIndex < steps.length - 1) {
+                        currentStepIndex++;
+                        steps[currentStepIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        if ('vibrate' in navigator) navigator.vibrate(50); // Feedback háptico
+                    }
+                } else if (command.includes('passo anterior') || command.includes('voltar')) {
+                    if (currentStepIndex > 0) {
+                        currentStepIndex--;
+                        steps[currentStepIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        if ('vibrate' in navigator) navigator.vibrate(50); // Feedback háptico
+                    }
+                } else if (command.includes('iniciar timer') || command.includes('começar timer')) {
+                    // Implementar lógica de timer aqui, talvez com um botão de timer específico
+                    if ('vibrate' in navigator) navigator.vibrate([100, 50, 100]);
+                } else if (command.includes('parar timer') || command.includes('pausar timer')) {
+                    // Implementar lógica para parar/pausar timer
+                    if ('vibrate' in navigator) navigator.vibrate([100, 50, 100]);
+                } else if (command.includes('abrir receita') || command.includes('expandir')) {
+                    if (!card.classList.contains('open')) {
+                        card.classList.add('open');
+                        card.querySelector('.rc-head').setAttribute('aria-expanded', 'true');
+                        if ('vibrate' in navigator) navigator.vibrate(50);
+                    }
+                } else if (command.includes('fechar receita') || command.includes('recolher')) {
+                    if (card.classList.contains('open')) {
+                        card.classList.remove('open');
+                        card.querySelector('.rc-head').setAttribute('aria-expanded', 'false');
+                        if ('vibrate' in navigator) navigator.vibrate(50);
+                    }
+                }
+            };
+
+            recognition.onstart = () => {
+                voiceControlBtn.classList.add('voice-control-btn--on');
+                voiceControlBtn.setAttribute('title', 'Controle por Voz Ativo');
+                console.log('Reconhecimento de voz iniciado.');
+            };
+
+            recognition.onend = () => {
+                voiceControlBtn.classList.remove('voice-control-btn--on');
+                voiceControlBtn.setAttribute('title', 'Controle por Voz Inativo');
+                console.log('Reconhecimento de voz parado.');
+            };
+
+            recognition.onerror = (event) => {
+                console.error('Erro no reconhecimento de voz:', event.error);
+                voiceControlBtn.classList.remove('voice-control-btn--on');
+                voiceControlBtn.setAttribute('title', 'Controle por Voz Inativo (Erro)');
+            };
+
+            voiceControlBtn.addEventListener('click', () => {
+                if (voiceControlBtn.classList.contains('voice-control-btn--on')) {
+                    recognition.stop();
+                } else {
+                    currentRecipeCard = card; // Define o card atual para navegação
+                    currentStepIndex = 0; // Reseta o índice do passo
+                    recognition.start();
+                }
+            });
+        } else if (voiceControlBtn) {
+            voiceControlBtn.style.display = 'none'; // Esconde o botão se a API não for suportada
+        }
+
+        /* ── 9b. BOTÃO MODO COZINHA ── */
         const kitchenBtn = document.createElement('button');
         kitchenBtn.className  = 'kitchen-btn';
         kitchenBtn.setAttribute('aria-label', 'Modo cozinha');
