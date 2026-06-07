@@ -4737,6 +4737,177 @@
         }
     });
 
+
+    // 4. TIMERS CONTEXTUAIS — Sistema de Temporizadores El Guapo
+    // ─────────────────────────────────────────────────────────────
+
+    const timerDock = document.getElementById('timer-dock');
+    const timerMap  = new Map(); // id -> { interval, totalSeconds }
+
+    // Regex para detectar expressões de tempo em português
+    const TIME_RE = /((\d+)\s*(?:a|ou|\u2013|—)\s*)?(\d+)\s*(horas?|minutos?|segundos?|min\.?|h\b|s\b)/gi;
+
+    /**
+     * Converte expressão de tempo para segundos.
+     * Para intervalos ("18 a 24h"), usa o valor médio.
+     */
+    function timeExprToSeconds(expr) {
+        const m = expr.match(/(?:(\d+)\s*(?:a|ou|–|—)\s*)?(\d+)\s*(horas?|minutos?|segundos?|min\.?|h\b|s\b)/i);
+        if (!m) return 0;
+        const lo   = m[1] ? parseInt(m[1]) : parseInt(m[2]);
+        const hi   = parseInt(m[2]);
+        const avg  = Math.round((lo + hi) / 2);
+        const unit = m[3].toLowerCase();
+        if (/^h/.test(unit))   return avg * 3600;
+        if (/^s/.test(unit))   return avg;
+        return avg * 60; // minutos
+    }
+
+    /**
+     * Formata segundos como "1h 30min" ou "8min 30s" ou "45s".
+     */
+    function fmtTime(secs) {
+        if (secs <= 0) return '0s';
+        const h = Math.floor(secs / 3600);
+        const m = Math.floor((secs % 3600) / 60);
+        const s = secs % 60;
+        if (h > 0) return `${h}h${m > 0 ? ' ' + m + 'min' : ''}`;
+        if (m > 0) return `${m}min${s > 0 ? ' ' + s + 's' : ''}`;
+        return `${s}s`;
+    }
+
+    /**
+     * Som artesanal de sineta: 3 notas musicais suaves (Dó, Mi, Sol).
+     */
+    function playBell() {
+        try {
+            const ctx  = new (window.AudioContext || window.webkitAudioContext)();
+            const notes = [523.25, 659.25, 783.99]; // Dó, Mi, Sol (acorde maior)
+            notes.forEach((freq, i) => {
+                const osc  = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.type = 'sine';
+                osc.frequency.value = freq;
+                const t0 = ctx.currentTime + i * 0.18;
+                gain.gain.setValueAtTime(0, t0);
+                gain.gain.linearRampToValueAtTime(0.22, t0 + 0.04);
+                gain.gain.exponentialRampToValueAtTime(0.001, t0 + 1.4);
+                osc.start(t0);
+                osc.stop(t0 + 1.5);
+            });
+        } catch (_) { /* silencia em ambientes sem AudioContext */ }
+    }
+
+    /**
+     * Cria e exibe um card de timer no dock.
+     */
+    function launchTimer(seconds, label) {
+        const id = `t${Date.now()}`;
+        const circumference = 2 * Math.PI * 17; // raio 17
+
+        const card = document.createElement('div');
+        card.className = 'timer-card';
+        card.id = id;
+        card.innerHTML = `
+            <div class="timer-ring-wrap" aria-hidden="true">
+                <svg class="timer-ring-svg" viewBox="0 0 42 42">
+                    <circle class="timer-ring-bg" cx="21" cy="21" r="17"/>
+                    <circle class="timer-ring-progress" cx="21" cy="21" r="17"
+                        stroke-dasharray="${circumference.toFixed(2)}"
+                        stroke-dashoffset="0"/>
+                </svg>
+                <span class="timer-ring-time">${fmtTime(seconds)}</span>
+            </div>
+            <div class="timer-info">
+                <span class="timer-label">${label}</span>
+                <span class="timer-status">${fmtTime(seconds)}</span>
+            </div>
+            <button class="timer-cancel" aria-label="Cancelar timer" title="Cancelar">×</button>`;
+
+        timerDock.appendChild(card);
+
+        const progressEl = card.querySelector('.timer-ring-progress');
+        const timeEl     = card.querySelector('.timer-ring-time');
+        const statusEl   = card.querySelector('.timer-status');
+        const cancelBtn  = card.querySelector('.timer-cancel');
+
+        let remaining = seconds;
+
+        function removeCard() {
+            card.classList.add('timer-removing');
+            setTimeout(() => card.remove(), 340);
+            clearInterval(timerMap.get(id)?.interval);
+            timerMap.delete(id);
+        }
+
+        cancelBtn.addEventListener('click', removeCard);
+
+        const interval = setInterval(() => {
+            remaining--;
+            const progress = remaining / seconds;
+            const offset   = circumference * (1 - progress);
+
+            progressEl.style.strokeDashoffset = offset.toFixed(2);
+            timeEl.textContent  = fmtTime(remaining);
+            statusEl.textContent = fmtTime(remaining);
+
+            if (remaining <= 0) {
+                clearInterval(interval);
+                timerMap.delete(id);
+                card.classList.add('timer-done');
+                timeEl.textContent  = '✓';
+                statusEl.textContent = 'Pronto!';
+                playBell();
+                // Vibração háptica no celular
+                if (navigator.vibrate) navigator.vibrate([200, 100, 200, 100, 400]);
+                // Remove após 6s
+                setTimeout(removeCard, 6000);
+            }
+        }, 1000);
+
+        timerMap.set(id, { interval, totalSeconds: seconds });
+    }
+
+    /**
+     * Injeta .timer-link nos textos dos passos de uma receita (ou de todas).
+     * @param {Element|null} root - card específico ou null para varrer tudo
+     */
+    function injectTimerLinks(root) {
+        const scope = root || document;
+        scope.querySelectorAll('.rc-step-text').forEach(stepEl => {
+            if (stepEl.dataset.timersInjected) return;
+            stepEl.dataset.timersInjected = '1';
+
+            // Trabalha no innerHTML para preservar <strong> etc.
+            stepEl.innerHTML = stepEl.innerHTML.replace(TIME_RE, (match) => {
+                const secs = timeExprToSeconds(match);
+                if (secs < 10) return match; // ignora valores muito pequenos
+                return `<span class="timer-link" role="button" tabindex="0"
+                    aria-label="Iniciar timer de ${match}"
+                    data-seconds="${secs}"
+                    data-label="${match.trim()}">${match}</span>`;
+            });
+        });
+
+        // Wiring dos links recém-injetados
+        scope.querySelectorAll('.timer-link:not([data-wired])').forEach(link => {
+            link.dataset.wired = '1';
+            function activate() {
+                const secs  = parseInt(link.dataset.seconds, 10);
+                const label = link.dataset.label;
+                if (secs > 0) launchTimer(secs, label);
+            }
+            link.addEventListener('click', (e) => { e.stopPropagation(); activate(); });
+            link.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(); }
+            });
+        });
+    }
+
+    // ─────────────────────────────────────────────────────────────
+
 })();
 
     /* ── SPLASH SCREEN ── */
@@ -4982,176 +5153,7 @@
     }
 
     // ─────────────────────────────────────────────────────────────
-    // 4. TIMERS CONTEXTUAIS — Sistema de Temporizadores El Guapo
-    // ─────────────────────────────────────────────────────────────
-
-    const timerDock = document.getElementById('timer-dock');
-    const timerMap  = new Map(); // id -> { interval, totalSeconds }
-
-    // Regex para detectar expressões de tempo em português
-    const TIME_RE = /((\d+)\s*(?:a|ou|\u2013|—)\s*)?(\d+)\s*(horas?|minutos?|segundos?|min\.?|h\b|s\b)/gi;
-
-    /**
-     * Converte expressão de tempo para segundos.
-     * Para intervalos ("18 a 24h"), usa o valor médio.
-     */
-    function timeExprToSeconds(expr) {
-        const m = expr.match(/(?:(\d+)\s*(?:a|ou|–|—)\s*)?(\d+)\s*(horas?|minutos?|segundos?|min\.?|h\b|s\b)/i);
-        if (!m) return 0;
-        const lo   = m[1] ? parseInt(m[1]) : parseInt(m[2]);
-        const hi   = parseInt(m[2]);
-        const avg  = Math.round((lo + hi) / 2);
-        const unit = m[3].toLowerCase();
-        if (/^h/.test(unit))   return avg * 3600;
-        if (/^s/.test(unit))   return avg;
-        return avg * 60; // minutos
-    }
-
-    /**
-     * Formata segundos como "1h 30min" ou "8min 30s" ou "45s".
-     */
-    function fmtTime(secs) {
-        if (secs <= 0) return '0s';
-        const h = Math.floor(secs / 3600);
-        const m = Math.floor((secs % 3600) / 60);
-        const s = secs % 60;
-        if (h > 0) return `${h}h${m > 0 ? ' ' + m + 'min' : ''}`;
-        if (m > 0) return `${m}min${s > 0 ? ' ' + s + 's' : ''}`;
-        return `${s}s`;
-    }
-
-    /**
-     * Som artesanal de sineta: 3 notas musicais suaves (Dó, Mi, Sol).
-     */
-    function playBell() {
-        try {
-            const ctx  = new (window.AudioContext || window.webkitAudioContext)();
-            const notes = [523.25, 659.25, 783.99]; // Dó, Mi, Sol (acorde maior)
-            notes.forEach((freq, i) => {
-                const osc  = ctx.createOscillator();
-                const gain = ctx.createGain();
-                osc.connect(gain);
-                gain.connect(ctx.destination);
-                osc.type = 'sine';
-                osc.frequency.value = freq;
-                const t0 = ctx.currentTime + i * 0.18;
-                gain.gain.setValueAtTime(0, t0);
-                gain.gain.linearRampToValueAtTime(0.22, t0 + 0.04);
-                gain.gain.exponentialRampToValueAtTime(0.001, t0 + 1.4);
-                osc.start(t0);
-                osc.stop(t0 + 1.5);
-            });
-        } catch (_) { /* silencia em ambientes sem AudioContext */ }
-    }
-
-    /**
-     * Cria e exibe um card de timer no dock.
-     */
-    function launchTimer(seconds, label) {
-        const id = `t${Date.now()}`;
-        const circumference = 2 * Math.PI * 17; // raio 17
-
-        const card = document.createElement('div');
-        card.className = 'timer-card';
-        card.id = id;
-        card.innerHTML = `
-            <div class="timer-ring-wrap" aria-hidden="true">
-                <svg class="timer-ring-svg" viewBox="0 0 42 42">
-                    <circle class="timer-ring-bg" cx="21" cy="21" r="17"/>
-                    <circle class="timer-ring-progress" cx="21" cy="21" r="17"
-                        stroke-dasharray="${circumference.toFixed(2)}"
-                        stroke-dashoffset="0"/>
-                </svg>
-                <span class="timer-ring-time">${fmtTime(seconds)}</span>
-            </div>
-            <div class="timer-info">
-                <span class="timer-label">${label}</span>
-                <span class="timer-status">${fmtTime(seconds)}</span>
-            </div>
-            <button class="timer-cancel" aria-label="Cancelar timer" title="Cancelar">×</button>`;
-
-        timerDock.appendChild(card);
-
-        const progressEl = card.querySelector('.timer-ring-progress');
-        const timeEl     = card.querySelector('.timer-ring-time');
-        const statusEl   = card.querySelector('.timer-status');
-        const cancelBtn  = card.querySelector('.timer-cancel');
-
-        let remaining = seconds;
-
-        function removeCard() {
-            card.classList.add('timer-removing');
-            setTimeout(() => card.remove(), 340);
-            clearInterval(timerMap.get(id)?.interval);
-            timerMap.delete(id);
-        }
-
-        cancelBtn.addEventListener('click', removeCard);
-
-        const interval = setInterval(() => {
-            remaining--;
-            const progress = remaining / seconds;
-            const offset   = circumference * (1 - progress);
-
-            progressEl.style.strokeDashoffset = offset.toFixed(2);
-            timeEl.textContent  = fmtTime(remaining);
-            statusEl.textContent = fmtTime(remaining);
-
-            if (remaining <= 0) {
-                clearInterval(interval);
-                timerMap.delete(id);
-                card.classList.add('timer-done');
-                timeEl.textContent  = '✓';
-                statusEl.textContent = 'Pronto!';
-                playBell();
-                // Vibração háptica no celular
-                if (navigator.vibrate) navigator.vibrate([200, 100, 200, 100, 400]);
-                // Remove após 6s
-                setTimeout(removeCard, 6000);
-            }
-        }, 1000);
-
-        timerMap.set(id, { interval, totalSeconds: seconds });
-    }
-
-    /**
-     * Injeta .timer-link nos textos dos passos de uma receita (ou de todas).
-     * @param {Element|null} root - card específico ou null para varrer tudo
-     */
-    function injectTimerLinks(root) {
-        const scope = root || document;
-        scope.querySelectorAll('.rc-step-text').forEach(stepEl => {
-            if (stepEl.dataset.timersInjected) return;
-            stepEl.dataset.timersInjected = '1';
-
-            // Trabalha no innerHTML para preservar <strong> etc.
-            stepEl.innerHTML = stepEl.innerHTML.replace(TIME_RE, (match) => {
-                const secs = timeExprToSeconds(match);
-                if (secs < 10) return match; // ignora valores muito pequenos
-                return `<span class="timer-link" role="button" tabindex="0"
-                    aria-label="Iniciar timer de ${match}"
-                    data-seconds="${secs}"
-                    data-label="${match.trim()}">${match}</span>`;
-            });
-        });
-
-        // Wiring dos links recém-injetados
-        scope.querySelectorAll('.timer-link:not([data-wired])').forEach(link => {
-            link.dataset.wired = '1';
-            function activate() {
-                const secs  = parseInt(link.dataset.seconds, 10);
-                const label = link.dataset.label;
-                if (secs > 0) launchTimer(secs, label);
-            }
-            link.addEventListener('click', (e) => { e.stopPropagation(); activate(); });
-            link.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(); }
-            });
-        });
-    }
-
-    // ─────────────────────────────────────────────────────────────
-    // 5. PWA REGISTRATION — Registrar Service Worker para PWA
+// 5. PWA REGISTRATION — Registrar Service Worker para PWA
     // ─────────────────────────────────────────────────────────────
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
