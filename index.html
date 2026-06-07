@@ -4454,12 +4454,14 @@
     /* ── 4. ACCORDION ── */
     document.addEventListener('click', e => {
         // Não propagar cliques de botões internos
-        if (e.target.closest('.kitchen-btn, .rc-user-notes-head, .rc-user-notes-save, .rc-scale-btn, .search-clear')) return;
+        if (e.target.closest('.kitchen-btn, .rc-user-notes-head, .rc-user-notes-save, .rc-scale-btn, .search-clear, .timer-link, .timer-cancel')) return;
         const head = e.target.closest('.rc-head');
         if (!head) return;
         const card  = head.closest('.recipe-card');
         const isOpen = card.classList.toggle('open');
         head.setAttribute('aria-expanded', String(isOpen));
+        // Injetar timer-links nos passos após abrir o card
+        if (isOpen) setTimeout(() => injectTimerLinks(card), 60);
     });
 
     document.addEventListener('keydown', e => {
@@ -4563,13 +4565,15 @@
 
         expandBtn.addEventListener('click', () => {
             const anyOpen = [...cards].some(c => c.classList.contains('open'));
+            const nowOpen = !anyOpen;
             cards.forEach(card => {
-                const nowOpen = !anyOpen;
                 card.classList.toggle('open', nowOpen);
                 const h = card.querySelector('.rc-head');
                 if (h) h.setAttribute('aria-expanded', String(nowOpen));
             });
             expandBtn.textContent = anyOpen ? 'abrir todas' : 'fechar todas';
+            // Injetar timer-links em todos os cards abertos
+            if (nowOpen) setTimeout(() => cards.forEach(c => injectTimerLinks(c)), 80);
         });
     });
 
@@ -5111,11 +5115,12 @@
     }
 
     /**
-     * Injeta .timer-link nos textos dos passos de todas as receitas.
-     * Executado após o DOM estar pronto.
+     * Injeta .timer-link nos textos dos passos de uma receita (ou de todas).
+     * @param {Element|null} root - card específico ou null para varrer tudo
      */
-    function injectTimerLinks() {
-        document.querySelectorAll('.rc-step-text').forEach(stepEl => {
+    function injectTimerLinks(root) {
+        const scope = root || document;
+        scope.querySelectorAll('.rc-step-text').forEach(stepEl => {
             if (stepEl.dataset.timersInjected) return;
             stepEl.dataset.timersInjected = '1';
 
@@ -5130,8 +5135,8 @@
             });
         });
 
-        // Delegated listener para timer-links
-        document.querySelectorAll('.timer-link:not([data-wired])').forEach(link => {
+        // Wiring dos links recém-injetados
+        scope.querySelectorAll('.timer-link:not([data-wired])').forEach(link => {
             link.dataset.wired = '1';
             function activate() {
                 const secs  = parseInt(link.dataset.seconds, 10);
@@ -5144,15 +5149,6 @@
             });
         });
     }
-
-    // Injetar quando o card é aberto (accordion)
-    document.addEventListener('click', (e) => {
-        const head = e.target.closest('.rc-head');
-        if (head) setTimeout(injectTimerLinks, 50);
-    });
-
-    // Injetar nos cards já abertos ao carregar
-    document.addEventListener('DOMContentLoaded', injectTimerLinks);
 
     // ─────────────────────────────────────────────────────────────
     // 5. PWA REGISTRATION — Registrar Service Worker para PWA
