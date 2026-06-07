@@ -1306,6 +1306,34 @@
         }
 
         .timer-cancel:hover { color: rgba(250,245,236,0.85); }
+        /* ─── BOTÃO DE TIMER POR ETAPA ─── */
+        .timer-btn {
+            display: inline-block;
+            margin-top: 0.75rem;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, var(--terra), var(--terra-light));
+            color: var(--cream);
+            border: 1px solid var(--terra);
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+        .timer-btn:hover {
+            background: linear-gradient(135deg, var(--terra-light), var(--terra));
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(139, 90, 43, 0.2);
+        }
+        .timer-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 6px rgba(139, 90, 43, 0.15);
+        }
+        .timer-btn-icon {
+            margin-right: 0.4rem;
+            font-size: 1rem;
+        }
 
         @media (max-width: 860px) {
             #timer-dock {
@@ -4461,7 +4489,7 @@
         const isOpen = card.classList.toggle('open');
         head.setAttribute('aria-expanded', String(isOpen));
         // Injetar timer-links nos passos após abrir o card
-        if (isOpen) setTimeout(() => injectTimerLinks(card), 60);
+        if (isOpen) setTimeout(() => injectTimerButtons(card), 60);
     });
 
     document.addEventListener('keydown', e => {
@@ -4573,7 +4601,7 @@
             });
             expandBtn.textContent = anyOpen ? 'abrir todas' : 'fechar todas';
             // Injetar timer-links em todos os cards abertos
-            if (nowOpen) setTimeout(() => cards.forEach(c => injectTimerLinks(c)), 80);
+            if (nowOpen) setTimeout(() => cards.forEach(c => injectTimerButtons(c)), 80);
         });
     });
 
@@ -4870,38 +4898,77 @@
         timerMap.set(id, { interval, totalSeconds: seconds });
     }
 
-    /**
-     * Injeta .timer-link nos textos dos passos de uma receita (ou de todas).
-     * @param {Element|null} root - card específico ou null para varrer tudo
+        /**
+     * Nova lógica: injeta botões dedicados de timer por etapa
+     * Apenas para tempos entre 10s e 3h (10800s)
      */
-    function injectTimerLinks(root) {
+    function injectTimerButtons(root) {
         const scope = root || document;
+        const MAX_SECONDS = 3 * 60 * 60; // 3 horas
+        const MIN_SECONDS = 10;
+        
         scope.querySelectorAll('.rc-step-text').forEach(stepEl => {
-            if (stepEl.dataset.timersInjected) return;
-            stepEl.dataset.timersInjected = '1';
-
-            // Trabalha no innerHTML para preservar <strong> etc.
-            stepEl.innerHTML = stepEl.innerHTML.replace(TIME_RE, (match) => {
-                const secs = timeExprToSeconds(match);
-                if (secs < 10) return match; // ignora valores muito pequenos
-                return `<span class="timer-link" role="button" tabindex="0"
-                    aria-label="Iniciar timer de ${match}"
-                    data-seconds="${secs}"
-                    data-label="${match.trim()}">${match}</span>`;
-            });
-        });
-
-        // Wiring dos links recém-injetados
-        scope.querySelectorAll('.timer-link:not([data-wired])').forEach(link => {
-            link.dataset.wired = '1';
-            function activate() {
-                const secs  = parseInt(link.dataset.seconds, 10);
-                const label = link.dataset.label;
-                if (secs > 0) launchTimer(secs, label);
+            if (stepEl.dataset.timerButtonsInjected) return;
+            stepEl.dataset.timerButtonsInjected = '1';
+            
+            // Procura por tempos no formato: "30 minutos", "1h30", "2 a 3 minutos", etc.
+            const timePatterns = [
+                /(\d+)\s*(?:a\s*)?(\d+)?\s*(?:h|horas?|hr)/gi,  // 1h, 2 horas, 1 a 2h
+                /(\d+)\s*(?:a\s*)?(\d+)?\s*(?:min|minutos?)/gi,  // 30 min, 20 a 30 minutos
+                /(\d+)\s*(?:a\s*)?(\d+)?\s*(?:seg|segundos?)/gi  // 30 seg, 20 a 30 segundos
+            ];
+            
+            let foundTime = null;
+            let timeLabel = '';
+            
+            for (const pattern of timePatterns) {
+                const match = pattern.exec(stepEl.textContent);
+                if (match) {
+                    const val1 = parseInt(match[1], 10);
+                    const val2 = match[2] ? parseInt(match[2], 10) : val1;
+                    const avgVal = Math.round((val1 + val2) / 2);
+                    
+                    let seconds = 0;
+                    if (pattern.source.includes('h|horas')) {
+                        seconds = avgVal * 3600;
+                        timeLabel = `${avgVal}h`;
+                    } else if (pattern.source.includes('min|minutos')) {
+                        seconds = avgVal * 60;
+                        timeLabel = `${avgVal}min`;
+                    } else if (pattern.source.includes('seg|segundos')) {
+                        seconds = avgVal;
+                        timeLabel = `${avgVal}s`;
+                    }
+                    
+                    // Validar se está dentro do range (10s a 3h)
+                    if (seconds >= MIN_SECONDS && seconds <= MAX_SECONDS) {
+                        foundTime = seconds;
+                        break;
+                    }
+                }
             }
-            link.addEventListener('click', (e) => { e.stopPropagation(); activate(); });
-            link.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(); }
+            
+            // Se encontrou um tempo válido, injetar botão após a etapa
+            if (foundTime) {
+                const btn = document.createElement('button');
+                btn.className = 'timer-btn';
+                btn.setAttribute('data-seconds', foundTime);
+                btn.setAttribute('data-label', timeLabel);
+                btn.setAttribute('aria-label', `Iniciar timer de ${timeLabel}`);
+                btn.innerHTML = `<span class="timer-btn-icon">⏱</span> ${timeLabel}`;
+                
+                stepEl.parentNode.insertBefore(btn, stepEl.nextSibling);
+            }
+        });
+        
+        // Wiring dos botões recém-injetados
+        scope.querySelectorAll('.timer-btn:not([data-wired])').forEach(btn => {
+            btn.dataset.wired = '1';
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const secs = parseInt(btn.dataset.seconds, 10);
+                const label = btn.dataset.label;
+                if (secs > 0) launchTimer(secs, label);
             });
         });
     }
