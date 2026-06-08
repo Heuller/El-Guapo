@@ -1,6 +1,6 @@
-/*
+/**
  * ═══════════════════════════════════════════════════════════════════
- * EL GUAPO — SCRIPT PRINCIPAL v5.1
+ * EL GUAPO — SCRIPT PRINCIPAL v5.0
  * Clean Code, Wake Lock, Kitchen Mode, Timers & PWA
  * ═══════════════════════════════════════════════════════════════════
  */
@@ -13,11 +13,8 @@
     const idxBtn = document.getElementById('idx-btn');
     const heroEl = document.querySelector('.hero');
     const timerDock = document.getElementById('timer-dock');
-    const timerMap = new Map();
+    const timerMap = new Map(); // id -> { interval, totalSeconds }
     let wakeLock = null;
-    let activeTimerId = null;
-    let activeTimerPaused = false;
-    let activeTimerRemaining = 0;
 
     // Estado do Modo Cozinha
     const kitchenModeOverlay = document.getElementById('kitchen-mode-overlay');
@@ -66,6 +63,7 @@
 
     /* ── 3. ACCORDION & INJEÇÃO DE COMPONENTES ── */
     document.addEventListener('click', e => {
+        // Ignorar cliques em botões internos
         if (e.target.closest('.kitchen-btn, .rc-user-notes-head, .rc-user-notes-save, .rc-scale-btn, .search-clear, .timer-btn, .timer-cancel')) return;
         
         const head = e.target.closest('.rc-head');
@@ -187,6 +185,7 @@
         if (kitchenModePrev) kitchenModePrev.disabled = currentStepIndex === 0;
         if (kitchenModeNext) kitchenModeNext.disabled = currentStepIndex === currentRecipeSteps.length - 1;
         
+        // Injetar timers no texto do modo cozinha se necessário
         setTimeout(() => {
             if (kitchenModeStepText) injectTimerButtons(kitchenModeStepText);
         }, 50);
@@ -228,7 +227,7 @@
     function playBell() {
         try {
             const ctx = new (window.AudioContext || window.webkitAudioContext)();
-            const notes = [523.25, 659.25, 783.99];
+            const notes = [523.25, 659.25, 783.99]; // Dó, Mi, Sol
             notes.forEach((freq, i) => {
                 const osc = ctx.createOscillator();
                 const gain = ctx.createGain();
@@ -247,42 +246,7 @@
     }
 
     function launchTimer(seconds, label) {
-        // Se há um timer ativo, pausar/retomar ou substituir
-        if (activeTimerId) {
-            const activeCard = document.getElementById(activeTimerId);
-            if (activeCard) {
-                const tObj = timerMap.get(activeTimerId);
-                if (tObj) {
-                    if (activeTimerPaused) {
-                        activeTimerPaused = false;
-                        resumeTimer(activeTimerId);
-                        return;
-                    } else {
-                        activeTimerPaused = true;
-                        pauseTimer(activeTimerId);
-                        return;
-                    }
-                }
-            }
-        }
-
-        // Parar timer anterior
-        if (activeTimerId) {
-            const prevCard = document.getElementById(activeTimerId);
-            if (prevCard) {
-                const tObj = timerMap.get(activeTimerId);
-                if (tObj) clearInterval(tObj.interval);
-                prevCard.classList.add('timer-removing');
-                setTimeout(() => prevCard.remove(), 340);
-                timerMap.delete(activeTimerId);
-            }
-        }
-
-        // Criar novo timer
         const id = `t${Date.now()}`;
-        activeTimerId = id;
-        activeTimerPaused = false;
-        activeTimerRemaining = seconds;
         const circumference = 2 * Math.PI * 17;
 
         const card = document.createElement('div');
@@ -319,14 +283,12 @@
             const tObj = timerMap.get(id);
             if (tObj) clearInterval(tObj.interval);
             timerMap.delete(id);
-            if (activeTimerId === id) activeTimerId = null;
         }
 
         cancelBtn.addEventListener('click', removeCard);
 
         const interval = setInterval(() => {
             remaining--;
-            activeTimerRemaining = remaining;
             const progress = remaining / seconds;
             const offset = circumference * (1 - progress);
 
@@ -337,7 +299,6 @@
             if (remaining <= 0) {
                 clearInterval(interval);
                 timerMap.delete(id);
-                activeTimerId = null;
                 card.classList.add('timer-done');
                 if (timeEl) timeEl.textContent = '✓';
                 if (statusEl) statusEl.textContent = 'Pronto!';
@@ -350,71 +311,12 @@
         timerMap.set(id, { interval, totalSeconds: seconds });
     }
 
-    function pauseTimer(id) {
-        const tObj = timerMap.get(id);
-        if (tObj) {
-            clearInterval(tObj.interval);
-            tObj.paused = true;
-        }
-    }
-
-    function resumeTimer(id) {
-        const tObj = timerMap.get(id);
-        if (!tObj || !tObj.paused) return;
-
-        const card = document.getElementById(id);
-        if (!card) return;
-
-        const progressEl = card.querySelector('.timer-ring-progress');
-        const timeEl = card.querySelector('.timer-ring-time');
-        const statusEl = card.querySelector('.timer-status');
-        const circumference = 2 * Math.PI * 17;
-        let remaining = activeTimerRemaining;
-        const totalSeconds = tObj.totalSeconds;
-
-        const interval = setInterval(() => {
-            remaining--;
-            activeTimerRemaining = remaining;
-            const progress = remaining / totalSeconds;
-            const offset = circumference * (1 - progress);
-
-            if (progressEl) progressEl.style.strokeDashoffset = offset.toFixed(2);
-            if (timeEl) timeEl.textContent = fmtTime(remaining);
-            if (statusEl) statusEl.textContent = fmtTime(remaining);
-
-            if (remaining <= 0) {
-                clearInterval(interval);
-                timerMap.delete(id);
-                activeTimerId = null;
-                card.classList.add('timer-done');
-                if (timeEl) timeEl.textContent = '✓';
-                if (statusEl) statusEl.textContent = 'Pronto!';
-                playBell();
-                if (navigator.vibrate) navigator.vibrate([200, 100, 200, 100, 400]);
-                setTimeout(() => {
-                    card.classList.add('timer-removing');
-                    setTimeout(() => card.remove(), 340);
-                }, 6000);
-            }
-        }, 1000);
-
-        tObj.interval = interval;
-        tObj.paused = false;
-    }
-
     function injectTimerButtons(root) {
         const scope = root || document;
         const MAX_SECONDS = 3 * 60 * 60;
         const MIN_SECONDS = 10;
         
-        let targets = [];
-        if (scope.id === 'kitchen-mode-step-text') {
-            targets = [scope];
-        } else if (scope.classList && scope.classList.contains('rc-step-text')) {
-            targets = [scope];
-        } else {
-            targets = scope.querySelectorAll('.rc-step-text, #kitchen-mode-step-text');
-        }
+        const targets = scope.classList && scope.classList.contains('rc-step-text') ? [scope] : scope.querySelectorAll('.rc-step-text');
 
         targets.forEach(stepEl => {
             if (stepEl.dataset.timerButtonsInjected) return;
@@ -473,13 +375,14 @@
         });
     }
 
-    /* ── 8. ESCALONADOR & NOTAS ── */
+    /* ── 8. ESCALONADOR & NOTAS (DENTRO DO LOOP DE CARDS) ── */
     function initRecipeCards() {
         document.querySelectorAll('.recipe-card').forEach(card => {
             const head = card.querySelector('.rc-head');
             const rcBody = card.querySelector('.rc-body');
             const ingCol = card.querySelector('.rc-ingredients');
 
+            // Botão Modo Cozinha (👨‍🍳)
             if (head && !head.querySelector('.kitchen-btn')) {
                 const kitchenBtn = document.createElement('button');
                 kitchenBtn.className = 'kitchen-btn';
@@ -492,6 +395,7 @@
                 head.appendChild(kitchenBtn);
             }
 
+            // Escalonador
             if (ingCol) {
                 const colLabel = ingCol.querySelector('.rc-col-label');
                 const qtyEls = ingCol.querySelectorAll('.rc-ing-qty');
@@ -523,6 +427,7 @@
                 });
             }
 
+            // Anotações
             if (rcBody) {
                 const noteKey = `eg-note-${card.id}`;
                 const savedNote = localStorage.getItem(noteKey) || '';
@@ -593,12 +498,14 @@
     document.addEventListener('DOMContentLoaded', () => {
         initRecipeCards();
         
+        // PWA
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('sw.js')
                 .then(() => console.log('✓ PWA Ativo'))
                 .catch(err => console.warn('PWA falhou:', err));
         }
 
+        // Splash Screen
         const splash = document.getElementById('splash');
         if (splash) {
             document.body.style.overflow = 'hidden';
@@ -612,6 +519,7 @@
             }, 2800);
         }
 
+        // Data no Rodapé
         const footerDate = document.getElementById('footer-date');
         if (footerDate) {
             const d = new Date(document.lastModified);
@@ -619,92 +527,88 @@
                 footerDate.textContent = `atualizado em ${d.toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' })}`;
             }
         }
-
-        initSoundtrack();
-        initCandlelightMode();
     });
 
 })();
 
-/* ── 10. TRILHA SONORA GASTRONÔMICA ── */
-const sounds = [
-    { id: 'fire', name: 'Forno a Lenha', url: 'https://www.soundjay.com/nature/fire-1.mp3' },
-    { id: 'rain', name: 'Chuva Suave', url: 'https://www.soundjay.com/nature/rain-01.mp3' },
-    { id: 'jazz', name: 'Jazz Instrumental', url: 'https://www.soundjay.com/misc/sounds/coffee-shop-1.mp3' },
-    { id: 'bossa', name: 'Bossa Nova & MPB', url: 'https://stream.zeno.fm/n5t8q5u9rvvuv' }
-];
+    /* ── 10. TRILHA SONORA GASTRONÔMICA ── */
+    const sounds = [
+        { id: 'fire', name: 'Forno a Lenha', url: 'https://www.soundjay.com/nature/fire-1.mp3' },
+        { id: 'rain', name: 'Chuva Suave', url: 'https://www.soundjay.com/nature/rain-01.mp3' },
+        { id: 'jazz', name: 'Jazz Instrumental', url: 'https://www.soundjay.com/misc/sounds/coffee-shop-1.mp3' } // Exemplo
+    ];
 
-let currentAudio = null;
+    let currentAudio = null;
 
-function initSoundtrack() {
-    const nav = document.querySelector('.nav');
-    if (!nav) return;
+    function initSoundtrack() {
+        const nav = document.querySelector('.nav');
+        if (!nav) return;
 
-    const soundControl = document.createElement('div');
-    soundControl.className = 'sound-control';
-    soundControl.innerHTML = `
-        <button class="sound-toggle" title="Trilha Sonora Gastronômica">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
-        </button>
-        <div class="sound-menu">
-            ${sounds.map(s => `<button class="sound-item" data-id="${s.id}">${s.name}</button>`).join('')}
-            <button class="sound-item sound-stop">Parar</button>
-        </div>
-    `;
-    
-    const navLinks = nav.querySelector('.nav-links');
-    if (navLinks) navLinks.before(soundControl);
+        const soundControl = document.createElement('div');
+        soundControl.className = 'sound-control';
+        soundControl.innerHTML = `
+            <button class="sound-toggle" title="Trilha Sonora Gastronômica">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+            </button>
+            <div class="sound-menu">
+                ${sounds.map(s => `<button class="sound-item" data-id="${s.id}">${s.name}</button>`).join('')}
+                <button class="sound-item sound-stop">Parar</button>
+            </div>
+        `;
+        
+        const navLinks = nav.querySelector('.nav-links');
+        if (navLinks) navLinks.before(soundControl);
 
-    const toggle = soundControl.querySelector('.sound-toggle');
-    const menu = soundControl.querySelector('.sound-menu');
+        const toggle = soundControl.querySelector('.sound-toggle');
+        const menu = soundControl.querySelector('.sound-menu');
 
-    toggle.addEventListener('click', () => menu.classList.toggle('open'));
+        toggle.addEventListener('click', () => menu.classList.toggle('open'));
 
-    soundControl.querySelectorAll('.sound-item').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const id = btn.dataset.id;
-            if (currentAudio) {
-                currentAudio.pause();
-                currentAudio.src = '';
-                currentAudio = null;
-            }
+        soundControl.querySelectorAll('.sound-item').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const id = btn.dataset.id;
+                if (currentAudio) {
+                    currentAudio.pause();
+                    currentAudio = null;
+                }
 
-            if (id) {
-                const sound = sounds.find(s => s.id === id);
-                currentAudio = new Audio(sound.url);
-                currentAudio.crossOrigin = 'anonymous';
-                currentAudio.loop = true;
-                currentAudio.play().catch(err => {
-                    console.warn(`Erro ao reproduzir ${sound.name}:`, err);
-                    alert(`Não foi possível reproduzir ${sound.name}. Verifique sua conexão.`);
-                });
-                toggle.classList.add('playing');
-            } else {
-                toggle.classList.remove('playing');
-            }
-            menu.classList.remove('open');
+                if (id) {
+                    const sound = sounds.find(s => s.id === id);
+                    currentAudio = new Audio(sound.url);
+                    currentAudio.loop = true;
+                    currentAudio.play();
+                    toggle.classList.add('playing');
+                } else {
+                    toggle.classList.remove('playing');
+                }
+                menu.classList.remove('open');
+            });
         });
-    });
-}
+    }
 
-/* ── 11. MODO LUZ DE VELA (DARK MODE ORGÂNICO) ── */
-function initCandlelightMode() {
-    const nav = document.querySelector('.nav');
-    if (!nav) return;
+    // Adicionar initSoundtrack ao DOMContentLoaded
+    document.addEventListener('DOMContentLoaded', initSoundtrack);
 
-    const candleBtn = document.createElement('button');
-    candleBtn.className = 'candle-toggle';
-    candleBtn.title = 'Modo Luz de Vela';
-    candleBtn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path><circle cx="12" cy="12" r="4"></circle></svg>`;
-    
-    const soundControl = nav.querySelector('.sound-control');
-    if (soundControl) soundControl.after(candleBtn);
+    /* ── 11. MODO LUZ DE VELA (DARK MODE ORGÂNICO) ── */
+    function initCandlelightMode() {
+        const nav = document.querySelector('.nav');
+        if (!nav) return;
 
-    const isDark = localStorage.getItem('eg-candlelight') === 'true';
-    if (isDark) document.documentElement.classList.add('candlelight');
+        const candleBtn = document.createElement('button');
+        candleBtn.className = 'candle-toggle';
+        candleBtn.title = 'Modo Luz de Vela';
+        candleBtn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path><circle cx="12" cy="12" r="4"></circle></svg>`;
+        
+        const soundControl = nav.querySelector('.sound-control');
+        if (soundControl) soundControl.after(candleBtn);
 
-    candleBtn.addEventListener('click', () => {
-        const active = document.documentElement.classList.toggle('candlelight');
-        localStorage.setItem('eg-candlelight', active);
-    });
-}
+        const isDark = localStorage.getItem('eg-candlelight') === 'true';
+        if (isDark) document.documentElement.classList.add('candlelight');
+
+        candleBtn.addEventListener('click', () => {
+            const active = document.documentElement.classList.toggle('candlelight');
+            localStorage.setItem('eg-candlelight', active);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', initCandlelightMode);

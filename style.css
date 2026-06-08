@@ -1261,10 +1261,10 @@
             background: transparent;
             color: var(--terra);
             border: 1px solid var(--terra);
-            padding: 6px 14px;
+            padding: 8px 16px;
             border-radius: 20px;
-            font-size: 0.8rem;
-            font-family: var(--font-main);
+            font-size: 0.75rem;
+            font-family: var(--ff-body);
             font-weight: 500;
             cursor: pointer;
             margin-top: 12px;
@@ -1273,6 +1273,10 @@
             text-transform: lowercase;
             font-variant: small-caps;
             letter-spacing: 0.02em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
         }
         .timer-btn:hover {
             background: var(--terra);
@@ -1761,10 +1765,14 @@
             background: var(--paper);
             z-index: 10000;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
-            padding: 2rem;
+            padding-top: 5rem;
+            padding-bottom: 6rem;
+            padding-left: 2rem;
+            padding-right: 2rem;
             overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         .kitchen-mode-overlay.active {
@@ -1807,9 +1815,13 @@
         }
 
         .kitchen-mode-content {
-            max-width: 90vw;
+            max-width: 100%;
             text-align: center;
-            margin-top: 5rem;
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
         }
 
         .kitchen-mode-step-number {
@@ -1822,11 +1834,14 @@
 
         .kitchen-mode-step-text {
             font-family: var(--ff-body);
-            font-size: 2.2rem;
-            line-height: 1.6;
+            font-size: clamp(1.4rem, 5vw, 2rem);
+            line-height: 1.8;
             color: var(--ink);
             margin-bottom: 3rem;
             font-weight: 300;
+            max-width: 90vw;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .kitchen-mode-navigation {
@@ -1868,39 +1883,7 @@
             text-align: center;
         }
 
-/* ── MODO COZINHA (OVERLAY) ── */
-.kitchen-mode-overlay {
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: var(--paper);
-    z-index: 9999;
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-}
-
-.kitchen-mode-overlay.active {
-    display: flex;
-}
-
-.kitchen-mode-header {
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    padding: 1.5rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid var(--line-faint);
-}
-
-#kitchen-mode-recipe-name {
-    font-family: var(--ff-disp);
-    font-size: 1.5rem;
-    font-style: italic;
-    color: var(--ink-soft);
-}
+/* Duplicated block removed - consolidated above */
 
 .kitchen-mode-close {
     background: none;
