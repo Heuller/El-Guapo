@@ -445,6 +445,7 @@
             flex-wrap: wrap;
             gap: 0.45rem;
             margin-top: 0.8rem;
+            align-items: center;
         }
 
         .rc-chip {
@@ -1268,15 +1269,17 @@
             font-weight: 500;
             cursor: pointer;
             margin-top: 12px;
-            margin-bottom: 4px;
+            margin-bottom: 12px;
             transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             text-transform: lowercase;
             font-variant: small-caps;
             letter-spacing: 0.02em;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 100%;
+            white-space: normal;
+            word-break: break-word;
+            text-align: left;
+            min-height: 36px;
+            line-height: 1.2;
+            width: fit-content;
         }
         .timer-btn:hover {
             background: var(--terra);
@@ -1767,10 +1770,10 @@
             flex-direction: column;
             justify-content: flex-start;
             align-items: center;
-            padding-top: 5rem;
-            padding-bottom: 6rem;
-            padding-left: 2rem;
-            padding-right: 2rem;
+            padding-top: 6rem;
+            padding-bottom: 8rem;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
         }
@@ -1800,12 +1803,17 @@
         .kitchen-mode-close {
             background: none;
             border: 1px solid var(--line);
-            padding: 0.5rem 1rem;
-            font-size: 0.9rem;
-            cursor: pointer;
             color: var(--ink);
-            border-radius: 2px;
-            transition: background 0.3s, color 0.3s;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            position: relative;
         }
 
         .kitchen-mode-close:hover {
@@ -1885,31 +1893,19 @@
 
 /* Duplicated block removed - consolidated above */
 
-.kitchen-mode-close {
-    background: none;
-    border: 1px solid var(--line);
-    color: var(--ink);
-    width: 2.5rem;
-    height: 2.5rem;
-    border-radius: 50%;
-    font-size: 1.5rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s;
-}
+/* Consolidado acima */
 
-.kitchen-mode-footer {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    padding: 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    background: linear-gradient(to top, var(--paper), transparent);
-}
+        .kitchen-mode-footer {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            background: linear-gradient(to top, var(--paper) 70%, transparent);
+            z-index: 10002;
+        }
 
 .kitchen-mode-progress {
     font-size: 0.9rem;

@@ -631,7 +631,7 @@ const sounds = [
     { id: 'fire', name: 'Forno a Lenha', url: 'https://www.soundjay.com/nature/fire-1.mp3' },
     { id: 'rain', name: 'Chuva Suave', url: 'https://www.soundjay.com/nature/rain-01.mp3' },
     { id: 'jazz', name: 'Jazz Instrumental', url: 'https://www.soundjay.com/misc/sounds/coffee-shop-1.mp3' },
-    { id: 'bossa', name: 'Bossa Nova & MPB', url: 'https://stream.zeno.fm/n5t8q5u9rvvuv' }
+    { id: 'bossa', name: 'Bossa Nova & MPB', url: 'https://live.mgradio.com.br/8002/stream' }
 ];
 
 let currentAudio = null;
@@ -675,8 +675,11 @@ function initSoundtrack() {
                 currentAudio.crossOrigin = 'anonymous';
                 currentAudio.loop = true;
                 currentAudio.play().catch(err => {
-                    console.warn(`Erro ao reproduzir ${sound.name}:`, err);
-                    alert(`Não foi possível reproduzir ${sound.name}. Verifique sua conexão.`);
+                    console.error("Erro ao tocar áudio:", err);
+                    toggleBtn.classList.remove('playing');
+                    if (sound.id === 'bossa') {
+                        alert("Não foi possível carregar a rádio Bossa Nova no momento. Tente as opções offline (Chuva ou Jazz).");
+                    }
                 });
                 toggle.classList.add('playing');
             } else {
