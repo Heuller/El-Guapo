@@ -1308,31 +1308,34 @@
         .timer-cancel:hover { color: rgba(250,245,236,0.85); }
         /* ─── BOTÃO DE TIMER POR ETAPA ─── */
         .timer-btn {
-            display: inline-block;
-            margin-top: 0.75rem;
-            padding: 0.5rem 1rem;
-            background: linear-gradient(135deg, var(--terra), var(--terra-light));
-            color: var(--cream);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: transparent;
+            color: var(--terra);
             border: 1px solid var(--terra);
-            border-radius: 4px;
-            font-size: 0.875rem;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-family: var(--font-main);
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.2s ease;
-            font-family: inherit;
+            margin-top: 12px;
+            margin-bottom: 4px;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            text-transform: lowercase;
+            font-variant: small-caps;
+            letter-spacing: 0.02em;
         }
         .timer-btn:hover {
-            background: linear-gradient(135deg, var(--terra-light), var(--terra));
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(139, 90, 43, 0.2);
-        }
-        .timer-btn:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 6px rgba(139, 90, 43, 0.15);
+            background: var(--terra);
+            color: var(--paper);
+            box-shadow: 0 4px 12px rgba(191, 107, 61, 0.2);
+            transform: translateY(-1px);
         }
         .timer-btn-icon {
-            margin-right: 0.4rem;
-            font-size: 1rem;
+            font-size: 0.9rem;
+            opacity: 0.9;
         }
 
         @media (max-width: 860px) {
@@ -4482,7 +4485,7 @@
     /* ── 4. ACCORDION ── */
     document.addEventListener('click', e => {
         // Não propagar cliques de botões internos
-        if (e.target.closest('.kitchen-btn, .rc-user-notes-head, .rc-user-notes-save, .rc-scale-btn, .search-clear, .timer-link, .timer-cancel')) return;
+        if (e.target.closest('.kitchen-btn, .rc-user-notes-head, .rc-user-notes-save, .rc-scale-btn, .search-clear, .timer-link, .timer-cancel, .timer-btn')) return;
         const head = e.target.closest('.rc-head');
         if (!head) return;
         const card  = head.closest('.recipe-card');
@@ -4621,26 +4624,26 @@
         const ingCol  = card.querySelector('.rc-ingredients');
         const rcBody  = card.querySelector('.rc-body');
 
-
-
         /* ── 9b. BOTÃO MODO COZINHA ── */
-        const kitchenBtn = document.createElement('button');
-        kitchenBtn.className  = 'kitchen-btn';
-        kitchenBtn.setAttribute('aria-label', 'Modo cozinha');
-        kitchenBtn.setAttribute('title', 'Modo Cozinha — texto ampliado para uso na bancada');
-        kitchenBtn.innerHTML  = `<svg width="13" height="14" viewBox="0 0 13 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 1C6.5 1 2 5.5 2 9.8a4.5 4.5 0 0 0 9 0C11 7 9 5 7.5 3.5L7 7C6 5.2 5.8 3.2 6.5 1z"/></svg>`;
+        if (head && !head.querySelector('.kitchen-btn')) {
+            const kitchenBtn = document.createElement('button');
+            kitchenBtn.className  = 'kitchen-btn';
+            kitchenBtn.setAttribute('aria-label', 'Modo cozinha');
+            kitchenBtn.setAttribute('title', 'Modo Cozinha — texto ampliado para uso na bancada');
+            kitchenBtn.innerHTML  = `<svg width="13" height="14" viewBox="0 0 13 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 1C6.5 1 2 5.5 2 9.8a4.5 4.5 0 0 0 9 0C11 7 9 5 7.5 3.5L7 7C6 5.2 5.8 3.2 6.5 1z"/></svg>`;
 
-        head.insertBefore(kitchenBtn, toggle);
+            head.insertBefore(kitchenBtn, toggle);
 
-        kitchenBtn.addEventListener('click', e => {
-            e.stopPropagation();
-            const on = card.classList.toggle('kitchen');
-            kitchenBtn.classList.toggle('kitchen-btn--on', on);
-            if (on && !card.classList.contains('open')) {
-                card.classList.add('open');
-                head.setAttribute('aria-expanded', 'true');
-            }
-        });
+            kitchenBtn.addEventListener('click', e => {
+                e.stopPropagation();
+                const on = card.classList.toggle('kitchen');
+                kitchenBtn.classList.toggle('kitchen-btn--on', on);
+                if (on && !card.classList.contains('open')) {
+                    card.classList.add('open');
+                    head.setAttribute('aria-expanded', 'true');
+                }
+            });
+        }
 
         /* ── 9b. ESCALONADOR DE RECEITA ── */
         if (ingCol) {
@@ -4911,36 +4914,35 @@
             if (stepEl.dataset.timerButtonsInjected) return;
             stepEl.dataset.timerButtonsInjected = '1';
             
-            // Procura por tempos no formato: "30 minutos", "1h30", "2 a 3 minutos", etc.
+            // Regex melhorada para capturar tempos em português
             const timePatterns = [
-                /(\d+)\s*(?:a\s*)?(\d+)?\s*(?:h|horas?|hr)/gi,  // 1h, 2 horas, 1 a 2h
-                /(\d+)\s*(?:a\s*)?(\d+)?\s*(?:min|minutos?)/gi,  // 30 min, 20 a 30 minutos
-                /(\d+)\s*(?:a\s*)?(\d+)?\s*(?:seg|segundos?)/gi  // 30 seg, 20 a 30 segundos
+                { regex: /(\d+)\s*(?:a\s*)?(\d+)?\s*(?:h|horas?|hr)/gi, type: 'h' },
+                { regex: /(\d+)\s*(?:a\s*)?(\d+)?\s*(?:min|minutos?)/gi, type: 'm' },
+                { regex: /(\d+)\s*(?:a\s*)?(\d+)?\s*(?:seg|segundos?)/gi, type: 's' }
             ];
             
             let foundTime = null;
             let timeLabel = '';
             
-            for (const pattern of timePatterns) {
-                const match = pattern.exec(stepEl.textContent);
+            for (const patternObj of timePatterns) {
+                const match = patternObj.regex.exec(stepEl.textContent);
                 if (match) {
                     const val1 = parseInt(match[1], 10);
                     const val2 = match[2] ? parseInt(match[2], 10) : val1;
                     const avgVal = Math.round((val1 + val2) / 2);
                     
                     let seconds = 0;
-                    if (pattern.source.includes('h|horas')) {
+                    if (patternObj.type === 'h') {
                         seconds = avgVal * 3600;
                         timeLabel = `${avgVal}h`;
-                    } else if (pattern.source.includes('min|minutos')) {
+                    } else if (patternObj.type === 'm') {
                         seconds = avgVal * 60;
                         timeLabel = `${avgVal}min`;
-                    } else if (pattern.source.includes('seg|segundos')) {
+                    } else if (patternObj.type === 's') {
                         seconds = avgVal;
                         timeLabel = `${avgVal}s`;
                     }
                     
-                    // Validar se está dentro do range (10s a 3h)
                     if (seconds >= MIN_SECONDS && seconds <= MAX_SECONDS) {
                         foundTime = seconds;
                         break;
@@ -4948,28 +4950,26 @@
                 }
             }
             
-            // Se encontrou um tempo válido, injetar botão após a etapa
             if (foundTime) {
                 const btn = document.createElement('button');
                 btn.className = 'timer-btn';
                 btn.setAttribute('data-seconds', foundTime);
                 btn.setAttribute('data-label', timeLabel);
-                btn.setAttribute('aria-label', `Iniciar timer de ${timeLabel}`);
-                btn.innerHTML = `<span class="timer-btn-icon">⏱</span> ${timeLabel}`;
+                btn.setAttribute('type', 'button'); // Previne submissão de formulário
+                btn.innerHTML = `<span class="timer-btn-icon">⏱</span> <span>ativar timer: ${timeLabel}</span>`;
                 
-                stepEl.parentNode.insertBefore(btn, stepEl.nextSibling);
+                // Inserir após o parágrafo da etapa
+                stepEl.after(btn);
+                
+                // Atrelar evento diretamente no momento da criação
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const secs = parseInt(btn.dataset.seconds, 10);
+                    const label = btn.dataset.label;
+                    if (secs > 0) launchTimer(secs, label);
+                });
             }
-        });
-        
-        // Wiring dos botões recém-injetados
-        scope.querySelectorAll('.timer-btn:not([data-wired])').forEach(btn => {
-            btn.dataset.wired = '1';
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const secs = parseInt(btn.dataset.seconds, 10);
-                const label = btn.dataset.label;
-                if (secs > 0) launchTimer(secs, label);
-            });
         });
     }
 
@@ -5164,63 +5164,7 @@
     });
 
     // ─────────────────────────────────────────────────────────────
-    // 3. PORTION SCALER — Conversor de Porções Dinâmico
-    // ─────────────────────────────────────────────────────────────
-    document.addEventListener('DOMContentLoaded', () => {
-        document.querySelectorAll('.recipe-card').forEach(card => {
-            const metaValue = card.querySelector('.rc-meta-value');
-            if (metaValue && metaValue.textContent.includes('rendimento')) {
-                // Encontrar o card pai e adicionar um input de escala
-                const rcHead = card.querySelector('.rc-head');
-                if (rcHead && !rcHead.querySelector('.scale-input-wrapper')) {
-                    const scaleWrapper = document.createElement('div');
-                    scaleWrapper.className = 'scale-input-wrapper';
-                    scaleWrapper.style.cssText = `
-                        position: absolute;
-                        top: 1rem;
-                        left: 1rem;
-                        display: flex;
-                        align-items: center;
-                        gap: 0.5rem;
-                        font-size: 0.8rem;
-                        z-index: 100;
-                    `;
-                    scaleWrapper.innerHTML = `
-                        <label for="scale-${card.id}" style="color: var(--ink-soft);">Escala:</label>
-                        <input type="number" id="scale-${card.id}" value="1" min="0.5" max="10" step="0.5" 
-                            style="width: 50px; padding: 0.3rem; border: 1px solid var(--line); border-radius: 2px; font-size: 0.8rem;">
-                    `;
-                    rcHead.style.position = 'relative';
-                    rcHead.appendChild(scaleWrapper);
-
-                    const scaleInput = scaleWrapper.querySelector('input');
-                    scaleInput.addEventListener('change', () => {
-                        const scale = parseFloat(scaleInput.value) || 1;
-                        scaleIngredients(card, scale);
-                    });
-                }
-            }
-        });
-    });
-
-    function scaleIngredients(card, scale) {
-        const ingredients = card.querySelectorAll('.rc-ing-item');
-        ingredients.forEach(item => {
-            const qtyElement = item.querySelector('.rc-ing-qty');
-            if (qtyElement) {
-                const originalQty = parseFloat(qtyElement.dataset.originalQty || qtyElement.textContent);
-                if (!qtyElement.dataset.originalQty) {
-                    qtyElement.dataset.originalQty = originalQty;
-                }
-                const scaledQty = (originalQty * scale).toFixed(1);
-                qtyElement.textContent = scaledQty + 'g';
-                qtyElement.style.color = scale !== 1 ? 'var(--terra)' : 'inherit';
-            }
-        });
-    }
-
-    // ─────────────────────────────────────────────────────────────
-// 5. PWA REGISTRATION — Registrar Service Worker para PWA
+    // 5. PWA REGISTRATION — Registrar Service Worker para PWA
     // ─────────────────────────────────────────────────────────────
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
@@ -5237,27 +5181,6 @@
 })();
 
 </script>
-
-<!-- ═══ TIMER DOCK ═══ -->
-<div id="timer-dock" aria-live="polite" aria-label="Timers ativos"></div>
-
-<!-- ═══ MODO FOCO NA COZINHA ═══ -->
-<div class="kitchen-mode-overlay" id="kitchen-mode-overlay">
-    <div class="kitchen-mode-header">
-        <span class="kitchen-mode-recipe-name" id="kitchen-mode-recipe-name"></span>
-        <button class="kitchen-mode-close" id="kitchen-mode-close">Fechar</button>
-    </div>
-    <div class="kitchen-mode-content">
-        <div class="kitchen-mode-step-number" id="kitchen-mode-step-number"></div>
-        <div class="kitchen-mode-step-text" id="kitchen-mode-step-text"></div>
-        <div class="kitchen-mode-navigation">
-            <button class="kitchen-mode-btn" id="kitchen-mode-prev">← Anterior</button>
-            <button class="kitchen-mode-btn" id="kitchen-mode-next">Próximo →</button>
-        </div>
-    </div>
-    <div class="kitchen-mode-progress" id="kitchen-mode-progress"></div>
-</div>
-
 
 </body>
 </html>
