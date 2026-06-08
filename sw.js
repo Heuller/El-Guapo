@@ -15,6 +15,8 @@ const ASSETS_TO_CACHE = [
     '/index.html',
     '/manifest.json',
     '/sw.js',
+    '/style.css',
+    '/script.js',
     '/images/el-guapo-img-01.webp',
     '/images/el-guapo-img-02.webp',
     '/images/el-guapo-img-03.webp',
