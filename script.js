@@ -551,6 +551,9 @@
         
         let targets = [];
         if (scope.id === 'kitchen-mode-step-text') {
+            if (scope.parentElement) {
+                scope.parentElement.querySelectorAll('.timer-btn').forEach(btn => btn.remove());
+            }
             targets = [scope];
         } else if (scope.classList && scope.classList.contains('rc-step-text')) {
             targets = [scope];
@@ -607,7 +610,11 @@
                 btn.setAttribute('data-label', timeLabel);
                 btn.innerHTML = `<svg class="timer-btn-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> <span>ativar timer: ${timeLabel}</span>`;
                 
-                stepEl.after(btn);
+                if (stepEl.id === 'kitchen-mode-step-text') {
+                    stepEl.appendChild(btn);
+                } else {
+                    stepEl.after(btn);
+                }
                 
                 btn.addEventListener('click', (e) => {
                     e.preventDefault();
