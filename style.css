@@ -1493,19 +1493,19 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            background: var(--paper-cream);
+            background: var(--paper-light);
             border: 1px solid var(--line);
-            color: var(--ink-soft);
-            padding: 8px 12px;
+            color: var(--ink);
+            padding: 10px 14px;
             border-radius: 8px;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-family: var(--ff-body);
-            font-weight: 500;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            text-transform: lowercase;
-            font-variant: small-caps;
-            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
         }
 
         .rc-action-btn:hover {
