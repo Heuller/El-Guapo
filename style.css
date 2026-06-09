@@ -1256,30 +1256,27 @@
         .timer-cancel:hover { color: rgba(250,245,236,0.85); }
         /* ─── BOTÃO DE TIMER POR ETAPA ─── */
         .timer-btn {
-            display: inline-flex;
+            display: flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
             background: transparent;
             color: var(--terra);
-            border: 1px solid var(--terra);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.75rem;
+            border: 1.5px solid var(--terra);
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 0.72rem;
             font-family: var(--ff-body);
             font-weight: 500;
             cursor: pointer;
-            margin-top: 12px;
-            margin-bottom: 12px;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            margin: 0.75rem 0;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             text-transform: lowercase;
             font-variant: small-caps;
-            letter-spacing: 0.02em;
-            white-space: normal;
-            word-break: break-word;
-            text-align: left;
-            min-height: 36px;
-            line-height: 1.2;
+            letter-spacing: 0.04em;
+            white-space: nowrap;
             width: fit-content;
+            line-height: 1;
         }
         .timer-btn:hover {
             background: var(--terra);
@@ -1997,6 +1994,16 @@
     --line-faint:    rgba(74, 58, 46, 0.4);
     --terra:         #d48a4d;
     --terra-light:   #e6a773;
+}
+
+.candlelight .hero-logo-el,
+.candlelight .splash-el {
+    color: var(--ink-soft);
+}
+
+.candlelight .hero-logo-guapo,
+.candlelight .splash-guapo {
+    color: var(--ink);
 }
 
 .candlelight body::after {

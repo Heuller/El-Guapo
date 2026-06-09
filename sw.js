@@ -11,24 +11,24 @@ const ASSETS_CACHE = 'el-guapo-assets-v2.0';
 const RUNTIME_CACHE = 'el-guapo-runtime-v2.0';
 
 const ASSETS_TO_CACHE = [
-    '/',
-    '/index.html',
-    '/manifest.json',
-    '/sw.js',
-    '/style.css',
-    '/script.js',
-    '/images/el-guapo-img-01.webp',
-    '/images/el-guapo-img-02.webp',
-    '/images/el-guapo-img-03.webp',
-    '/images/el-guapo-img-04.webp',
-    '/images/el-guapo-img-05.webp',
-    '/images/el-guapo-img-06.webp',
-    '/images/el-guapo-img-07.webp',
-    '/images/el-guapo-img-08.webp',
-    '/images/el-guapo-img-09.webp',
-    '/images/el-guapo-img-10.webp',
-    '/images/el-guapo-img-11.webp',
-    '/images/el-guapo-img-12.webp'
+    './',
+    './index.html',
+    './manifest.json',
+    './sw.js',
+    './style.css',
+    './script.js',
+    './images/el-guapo-img-01.webp',
+    './images/el-guapo-img-02.webp',
+    './images/el-guapo-img-03.webp',
+    './images/el-guapo-img-04.webp',
+    './images/el-guapo-img-05.webp',
+    './images/el-guapo-img-06.webp',
+    './images/el-guapo-img-07.webp',
+    './images/el-guapo-img-08.webp',
+    './images/el-guapo-img-09.webp',
+    './images/el-guapo-img-10.webp',
+    './images/el-guapo-img-11.webp',
+    './images/el-guapo-img-12.webp'
 ];
 
 // Evento de instalação: cachear assets críticos
@@ -109,7 +109,7 @@ async function networkFirst(request) {
         console.log('[SW] Network failed, trying cache for:', request.url);
         const cached = await caches.match(request);
         if (cached) return cached;
-        return caches.match('/index.html') || new Response('Offline', { status: 503 });
+        return caches.match('./index.html') || new Response('Offline', { status: 503 });
     }
 }
 

@@ -33,6 +33,35 @@
     let currentStepIndex = 0;
 
     /* ── 2. NAVEGAÇÃO & UI BÁSICA ── */
+    const hamburger = document.getElementById('nav-hamburger');
+    const drawer = document.getElementById('nav-drawer');
+    const drawerClose = document.getElementById('nav-drawer-close');
+    const drawerLinks = document.querySelectorAll('.nav-drawer-links a');
+
+    if (hamburger && drawer) {
+        hamburger.addEventListener('click', () => {
+            drawer.classList.add('open');
+            drawer.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        });
+    }
+
+    if (drawerClose && drawer) {
+        drawerClose.addEventListener('click', () => {
+            drawer.classList.remove('open');
+            drawer.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        });
+    }
+
+    drawerLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            drawer.classList.remove('open');
+            drawer.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        });
+    });
+
     window.addEventListener('scroll', () => {
         const scrolled = window.scrollY;
         if (nav) nav.classList.toggle('solid', scrolled > 50);
@@ -460,7 +489,7 @@
                 btn.className = 'timer-btn';
                 btn.setAttribute('data-seconds', foundTime);
                 btn.setAttribute('data-label', timeLabel);
-                btn.innerHTML = `<span class="timer-btn-icon">⏱</span> <span>ativar timer: ${timeLabel}</span>`;
+                btn.innerHTML = `<svg class="timer-btn-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> <span>ativar timer: ${timeLabel}</span>`;
                 
                 stepEl.after(btn);
                 
@@ -483,7 +512,7 @@
             if (head && !head.querySelector('.kitchen-btn')) {
                 const kitchenBtn = document.createElement('button');
                 kitchenBtn.className = 'kitchen-btn';
-                kitchenBtn.textContent = '👨‍🍳';
+                kitchenBtn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 13.87A4 4 0 0 1 7.41 6.13 4 4 0 0 1 14 6a4 4 0 0 1 2.59 7.87"></path><line x1="9" y1="16" x2="9" y2="22"></line><line x1="15" y1="16" x2="15" y2="22"></line><line x1="9" y1="19" x2="15" y2="19"></line><path d="M22 9h-2"></path><path d="M4 9H2"></path></svg>`;
                 kitchenBtn.title = 'Modo Foco na Cozinha';
                 kitchenBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
@@ -536,7 +565,7 @@
                     <div class="rc-user-notes-body${savedNote ? ' open' : ''}">
                         <textarea class="rc-user-notes-area" placeholder="Ajustes, variações...">${savedNote}</textarea>
                         <div class="rc-user-notes-actions">
-                            <span class="rc-user-notes-saved">salvo ✦</span>
+                            <span class="rc-user-notes-saved">salvo</span>
                             <button class="rc-user-notes-save">salvar</button>
                         </div>
                     </div>`;
@@ -674,14 +703,15 @@ function initSoundtrack() {
                 currentAudio = new Audio(sound.url);
                 currentAudio.crossOrigin = 'anonymous';
                 currentAudio.loop = true;
-                currentAudio.play().catch(err => {
+                currentAudio.play().then(() => {
+                    toggle.classList.add('playing');
+                }).catch(err => {
                     console.error("Erro ao tocar áudio:", err);
-                    toggleBtn.classList.remove('playing');
+                    toggle.classList.remove('playing');
                     if (sound.id === 'bossa') {
                         alert("Não foi possível carregar a rádio Bossa Nova no momento. Tente as opções offline (Chuva ou Jazz).");
                     }
                 });
-                toggle.classList.add('playing');
             } else {
                 toggle.classList.remove('playing');
             }
