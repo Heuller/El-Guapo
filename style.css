@@ -22,17 +22,22 @@
 
             --ff-disp: 'Cormorant Garamond', Georgia, serif;
             --ff-body: 'Jost', 'Helvetica Neue', sans-serif;
+
+            /* Transitions & Easing */
+            --ease-out: cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-long: 0.8s var(--ease-out);
+            --transition-mid: 0.45s var(--ease-out);
         }
 
         html { 
             scroll-behavior: smooth; 
             scroll-padding-top: 68px; 
-            transition: background-color 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: background-color var(--transition-long);
         }
 
         body {
             font-family: var(--ff-body);
-            transition: background-color 0.8s cubic-bezier(0.4, 0, 0.2, 1), color 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: background-color var(--transition-long), color var(--transition-long);
             background: var(--paper);
             color: var(--ink);
             overflow-x: hidden;

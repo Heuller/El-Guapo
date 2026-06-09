@@ -44,14 +44,18 @@
         modalBody.appendChild(content);
         modalOverlay.classList.add('active');
         modalOverlay.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
+        toggleScroll(false);
     }
 
     function closeModal() {
         if (!modalOverlay) return;
         modalOverlay.classList.remove('active');
         modalOverlay.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
+        toggleScroll(true);
+    }
+
+    function toggleScroll(enable) {
+        document.body.style.overflow = enable ? '' : 'hidden';
     }
 
     if (modalClose) modalClose.addEventListener('click', closeModal);
@@ -67,29 +71,16 @@
     const drawerClose = document.getElementById('nav-drawer-close');
     const drawerLinks = document.querySelectorAll('.nav-drawer-links a');
 
-    if (hamburger && drawer) {
-        hamburger.addEventListener('click', () => {
-            drawer.classList.add('open');
-            drawer.setAttribute('aria-hidden', 'false');
-            document.body.style.overflow = 'hidden';
-        });
-    }
+    const toggleDrawer = (isOpen) => {
+        if (!drawer) return;
+        drawer.classList.toggle('open', isOpen);
+        drawer.setAttribute('aria-hidden', !isOpen);
+        toggleScroll(!isOpen);
+    };
 
-    if (drawerClose && drawer) {
-        drawerClose.addEventListener('click', () => {
-            drawer.classList.remove('open');
-            drawer.setAttribute('aria-hidden', 'true');
-            document.body.style.overflow = '';
-        });
-    }
-
-    drawerLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            drawer.classList.remove('open');
-            drawer.setAttribute('aria-hidden', 'true');
-            document.body.style.overflow = '';
-        });
-    });
+    if (hamburger) hamburger.addEventListener('click', () => toggleDrawer(true));
+    if (drawerClose) drawerClose.addEventListener('click', () => toggleDrawer(false));
+    drawerLinks.forEach(link => link.addEventListener('click', () => toggleDrawer(false)));
 
     window.addEventListener('scroll', () => {
         const scrolled = window.scrollY;
@@ -221,21 +212,19 @@
         const recipeName = card.querySelector('.rc-name')?.textContent || 'Receita';
         const steps = Array.from(card.querySelectorAll('.rc-step-text'));
 
-        if (steps.length === 0) {
-            alert('Esta receita não possui passos detalhados.');
-            return;
-        }
+        if (steps.length === 0) return alert('Esta receita não possui passos detalhados.');
 
         currentRecipeSteps = steps.map(step => step.innerHTML);
         currentStepIndex = 0;
 
         if (kitchenModeRecipeName) kitchenModeRecipeName.textContent = recipeName;
         displayKitchenStep();
+        
         if (kitchenModeOverlay) {
             kitchenModeOverlay.classList.add('active');
             kitchenModeOverlay.setAttribute('aria-hidden', 'false');
         }
-        document.body.style.overflow = 'hidden';
+        toggleScroll(false);
         requestWakeLock();
     }
 
@@ -280,7 +269,7 @@
             kitchenModeOverlay.classList.remove('active');
             kitchenModeOverlay.setAttribute('aria-hidden', 'true');
         }
-        document.body.style.overflow = '';
+        toggleScroll(true);
     });
 
     /* ── 7. TIMERS CONTEXTUAIS ── */
@@ -553,47 +542,34 @@
     function generateShoppingList(card) {
         const recipeName = card.querySelector('.rc-name')?.textContent || 'Receita';
         const ingredients = getRecipeIngredients(card);
+        const listText = `🛒 *Lista de Compras: ${recipeName}*\n\n` + ingredients.map(i => `• ${i.name}: ${i.qty}`).join('\n');
         
         const container = document.createElement('div');
-        container.className = 'shop-list-container';
-        
-        let listText = `🛒 *Lista de Compras: ${recipeName}*\n\n`;
-        let htmlContent = '<div class="shop-html-list">';
-        
-        ingredients.forEach(ing => {
-            listText += `• ${ing.name}: ${ing.qty}\n`;
-            htmlContent += `
-                <div class="shop-item" style="display:flex; justify-content:space-between; padding:0.5rem 0; border-bottom:1px solid var(--line-faint)">
-                    <span style="font-weight:500">${ing.name}</span>
-                    <span style="color:var(--terra); font-weight:600">${ing.qty}</span>
-                </div>`;
-        });
-        htmlContent += '</div>';
-        
-        const actions = document.createElement('div');
-        actions.className = 'shop-actions';
-        actions.innerHTML = `
-            ${htmlContent}
+        container.className = 'shop-actions';
+        container.innerHTML = `
+            <div class="shop-html-list">
+                ${ingredients.map(ing => `
+                    <div class="shop-item" style="display:flex; justify-content:space-between; padding:0.5rem 0; border-bottom:1px solid var(--line-faint)">
+                        <span style="font-weight:500">${ing.name}</span>
+                        <span style="color:var(--terra); font-weight:600">${ing.qty}</span>
+                    </div>`).join('')}
+            </div>
             <button class="shop-copy-btn">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
                 Copiar para WhatsApp / Notas
-            </button>
-        `;
+            </button>`;
 
-        actions.querySelector('.shop-copy-btn').addEventListener('click', () => {
+        container.querySelector('.shop-copy-btn').addEventListener('click', (e) => {
+            const btn = e.currentTarget;
             navigator.clipboard.writeText(listText).then(() => {
-                const btn = actions.querySelector('.shop-copy-btn');
-                const originalText = btn.innerHTML;
+                const oldHTML = btn.innerHTML;
                 btn.innerHTML = '✓ Copiado!';
                 btn.style.background = '#27ae60';
-                setTimeout(() => {
-                    btn.innerHTML = originalText;
-                    btn.style.background = '';
-                }, 2000);
+                setTimeout(() => { btn.innerHTML = oldHTML; btn.style.background = ''; }, 2000);
             });
         });
 
-        openModal('Lista de Compras', recipeName.toUpperCase(), actions);
+        openModal('Lista de Compras', recipeName.toUpperCase(), container);
     }
 
     function startMiseEnPlace(card) {
