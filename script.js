@@ -214,15 +214,19 @@
         const stepText = currentRecipeSteps[currentStepIndex];
 
         if (kitchenModeStepNumber) kitchenModeStepNumber.textContent = `Passo ${stepNum}`;
-        if (kitchenModeStepText) kitchenModeStepText.innerHTML = stepText;
+        if (kitchenModeStepText) {
+            kitchenModeStepText.innerHTML = stepText;
+            // Limpa o dataset para forçar a reinjeção dos botões de timer
+            delete kitchenModeStepText.dataset.timerButtonsInjected;
+            injectTimerButtons(kitchenModeStepText);
+        }
         if (kitchenModeProgress) kitchenModeProgress.textContent = `${stepNum} de ${currentRecipeSteps.length}`;
 
         if (kitchenModePrev) kitchenModePrev.disabled = currentStepIndex === 0;
-        if (kitchenModeNext) kitchenModeNext.disabled = currentStepIndex === currentRecipeSteps.length - 1;
-        
-        setTimeout(() => {
-            if (kitchenModeStepText) injectTimerButtons(kitchenModeStepText);
-        }, 50);
+        if (kitchenModeNext) {
+            kitchenModeNext.textContent = currentStepIndex === currentRecipeSteps.length - 1 ? 'Concluir' : 'Próximo';
+            kitchenModeNext.disabled = false;
+        }
     }
 
     if (kitchenModePrev) kitchenModePrev.addEventListener('click', () => {
@@ -435,7 +439,10 @@
         } else if (scope.classList && scope.classList.contains('rc-step-text')) {
             targets = [scope];
         } else {
-            targets = scope.querySelectorAll('.rc-step-text, #kitchen-mode-step-text');
+            // Garante que pegamos tanto as receitas quanto o modo cozinha
+            targets = Array.from(scope.querySelectorAll('.rc-step-text'));
+            const kmText = document.getElementById('kitchen-mode-step-text');
+            if (kmText) targets.push(kmText);
         }
 
         targets.forEach(stepEl => {
@@ -642,8 +649,11 @@
             }
         }
 
-        // Soundtrack removed for stability - focus on core kitchen tools
+        // Restaura as funcionalidades principais
         initCandlelightMode();
+        
+        // Garante que os botões de timer sejam injetados em todas as receitas no início
+        injectTimerButtons();
     });
 
 })();
@@ -651,23 +661,30 @@
 
 
 /* ── 11. MODO LUZ DE VELA (DARK MODE ORGÂNICO) ── */
-function initCandlelightMode() {
-    const nav = document.querySelector('.nav');
-    if (!nav) return;
+    function initCandlelightMode() {
+        const nav = document.querySelector('.nav');
+        if (!nav) return;
 
-    const candleBtn = document.createElement('button');
-    candleBtn.className = 'candle-toggle';
-    candleBtn.title = 'Modo Luz de Vela';
-    candleBtn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path><circle cx="12" cy="12" r="4"></circle></svg>`;
-    
-    const soundControl = nav.querySelector('.sound-control');
-    if (soundControl) soundControl.after(candleBtn);
+        const candleBtn = document.createElement('button');
+        candleBtn.className = 'candle-toggle';
+        candleBtn.title = 'Modo Luz de Vela';
+        candleBtn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path><circle cx="12" cy="12" r="4"></circle></svg>`;
+        
+        // Insere o botão no nav, antes dos links ou no final se não houver links
+        const navLinks = nav.querySelector('.nav-links');
+        if (navLinks) {
+            navLinks.before(candleBtn);
+        } else {
+            nav.appendChild(candleBtn);
+        }
 
-    const isDark = localStorage.getItem('eg-candlelight') === 'true';
-    if (isDark) document.documentElement.classList.add('candlelight');
+        const isDark = localStorage.getItem('eg-candlelight') === 'true';
+        if (isDark) document.documentElement.classList.add('candlelight');
 
-    candleBtn.addEventListener('click', () => {
-        const active = document.documentElement.classList.toggle('candlelight');
-        localStorage.setItem('eg-candlelight', active);
-    });
-}
+        candleBtn.addEventListener('click', () => {
+            const active = document.documentElement.classList.toggle('candlelight');
+            localStorage.setItem('eg-candlelight', active);
+            // Feedback tátil se disponível
+            if (navigator.vibrate) navigator.vibrate(10);
+        });
+    }
