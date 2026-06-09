@@ -228,39 +228,55 @@
         requestWakeLock();
     }
 
-    function displayKitchenStep() {
+    function displayKitchenStep(direction = 'next') {
         if (currentStepIndex < 0 || currentStepIndex >= currentRecipeSteps.length) return;
 
         const stepNum = currentStepIndex + 1;
         const stepText = currentRecipeSteps[currentStepIndex];
 
-        if (kitchenModeStepNumber) kitchenModeStepNumber.textContent = `Passo ${stepNum}`;
         if (kitchenModeStepText) {
-            kitchenModeStepText.innerHTML = stepText;
-            // Limpa o dataset para forçar a reinjeção dos botões de timer
-            delete kitchenModeStepText.dataset.timerButtonsInjected;
-            injectTimerButtons(kitchenModeStepText);
+            // Animação de saída
+            kitchenModeStepText.classList.add(direction === 'next' ? 'page-exit' : 'page-enter');
+            
+            setTimeout(() => {
+                if (kitchenModeStepNumber) kitchenModeStepNumber.textContent = `Passo ${stepNum}`;
+                kitchenModeStepText.innerHTML = stepText;
+                delete kitchenModeStepText.dataset.timerButtonsInjected;
+                injectTimerButtons(kitchenModeStepText);
+                
+                // Animação de entrada
+                kitchenModeStepText.classList.remove('page-exit', 'page-enter');
+                kitchenModeStepText.style.opacity = '0';
+                kitchenModeStepText.style.transform = direction === 'next' ? 'translateX(20px)' : 'translateX(-20px)';
+                
+                requestAnimationFrame(() => {
+                    kitchenModeStepText.style.transition = 'all 0.4s var(--ease-out)';
+                    kitchenModeStepText.style.opacity = '1';
+                    kitchenModeStepText.style.transform = 'translateX(0)';
+                });
+            }, 250);
         }
-        if (kitchenModeProgress) kitchenModeProgress.textContent = `${stepNum} de ${currentRecipeSteps.length}`;
 
+        if (kitchenModeProgress) kitchenModeProgress.textContent = `${stepNum} de ${currentRecipeSteps.length}`;
         if (kitchenModePrev) kitchenModePrev.disabled = currentStepIndex === 0;
         if (kitchenModeNext) {
             kitchenModeNext.textContent = currentStepIndex === currentRecipeSteps.length - 1 ? 'Concluir' : 'Próximo';
-            kitchenModeNext.disabled = false;
         }
     }
 
     if (kitchenModePrev) kitchenModePrev.addEventListener('click', () => {
         if (currentStepIndex > 0) {
             currentStepIndex--;
-            displayKitchenStep();
+            displayKitchenStep('prev');
         }
     });
 
     if (kitchenModeNext) kitchenModeNext.addEventListener('click', () => {
         if (currentStepIndex < currentRecipeSteps.length - 1) {
             currentStepIndex++;
-            displayKitchenStep();
+            displayKitchenStep('next');
+        } else {
+            kitchenModeClose.click();
         }
     });
 

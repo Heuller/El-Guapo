@@ -431,7 +431,11 @@
             gap: 2rem;
             cursor: pointer;
             user-select: none;
-            transition: background 0.4s ease;
+            transition: background 0.4s var(--ease-out), transform 0.2s var(--ease-out);
+        }
+
+        .rc-head:active {
+            transform: scale(0.995);
         }
 
         .rc-head:hover { background: var(--terra-dim); }
@@ -443,11 +447,15 @@
             font-weight: 500;
             font-style: italic;
             line-height: 1.15;
-            transition: color 0.35s;
+            transition: color 0.35s, font-variation-settings 0.4s var(--ease-out);
             text-wrap: balance;
+            font-variation-settings: "wght" 500;
         }
 
-        .rc-head:hover .rc-name { color: var(--terra); }
+        .rc-head:hover .rc-name { 
+            color: var(--terra); 
+            font-variation-settings: "wght" 600;
+        }
 
         /* ── Ficha Técnica: chips/badges ── */
         .rc-chips {
