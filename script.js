@@ -82,6 +82,11 @@
             drawerOverlay.setAttribute('aria-hidden', String(!isOpen));
         }
         toggleScroll(!isOpen);
+        if (isOpen) {
+            enableFocusTrap(drawer);
+        } else {
+            disableFocusTrap();
+        }
     };
 
     function syncRecipeAccessibility(card, open) {
@@ -91,6 +96,32 @@
         if (!body.id) body.id = `${card.id || 'recipe'}-body`;
         head.setAttribute('aria-controls', body.id);
         body.setAttribute('aria-hidden', String(!open));
+    }
+
+    /* Focus trap utilities for drawer/modal */
+    let _prevFocus = null;
+    let _trapContainer = null;
+    function enableFocusTrap(container) {
+        if (!container) return;
+        _prevFocus = document.activeElement;
+        _trapContainer = container;
+        const focusable = container.querySelectorAll('a[href], button:not([disabled]), input, textarea, [tabindex]:not([tabindex="-1"])');
+        if (focusable.length) focusable[0].focus();
+        document.addEventListener('focus', _keepFocus, true);
+    }
+
+    function disableFocusTrap() {
+        document.removeEventListener('focus', _keepFocus, true);
+        if (_prevFocus && typeof _prevFocus.focus === 'function') _prevFocus.focus();
+        _prevFocus = null; _trapContainer = null;
+    }
+
+    function _keepFocus(e) {
+        if (!_trapContainer) return;
+        if (_trapContainer.contains(e.target)) return;
+        e.stopPropagation();
+        const focusable = _trapContainer.querySelectorAll('a[href], button:not([disabled]), input, textarea, [tabindex]:not([tabindex="-1"])');
+        if (focusable.length) focusable[0].focus();
     }
 
     if (hamburger) hamburger.addEventListener('click', () => toggleDrawer(true));
@@ -190,7 +221,7 @@
     const searchClear = document.getElementById('search-clear');
 
     if (searchInput) {
-        searchInput.addEventListener('input', () => {
+        const doSearch = () => {
             const q = searchInput.value.trim().toLowerCase();
             if (searchClear) searchClear.style.display = q ? 'block' : 'none';
 
@@ -217,7 +248,15 @@
                     msg.style.display = 'none';
                 }
             });
-        });
+        };
+
+        const debounce = (fn, wait = 120) => {
+            let t;
+            return (...args) => { clearTimeout(t); t = setTimeout(() => fn.apply(this, args), wait); };
+        };
+
+        const debouncedSearch = debounce(doSearch, 120);
+        searchInput.addEventListener('input', debouncedSearch);
 
         if (searchClear) {
             searchClear.addEventListener('click', () => {
