@@ -2578,9 +2578,9 @@
             <h2 id="kitchen-mode-recipe-name">Receita</h2>
             <button id="kitchen-mode-close" class="kitchen-mode-close" aria-label="Fechar modo cozinha">&times;</button>
         </div>
-        <div class="kitchen-mode-content">
-            <div id="kitchen-mode-step-number" class="kitchen-mode-step-number">Passo 1</div>
-            <div id="kitchen-mode-step-text" class="kitchen-mode-step-text">Carregando...</div>
+        <div class="kitchen-mode-content" role="main" aria-labelledby="kitchen-mode-step-number">
+            <div id="kitchen-mode-step-number" class="kitchen-mode-step-number" aria-live="polite">Passo 1</div>
+            <div id="kitchen-mode-step-text" class="kitchen-mode-step-text" aria-live="polite">Carregando...</div>
         </div>
         <div class="kitchen-mode-footer">
             <button id="kitchen-mode-prev" class="kitchen-mode-btn" disabled>Anterior</button>
@@ -2590,6 +2590,6 @@
     </div>
 
     <!-- ═══ DOCK DE TIMERS ═══ -->
-    <div id="timer-dock" class="timer-dock"></div>
+    <div id="timer-dock" class="timer-dock" role="region" aria-label="Temporizadores ativos"></div>
 
     <script src="script.js"></script></body></html>

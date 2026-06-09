@@ -15,9 +15,6 @@
     const timerDock = document.getElementById('timer-dock');
     const timerMap = new Map();
     let wakeLock = null;
-    let activeTimerId = null;
-    let activeTimerPaused = false;
-    let activeTimerRemaining = 0;
 
     // Estado do Modo Cozinha
     const kitchenModeOverlay = document.getElementById('kitchen-mode-overlay');
@@ -111,11 +108,18 @@
     });
 
     document.addEventListener('keydown', e => {
-        if (e.key !== 'Enter' && e.key !== ' ') return;
         const head = e.target.closest('.rc-head');
-        if (!head) return;
-        e.preventDefault();
-        head.click();
+        const timerCard = e.target.closest('.timer-card');
+        
+        if (e.key === 'Enter' || e.key === ' ') {
+            if (head) {
+                e.preventDefault();
+                head.click();
+            } else if (timerCard) {
+                e.preventDefault();
+                timerCard.click();
+            }
+        }
     });
 
     /* ── 4. BUSCA ── */
@@ -276,47 +280,28 @@
     }
 
     function launchTimer(seconds, label) {
-        // Se há um timer ativo, pausar/retomar ou substituir
-        if (activeTimerId) {
-            const activeCard = document.getElementById(activeTimerId);
-            if (activeCard) {
-                const tObj = timerMap.get(activeTimerId);
-                if (tObj) {
-                    if (activeTimerPaused) {
-                        activeTimerPaused = false;
-                        resumeTimer(activeTimerId);
-                        return;
-                    } else {
-                        activeTimerPaused = true;
-                        pauseTimer(activeTimerId);
-                        return;
-                    }
+        // Se o usuário clicar em um timer que já existe com o mesmo label, pausar/retomar
+        for (const [tid, tObj] of timerMap.entries()) {
+            if (tObj.label === label) {
+                if (tObj.paused) {
+                    resumeTimer(tid);
+                } else {
+                    pauseTimer(tid);
                 }
+                return;
             }
         }
 
-        // Parar timer anterior
-        if (activeTimerId) {
-            const prevCard = document.getElementById(activeTimerId);
-            if (prevCard) {
-                const tObj = timerMap.get(activeTimerId);
-                if (tObj) clearInterval(tObj.interval);
-                prevCard.classList.add('timer-removing');
-                setTimeout(() => prevCard.remove(), 340);
-                timerMap.delete(activeTimerId);
-            }
-        }
-
-        // Criar novo timer
+        // Criar novo timer (suporta múltiplos agora)
         const id = `t${Date.now()}`;
-        activeTimerId = id;
-        activeTimerPaused = false;
-        activeTimerRemaining = seconds;
         const circumference = 2 * Math.PI * 17;
 
         const card = document.createElement('div');
         card.className = 'timer-card';
         card.id = id;
+        card.setAttribute('role', 'status');
+        card.setAttribute('aria-live', 'polite');
+        card.setAttribute('tabindex', '0');
         card.innerHTML = `
             <div class="timer-ring-wrap" aria-hidden="true">
                 <svg class="timer-ring-svg" viewBox="0 0 42 42">
@@ -329,107 +314,115 @@
             </div>
             <div class="timer-info">
                 <span class="timer-label">${label}</span>
-                <span class="timer-status">${fmtTime(seconds)}</span>
+                <span class="timer-status" aria-label="Tempo restante">${fmtTime(seconds)}</span>
             </div>
-            <button class="timer-cancel" aria-label="Cancelar timer" title="Cancelar">×</button>`;
+            <button class="timer-cancel" aria-label="Cancelar timer ${label}" title="Cancelar">×</button>`;
 
         if (timerDock) timerDock.appendChild(card);
+
+        // Ao clicar no card, pausa/retoma
+        card.addEventListener('click', (e) => {
+            if (e.target.closest('.timer-cancel')) return;
+            const tObj = timerMap.get(id);
+            if (tObj) {
+                if (tObj.paused) resumeTimer(id);
+                else pauseTimer(id);
+            }
+        });
+
+        const timerObj = {
+            id,
+            label,
+            totalSeconds: seconds,
+            remaining: seconds,
+            paused: false,
+            interval: null,
+            circumference
+        };
+
+        timerMap.set(id, timerObj);
+        startTimerInterval(id);
+
+        const cancelBtn = card.querySelector('.timer-cancel');
+        cancelBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            removeTimer(id);
+        });
+    }
+
+    function startTimerInterval(id) {
+        const tObj = timerMap.get(id);
+        if (!tObj) return;
+
+        tObj.interval = setInterval(() => {
+            if (tObj.paused) return;
+
+            tObj.remaining--;
+            updateTimerUI(id);
+
+            if (tObj.remaining <= 0) {
+                clearInterval(tObj.interval);
+                const card = document.getElementById(id);
+                if (card) {
+                    card.classList.add('timer-done');
+                    card.querySelector('.timer-status').textContent = 'Concluído!';
+                }
+                playBell();
+                // Remove automaticamente após 30s se concluído
+                setTimeout(() => removeTimer(id), 30000);
+            }
+        }, 1000);
+    }
+
+    function updateTimerUI(id) {
+        const tObj = timerMap.get(id);
+        const card = document.getElementById(id);
+        if (!tObj || !card) return;
 
         const progressEl = card.querySelector('.timer-ring-progress');
         const timeEl = card.querySelector('.timer-ring-time');
         const statusEl = card.querySelector('.timer-status');
-        const cancelBtn = card.querySelector('.timer-cancel');
 
-        let remaining = seconds;
+        const progress = tObj.remaining / tObj.totalSeconds;
+        const offset = tObj.circumference * (1 - progress);
 
-        function removeCard() {
-            card.classList.add('timer-removing');
-            setTimeout(() => card.remove(), 340);
-            const tObj = timerMap.get(id);
-            if (tObj) clearInterval(tObj.interval);
-            timerMap.delete(id);
-            if (activeTimerId === id) activeTimerId = null;
-        }
-
-        cancelBtn.addEventListener('click', removeCard);
-
-        const interval = setInterval(() => {
-            remaining--;
-            activeTimerRemaining = remaining;
-            const progress = remaining / seconds;
-            const offset = circumference * (1 - progress);
-
-            if (progressEl) progressEl.style.strokeDashoffset = offset.toFixed(2);
-            if (timeEl) timeEl.textContent = fmtTime(remaining);
-            if (statusEl) statusEl.textContent = fmtTime(remaining);
-
-            if (remaining <= 0) {
-                clearInterval(interval);
-                timerMap.delete(id);
-                activeTimerId = null;
-                card.classList.add('timer-done');
-                if (timeEl) timeEl.textContent = '✓';
-                if (statusEl) statusEl.textContent = 'Pronto!';
-                playBell();
-                if (navigator.vibrate) navigator.vibrate([200, 100, 200, 100, 400]);
-                setTimeout(removeCard, 6000);
-            }
-        }, 1000);
-
-        timerMap.set(id, { interval, totalSeconds: seconds });
+        if (progressEl) progressEl.style.strokeDashoffset = offset.toFixed(2);
+        if (timeEl) timeEl.textContent = fmtTime(tObj.remaining);
+        if (statusEl) statusEl.textContent = tObj.paused ? 'Pausado' : fmtTime(tObj.remaining);
     }
 
     function pauseTimer(id) {
         const tObj = timerMap.get(id);
-        if (tObj) {
-            clearInterval(tObj.interval);
-            tObj.paused = true;
-        }
+        if (!tObj) return;
+        tObj.paused = true;
+        const card = document.getElementById(id);
+        if (card) card.classList.add('paused');
+        updateTimerUI(id);
     }
 
     function resumeTimer(id) {
         const tObj = timerMap.get(id);
-        if (!tObj || !tObj.paused) return;
-
-        const card = document.getElementById(id);
-        if (!card) return;
-
-        const progressEl = card.querySelector('.timer-ring-progress');
-        const timeEl = card.querySelector('.timer-ring-time');
-        const statusEl = card.querySelector('.timer-status');
-        const circumference = 2 * Math.PI * 17;
-        let remaining = activeTimerRemaining;
-        const totalSeconds = tObj.totalSeconds;
-
-        const interval = setInterval(() => {
-            remaining--;
-            activeTimerRemaining = remaining;
-            const progress = remaining / totalSeconds;
-            const offset = circumference * (1 - progress);
-
-            if (progressEl) progressEl.style.strokeDashoffset = offset.toFixed(2);
-            if (timeEl) timeEl.textContent = fmtTime(remaining);
-            if (statusEl) statusEl.textContent = fmtTime(remaining);
-
-            if (remaining <= 0) {
-                clearInterval(interval);
-                timerMap.delete(id);
-                activeTimerId = null;
-                card.classList.add('timer-done');
-                if (timeEl) timeEl.textContent = '✓';
-                if (statusEl) statusEl.textContent = 'Pronto!';
-                playBell();
-                if (navigator.vibrate) navigator.vibrate([200, 100, 200, 100, 400]);
-                setTimeout(() => {
-                    card.classList.add('timer-removing');
-                    setTimeout(() => card.remove(), 340);
-                }, 6000);
-            }
-        }, 1000);
-
-        tObj.interval = interval;
+        if (!tObj) return;
         tObj.paused = false;
+        const card = document.getElementById(id);
+        if (card) card.classList.remove('paused');
+        updateTimerUI(id);
     }
+
+    function removeTimer(id) {
+        const tObj = timerMap.get(id);
+        if (!tObj) return;
+        
+        clearInterval(tObj.interval);
+        const card = document.getElementById(id);
+        if (card) {
+            card.classList.add('timer-removing');
+            setTimeout(() => card.remove(), 340);
+        }
+        timerMap.delete(id);
+    }
+
+
 
     function injectTimerButtons(root) {
         const scope = root || document;
@@ -512,7 +505,7 @@
             if (head && !head.querySelector('.kitchen-btn')) {
                 const kitchenBtn = document.createElement('button');
                 kitchenBtn.className = 'kitchen-btn';
-                kitchenBtn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 13.87A4 4 0 0 1 7.41 6.13 4 4 0 0 1 14 6a4 4 0 0 1 2.59 7.87"></path><line x1="9" y1="16" x2="9" y2="22"></line><line x1="15" y1="16" x2="15" y2="22"></line><line x1="9" y1="19" x2="15" y2="19"></line><path d="M22 9h-2"></path><path d="M4 9H2"></path></svg>`;
+                kitchenBtn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="kitchen-icon-svg"><path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/><path d="M12 18V2"/></svg>`;
                 kitchenBtn.title = 'Modo Foco na Cozinha';
                 kitchenBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
@@ -649,76 +642,13 @@
             }
         }
 
-        initSoundtrack();
+        // Soundtrack removed for stability - focus on core kitchen tools
         initCandlelightMode();
     });
 
 })();
 
-/* ── 10. TRILHA SONORA GASTRONÔMICA ── */
-const sounds = [
-    { id: 'fire', name: 'Forno a Lenha', url: 'https://www.soundjay.com/nature/fire-1.mp3' },
-    { id: 'rain', name: 'Chuva Suave', url: 'https://www.soundjay.com/nature/rain-01.mp3' },
-    { id: 'jazz', name: 'Jazz Instrumental', url: 'https://www.soundjay.com/misc/sounds/coffee-shop-1.mp3' },
-    { id: 'bossa', name: 'Bossa Nova & MPB', url: 'https://live.mgradio.com.br/8002/stream' }
-];
 
-let currentAudio = null;
-
-function initSoundtrack() {
-    const nav = document.querySelector('.nav');
-    if (!nav) return;
-
-    const soundControl = document.createElement('div');
-    soundControl.className = 'sound-control';
-    soundControl.innerHTML = `
-        <button class="sound-toggle" title="Trilha Sonora Gastronômica">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
-        </button>
-        <div class="sound-menu">
-            ${sounds.map(s => `<button class="sound-item" data-id="${s.id}">${s.name}</button>`).join('')}
-            <button class="sound-item sound-stop">Parar</button>
-        </div>
-    `;
-    
-    const navLinks = nav.querySelector('.nav-links');
-    if (navLinks) navLinks.before(soundControl);
-
-    const toggle = soundControl.querySelector('.sound-toggle');
-    const menu = soundControl.querySelector('.sound-menu');
-
-    toggle.addEventListener('click', () => menu.classList.toggle('open'));
-
-    soundControl.querySelectorAll('.sound-item').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const id = btn.dataset.id;
-            if (currentAudio) {
-                currentAudio.pause();
-                currentAudio.src = '';
-                currentAudio = null;
-            }
-
-            if (id) {
-                const sound = sounds.find(s => s.id === id);
-                currentAudio = new Audio(sound.url);
-                currentAudio.crossOrigin = 'anonymous';
-                currentAudio.loop = true;
-                currentAudio.play().then(() => {
-                    toggle.classList.add('playing');
-                }).catch(err => {
-                    console.error("Erro ao tocar áudio:", err);
-                    toggle.classList.remove('playing');
-                    if (sound.id === 'bossa') {
-                        alert("Não foi possível carregar a rádio Bossa Nova no momento. Tente as opções offline (Chuva ou Jazz).");
-                    }
-                });
-            } else {
-                toggle.classList.remove('playing');
-            }
-            menu.classList.remove('open');
-        });
-    });
-}
 
 /* ── 11. MODO LUZ DE VELA (DARK MODE ORGÂNICO) ── */
 function initCandlelightMode() {
