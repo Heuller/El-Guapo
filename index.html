@@ -93,6 +93,7 @@
         <li><a href="#bolos">Bolos</a></li>
         <li><a href="#quitanda">Quitanda</a></li>
         <li><a href="#especiais">Especiais</a></li>
+        <li><a href="#contribute" style="color:var(--terra)">Contribuir</a></li>
     </ul>
     <button class="nav-hamburger" id="nav-hamburger" aria-label="Abrir menu" aria-expanded="false">☰</button>
 </nav>
@@ -2562,6 +2563,162 @@
 <a href="#top" class="idx-btn" id="idx-btn" aria-label="Voltar ao índice">↑ Índice</a>
 
 <!-- ═══ RODAPÉ ═══ -->
+<!-- ═════════════════════════════════════════════════════════════════════════════════
+     FORM SECTION: Recipe Submission & Feedback
+     ═════════════════════════════════════════════════════════════════════════ -->
+
+<section id="contribute" class="contribute-section">
+    <div class="section-header">
+        <div class="section-header-inner">
+            <span class="section-symbol" aria-hidden="true">&#8251;</span>
+            <h2>Contribua</h2>
+            <span class="section-header-line"></span>
+        </div>
+        <p class="section-desc">Envie uma receita ou deixe seu comentário</p>
+    </div>
+
+    <!-- Multi-Step Recipe Form -->
+    <div class="form-panel">
+        <div class="form-panel-header">
+            <h3 class="form-panel-title">Nova Receita</h3>
+            <div class="form-steps">
+                <div class="form-step-dot current" data-step="0" aria-label="Passo 1: Essenciais"></div>
+                <div class="form-step-connector"></div>
+                <div class="form-step-dot" data-step="1" aria-label="Passo 2: Ingredientes"></div>
+                <div class="form-step-connector"></div>
+                <div class="form-step-dot" data-step="2" aria-label="Passo 3: Modo de Preparo"></div>
+            </div>
+        </div>
+
+        <form id="recipe-form" class="recipe-form" novalidate>
+            <!-- Step 1: Essenciais -->
+            <div class="form-step active" data-step="0">
+                <div class="form-group-row">
+                    <div class="form-group form-group--lg">
+                        <label for="sub-name">Nome da Receita <span class="req">*</span></label>
+                        <input type="text" id="sub-name" placeholder="Ex: Pão de Mel com Chocolate Amargo" autocomplete="off" aria-required="true" required>
+                    </div>
+                </div>
+                <div class="form-group-row">
+                    <div class="form-group">
+                        <label for="sub-category">Categoria <span class="req">*</span></label>
+                        <select id="sub-category" aria-required="true" required>
+                            <option value="" disabled>Selecione...</option>
+                            <option value="Massas e Grelados" selected>Massas e Grelados</option>
+                            <option value="Brotformas">Brotformas</option>
+                            <option value="Panes de Panadera">Panes de Panadera</option>
+                            <option value="Especiais">Especiais</option>
+                            <option value="Especiarias">Especiarias</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="sub-difficulty">Dificuldade</label>
+                        <select id="sub-difficulty">
+                            <option value="Fácil">Fácil</option>
+                            <option value="Média" selected>Média</option>
+                            <option value="Complexa">Complexa</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group-row">
+                    <div class="form-group">
+                        <label for="sub-time">Tempo de Preparo</label>
+                        <input type="text" id="sub-time" placeholder="Ex: 2h a 3h" aria-describedby="sub-time-hint">
+                        <span class="field-hint" id="sub-time-hint">Inclua fermentação se houver</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="sub-yield">Rendimento</label>
+                        <input type="text" id="sub-yield" placeholder="Ex: 2 unidades">
+                    </div>
+                </div>
+                <div class="form-group form-group--hidden" id="sub-hydration-wrap">
+                    <label for="sub-hydration">Hidratação (%)</label>
+                    <input type="number" id="sub-hydration" min="50" max="120" placeholder="Ex: 75" aria-describedby="sub-hydration-hint">
+                    <span class="field-hint" id="sub-hydration-hint">Para massas fermentadas. Apenas aparece para categorias de pão.</span>
+                </div>
+            </div>
+
+            <!-- Step 2: Ingredientes -->
+            <div class="form-step" data-step="1">
+                <div class="form-group form-group--stack">
+                    <label for="sub-ingredients">Ingredientes <span class="req">*</span></label>
+                    <textarea id="sub-ingredients" rows="8" placeholder="200g farinha de trigo&#10;150ml água morna&#10;5g sal&#10;3g fermento biológico seco&#10;...&#10;&#10;— Escreva um ingrediente por linha" aria-required="true" required aria-describedby="sub-ingredients-hint"></textarea>
+                    <span class="field-hint" id="sub-ingredients-hint">Um ingrediente por linha. Use quantidade + unidade + nome.</span>
+                </div>
+                <div class="form-group form-group--stack">
+                    <label for="sub-notes">Notas / Observações (opcional)</label>
+                    <textarea id="sub-notes" rows="3" placeholder="Variações, dicas de forno, substituições..."></textarea>
+                </div>
+            </div>
+
+            <!-- Step 3: Modo de Preparo -->
+            <div class="form-step" data-step="2">
+                <div class="form-group form-group--stack">
+                    <label for="sub-steps">Modo de Preparo <span class="req">*</span></label>
+                    <textarea id="sub-steps" rows="10" placeholder="1. Misture a farinha com a água e deixe autolisar por 30 min.&#10;2. Adicione o sal e o fermento.&#10;3. Sove até obter véu de glúten.&#10;4. Faça 3 dobras a cada 30 min.&#10;...&#10;&#10;— Escreva um passo por linha" aria-required="true" required aria-describedby="sub-steps-hint"></textarea>
+                    <span class="field-hint" id="sub-steps-hint">Um passo por linha. Número automático na exibição.</span>
+                </div>
+                <div class="form-group form-group--stack">
+                    <label for="sub-description">Descrição Curta (opcional)</label>
+                    <textarea id="sub-description" rows="2" maxlength="500" placeholder="Um resumo de uma frase para o card da receita." aria-describedby="sub-desc-count"></textarea>
+                    <span class="field-hint" id="sub-desc-count">Até 500 caracteres</span>
+                </div>
+            </div>
+
+            <div class="form-global-error" id="form-global-error" role="alert"></div>
+
+            <div class="form-actions">
+                <button type="button" id="form-prev" class="form-btn form-btn--secondary" style="display:none">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+                    Anterior
+                </button>
+                <button type="button" id="form-next" class="form-btn form-btn--primary">
+                    Próximo
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+                </button>
+                <button type="button" id="form-submit" class="form-btn form-btn--primary" style="display:none">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    Enviar Receita
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Quick Feedback Mini-Form -->
+    <div class="form-panel form-panel--compact">
+        <h3 class="form-panel-title">Feedback Rápido</h3>
+        <form id="feedback-form" class="feedback-form" novalidate>
+            <div class="form-group-row">
+                <div class="form-group">
+                    <label for="feedback-name">Nome (opcional)</label>
+                    <input type="text" id="feedback-name" placeholder="Seu nome" autocomplete="name">
+                </div>
+                <div class="form-group">
+                    <label for="feedback-email">Email (opcional)</label>
+                    <input type="email" id="feedback-email" placeholder="seu@email.com" autocomplete="email">
+                </div>
+            </div>
+            <div class="form-group form-group--stack">
+                <label for="feedback-msg">Mensagem</label>
+                <textarea id="feedback-msg" rows="3" placeholder="Sugestões, dúvidas, elogios..." required></textarea>
+                <span class="field-error"></span>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="form-btn form-btn--primary">Enviar</button>
+            </div>
+        </form>
+    </div>
+</section>
+
+<!-- Success overlay -->
+<div id="form-success-overlay" class="form-success-overlay" role="status" aria-live="polite">
+    <div class="form-success-box">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <h3>Receita enviada!</h3>
+        <p>Obrigado por compartilhar. Ela será revisada em breve.</p>
+    </div>
+</div>
+
 <footer class="footer">
     <div class="footer-left">
         <span class="footer-brand">El Guapo</span>
@@ -2602,4 +2759,14 @@
     <!-- ═══ DOCK DE TIMERS ═══ -->
     <div id="timer-dock" class="timer-dock" role="region" aria-label="Temporizadores ativos"></div>
 
-    <script src="script.js"></script></body></html>
+    <script src="script.js"></script>
+    <script type="module">
+        import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+        window._supabase = createClient(
+            'https://klhvjfckeiznxapkstpt.supabase.co',
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtsaHZqZmNrZWl6bnhhcGtzdHB0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5ODE2NzgsImV4cCI6MjA5NjU1NzY3OH0.VjnrMKKhaWCt3Yl5WdaJW2hHN0k6SYbOXR7t_tpvI84'
+        );
+    </script>
+    <script type="module" src="form-submit.js"></script>
+</body>
+</html>
