@@ -29,6 +29,38 @@
     let currentRecipeSteps = [];
     let currentStepIndex = 0;
 
+    // Estado do Modal (Mise en Place / Lista de Compras)
+    const modalOverlay = document.getElementById('modal-overlay');
+    const modalClose = document.getElementById('modal-close');
+    const modalTitle = document.getElementById('modal-title');
+    const modalSubtitle = document.getElementById('modal-subtitle');
+    const modalBody = document.getElementById('modal-body');
+
+    function openModal(title, subtitle, content) {
+        if (!modalOverlay) return;
+        modalTitle.textContent = title;
+        modalSubtitle.textContent = subtitle;
+        modalBody.innerHTML = '';
+        modalBody.appendChild(content);
+        modalOverlay.classList.add('active');
+        modalOverlay.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        if (!modalOverlay) return;
+        modalOverlay.classList.remove('active');
+        modalOverlay.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    }
+
+    if (modalClose) modalClose.addEventListener('click', closeModal);
+    if (modalOverlay) {
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) closeModal();
+        });
+    }
+
     /* ── 2. NAVEGAÇÃO & UI BÁSICA ── */
     const hamburger = document.getElementById('nav-hamburger');
     const drawer = document.getElementById('nav-drawer');
@@ -502,7 +534,97 @@
         });
     }
 
-    /* ── 8. ESCALONADOR & NOTAS ── */
+    /* ── 8. LISTA DE COMPRAS & MISE EN PLACE ── */
+    function getRecipeIngredients(card) {
+        const ingredients = [];
+        card.querySelectorAll('.rc-ing-group').forEach(group => {
+            const groupName = group.querySelector('.rc-ing-group-name')?.textContent || '';
+            group.querySelectorAll('.rc-ing-item').forEach(item => {
+                const name = item.querySelector('.rc-ing-row span:first-child')?.childNodes[0]?.textContent.trim();
+                const qty = item.querySelector('.rc-ing-qty')?.textContent.trim();
+                if (name) {
+                    ingredients.push({ group: groupName, name, qty });
+                }
+            });
+        });
+        return ingredients;
+    }
+
+    function generateShoppingList(card) {
+        const recipeName = card.querySelector('.rc-name')?.textContent || 'Receita';
+        const ingredients = getRecipeIngredients(card);
+        
+        const container = document.createElement('div');
+        container.className = 'shop-list-container';
+        
+        let listText = `🛒 *Lista de Compras: ${recipeName}*\n\n`;
+        let htmlContent = '<div class="shop-html-list">';
+        
+        ingredients.forEach(ing => {
+            listText += `• ${ing.name}: ${ing.qty}\n`;
+            htmlContent += `
+                <div class="shop-item" style="display:flex; justify-content:space-between; padding:0.5rem 0; border-bottom:1px solid var(--line-faint)">
+                    <span style="font-weight:500">${ing.name}</span>
+                    <span style="color:var(--terra); font-weight:600">${ing.qty}</span>
+                </div>`;
+        });
+        htmlContent += '</div>';
+        
+        const actions = document.createElement('div');
+        actions.className = 'shop-actions';
+        actions.innerHTML = `
+            ${htmlContent}
+            <button class="shop-copy-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                Copiar para WhatsApp / Notas
+            </button>
+        `;
+
+        actions.querySelector('.shop-copy-btn').addEventListener('click', () => {
+            navigator.clipboard.writeText(listText).then(() => {
+                const btn = actions.querySelector('.shop-copy-btn');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '✓ Copiado!';
+                btn.style.background = '#27ae60';
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.style.background = '';
+                }, 2000);
+            });
+        });
+
+        openModal('Lista de Compras', recipeName.toUpperCase(), actions);
+    }
+
+    function startMiseEnPlace(card) {
+        const recipeName = card.querySelector('.rc-name')?.textContent || 'Receita';
+        const ingredients = getRecipeIngredients(card);
+        
+        const list = document.createElement('ul');
+        list.className = 'mise-list';
+        
+        ingredients.forEach(ing => {
+            const li = document.createElement('li');
+            li.className = 'mise-item';
+            li.innerHTML = `
+                <div class="mise-checkbox"></div>
+                <div class="mise-info">
+                    <span class="mise-name" style="display:block; font-weight:600; font-size:0.95rem">${ing.name}</span>
+                    <span class="mise-qty" style="display:block; font-size:0.8rem; color:var(--terra)">${ing.qty}</span>
+                </div>
+            `;
+            li.addEventListener('click', () => {
+                li.classList.toggle('checked');
+                // Haptic feedback se disponível
+                if (window.navigator.vibrate) window.navigator.vibrate(10);
+            });
+            list.appendChild(li);
+        });
+
+        openModal('Mise en Place', 'Organize sua bancada', list);
+    }
+
+    /* ── 9. ESCALONADOR & NOTAS ── */
     function initRecipeCards() {
         document.querySelectorAll('.recipe-card').forEach(card => {
             const head = card.querySelector('.rc-head');
@@ -539,6 +661,33 @@
                     </div>`;
 
                 if (colLabel) colLabel.after(scaler);
+
+                // Injeção de Ações Rápidas (Lista de Compras & Mise en Place)
+                if (!ingCol.querySelector('.rc-quick-actions')) {
+                    const quickActions = document.createElement('div');
+                    quickActions.className = 'rc-quick-actions js-fade';
+                    quickActions.innerHTML = `
+                        <button class="rc-action-btn rc-shop-btn" title="Gerar Lista de Compras">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                            Lista de Compras
+                        </button>
+                        <button class="rc-action-btn rc-mise-btn" title="Mise en Place">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
+                            Mise en Place
+                        </button>
+                    `;
+                    scaler.after(quickActions);
+
+                    quickActions.querySelector('.rc-shop-btn').addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        generateShoppingList(card);
+                    });
+
+                    quickActions.querySelector('.rc-mise-btn').addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        startMiseEnPlace(card);
+                    });
+                }
 
                 scaler.querySelectorAll('.rc-scale-btn').forEach(btn => {
                     btn.addEventListener('click', e => {

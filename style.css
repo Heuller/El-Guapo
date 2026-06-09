@@ -1474,9 +1474,201 @@
            ESCALONADOR DE RECEITA
         ═══════════════════════════════════════════════ */
         .rc-scaler {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px dashed var(--line-faint);
+        }
+
+        .rc-quick-actions {
+            display: flex;
+            gap: 0.75rem;
             margin-bottom: 1.5rem;
-            padding-bottom: 1.2rem;
-            border-bottom: 1px solid var(--line-faint);
+            padding-bottom: 1.25rem;
+            border-bottom: 1px dashed var(--line-faint);
+        }
+
+        .rc-action-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: var(--paper-cream);
+            border: 1px solid var(--line);
+            color: var(--ink-soft);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-family: var(--ff-body);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-transform: lowercase;
+            font-variant: small-caps;
+            letter-spacing: 0.03em;
+        }
+
+        .rc-action-btn:hover {
+            border-color: var(--terra);
+            color: var(--terra);
+            background: var(--paper-light);
+            transform: translateY(-1px);
+        }
+
+        .rc-action-btn svg {
+            opacity: 0.7;
+            transition: transform 0.3s;
+        }
+
+        .rc-action-btn:hover svg {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        /* Modal / Overlay para Mise en Place e Lista */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(27, 19, 13, 0.8);
+            backdrop-filter: blur(8px);
+            z-index: 30000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s;
+            padding: 1.5rem;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background: var(--paper);
+            width: 100%;
+            max-width: 500px;
+            max-height: 85vh;
+            border-radius: 20px;
+            padding: 2.5rem;
+            position: relative;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--line-faint);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.25rem;
+            right: 1.25rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--ink-soft);
+            cursor: pointer;
+            padding: 0.5rem;
+            line-height: 1;
+        }
+
+        .modal-title {
+            font-family: var(--ff-disp);
+            font-size: 1.75rem;
+            color: var(--ink);
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .modal-subtitle {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+            text-align: center;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .mise-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .mise-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--paper-cream);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .mise-item:hover {
+            border-color: var(--line);
+        }
+
+        .mise-item.checked {
+            opacity: 0.6;
+            background: var(--line-faint);
+        }
+
+        .mise-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--terra);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .mise-item.checked .mise-checkbox {
+            background: var(--terra);
+        }
+
+        .mise-item.checked .mise-checkbox::after {
+            content: '✓';
+            color: var(--paper);
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .mise-item.checked span {
+            text-decoration: line-through;
+        }
+
+        .shop-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .shop-copy-btn {
+            background: var(--terra);
+            color: var(--paper);
+            border: none;
+            padding: 1rem;
+            border-radius: 12px;
+            font-family: var(--ff-body);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+
+        .shop-copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(168, 93, 34, 0.3);
         }
 
         .rc-scaler-label {
