@@ -272,7 +272,6 @@
         try {
             if ('wakeLock' in navigator) {
                 wakeLock = await navigator.wakeLock.request('screen');
-                console.log('✓ Wake Lock ativo: Tela permanecerá acesa.');
             }
         } catch (err) {
             console.warn(`Wake Lock indisponível: ${err.name}`);
@@ -322,6 +321,11 @@
                 kitchenModeStepText.innerHTML = stepText;
                 delete kitchenModeStepText.dataset.timerButtonsInjected;
                 injectTimerButtons(kitchenModeStepText);
+                // leitura por voz do passo (se ativada)
+                try {
+                    const plain = kitchenModeStepText.textContent || stepText;
+                    speak(`Passo ${stepNum}. ${plain}`);
+                } catch (_) {}
                 
                 // Animação de entrada
                 kitchenModeStepText.classList.remove('page-exit', 'page-enter');
@@ -644,32 +648,133 @@
     function generateShoppingList(card) {
         const recipeName = card.querySelector('.rc-name')?.textContent || 'Receita';
         const ingredients = getRecipeIngredients(card);
-        const listText = `🛒 *Lista de Compras: ${recipeName}*\n\n` + ingredients.map(i => `• ${i.name}: ${i.qty}`).join('\n');
-        
-        const container = document.createElement('div');
-        container.className = 'shop-actions';
-        container.innerHTML = `
-            <div class="shop-html-list">
-                ${ingredients.map(ing => `
-                    <div class="shop-item" style="display:flex; justify-content:space-between; padding:0.5rem 0; border-bottom:1px solid var(--line-faint)">
-                        <span style="font-weight:500">${ing.name}</span>
-                        <span style="color:var(--terra); font-weight:600">${ing.qty}</span>
-                    </div>`).join('')}
-            </div>
-            <button class="shop-copy-btn">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-                Copiar para WhatsApp / Notas
-            </button>`;
 
-        container.querySelector('.shop-copy-btn').addEventListener('click', (e) => {
-            const btn = e.currentTarget;
-            navigator.clipboard.writeText(listText).then(() => {
-                const oldHTML = btn.innerHTML;
-                btn.innerHTML = '✓ Copiado!';
-                btn.style.background = '#27ae60';
-                setTimeout(() => { btn.innerHTML = oldHTML; btn.style.background = ''; }, 2000);
+        // Helpers para despensa e categorias
+        const pantry = getPantry();
+        const normalize = (s) => s.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '').trim();
+
+        function categorizeIngredient(name) {
+            const n = name.toLowerCase();
+            if (/leite|manteiga|iogurte|creme|queijo|nata|ricota/.test(n)) return 'Laticínios';
+            if (/farinha|trigo|fermento|ovo|gema|clara/.test(n)) return 'Padaria & Panificação';
+            if (/açúcar|mel|glucose|xarope|açucar|demerara/.test(n)) return 'Açúcares & Doces';
+            if (/sal|pimenta|canela|baunilha|essência|tempero|ervas|temperos?/.test(n)) return 'Temperos';
+            if (/banana|laranja|limão|fruta|maçã|manga|uva|abacaxi/.test(n)) return 'Frutas';
+            if (/noz|pecã|amêndra|castanha|amendoim|nozes|castanhas?/.test(n)) return 'Oleaginosas';
+            if (/óleo|azeite|azeite|óleo|manteiga|gordura/.test(n)) return 'Óleos & Gorduras';
+            if (/chocolate|cacau|cacau em pó/.test(n)) return 'Chocolates & Cacau';
+            return 'Outros';
+        }
+
+        const substitutions = {
+            'fermento biológico seco': [{ name: 'Fermento biológico fresco', note: 'Use 3× a massa: 1g seco ≈ 3g fresco' }],
+            'fermento seco': [{ name: 'Fermento fresco', note: 'Use 3×' }],
+            'açúcar refinado': [{ name: 'Açúcar demerara', note: 'Sabor mais caramelado' }],
+            'leite integral': [{ name: 'Leite', note: 'Se tiver apenas vegetal, ajuste expectativa de sabor' }]
+        };
+
+        // Construir estrutura por categorias
+        const buckets = {};
+        const missing = [];
+
+        ingredients.forEach(ing => {
+            const cat = categorizeIngredient(ing.name);
+            buckets[cat] = buckets[cat] || [];
+            const nName = normalize(ing.name);
+            // Verifica na despensa por substring
+            const found = pantry.find(p => normalize(p.name).includes(nName) || nName.includes(normalize(p.name)));
+            const available = !!found;
+            const item = { name: ing.name, qty: ing.qty, available };
+            if (!available) missing.push(item);
+            // Sugestões
+            const subKey = Object.keys(substitutions).find(k => nName.includes(k));
+            if (subKey) item.suggestions = substitutions[subKey];
+            buckets[cat].push(item);
+        });
+
+        const container = document.createElement('div');
+        container.className = 'shop-actions shop-actions--full';
+
+        const listHtml = document.createElement('div');
+        listHtml.className = 'shop-html-list shop-html-list--categorized';
+
+        Object.keys(buckets).forEach(cat => {
+            const items = buckets[cat];
+            const catEl = document.createElement('div');
+            catEl.className = 'shop-cat';
+            const head = document.createElement('div');
+            head.className = 'shop-cat-head';
+            head.innerHTML = `<strong>${cat}</strong> <span style="color:var(--ink-soft); font-size:0.9rem">(${items.length})</span>`;
+            catEl.appendChild(head);
+
+            items.forEach(it => {
+                const itEl = document.createElement('div');
+                itEl.className = 'shop-item';
+                itEl.style.display = 'flex';
+                itEl.style.justifyContent = 'space-between';
+                itEl.style.padding = '0.45rem 0';
+                itEl.style.borderBottom = '1px solid var(--line-faint)';
+
+                const left = document.createElement('div');
+                left.innerHTML = `<span style="font-weight:600">${it.name}</span><div style="font-size:0.85rem; color:var(--ink-soft)">${it.suggestions ? it.suggestions.map(s=>`${s.name} (${s.note})`).join('<br>') : ''}</div>`;
+                const right = document.createElement('div');
+                right.style.textAlign = 'right';
+                right.innerHTML = `<div style="color:var(--terra); font-weight:600">${it.qty}</div><div style="font-size:0.85rem; color:${it.available ? '#2e7d32' : '#c0392b'}">${it.available ? 'na despensa' : 'faltando'}</div>`;
+
+                itEl.appendChild(left);
+                itEl.appendChild(right);
+                catEl.appendChild(itEl);
+            });
+
+            listHtml.appendChild(catEl);
+        });
+
+        container.appendChild(listHtml);
+
+        const actions = document.createElement('div');
+        actions.style.display = 'flex';
+        actions.style.gap = '0.6rem';
+        actions.style.marginTop = '1rem';
+
+        const copyBtn = document.createElement('button');
+        copyBtn.className = 'shop-copy-btn';
+        copyBtn.textContent = 'Copiar lista';
+        copyBtn.addEventListener('click', () => {
+            const text = `${recipeName} - Lista:\n` + ingredients.map(i => `- ${i.name}: ${i.qty}`).join('\n');
+            navigator.clipboard.writeText(text).then(() => {
+                copyBtn.textContent = '✓ Copiado';
+                setTimeout(() => copyBtn.textContent = 'Copiar lista', 1500);
             });
         });
+
+        const addMissingBtn = document.createElement('button');
+        addMissingBtn.className = 'shop-add-missing';
+        addMissingBtn.textContent = `Adicionar ${missing.length} faltantes à despensa`;
+        addMissingBtn.addEventListener('click', () => {
+            missing.forEach(it => addPantryItem({ name: it.name }));
+            addMissingBtn.textContent = 'Adicionados ✓';
+            setTimeout(() => addMissingBtn.textContent = `Adicionar ${missing.length} faltantes à despensa`, 1500);
+        });
+
+        const shareBtn = document.createElement('button');
+        shareBtn.className = 'shop-share-btn';
+        shareBtn.textContent = 'Compartilhar';
+        shareBtn.addEventListener('click', async () => {
+            const text = `${recipeName} - Lista:\n` + ingredients.map(i => `- ${i.name}: ${i.qty}`).join('\n');
+            if (navigator.share) {
+                try { await navigator.share({ title: `Lista: ${recipeName}`, text }); } catch(_) {}
+            } else {
+                navigator.clipboard.writeText(text).then(() => {
+                    shareBtn.textContent = 'Copiado para área de transferência';
+                    setTimeout(() => shareBtn.textContent = 'Compartilhar', 1500);
+                });
+            }
+        });
+
+        actions.appendChild(copyBtn);
+        actions.appendChild(addMissingBtn);
+        actions.appendChild(shareBtn);
+        container.appendChild(actions);
 
         openModal('Lista de Compras', recipeName.toUpperCase(), container);
     }
@@ -845,13 +950,173 @@
         return Math.round(n * 10) / 10;
     }
 
+    /* ── 10. MODO LUZ DE VELA (DARK MODE ORGÂNICO) ── */
+    function initCandlelightMode() {
+        const nav = document.querySelector('.nav');
+        if (!nav) return;
+
+        const candleBtn = document.createElement('button');
+        candleBtn.className = 'candle-toggle';
+        candleBtn.title = 'Modo Luz de Vela';
+        candleBtn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path><circle cx="12" cy="12" r="4"></circle></svg>`;
+        
+        // Insere o botão no nav, antes dos links ou no final se não houver links
+        const navLinks = nav.querySelector('.nav-links');
+        if (navLinks) {
+            navLinks.before(candleBtn);
+        } else {
+            nav.appendChild(candleBtn);
+        }
+
+        const isDark = localStorage.getItem('eg-candlelight') === 'true';
+        if (isDark) document.documentElement.classList.add('candlelight');
+
+        candleBtn.addEventListener('click', () => {
+            const active = document.documentElement.classList.toggle('candlelight');
+            localStorage.setItem('eg-candlelight', active);
+            if (navigator.vibrate) navigator.vibrate(10);
+        });
+    }
+
     /* ── 9. INICIALIZAÇÃO ── */
+    // Despensa: persistência simples
+    const PANTRY_KEY = 'eg-pantry-v1';
+    function getPantry() {
+        try { return JSON.parse(localStorage.getItem(PANTRY_KEY) || '[]'); } catch { return []; }
+    }
+    function savePantry(arr) { localStorage.setItem(PANTRY_KEY, JSON.stringify(arr)); }
+    function addPantryItem(item) {
+        const p = getPantry();
+        // evita duplicados simples
+        if (p.find(x => x.name === item.name)) return;
+        p.push({ name: item.name });
+        savePantry(p);
+    }
+    function removePantryItem(name) {
+        const p = getPantry().filter(i => i.name !== name);
+        savePantry(p);
+    }
+
+    function openPantryModal() {
+        const p = getPantry();
+        const container = document.createElement('div');
+        container.className = 'pantry-modal';
+
+        const list = document.createElement('div');
+        list.style.maxHeight = '40vh';
+        list.style.overflow = 'auto';
+        list.style.marginBottom = '0.6rem';
+
+        function render() {
+            list.innerHTML = '';
+            getPantry().forEach(item => {
+                const row = document.createElement('div');
+                row.style.display = 'flex'; row.style.justifyContent = 'space-between'; row.style.padding = '0.45rem 0'; row.style.borderBottom = '1px solid var(--line-faint)';
+                row.innerHTML = `<div style="font-weight:600">${item.name}</div><div><button class="pantry-remove">Remover</button></div>`;
+                row.querySelector('.pantry-remove').addEventListener('click', () => { removePantryItem(item.name); render(); });
+                list.appendChild(row);
+            });
+        }
+
+        const form = document.createElement('div');
+        form.style.display = 'flex'; form.style.gap = '0.5rem';
+        form.innerHTML = `<input class="pantry-input" placeholder="Adicionar item à despensa" style="flex:1; padding:0.5rem; border:1px solid var(--line); border-radius:8px"/><button class="pantry-add btn--primary" style="padding:0.5rem 0.8rem">Adicionar</button>`;
+        form.querySelector('.pantry-add').addEventListener('click', () => {
+            const val = form.querySelector('.pantry-input').value.trim();
+            if (!val) return;
+            addPantryItem({ name: val });
+            form.querySelector('.pantry-input').value = '';
+            render();
+        });
+
+        render();
+        container.appendChild(list);
+        container.appendChild(form);
+        openModal('Despensa', 'Itens salvos localmente', container);
+    }
+
+    // Observador de timers para falar quando concluídos
+    function initTimerSpeechObserver() {
+        const dock = document.getElementById('timer-dock');
+        if (!dock) return;
+        const obs = new MutationObserver(muts => {
+            muts.forEach(m => {
+                if (m.type === 'attributes' && m.attributeName === 'class') {
+                    const node = m.target;
+                    if (node.classList && node.classList.contains('timer-done')) {
+                        const label = node.querySelector('.timer-label')?.textContent || 'Timer';
+                        speak(`${label} concluído`);
+                    }
+                }
+                if (m.type === 'childList') {
+                    m.addedNodes.forEach(n => {
+                        if (n.nodeType === 1) {
+                            // monitorar classe changes
+                            const mo = new MutationObserver(ms => ms.forEach(mm => {
+                                if (mm.attributeName === 'class' && n.classList.contains('timer-done')) {
+                                    const label = n.querySelector('.timer-label')?.textContent || 'Timer';
+                                    speak(`${label} concluído`);
+                                }
+                            }));
+                            mo.observe(n, { attributes: true });
+                        }
+                    });
+                }
+            });
+        });
+        obs.observe(dock, { childList: true, subtree: true, attributes: true });
+    }
+
+    // Voz: leitura segura via SpeechSynthesis
+    function speak(text) {
+        if (!('speechSynthesis' in window)) return;
+        if (localStorage.getItem('eg-voice-enabled') !== 'true') return;
+        const utter = new SpeechSynthesisUtterance(text);
+        utter.lang = 'pt-BR';
+        utter.rate = 0.95;
+        window.speechSynthesis.cancel();
+        window.speechSynthesis.speak(utter);
+    }
+
+    function initPantryButton() {
+        const nav = document.querySelector('.nav');
+        if (!nav) return;
+        const btn = document.createElement('button');
+        btn.className = 'nav-btn-pantry btn';
+        btn.textContent = 'Despensa';
+        btn.style.marginLeft = '0.6rem';
+        btn.addEventListener('click', () => openPantryModal());
+        const navLinks = nav.querySelector('.nav-links');
+        if (navLinks) navLinks.after(btn); else nav.appendChild(btn);
+    }
+
+    // Botão de voz no modo cozinha
+    function ensureKitchenVoiceToggle() {
+        const kmHeader = document.querySelector('.kitchen-mode-header');
+        if (!kmHeader) return;
+        if (kmHeader.querySelector('.kitchen-voice-toggle')) return;
+        const btn = document.createElement('button');
+        btn.className = 'kitchen-voice-toggle btn';
+        btn.style.marginLeft = '0.6rem';
+        const enabled = localStorage.getItem('eg-voice-enabled') === 'true';
+        btn.textContent = enabled ? 'Voz: ON' : 'Voz: OFF';
+        btn.addEventListener('click', () => {
+            const cur = localStorage.getItem('eg-voice-enabled') === 'true';
+            localStorage.setItem('eg-voice-enabled', cur ? 'false' : 'true');
+            btn.textContent = cur ? 'Voz: OFF' : 'Voz: ON';
+        });
+        kmHeader.appendChild(btn);
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
         initRecipeCards();
-        
+        initCandlelightMode();
+        initPantryButton();
+        initTimerSpeechObserver();
+        ensureKitchenVoiceToggle();
+
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('sw.js')
-                .then(() => console.log('✓ PWA Ativo'))
                 .catch(err => console.warn('PWA falhou:', err));
         }
 
@@ -876,18 +1141,12 @@
             }
         }
 
-        // Restaura as funcionalidades principais
-        initCandlelightMode();
-        
         // Garante que os botões de timer sejam injetados em todas as receitas no início
         injectTimerButtons();
     });
 
 })();
 
-
-
-/* ── 11. MODO LUZ DE VELA (DARK MODE ORGÂNICO) ── */
     function initCandlelightMode() {
         const nav = document.querySelector('.nav');
         if (!nav) return;
