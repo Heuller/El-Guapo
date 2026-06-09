@@ -94,14 +94,14 @@
         <li><a href="#quitanda">Quitanda</a></li>
         <li><a href="#especiais">Especiais</a></li>
     </ul>
-    <button class="nav-hamburger" id="nav-hamburger" aria-label="Abrir menu" aria-expanded="false">☰</button>
+    <button type="button" class="nav-hamburger" id="nav-hamburger" aria-label="Abrir menu" aria-expanded="false">☰</button>
 </nav>
 
 <div class="nav-drawer-overlay" id="nav-drawer-overlay" aria-hidden="true"></div>
 <nav class="nav-drawer" id="nav-drawer" aria-label="Menu mobile" aria-hidden="true">
     <div class="nav-drawer-top">
         <a href="#top" class="nav-drawer-brand">El Guapo</a>
-        <button class="nav-drawer-close" id="nav-drawer-close" aria-label="Fechar menu">✕</button>
+        <button type="button" class="nav-drawer-close" id="nav-drawer-close" aria-label="Fechar menu">✕</button>
     </div>
     <ul class="nav-drawer-links">
         <li><a href="#pizzas"><span class="nav-drawer-num">01</span>Pizzas</a></li>
@@ -141,7 +141,7 @@
         <input type="search" class="search-input" id="recipe-search"
                placeholder="Buscar por ingrediente, método ou receita…"
                autocomplete="off" aria-label="Buscar receitas">
-        <button class="search-clear" id="search-clear" aria-label="Limpar busca">✕</button>
+        <button type="button" class="search-clear" id="search-clear" aria-label="Limpar busca">✕</button>
     </div>
     <div class="toc-grid js-fade" style="transition-delay:.1s">
         <a href="#pizzas" class="toc-card">
@@ -226,7 +226,7 @@
 
             <div class="rc-body">
 
-                <div class="rc-image"><img src="images/el-guapo-img-01.webp" loading="lazy" alt="Massa de Pizza El Guapo" loading="lazy"></div>
+                <div class="rc-image"><img src="images/el-guapo-img-01.webp" loading="lazy" alt="Massa de Pizza El Guapo"></div>
                 <div class="rc-body-inner">
 
                     <div class="rc-ingredients">
@@ -397,7 +397,7 @@
 
             <div class="rc-body">
 
-                <div class="rc-image"><img src="images/el-guapo-img-02.webp" loading="lazy" alt="Massa Base de Focaccia" loading="lazy"></div>
+                <div class="rc-image"><img src="images/el-guapo-img-02.webp" loading="lazy" alt="Massa Base de Focaccia"></div>
                 <div class="rc-body-inner">
 
                     <div class="rc-ingredients">
@@ -610,7 +610,7 @@
             </div>
             <div class="rc-body">
 
-                <div class="rc-image"><img src="images/el-guapo-img-03.webp" loading="lazy" alt="Massa Base de Cuca" loading="lazy"></div>
+                <div class="rc-image"><img src="images/el-guapo-img-03.webp" loading="lazy" alt="Massa Base de Cuca"></div>
                 <div class="rc-body-inner">
                     <div class="rc-ingredients">
                         <span class="rc-col-label">Composição Analítica</span>
@@ -1288,7 +1288,7 @@
             </div>
             <div class="rc-body">
 
-                <div class="rc-image"><img src="images/el-guapo-img-05.webp" loading="lazy" alt="Pão de Ló Padrão" loading="lazy"></div>
+                <div class="rc-image"><img src="images/el-guapo-img-05.webp" loading="lazy" alt="Pão de Ló Padrão"></div>
                 <div class="rc-body-inner">
                     <div class="rc-ingredients">
                         <span class="rc-col-label">Composição Analítica</span>
@@ -1434,7 +1434,7 @@
             </div>
             <div class="rc-body">
 
-                <div class="rc-image"><img src="images/el-guapo-img-06.webp" loading="lazy" alt="Pão de Ló de Chocolate" loading="lazy"></div>
+                <div class="rc-image"><img src="images/el-guapo-img-06.webp" loading="lazy" alt="Pão de Ló de Chocolate"></div>
                 <div class="rc-body-inner">
                     <div class="rc-ingredients">
                         <span class="rc-col-label">Composição Analítica</span>
@@ -1813,7 +1813,7 @@
             </div>
             <div class="rc-body">
 
-                <div class="rc-image"><img src="images/el-guapo-img-09.webp" loading="lazy" alt="Pão de Queijo do Heuller" loading="lazy"></div>
+                <div class="rc-image"><img src="images/el-guapo-img-09.webp" loading="lazy" alt="Pão de Queijo do Heuller"></div>
                 <div class="rc-body-inner">
                     <div class="rc-ingredients">
                         <span class="rc-col-label">Composição Analítica</span>
@@ -1985,7 +1985,7 @@
             </div>
             <div class="rc-body">
 
-                <div class="rc-image"><img src="images/el-guapo-img-10.webp" loading="lazy" alt="Pão do Heuller e da Gabriela" loading="lazy"></div>
+                <div class="rc-image"><img src="images/el-guapo-img-10.webp" loading="lazy" alt="Pão do Heuller e da Gabriela"></div>
                 <div class="rc-body-inner">
                     <div class="rc-ingredients">
                         <span class="rc-col-label">Ingredientes</span>
@@ -2575,7 +2575,7 @@
     <!-- ═══ MODAL PARA MISE EN PLACE E LISTA DE COMPRAS ═══ -->
     <div id="modal-overlay" class="modal-overlay" aria-hidden="true">
         <div class="modal-content">
-            <button class="modal-close" id="modal-close" aria-label="Fechar">✕</button>
+            <button type="button" class="modal-close" id="modal-close" aria-label="Fechar">✕</button>
             <h2 id="modal-title" class="modal-title">Título</h2>
             <p id="modal-subtitle" class="modal-subtitle">Subtítulo</p>
             <div id="modal-body"></div>
@@ -2586,16 +2586,16 @@
     <div id="kitchen-mode-overlay" class="kitchen-mode-overlay" aria-hidden="true">
         <div class="kitchen-mode-header">
             <h2 id="kitchen-mode-recipe-name">Receita</h2>
-            <button id="kitchen-mode-close" class="kitchen-mode-close" aria-label="Fechar modo cozinha">&times;</button>
+            <button type="button" id="kitchen-mode-close" class="kitchen-mode-close" aria-label="Fechar modo cozinha">&times;</button>
         </div>
         <div class="kitchen-mode-content" role="main" aria-labelledby="kitchen-mode-step-number">
             <div id="kitchen-mode-step-number" class="kitchen-mode-step-number" aria-live="polite">Passo 1</div>
             <div id="kitchen-mode-step-text" class="kitchen-mode-step-text" aria-live="polite">Carregando...</div>
         </div>
         <div class="kitchen-mode-footer">
-            <button id="kitchen-mode-prev" class="kitchen-mode-btn" disabled>Anterior</button>
+            <button type="button" id="kitchen-mode-prev" class="kitchen-mode-btn" disabled>Anterior</button>
             <div id="kitchen-mode-progress" class="kitchen-mode-progress">1 de 10</div>
-            <button id="kitchen-mode-next" class="kitchen-mode-btn">Próximo</button>
+            <button type="button" id="kitchen-mode-next" class="kitchen-mode-btn">Próximo</button>
         </div>
     </div>
 

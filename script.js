@@ -68,18 +68,34 @@
     /* ── 2. NAVEGAÇÃO & UI BÁSICA ── */
     const hamburger = document.getElementById('nav-hamburger');
     const drawer = document.getElementById('nav-drawer');
+    const drawerOverlay = document.getElementById('nav-drawer-overlay');
     const drawerClose = document.getElementById('nav-drawer-close');
     const drawerLinks = document.querySelectorAll('.nav-drawer-links a');
 
     const toggleDrawer = (isOpen) => {
-        if (!drawer) return;
+        if (!drawer || !hamburger) return;
         drawer.classList.toggle('open', isOpen);
-        drawer.setAttribute('aria-hidden', !isOpen);
+        drawer.setAttribute('aria-hidden', String(!isOpen));
+        hamburger.setAttribute('aria-expanded', String(isOpen));
+        if (drawerOverlay) {
+            drawerOverlay.classList.toggle('open', isOpen);
+            drawerOverlay.setAttribute('aria-hidden', String(!isOpen));
+        }
         toggleScroll(!isOpen);
     };
 
+    function syncRecipeAccessibility(card, open) {
+        const head = card.querySelector('.rc-head');
+        const body = card.querySelector('.rc-body');
+        if (!head || !body) return;
+        if (!body.id) body.id = `${card.id || 'recipe'}-body`;
+        head.setAttribute('aria-controls', body.id);
+        body.setAttribute('aria-hidden', String(!open));
+    }
+
     if (hamburger) hamburger.addEventListener('click', () => toggleDrawer(true));
     if (drawerClose) drawerClose.addEventListener('click', () => toggleDrawer(false));
+    if (drawerOverlay) drawerOverlay.addEventListener('click', () => toggleDrawer(false));
     drawerLinks.forEach(link => link.addEventListener('click', () => toggleDrawer(false)));
 
     window.addEventListener('scroll', () => {
@@ -121,7 +137,17 @@
         if (!head) return;
         
         const card = head.closest('.recipe-card');
+        const wasOpen = card.classList.contains('open');
+        if (!wasOpen) {
+            document.querySelectorAll('.recipe-card.open').forEach(other => {
+                if (other !== card) {
+                    other.classList.remove('open');
+                    syncRecipeAccessibility(other, false);
+                }
+            });
+        }
         const isOpen = card.classList.toggle('open');
+        syncRecipeAccessibility(card, isOpen);
         head.setAttribute('aria-expanded', String(isOpen));
         
         if (isOpen) {
@@ -141,6 +167,20 @@
             } else if (timerCard) {
                 e.preventDefault();
                 timerCard.click();
+            }
+        }
+        if (e.key === 'Escape') {
+            if (drawer && drawer.classList.contains('open')) {
+                toggleDrawer(false);
+                return;
+            }
+            if (modalOverlay && modalOverlay.classList.contains('active')) {
+                closeModal();
+                return;
+            }
+            if (kitchenModeOverlay && kitchenModeOverlay.classList.contains('active') && kitchenModeClose) {
+                kitchenModeClose.click();
+                return;
             }
         }
     });
