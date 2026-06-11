@@ -1327,6 +1327,29 @@ button:focus-visible {
   .rc-note {
     padding: 1.25rem 0 1.25rem 1.25rem;
   }
+  .rc-step {
+    grid-template-columns: minmax(0, 40px) 1fr;
+    gap: 0.85rem;
+  }
+  .rc-step-num {
+    font-size: 1.45rem;
+  }
+  .rc-step-text {
+    font-size: 0.94rem;
+    line-height: 1.75;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  .rc-unit-switcher {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .rc-unit-controls {
+    justify-content: flex-start;
+  }
+  .rc-action-btn {
+    min-height: 48px;
+  }
 
   .recipe-wrap {
     padding: 1.5rem 1.25rem 0;
