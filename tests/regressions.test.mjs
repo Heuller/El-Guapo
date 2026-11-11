@@ -44,7 +44,7 @@ test('modal returns focus on close, Escape and outside click; reopening stays co
 
 test('shopping-list modal returns focus to its own trigger', async () => {
   await reset();
-  await app.evaluate(`document.querySelector('.rc-head').click();document.querySelector('.rc-shop-btn').focus();document.querySelector('.rc-shop-btn').click()`);
+  await app.evaluate(`document.querySelector('#pizza-massa-base .rc-head').click();document.querySelector('#pizza-massa-base .rc-shop-btn').focus();document.querySelector('#pizza-massa-base .rc-shop-btn').click()`);
   await app.wait(`document.querySelector('#modal-overlay.active') !== null`);
   assert.match(await app.evaluate(`document.querySelector('#modal-body').textContent`), /Farinha/);
   await app.evaluate(`document.querySelector('#modal-close').click()`);
@@ -59,13 +59,13 @@ test('recipe source, images and recipe ids match the approved content baseline',
     assert.equal(createHash('sha256').update(bytes).digest('hex'), hash, path);
   }
   await reset();
-  assert.deepEqual(await app.evaluate(`[...document.querySelectorAll('.rc-head')].map(e=>e.closest(".recipe-card").id)`), baseline.recipeIds);
+  assert.deepEqual(await app.evaluate(`[...document.querySelectorAll('.rc-head')].map(e=>e.closest(".recipe-card").id).sort()`), [...baseline.recipeIds].sort());
 });
 
 
 test('structured catalog matches ingredient text and preparation steps in the approved HTML', async () => {
   await reset();
-  const catalog=JSON.parse(await readFile(new URL('../content/recipes.json',import.meta.url),'utf8'));
+  const catalog=JSON.parse(await readFile(new URL('../content/recipes.json',import.meta.url),'utf8'));catalog.recipes.sort((a,b)=>a.title.localeCompare(b.title,'pt-BR',{sensitivity:'base',numeric:true}));
   const actual=await app.evaluate(`Array.from(document.querySelectorAll('.recipe-card'),card=>({id:card.id,title:card.querySelector('.rc-name').textContent.trim(),quantities:Array.from(card.querySelectorAll('.rc-ing-qty'),e=>e.getAttribute('data-orig')),steps:Array.from(card.querySelectorAll('.rc-step-text'),e=>e.textContent.replace(/\\s+/g,' ').trim())}))`);
   assert.deepEqual(actual,catalog.recipes.map(r=>({id:r.id,title:r.title,quantities:r.ingredientGroups.flatMap(g=>g.ingredients.map(i=>i.quantityText)),steps:r.steps.map(s=>s.text)})));
 });
@@ -107,7 +107,7 @@ test('all recipes keep original measures and scaling after removing the househol
   await app.load();
   assert.equal(await app.evaluate(`document.querySelectorAll('.rc-unit-switcher, .rc-unit-btn, [data-unit="caseiro"]').length`),0);
   assert.equal(await app.evaluate(`Array.from(document.querySelectorAll('button')).some(e=>e.textContent.trim().toLowerCase()==='caseiro')`),false);
-  const catalog=JSON.parse(await readFile(new URL('../content/recipes.json',import.meta.url),'utf8'));
+  const catalog=JSON.parse(await readFile(new URL('../content/recipes.json',import.meta.url),'utf8'));catalog.recipes.sort((a,b)=>a.title.localeCompare(b.title,'pt-BR',{sensitivity:'base',numeric:true}));
   assert.deepEqual(await app.evaluate(`Array.from(document.querySelectorAll('.recipe-card'),card=>Array.from(card.querySelectorAll('.rc-ing-qty'),e=>e.textContent.trim()))`),catalog.recipes.map(r=>r.ingredientGroups.flatMap(g=>g.ingredients.map(i=>i.quantityText))));
   await app.evaluate(`document.querySelector('#bolo-cenoura-gabriela .rc-head').click();document.querySelector('#bolo-cenoura-gabriela [data-mult="2"]').click()`);
   const cups=await app.evaluate(`Array.from(document.querySelectorAll('#bolo-cenoura-gabriela .rc-ing-qty')).filter(e=>e.dataset.orig.includes('xícara')).map(e=>e.textContent)`);

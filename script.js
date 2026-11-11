@@ -950,6 +950,16 @@
 
   document.addEventListener("DOMContentLoaded", () => {
     shoppingList = window.ElGuapoShopping.createUI(openModal);
+    // Sort the actual DOM so visual, keyboard and kitchen-picker orders agree.
+    const collator = new Intl.Collator("pt-BR", { sensitivity: "base", numeric: true });
+    const cards = [...document.querySelectorAll(".catalog-grid .recipe-card")];
+    const slots = cards.map(card => {
+      const slot = document.createComment("recipe slot");
+      card.before(slot);
+      return slot;
+    });
+    cards.sort((a, b) => collator.compare(a.querySelector(".rc-name").textContent.trim(), b.querySelector(".rc-name").textContent.trim()));
+    cards.forEach((card, i) => slots[i].replaceWith(card));
     initRecipeCards();
     initCandlelightMode();
     initShoppingButton();

@@ -8,7 +8,7 @@ beforeEach(async()=>{await a.send('Network.emulateNetworkConditions',{offline:fa
 async function key(key,code,virtual){await a.send('Input.dispatchKeyEvent',{type:'keyDown',key,code,windowsVirtualKeyCode:virtual});await a.send('Input.dispatchKeyEvent',{type:'keyUp',key,code,windowsVirtualKeyCode:virtual});}
 async function launch(query){const url=await a.evaluate(`location.origin+'/' + ${JSON.stringify(query)}`);await a.send('Page.navigate',{url});await a.wait(`document.readyState==='complete'&&!!document.querySelector('.candle-toggle')`);}
 test('mise en place exposes native checkbox names and scaled quantities; Space toggles both ways',async()=>{
- await a.evaluate(`document.querySelector('.rc-head').click();document.querySelector('[data-mult="2"]').click();document.querySelector('.rc-mise-btn').focus();document.querySelector('.rc-mise-btn').click();document.querySelector('.mise-checkbox').focus()`);
+ await a.evaluate(`document.querySelector('#pizza-massa-base .rc-head').click();document.querySelector('#pizza-massa-base [data-mult="2"]').click();document.querySelector('#pizza-massa-base .rc-mise-btn').focus();document.querySelector('#pizza-massa-base .rc-mise-btn').click();document.querySelector('.mise-checkbox').focus()`);
  assert.equal(await a.evaluate(`document.querySelector('.mise-checkbox').type`),'checkbox');
  const ax=await a.send('Accessibility.getFullAXTree');const checks=ax.nodes.filter(n=>n.role?.value==='checkbox');assert.ok(checks.length>0);assert.match(checks[0].name.value,/Farinha/);assert.match(checks[0].name.value,/1000/);
  await key(' ','Space',32);assert.equal(await a.evaluate(`document.querySelector('.mise-checkbox').checked&&document.querySelector('.mise-item').classList.contains('checked')`),true);
