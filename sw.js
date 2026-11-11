@@ -1,25 +1,25 @@
 /**
  * ═══════════════════════════════════════════════════════════════════
- * EL GUAPO SERVICE WORKER v3.2
+ * EL GUAPO SERVICE WORKER v3.3
  * Cache Strategy: Network-First para HTML, Cache-First para assets
  * Suporte offline completo + sincronização em background
  * ═══════════════════════════════════════════════════════════════════
  */
 
-const CACHE_NAME = 'el-guapo-v3.2';
-const ASSETS_CACHE = 'el-guapo-assets-v3.2';
-const RUNTIME_CACHE = 'el-guapo-runtime-v3.2';
+const CACHE_NAME = 'el-guapo-v3.3';
+const ASSETS_CACHE = 'el-guapo-assets-v3.3';
+const RUNTIME_CACHE = 'el-guapo-runtime-v3.3';
 
 const ASSETS_TO_CACHE = [
     "./",
     "./index.html",
     "./manifest.json",
     "./sw.js",
-    "./style.css",
-    "./script.js",
-    "./shopping-list.js",
-    "./ingredient-catalog.js",
-    "./shopping-model.js",
+    "./style.css?v=3.3",
+    "./script.js?v=3.3",
+    "./shopping-list.js?v=3.3",
+    "./ingredient-catalog.js?v=3.3",
+    "./shopping-model.js?v=3.3",
     "./assets/fonts/DM-Sans-OFL.txt",
     "./assets/fonts/Fraunces-OFL.txt",
     "./assets/fonts/dm-sans-400-normal.ttf",
@@ -31,7 +31,7 @@ const ASSETS_TO_CACHE = [
     "./assets/fonts/fraunces-600-italic.ttf",
     "./assets/fonts/fraunces-600-normal.ttf",
     "./assets/fonts/fraunces-700-normal.ttf",
-    "./assets/fonts.css",
+    "./assets/fonts.css?v=3.3",
     "./assets/icons/LICENSE",
     "./assets/icons/arrow-up-right.svg",
     "./assets/icons/book-open.svg",
@@ -61,18 +61,12 @@ const ASSETS_TO_CACHE = [
 
 // Evento de instalação: cachear assets críticos
 self.addEventListener('install', (event) => {
-    console.log('Service Worker instalando...');
-    event.waitUntil(
-        caches.open(CACHE_NAME).then((cache) => {
-            console.log('Cache aberto:', CACHE_NAME);
-            return cache.addAll(ASSETS_TO_CACHE).catch((err) => {
-                console.warn('Alguns assets não puderam ser cacheados:', err);
-                // Continuar mesmo que alguns assets falhem
-                return Promise.resolve();
-            });
-        })
-    );
-    self.skipWaiting();
+    // A failed download must not replace the previous complete offline version.
+    event.waitUntil((async () => {
+        const cache = await caches.open(CACHE_NAME);
+        await cache.addAll(ASSETS_TO_CACHE.map(url => new Request(url, { cache: 'reload' })));
+        await self.skipWaiting();
+    })());
 });
 
 // Evento de ativação: limpar caches antigos
@@ -89,9 +83,8 @@ self.addEventListener('activate', (event) => {
                     }
                 })
             );
-        })
+        }).then(() => self.clients.claim())
     );
-    self.clients.claim();
 });
 
 // Evento de fetch: estratégia inteligente baseada no tipo de requisição
@@ -116,7 +109,7 @@ self.addEventListener('fetch', (event) => {
     }
 
     // Estratégia Cache-First para CSS, JS, imagens e fonts
-    if (isCacheableAsset(request.url)) {
+    if (isCacheableAsset(url.pathname)) {
         event.respondWith(cacheFirst(request));
         return;
     }
@@ -136,15 +129,19 @@ async function networkFirst(request) {
         return response;
     } catch (error) {
         console.log('[SW] Network failed, trying cache for:', request.url);
-        const cached = await caches.match(request);
+        const cached = await matchCurrentCaches(request);
         if (cached) return cached;
-        return caches.match('./index.html') || new Response('Offline', { status: 503 });
+        if (request.mode === 'navigate' || request.destination === 'document') {
+            const page = await matchCurrentCaches('./index.html');
+            if (page) return page;
+        }
+        return new Response('Offline', { status: 503 });
     }
 }
 
 // Estratégia: Cache-First (usa cache primeiro, tenta rede se não encontrar)
 async function cacheFirst(request) {
-    const cached = await caches.match(request);
+    const cached = await matchCurrentCaches(request);
     if (cached) return cached;
 
     try {
@@ -157,6 +154,15 @@ async function cacheFirst(request) {
     } catch (error) {
         console.log('[SW] Network failed for:', request.url);
         return new Response('Offline', { status: 503 });
+    }
+}
+
+// Never consult caches belonging to another app release.
+async function matchCurrentCaches(request) {
+    for (const name of [RUNTIME_CACHE, ASSETS_CACHE, CACHE_NAME]) {
+        const cache = await caches.open(name);
+        const response = await cache.match(request);
+        if (response) return response;
     }
 }
 
@@ -183,4 +189,4 @@ self.addEventListener('message', (event) => {
     }
 });
 
-console.log('[SW] Service Worker v3.2 carregado com sucesso!');
+console.log('[SW] Service Worker v3.3 carregado com sucesso!');

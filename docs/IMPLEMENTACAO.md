@@ -100,3 +100,13 @@ Evidências e classificação em `design-qa.md`, resultado `passed`, sem pendên
 ## Hero da marca — ajuste textual
 
 Aplicados os quatro textos fornecidos: eyebrow “Receitas artesanais”, título “El Guapo”, slogan “Feito com o coração, para conquistar o seu.” e apoio “Doces, massas e receitas para tirar do papel e levar ao forno.”. Título com maior escala editorial; slogan serifado em itálico com destaque secundário e quebra equilibrada. Paleta, ilustrações, componentes e estrutura da home preservados. Capturas em `test-results/hero-brand/` (320, 390, 820 e 1440 px), sem overflow ou erros de execução. 70 testes aprovados, sintaxe e diff passaram. Service worker v3.2 renova o CSS; sem publicação.
+
+## Correção de atualização com cache legado
+
+A captura enviada após a publicação era compatível com HTML novo e CSS legado: link de acessibilidade exposto, fundo anterior e ilustração sem limite. Reproduzido em Chromium com um worker antigo mantendo CSS em cache. Os testes anteriores usavam perfis novos e não cobriam essa transição.
+
+Entradas CSS/JS agora usam URLs versionadas (`?v=3.3`), com os mesmos endereços no precache. Assim, o HTML novo recebe os arquivos correspondentes mesmo antes da substituição do worker antigo. O worker v3.3 consulta apenas seus caches, solicita o precache com revalidação e só ativa após concluir todos os downloads. Falha de rede conserva a versão offline anterior. O registro ignora cache HTTP do script do worker. Nenhum armazenamento de receitas, compras, despensa antiga ou anotações é apagado.
+
+Validação: 72 testes aprovados, incluindo troca de CSS legado para o atual em uma única recarga com worker antigo ainda ativo, preservação de dados locais e impedimento de ativação com precache incompleto. Evidências em `test-results/cache-update/legacy-broken.png` e `upgraded-mobile.png`. Sintaxe e diff passaram.
+
+Em próximas versões, atualizar conjuntamente o identificador das URLs CSS/JS no HTML e precache e a versão dos caches. Não reutilizar URLs de arquivos de entrada alterados entre versões da aplicação.

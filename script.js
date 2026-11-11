@@ -1083,7 +1083,7 @@
 
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker
-        .register("sw.js")
+        .register("sw.js", { updateViaCache: "none" })
         .catch((err) => console.warn("PWA falhou:", err));
     }
 

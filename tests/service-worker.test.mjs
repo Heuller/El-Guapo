@@ -8,7 +8,7 @@ test('activation discards stale app caches and preserves unrelated and current c
   const removed = [];
   const names = [
     'el-guapo-v2.0', 'el-guapo-assets-v2.0', 'el-guapo-runtime-v2.0',
-    'el-guapo-v3.2', 'el-guapo-assets-v3.2', 'el-guapo-runtime-v3.2', 'other-app-cache',
+    'el-guapo-v3.3', 'el-guapo-assets-v3.3', 'el-guapo-runtime-v3.3', 'other-app-cache',
   ];
   let activation;
   vm.runInNewContext(await readFile(new URL('../sw.js', import.meta.url), 'utf8'), {
@@ -23,4 +23,17 @@ test('activation discards stale app caches and preserves unrelated and current c
   listeners.activate({ waitUntil: promise => { activation = promise; } });
   await activation;
   assert.deepEqual(removed.sort(), ['el-guapo-assets-v2.0', 'el-guapo-runtime-v2.0', 'el-guapo-v2.0']);
+});
+
+test('a failed precache cannot activate an incomplete update',async()=>{
+ const listeners={};let activationRequested=false;let installation;
+ vm.runInNewContext(await readFile(new URL('../sw.js',import.meta.url),'utf8'),{
+  self:{addEventListener:(type,fn)=>listeners[type]=fn,skipWaiting(){activationRequested=true}},
+  caches:{open:async()=>({addAll:async()=>{throw new Error('download failed')}})},
+  Request:class{constructor(url,options){this.url=url;this.cache=options.cache}},
+  console:{log(){}}
+ });
+ listeners.install({waitUntil:p=>installation=p});
+ await assert.rejects(installation,/download failed/);
+ assert.equal(activationRequested,false);
 });

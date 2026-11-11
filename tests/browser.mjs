@@ -8,14 +8,16 @@ import { setTimeout as delay } from 'node:timers/promises';
 
 // A real, isolated Chromium driven through its standard DevTools protocol.
 // No production data or external browser-automation package is required.
-export async function browser() {
+export async function browser(options = {}) {
   const root = resolve(import.meta.dirname, '..');
+  let overrides = options.overrides || {};
   const server = createServer(async (req, res) => {
     try {
       const path = resolve(root, '.' + new URL(req.url, 'http://localhost').pathname);
       if (!path.startsWith(root + '/') && path !== root) throw new Error('Invalid path');
       const file = path === root ? join(root, 'index.html') : path;
-      const body = await readFile(file);
+      const relative = path === root ? 'index.html' : path.slice(root.length + 1);
+      const body = overrides[relative] ?? await readFile(file);
       const types = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.ttf': 'font/ttf' };
       res.writeHead(200, { 'Content-Type': types[extname(file)] || 'application/octet-stream' });
       res.end(body);
@@ -99,6 +101,6 @@ export async function browser() {
       await evaluate(`document.documentElement.style.scrollBehavior='auto'; const style=document.createElement('style');style.textContent='*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}';document.head.append(style)`);
     }
     await load();
-    return { evaluate, wait, send, load, close, errors };
+    return { evaluate, wait, send, load, close, errors, setOverrides(value) { overrides = value; } };
   } catch (error) { await close(); throw error; }
 }
