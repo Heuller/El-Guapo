@@ -1,36 +1,36 @@
 /**
  * ═══════════════════════════════════════════════════════════════════
- * EL GUAPO SERVICE WORKER v3.13
+ * EL GUAPO SERVICE WORKER v3.14
  * Cache Strategy: Network-First para HTML, Cache-First para assets
  * Suporte offline completo + sincronização em background
  * ═══════════════════════════════════════════════════════════════════
  */
 
-const CACHE_NAME = 'el-guapo-v3.13';
-const ASSETS_CACHE = 'el-guapo-assets-v3.13';
-const RUNTIME_CACHE = 'el-guapo-runtime-v3.13';
+const CACHE_NAME = 'el-guapo-v3.14';
+const ASSETS_CACHE = 'el-guapo-assets-v3.14';
+const RUNTIME_CACHE = 'el-guapo-runtime-v3.14';
 
 const ASSETS_TO_CACHE = [
     "./",
     "./index.html",
     "./manifest.json",
     "./sw.js",
-    "./splash.css?v=3.13",
-    "./splash.js?v=3.13",
+    "./splash.css?v=3.14",
+    "./splash.js?v=3.14",
     "./assets/licenses/uiverse-hand-MIT.txt",
-    "./style.css?v=3.13",
-    "./dark-theme.css?v=3.13",
-    "./theme-switch.css?v=3.13",
-    "./timer-player.css?v=3.13",
+    "./style.css?v=3.14",
+    "./dark-theme.css?v=3.14",
+    "./theme-switch.css?v=3.14",
+    "./timer-player.css?v=3.14",
     "./assets/icons/clock.svg",
     "./assets/icons/pause.svg",
     "./assets/icons/play.svg",
-    "./script.js?v=3.13",
-    "./timer-durations.js?v=3.13",
-    "./recipe-scaling.js?v=3.13",
-    "./shopping-list.js?v=3.13",
-    "./ingredient-catalog.js?v=3.13",
-    "./shopping-model.js?v=3.13",
+    "./script.js?v=3.14",
+    "./timer-durations.js?v=3.14",
+    "./recipe-scaling.js?v=3.14",
+    "./shopping-list.js?v=3.14",
+    "./ingredient-catalog.js?v=3.14",
+    "./shopping-model.js?v=3.14",
     "./assets/fonts/DM-Sans-OFL.txt",
     "./assets/fonts/Fraunces-OFL.txt",
     "./assets/fonts/dm-sans-400-normal.ttf",
@@ -42,7 +42,7 @@ const ASSETS_TO_CACHE = [
     "./assets/fonts/fraunces-600-italic.ttf",
     "./assets/fonts/fraunces-600-normal.ttf",
     "./assets/fonts/fraunces-700-normal.ttf",
-    "./assets/fonts.css?v=3.13",
+    "./assets/fonts.css?v=3.14",
     "./assets/icons/LICENSE",
     "./assets/icons/arrow-up-right.svg",
     "./assets/icons/book-open.svg",
@@ -200,4 +200,4 @@ self.addEventListener('message', (event) => {
     }
 });
 
-console.log('[SW] Service Worker v3.13 carregado com sucesso!');
+console.log('[SW] Service Worker v3.14 carregado com sucesso!');

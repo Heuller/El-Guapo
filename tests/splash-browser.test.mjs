@@ -17,7 +17,7 @@ const exists=()=>a.evaluate(`!!document.querySelector('#splash')`);
 test('first session waits for essential artwork and readiness, leaves time to perceive the hand animation before exiting; reload and internal actions do not replay',async()=>{
  await install(hold);await nav();assert.equal(await a.evaluate(`document.documentElement.classList.contains('eg-splash-pending')&&window.__appReady`),true);
  assert.equal(await a.evaluate(`sessionStorage.getItem('eg-splash-seen-v1')`),'true');
- const before=await a.evaluate('performance.now()');await a.evaluate(`window.__releaseCover()`);await a.wait(`!document.querySelector('#splash')`);assert.ok(await a.evaluate('performance.now()')-before<2300);assert.ok(await a.evaluate('performance.now()-window.__coverFrame')>=1600);
+ const before=await a.evaluate('performance.now()');await a.evaluate(`window.__releaseCover()`);await a.wait(`!document.querySelector('#splash')`);assert.ok(await a.evaluate('performance.now()')-before<3400);assert.ok(await a.evaluate('performance.now()-window.__coverFrame')>=2600);
  await a.evaluate(`document.querySelector('.candle-toggle').click();document.querySelector('#pizza-massa-base .rc-head').click();document.querySelector('#pizza-massa-base [data-mult="2"]').click();document.querySelector('#pizza-massa-base .kitchen-btn').click();document.querySelector('#kitchen-mode-close').click();document.querySelector('.nav-btn-shopping').click();document.querySelector('#modal-close').click()`);assert.equal(await exists(),false);
  await nav();assert.equal(await exists(),false);
  await a.evaluate('sessionStorage.clear()');await nav();assert.equal(await exists(),true);await a.evaluate(`window.__releaseCover()`);await a.wait(`!document.querySelector('#splash')`);
@@ -30,9 +30,9 @@ test('recipe deep links and PWA launch shortcuts bypass presentation without los
   if(suffix.includes('kitchen'))assert.equal(await a.evaluate(`!!document.querySelector('.kitchen-recipe-picker')`),true);
  }
 });
-test('failed artwork and a never-resolving resource fail open; safety removes cover by two seconds',async()=>{
+test('failed artwork and a never-resolving resource fail open; safety removes cover by three seconds',async()=>{
  await install(`HTMLImageElement.prototype.decode=function(){return this.closest('#splash')?Promise.reject(Error('missing artwork')):Promise.resolve()}`);await nav();await a.wait(`!document.querySelector('#splash')`);
- await a.send('Page.removeScriptToEvaluateOnNewDocument',{identifier:hook});hook=null;await a.evaluate('sessionStorage.clear()');await install(hold);await nav();await a.wait(`!document.querySelector('#splash')`);assert.ok(await a.evaluate('performance.now()')<2400);assert.equal(await a.evaluate(`!!document.querySelector('.rc-scaler')`),true);
+ await a.send('Page.removeScriptToEvaluateOnNewDocument',{identifier:hook});hook=null;await a.evaluate('sessionStorage.clear()');await install(hold);await nav();await a.wait(`!document.querySelector('#splash')`);assert.ok(await a.evaluate('performance.now()')<3400);assert.equal(await a.evaluate(`!!document.querySelector('.rc-scaler')`),true);
 });
 test('Tab dismisses immediately without trapping focus; reduced motion has no decorative animations',async()=>{
  await install(hold);await nav();await a.send('Input.dispatchKeyEvent',{type:'keyDown',key:'Tab',code:'Tab',windowsVirtualKeyCode:9});assert.equal(await exists(),false);
@@ -54,12 +54,12 @@ test('slow network still releases the cover and leaves the initialized recipe co
   await a.send('Network.emulateNetworkConditions',{offline:false,latency:180,downloadThroughput:2000000,uploadThroughput:2000000});
   await install(`new MutationObserver(()=>{if(document.documentElement?.classList.contains('eg-splash-pending')&&!window.__coverStart)window.__coverStart=performance.now();if(window.__coverStart&&!document.querySelector('#splash')&&!document.documentElement.classList.contains('eg-splash-pending'))window.__coverEnd??=performance.now()}).observe(document,{childList:true,subtree:true,attributes:true,attributeFilter:['class']})`);
   await nav();await a.wait(`!document.querySelector('#splash')`);
-  assert.ok(await a.evaluate(`!window.__coverEnd||window.__coverEnd-window.__coverStart<2400`));
+  assert.ok(await a.evaluate(`!window.__coverEnd||window.__coverEnd-window.__coverStart<3400`));
   await a.evaluate(`document.querySelector('#pizza-massa-base .rc-head').click();document.querySelector('#pizza-massa-base [data-mult="2"]').click()`);assert.equal(await a.evaluate(`document.querySelector('#pizza-massa-base .rc-ing-qty').textContent`),'1000 g');
  }finally{await a.send('Network.setBypassServiceWorker',{bypass:false});await a.send('Network.setCacheDisabled',{cacheDisabled:false});}
 });
 test('late artwork readiness does not add another minimum and keyboard can bypass the presentation hold',async()=>{
- await install(hold);await nav();await a.wait('performance.now()-window.__coverFrame>=1750');
+ await install(hold);await nav();await a.wait('performance.now()-window.__coverFrame>=2800');
  const before=await a.evaluate('performance.now()');await a.evaluate('window.__releaseCover()');await a.wait(`!document.querySelector('#splash')`);assert.ok(await a.evaluate('performance.now()')-before<650);
  await a.evaluate('sessionStorage.clear()');await nav();await a.evaluate('window.__releaseCover()');await a.send('Input.dispatchKeyEvent',{type:'keyDown',key:'Escape',code:'Escape',windowsVirtualKeyCode:27});assert.equal(await exists(),false);
 });

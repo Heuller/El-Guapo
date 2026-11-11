@@ -17,8 +17,8 @@ O código original de https://uiverse.io/Pradeepsaranbishnoi/tall-fish-38 foi co
 - `splash.js` executa no cabeçalho. Se houver preferência de sessão, hash ou um atalho PWA conhecido, a apresentação é pulada.
 - Primeira visita da sessão é registrada em `sessionStorage`, na chave nova `eg-splash-seen-v1`. Nenhuma chave de compras, receitas, anotações, tema ou temporizadores é migrada ou apagada.
 - O aplicativo inicializa normalmente. Ao terminar catálogo, controles, restauração dos timers e atalhos, emite `eg:ready`.
-- A saída depende desse sinal, da decodificação da foto principal e das duas fontes usadas na capa. Não espera outras fotos ou o cache completo do service worker. Após a revisão do usuário, a apresentação tem permanência mínima de 1.700ms desde o primeiro frame após DOMContentLoaded, seguida do fade de 220ms (cerca de 1,9–2s no fluxo normal, respeitando o watchdog). O prazo mínimo não reinicia quando os recursos ficam prontos. Erros, interação e movimento reduzido continuam liberando imediatamente.
-- Saída em 220ms; watchdog inicia a saída em 1.780ms, para concluir em aproximadamente 2s mesmo sem prontidão. Falha na foto ou fontes libera imediatamente. Os limites dependem da disponibilidade do event loop do navegador, não são garantia de tempo real durante travamentos do processo.
+- A saída depende desse sinal, da decodificação da foto principal e das duas fontes usadas na capa. Não espera outras fotos ou o cache completo do service worker. Na duração final aprovada, a apresentação fecha por volta de 3s: a saída inicia em 2.780ms e inclui fade de 220ms. O prazo mínimo não reinicia quando os recursos ficam prontos. Erros, interação e movimento reduzido continuam liberando imediatamente.
+- Saída em 220ms; watchdog inicia a saída em 2.780ms, para concluir em aproximadamente 3s mesmo sem prontidão. Falha na foto ou fontes libera imediatamente. Os limites dependem da disponibilidade do event loop do navegador, não são garantia de tempo real durante travamentos do processo.
 - Tab, Escape, foco ou toque liberam a interface imediatamente. Não há foco preso, porcentagem inventada ou alteração de scroll/estilos do body. Ao sair, os dedos são pausados e o nó completo é removido; não sobra overlay capturando eventos.
 - Sem JavaScript, a splash fica oculta por padrão. Se o script principal falhar, o watchdog da splash ainda pode liberar o conteúdo HTML.
 
@@ -41,7 +41,7 @@ Não foi testado aparelho físico nem a splash nativa gerada pelo sistema operac
 
 ## Arquivos alterados
 
-Produção: `index.html`, `script.js`, `sw.js`, novos `splash.js`, `splash.css` e `assets/licenses/uiverse-hand-MIT.txt`. Cache preparado para v3.13, incluindo os recursos novos.
+Produção: `index.html`, `script.js`, `sw.js`, novos `splash.js`, `splash.css` e `assets/licenses/uiverse-hand-MIT.txt`. Cache preparado para v3.14, incluindo os recursos novos.
 
 Validação: `package.json`, `tests/content-baseline.json`, `tests/service-worker.test.mjs`, `tests/cache-upgrade-browser.test.mjs`, `tests/dark-theme-browser.test.mjs`, `tests/redesign-browser.test.mjs`, novo `tests/splash-browser.test.mjs` e `scripts/capture-splash.mjs`. Os testes existentes receberam apenas a nova versão dos recursos e o hash do HTML; conteúdo, fórmulas e imagens do catálogo não mudaram.
 
@@ -56,3 +56,8 @@ A medição da versão v3.11 em produção mostrou 0,42–0,50s na abertura comu
 ## Extensão para perceber a mãozinha
 
 A pedido do usuário, a permanência antes do fade passou de 900ms para 1.700ms, mantendo o watchdog original de aproximadamente 2s. Isso deixa a animação de 1,2s da mão mais perceptível, sem repetir a apresentação na sessão. O limite de segurança tem precedência em carregamentos demorados. Toque, teclado, foco, erros e movimento reduzido continuam ignorando a permanência mínima. Publicação autorizada como v3.13; a identidade visual e a velocidade da animação não foram alteradas.
+
+
+## Duração final aprovada: 3 segundos
+
+O usuário definiu a duração final como 3 segundos e autorizou a publicação. Em v3.14, a saída inicia em 2.780ms e o fade de 220ms conclui por volta de 3s desde a ativação da apresentação. A permanência normal acompanha esse prazo; falhas de recursos, interação e movimento reduzido continuam liberando antes. A splash não reaparece na mesma sessão e os links diretos continuam pulando a apresentação. Esta decisão substitui as durações das revisões anteriores, sem alterar o visual ou o ritmo da mãozinha. A suíte de 124 testes foi atualizada para o prazo final.

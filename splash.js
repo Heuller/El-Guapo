@@ -37,15 +37,15 @@
     if (visibleSince === undefined) return;
     // Let the entrance and a full 1.2s hand cycle be perceived before exit.
     // This minimum is measured from its first frame, not from resource readiness.
-    const remaining = 1700 - (performance.now() - visibleSince);
+    const remaining = 2780 - (performance.now() - visibleSince);
     if (remaining <= 0) { finish(); return; }
     if (minimumTimer === undefined) minimumTimer = setTimeout(() => {
       minimumTimer = undefined;
       maybeFinish();
     }, remaining);
   }
-  // Includes the 220ms exit; does not depend on transitionend or app script success.
-  const safety = setTimeout(() => finish(), 1780);
+  // Close at 3 seconds including the 220ms fade, even if readiness never arrives.
+  const safety = setTimeout(() => finish(), 2780);
   document.addEventListener('eg:ready', () => { ready = true; maybeFinish(); }, {once:true,signal:abort.signal});
   document.addEventListener('keydown', e => { if (e.key === 'Tab' || e.key === 'Escape') finish(true); }, {signal:abort.signal});
   document.addEventListener('focusin', () => finish(true), {signal:abort.signal});
