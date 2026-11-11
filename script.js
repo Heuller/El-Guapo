@@ -42,6 +42,7 @@
 
   function openModal(title, subtitle, content) {
     if (!modalOverlay) return;
+    modalOverlay.querySelector(".modal-content").classList.toggle("kitchen-picker-modal", content.classList.contains("kitchen-recipe-picker"));
     modalTitle.textContent = title;
     modalSubtitle.textContent = subtitle;
     modalBody.innerHTML = "";
@@ -107,33 +108,40 @@
   /* Focus trap utilities for drawer/modal */
   let _prevFocus = null;
   let _trapContainer = null;
+  function trapControls(container) {
+    return [...container.querySelectorAll('a[href], button, input, select, textarea, [tabindex]')]
+      .filter(el => !el.disabled && el.tabIndex >= 0 && !el.closest('[hidden], [inert], [aria-hidden="true"]') && el.getClientRects().length && getComputedStyle(el).visibility !== "hidden");
+  }
   function enableFocusTrap(container) {
     if (!container) return;
     _prevFocus = document.activeElement;
     _trapContainer = container;
-    const focusable = container.querySelectorAll(
-      'a[href], button:not([disabled]), input, textarea, [tabindex]:not([tabindex="-1"])',
-    );
-    if (focusable.length) focusable[0].focus();
+    trapControls(container)[0]?.focus();
     document.addEventListener("focus", _keepFocus, true);
+    document.addEventListener("keydown", _trapTab);
   }
-
   function disableFocusTrap() {
     document.removeEventListener("focus", _keepFocus, true);
-    if (_prevFocus?.isConnected && typeof _prevFocus.focus === "function")
-      _prevFocus.focus();
+    document.removeEventListener("keydown", _trapTab);
+    const previous = _prevFocus;
     _prevFocus = null;
     _trapContainer = null;
+    if (previous?.isConnected) previous.focus();
   }
-
   function _keepFocus(e) {
-    if (!_trapContainer) return;
-    if (_trapContainer.contains(e.target)) return;
+    if (!_trapContainer || _trapContainer.contains(e.target)) return;
     e.stopPropagation();
-    const focusable = _trapContainer.querySelectorAll(
-      'a[href], button:not([disabled]), input, textarea, [tabindex]:not([tabindex="-1"])',
-    );
-    if (focusable.length) focusable[0].focus();
+    trapControls(_trapContainer)[0]?.focus();
+  }
+  function _trapTab(e) {
+    if (e.key !== "Tab" || !_trapContainer) return;
+    const controls = trapControls(_trapContainer);
+    if (!controls.length) { e.preventDefault(); return; }
+    const index = controls.indexOf(document.activeElement);
+    if (index === -1 || (e.shiftKey && index === 0) || (!e.shiftKey && index === controls.length - 1)) {
+      e.preventDefault();
+      controls[e.shiftKey ? controls.length - 1 : 0].focus();
+    }
   }
 
   if (hamburger) hamburger.addEventListener("click", () => toggleDrawer(true));
@@ -315,7 +323,9 @@
   });
 
   /* ── 6. MODO COZINHA (OVERLAY) ── */
+  let currentKitchenRecipeId = null;
   function startKitchenMode(card) {
+    currentKitchenRecipeId = card.id;
     const recipeName = card.querySelector(".rc-name")?.textContent || "Receita";
     const steps = Array.from(card.querySelectorAll(".rc-step-text"));
 
@@ -354,14 +364,10 @@
         if (kitchenModeStepNumber)
           kitchenModeStepNumber.textContent = `Passo ${stepNum}`;
         kitchenModeStepText.innerHTML = stepText;
+        kitchenModeStepText.dataset.recipeId=currentKitchenRecipeId;
+        kitchenModeStepText.dataset.stepId=`${currentKitchenRecipeId}-step-${currentStepIndex}`;
         delete kitchenModeStepText.dataset.timerButtonsInjected;
         injectTimerButtons(kitchenModeStepText);
-        // leitura por voz do passo (se ativada)
-        try {
-          const plain = kitchenModeStepText.textContent || stepText;
-          speak(`Passo ${stepNum}. ${plain}`);
-        } catch (_) {}
-
         // Animação de entrada
         kitchenModeStepText.classList.remove("page-exit", "page-enter");
         kitchenModeStepText.style.opacity = "0";
@@ -446,13 +452,14 @@
 
   const TIMER_KEY = "eg-timers-v1";
   function saveTimers() {
-    try { localStorage.setItem(TIMER_KEY, JSON.stringify([...timerMap.values()].map(t => ({id:t.id,label:t.label,totalSeconds:t.totalSeconds,remaining:t.remaining,paused:t.paused,deadline:t.deadline,done:t.done})))); } catch (_) {}
+    try { localStorage.setItem(TIMER_KEY, JSON.stringify([...timerMap.values()].map(t => ({id:t.id,label:t.label,totalSeconds:t.totalSeconds,remaining:t.remaining,paused:t.paused,deadline:t.deadline,done:t.done,sourceKey:t.sourceKey,recipeId:t.recipeId,stepId:t.stepId,durationId:t.durationId})))); } catch (_) {}
   }
-  function launchTimer(seconds, label, saved = null) {
+  function launchTimer(seconds, label, saved = null, source = null) {
     if (!Number.isFinite(seconds) || seconds <= 0) return;
-    for (const [id,t] of timerMap) if (t.label === label && !saved) {
-      if (!t.done) t.paused ? resumeTimer(id) : pauseTimer(id);
-      return;
+    const sourceKey = source ? `${source.recipeId}:${source.stepId}:${source.durationId}` : saved?.sourceKey || null;
+    for (const [id,t] of timerMap) if (sourceKey && t.sourceKey === sourceKey && !saved && !t.done) {
+      const card=document.getElementById(id);card?.scrollIntoView({block:'nearest'});card?.querySelector('.timer-pause').focus();card?.classList.add('timer-highlight');setTimeout(()=>card?.classList.remove('timer-highlight'),1200);
+      return {id,existing:true};
     }
     const id = saved?.id || `t${Date.now()}-${Math.random().toString(36).slice(2,8)}`;
     const card = document.createElement("div");
@@ -465,7 +472,7 @@
       <progress class="timer-progress" max="1" value="1" aria-label="Tempo restante"></progress>`;
     card.querySelector('.timer-label').textContent = label;
     timerDock?.append(card);
-    const t = {id,label,totalSeconds:seconds,remaining:saved?.remaining ?? seconds,paused:saved?.paused ?? false,deadline:saved?.deadline ?? Date.now()+seconds*1000,done:saved?.done ?? false,interval:null};
+    const t = {id,label,sourceKey,recipeId:source?.recipeId||saved?.recipeId||null,stepId:source?.stepId||saved?.stepId||null,durationId:source?.durationId||saved?.durationId||null,totalSeconds:seconds,remaining:saved?.remaining ?? seconds,paused:saved?.paused ?? false,deadline:saved?.deadline ?? Date.now()+seconds*1000,done:saved?.done ?? false,interval:null};
     timerMap.set(id,t);
     card.querySelector('.timer-pause').addEventListener('click',()=>t.paused?resumeTimer(id):pauseTimer(id));
     card.querySelector('.timer-cancel').addEventListener('click',()=>removeTimer(id));
@@ -517,7 +524,7 @@
     try {
       const items = JSON.parse(localStorage.getItem(TIMER_KEY)||'[]');
       if (Array.isArray(items)) items.slice(0,30).forEach(t=>{
-        if(t && typeof t.id==='string' && /^t[\w-]+$/.test(t.id) && typeof t.label==='string' && Number.isFinite(t.totalSeconds) && t.totalSeconds>0 && t.totalSeconds<=86400 && Number.isFinite(t.remaining) && t.remaining>=0 && t.remaining<=t.totalSeconds && typeof t.paused==='boolean' && typeof t.done==='boolean' && !timerMap.has(t.id) && Number.isFinite(t.deadline)) launchTimer(t.totalSeconds,t.label,t);
+        if(t && typeof t.id==='string' && /^t[\w-]+$/.test(t.id) && typeof t.label==='string' && Number.isFinite(t.totalSeconds) && t.totalSeconds>0 && t.totalSeconds<=604800 && Number.isFinite(t.remaining) && t.remaining>=0 && t.remaining<=t.totalSeconds && typeof t.paused==='boolean' && typeof t.done==='boolean' && !timerMap.has(t.id) && Number.isFinite(t.deadline)) launchTimer(t.totalSeconds,t.label,t);
       });
     } catch (_) {}
     const layout = () => {
@@ -534,86 +541,60 @@
 
   function injectTimerButtons(root) {
     const scope = root || document;
-    const MAX_SECONDS = 3 * 60 * 60;
-    const MIN_SECONDS = 10;
-
-    let targets = [];
-    if (scope.id === "kitchen-mode-step-text") {
-      if (scope.parentElement) {
-        scope.parentElement
-          .querySelectorAll(".timer-btn")
-          .forEach((btn) => btn.remove());
-      }
-      targets = [scope];
-    } else if (scope.classList && scope.classList.contains("rc-step-text")) {
-      targets = [scope];
-    } else {
-      // Garante que pegamos tanto as receitas quanto o modo cozinha
-      targets = Array.from(scope.querySelectorAll(".rc-step-text"));
-      const kmText = document.getElementById("kitchen-mode-step-text");
-      if (kmText) targets.push(kmText);
+    const targets = scope.matches?.('.rc-step-text, #kitchen-mode-step-text') ? [scope] : [...scope.querySelectorAll('.rc-step-text')];
+    for (const step of targets) {
+      if (step.dataset.timerButtonsInjected) continue;
+      const durations = window.ElGuapoDurations.parse(step.textContent);
+      if (!durations.length) continue;
+      const card = step.closest('.recipe-card');
+      const recipeId = step.dataset.recipeId || card?.id;
+      const stepId = step.dataset.stepId;
+      if (!recipeId || !stepId) continue;
+      step.dataset.timerButtonsInjected = '1';
+      const btn = document.createElement('button');btn.type='button';btn.className='timer-btn';
+      btn.dataset.recipeId=recipeId;btn.dataset.stepId=stepId;
+      btn.dataset.durations=JSON.stringify(durations);
+      btn.dataset.seconds=String(Math.round((durations[0].min+durations[0].max)/2));
+      btn.dataset.label=`Etapa ${Number(stepId.split('-').at(-1))+1}`;
+      const title = durations.length>1 ? `${durations.length} tempos nesta etapa` : durations[0].raw;
+      btn.textContent=`${durations.length>1||durations[0].min!==durations[0].max?'Escolher tempo':'Iniciar timer'}: ${title}`;
+      if(step.id==='kitchen-mode-step-text')step.append(btn);else step.after(btn);
+      btn.addEventListener('click',e=>{
+        e.preventDefault();e.stopPropagation();
+        const options=JSON.parse(btn.dataset.durations);
+        const run=(durationIndex,seconds)=>{
+          const name=document.getElementById(btn.dataset.recipeId)?.querySelector('.rc-name')?.textContent.trim()||'';
+          return launchTimer(seconds,`${name} · ${btn.dataset.label} · ${options[durationIndex].raw}`,null,{recipeId:btn.dataset.recipeId,stepId:btn.dataset.stepId,durationId:String(durationIndex)});
+        };
+        if(options.length===1&&options[0].min===options[0].max){run(0,options[0].min);return;}
+        if(btn.nextElementSibling?.classList.contains('timer-choice')){btn.nextElementSibling.remove();return;}
+        showTimerChoice(btn,options,run);
+      });
     }
-
-    targets.forEach((stepEl) => {
-      if (stepEl.dataset.timerButtonsInjected) return;
-
-      const timePatterns = [
-        { regex: /(\d+)\s*(?:a\s*)?(\d+)?\s*(?:h|horas?|hr)/gi, type: "h" },
-        { regex: /(\d+)\s*(?:a\s*)?(\d+)?\s*(?:min|minutos?)/gi, type: "m" },
-        { regex: /(\d+)\s*(?:a\s*)?(\d+)?\s*(?:seg|segundos?)/gi, type: "s" },
-      ];
-
-      let foundTime = null;
-      let timeLabel = "";
-
-      for (const patternObj of timePatterns) {
-        const match = patternObj.regex.exec(stepEl.textContent);
-        if (match) {
-          const val1 = parseInt(match[1], 10);
-          const val2 = match[2] ? parseInt(match[2], 10) : val1;
-          const avgVal = Math.round((val1 + val2) / 2);
-
-          let seconds = 0;
-          if (patternObj.type === "h") {
-            seconds = avgVal * 3600;
-            timeLabel = `${avgVal}h`;
-          } else if (patternObj.type === "m") {
-            seconds = avgVal * 60;
-            timeLabel = `${avgVal}min`;
-          } else if (patternObj.type === "s") {
-            seconds = avgVal;
-            timeLabel = `${avgVal}s`;
-          }
-
-          if (seconds >= MIN_SECONDS && seconds <= MAX_SECONDS) {
-            foundTime = seconds;
-            break;
-          }
-        }
-      }
-
-      if (foundTime) {
-        stepEl.dataset.timerButtonsInjected = "1";
-        const btn = document.createElement("button");
-        btn.className = "timer-btn";
-        btn.setAttribute("data-seconds", foundTime);
-        const stepNumber = stepEl.closest(".rc-step")?.querySelector(".rc-step-num")?.textContent.trim() || (stepEl.id === "kitchen-mode-step-text" ? String(currentStepIndex + 1) : "");
-        btn.setAttribute("data-label", stepNumber ? `Etapa ${Number(stepNumber) || stepNumber} · ${timeLabel}` : timeLabel);
-        btn.innerHTML = `<svg class="timer-btn-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> <span>ativar timer: ${timeLabel}</span>`;
-
-        if (stepEl.id === "kitchen-mode-step-text") {
-          stepEl.appendChild(btn);
-        } else {
-          stepEl.after(btn);
-        }
-
-        btn.addEventListener("click", (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          launchTimer(parseInt(btn.dataset.seconds, 10), btn.dataset.label);
-        });
-      }
+  }
+  function showTimerChoice(button,options,run) {
+    const form=document.createElement('form');form.className='timer-choice';form.noValidate=true;
+    const field=document.createElement('fieldset');const legend=document.createElement('legend');legend.textContent='Escolha o tempo desta etapa';field.append(legend);form.append(field);
+    const labelSelect=document.createElement('label');labelSelect.textContent='Duração mencionada';const select=document.createElement('select');select.className='timer-duration-select';
+    options.forEach((o,i)=>{const option=document.createElement('option');option.value=i;option.textContent=options.length>1?`${o.raw} — ${o.context||o.raw}`:o.raw;select.append(option)});labelSelect.append(select);field.append(labelSelect);
+    const labelPreset=document.createElement('label');labelPreset.textContent='Tempo do temporizador';const preset=document.createElement('select');preset.className='timer-range-select';labelPreset.append(preset);field.append(labelPreset);
+    const labelCustom=document.createElement('label');labelCustom.textContent='Outro valor, em minutos';const custom=document.createElement('input');custom.type='number';custom.step='any';custom.className='timer-custom-minutes';labelCustom.append(custom);field.append(labelCustom);
+    const error=document.createElement('p');error.setAttribute('role','alert');error.className='timer-choice-error';field.append(error);
+    const start=document.createElement('button');start.type='submit';start.className='timer-choice-start';start.textContent='Iniciar temporizador';field.append(start);
+    const cancel=document.createElement('button');cancel.type='button';cancel.textContent='Cancelar';cancel.addEventListener('click',()=>{form.remove();button.focus()});field.append(cancel);
+    const update=()=>{
+      const o=options[Number(select.value)];preset.replaceChildren();
+      const choices=o.min===o.max?[['min','Tempo indicado',o.min]]:[['min','Mínimo',o.min],['middle','Intermediário',Math.round((o.min+o.max)/2)],['max','Máximo',o.max],['custom','Outro valor',null]];
+      choices.forEach(([v,label,time])=>{const op=document.createElement('option');op.value=v;op.textContent=time===null?label:`${label}: ${fmtTime(time)}`;preset.append(op)});
+      preset.value=o.min===o.max?'min':'middle';custom.min=o.min/60;custom.max=o.max/60;custom.value=String((o.min+o.max)/120);labelCustom.hidden=true;custom.disabled=true;error.textContent='';
+    };
+    select.addEventListener('change',update);preset.addEventListener('change',()=>{labelCustom.hidden=preset.value!=='custom';custom.disabled=preset.value!=='custom';error.textContent='';});update();
+    form.addEventListener('submit',e=>{
+      e.preventDefault();const index=Number(select.value),o=options[index];const seconds=preset.value==='min'?o.min:preset.value==='max'?o.max:preset.value==='custom'?Math.round(Number(custom.value)*60):Math.round((o.min+o.max)/2);
+      if(!Number.isFinite(seconds)||seconds<o.min||seconds>o.max){error.textContent=`Escolha um tempo entre ${fmtTime(o.min)} e ${fmtTime(o.max)}.`;return;}
+      const result=run(index,seconds);form.remove();if(result?.existing)document.getElementById(result.id)?.querySelector('.timer-pause').focus();else button.focus();
     });
+    button.after(form);select.focus();
   }
 
   /* ── 8. LISTA DE COMPRAS & MISE EN PLACE ── */
@@ -624,12 +605,11 @@
       const groupName =
         group.querySelector(".rc-ing-group-name")?.textContent || "";
       group.querySelectorAll(".rc-ing-item").forEach((item, itemIndex) => {
-        const name = item
-          .querySelector(".rc-ing-row span:first-child")
-          ?.childNodes[0]?.textContent.trim();
+        const displayName = item.querySelector(".rc-ing-row span:first-child")?.childNodes[0]?.textContent.trim();
+        const name = item.dataset.baseName || displayName;
         const qty = item.querySelector(".rc-ing-qty")?.textContent.trim();
         if (name) {
-          ingredients.push({ group: groupName, name, qty,
+          ingredients.push({ group: groupName, name, displayName, qty,
             baseQty: item.querySelector(".rc-ing-qty")?.getAttribute("data-orig") || qty,
             scale: Number(card.querySelector(".rc-scale-btn--active")?.dataset.mult || 1),
             sourceKey: `${groupIndex}-${itemIndex}`,
@@ -656,16 +636,24 @@
     ingredients.forEach((ing) => {
       const li = document.createElement("li");
       li.className = "mise-item";
-      li.innerHTML = `
-                <div class="mise-checkbox"></div>
-                <div class="mise-info">
-                    <span class="mise-name" style="display:block; font-weight:600; font-size:0.95rem">${ing.name}</span>
-                    <span class="mise-qty" style="display:block; font-size:0.8rem; color:var(--terra)">${ing.qty}</span>
-                </div>
-            `;
-      li.addEventListener("click", () => {
-        li.classList.toggle("checked");
-        // Haptic feedback se disponível
+      const label = document.createElement("label");
+      label.className = "mise-label";
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.className = "mise-checkbox";
+      const info = document.createElement("span");
+      info.className = "mise-info";
+      const name = document.createElement("span");
+      name.className = "mise-name";
+      name.textContent = ing.displayName || ing.name;
+      const qty = document.createElement("span");
+      qty.className = "mise-qty";
+      qty.textContent = ing.qty;
+      info.append(name, qty);
+      label.append(checkbox, info);
+      li.append(label);
+      checkbox.addEventListener("change", () => {
+        li.classList.toggle("checked", checkbox.checked);
         if (window.navigator.vibrate) window.navigator.vibrate(10);
       });
       list.appendChild(li);
@@ -680,6 +668,10 @@
       const head = card.querySelector(".rc-head");
       const rcBody = card.querySelector(".rc-body");
       const ingCol = card.querySelector(".rc-ingredients");
+      card.querySelectorAll('.rc-ing-item').forEach(item=>{item.dataset.baseName=item.querySelector('.rc-ing-row span:first-child')?.childNodes[0]?.textContent.trim()||''});
+      card.querySelectorAll('.rc-step-text').forEach((step,i)=>{step.dataset.recipeId=card.id;step.dataset.stepId=`${card.id}-step-${i}`});
+      const missing=window.ElGuapoScaling.init(card);
+      if(missing.length)console.warn('Referências de escala não localizadas',card.id,missing);
       card.querySelectorAll('.rc-inclusion-options input[type="radio"]').forEach((input) => {
         input.addEventListener("change", () => {
           card.querySelectorAll(".rc-ing-group[data-variant]").forEach((group) => {
@@ -725,6 +717,9 @@
                     </div>`;
 
         if (colLabel) colLabel.after(scaler);
+        const scaleNote=document.createElement('p');scaleNote.className='recipe-scale-note';scaleNote.hidden=true;
+        scaleNote.textContent='Rendimento proporcional. Mantenha o tamanho das porções/formas e distribua o volume em recipientes suficientes. Tempos e temperaturas continuam como referências da receita base; confirme o ponto. Para frações de ovo, pese o ovo batido.';
+        scaler.after(scaleNote);
 
         // Injeção de Ações Rápidas (Lista de Compras & Mise en Place)
         if (!ingCol.querySelector(".rc-quick-actions")) {
@@ -766,6 +761,8 @@
               .forEach((b) =>
                 b.classList.toggle("rc-scale-btn--active", b === btn),
               );
+            window.ElGuapoScaling.apply(card,mult);
+            scaleNote.hidden=mult===1;
             qtyEls.forEach((el) => {
               el.textContent = renderIngredientQty(el, mult);
             });
@@ -820,39 +817,7 @@
 
   function renderIngredientQty(el, mult) {
     const orig = el.getAttribute("data-orig");
-    return orig ? scaleText(orig, mult) : el.textContent.trim();
-  }
-
-  function scaleText(orig, mult) {
-    if (!orig || /q\.b\.|a gosto|opcional|%/i.test(orig)) return orig;
-    // Kitchen fractions are used by the homemade essence (¼ citrus, ½ vanilla).
-    orig = orig.replace(/^(\d*)([¼½¾])/, (_, whole, fraction) =>
-      String(Number(whole || 0) + ({ "¼": 0.25, "½": 0.5, "¾": 0.75 })[fraction]),
-    );
-    const rng = orig.match(
-      /^(~?)([\d]+(?:[.,]\d+)?)\s*[–—-]\s*([\d]+(?:[.,]\d+)?)\s*([a-zA-Z.]*.*)?$/,
-    );
-    if (rng) {
-      const lo = smartRound(parseFloat(rng[2].replace(",", ".")) * mult);
-      const hi = smartRound(parseFloat(rng[3].replace(",", ".")) * mult);
-      return `${rng[1]}${lo}–${hi}${rng[4] || ""}`.trim();
-    }
-    const sim = orig.match(/^(~?)(\d+(?:[.,]\d+)?)\s*(.*)?$/);
-    if (sim) {
-      const num = parseFloat(sim[2].replace(",", "."));
-      const scaled = smartRound(num * mult);
-      const formatted = Number.isInteger(scaled)
-        ? String(scaled)
-        : scaled.toFixed(1).replace(".", ",");
-      return `${sim[1]}${formatted}${sim[3] ? " " + sim[3].trim() : ""}`.trim();
-    }
-    return orig;
-  }
-
-  function smartRound(n) {
-    if (n >= 100) return Math.round(n);
-    if (n >= 10) return Math.round(n * 2) / 2;
-    return Math.round(n * 10) / 10;
+    return orig ? window.ElGuapoScaling.quantity(orig, mult) : el.textContent.trim();
   }
 
   /* ── 10. MODO LUZ DE VELA (DARK MODE ORGÂNICO) ── */
@@ -884,71 +849,28 @@
       nav.appendChild(switchLabel);
     }
 
-    const isDark = localStorage.getItem("eg-candlelight") === "true";
-    if (isDark) document.documentElement.classList.add("candlelight");
+    let isDark = document.documentElement.classList.contains("candlelight");
+    try { isDark = localStorage.getItem("eg-candlelight") === "true"; } catch {}
+    const applyTheme = active => {
+      document.documentElement.classList.toggle("candlelight", active);
+      candleBtn.checked = active;
+      document.querySelector('meta[name="theme-color"]').content = active ? "#241B20" : "#FFFDF8";
+    };
+    applyTheme(isDark);
     candleBtn.checked = isDark;
-    candleBtn.setAttribute("aria-pressed", String(isDark));
 
     candleBtn.addEventListener("change", () => {
       const active = candleBtn.checked;
-      document.documentElement.classList.toggle("candlelight", active);
-      localStorage.setItem("eg-candlelight", active);
-      candleBtn.setAttribute("aria-pressed", String(active));
+      applyTheme(active);
+      try { localStorage.setItem("eg-candlelight", String(active)); } catch {}
       if (navigator.vibrate) navigator.vibrate(10);
+    });
+    window.addEventListener("storage", event => {
+      if (event.key === "eg-candlelight" || event.key === null) applyTheme(event.newValue === "true");
     });
   }
 
   /* ── 9. INICIALIZAÇÃO ── */
-  // Observador de timers para falar quando concluídos
-  function initTimerSpeechObserver() {
-    const dock = document.getElementById("timer-dock");
-    if (!dock) return;
-    const obs = new MutationObserver((muts) => {
-      muts.forEach((m) => {
-        if (m.type === "attributes" && m.attributeName === "class") {
-          const node = m.target;
-          if (node.classList && node.classList.contains("timer-done")) {
-            const label =
-              node.querySelector(".timer-label")?.textContent || "Timer";
-            speak(`${label} concluído`);
-          }
-        }
-        if (m.type === "childList") {
-          m.addedNodes.forEach((n) => {
-            if (n.nodeType === 1) {
-              // monitorar classe changes
-              const mo = new MutationObserver((ms) =>
-                ms.forEach((mm) => {
-                  if (
-                    mm.attributeName === "class" &&
-                    n.classList.contains("timer-done")
-                  ) {
-                    const label =
-                      n.querySelector(".timer-label")?.textContent || "Timer";
-                    speak(`${label} concluído`);
-                  }
-                }),
-              );
-              mo.observe(n, { attributes: true });
-            }
-          });
-        }
-      });
-    });
-    obs.observe(dock, { childList: true, subtree: true, attributes: true });
-  }
-
-  // Voz: leitura segura via SpeechSynthesis
-  function speak(text) {
-    if (!("speechSynthesis" in window)) return;
-    if (localStorage.getItem("eg-voice-enabled") !== "true") return;
-    const utter = new SpeechSynthesisUtterance(text);
-    utter.lang = "pt-BR";
-    utter.rate = 0.95;
-    window.speechSynthesis.cancel();
-    window.speechSynthesis.speak(utter);
-  }
-
   function initShoppingButton() {
     const nav = document.querySelector(".nav");
     if (!nav) return;
@@ -979,22 +901,51 @@
     else nav.appendChild(btn);
   }
 
-  // Botão de voz no modo cozinha
-  function ensureKitchenVoiceToggle() {
-    const kmHeader = document.querySelector(".kitchen-mode-header");
-    if (!kmHeader) return;
-    if (kmHeader.querySelector(".kitchen-voice-toggle")) return;
-    const btn = document.createElement("button");
-    btn.className = "kitchen-voice-toggle btn";
-    btn.style.marginLeft = "0.6rem";
-    const enabled = localStorage.getItem("eg-voice-enabled") === "true";
-    btn.textContent = enabled ? "Voz: ON" : "Voz: OFF";
-    btn.addEventListener("click", () => {
-      const cur = localStorage.getItem("eg-voice-enabled") === "true";
-      localStorage.setItem("eg-voice-enabled", cur ? "false" : "true");
-      btn.textContent = cur ? "Voz: OFF" : "Voz: ON";
-    });
-    kmHeader.appendChild(btn);
+  function initLaunchShortcuts() {
+    const params = new URLSearchParams(location.search);
+    const kitchen = params.get("mode") === "kitchen";
+    if (!kitchen && params.get("view") !== "index") return;
+    const catalog = document.getElementById("catalogo");
+    searchInput.value = "";
+    document.querySelector('[data-category="all"]').click();
+    catalog.scrollIntoView({block: "start"});
+    if (kitchen) {
+      const list = document.createElement("div");
+      list.className = "kitchen-recipe-picker";
+      document.querySelectorAll(".recipe-card").forEach(card => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "kitchen-recipe-option";
+        const name = card.querySelector(".rc-name").textContent.trim();
+        button.setAttribute("aria-label", `Preparar ${name}`);
+        const image = document.createElement("img");
+        image.src = card.querySelector(".rc-image img").getAttribute("src");
+        image.alt = "";image.width = 72;image.height = 72;image.decoding = "async";
+        const copy = document.createElement("span");copy.className = "kitchen-picker-copy";
+        const title = document.createElement("span");title.className = "kitchen-picker-name";title.textContent = name;
+        const detail = document.createElement("span");detail.className = "kitchen-picker-detail";
+        detail.textContent = `${card.dataset.category === "savory" ? "Salgados" : "Doces"} · ${card.querySelectorAll(".rc-step-text").length} etapas`;
+        copy.append(title, detail);
+        const arrow = document.createElement("span");arrow.className = "kitchen-picker-arrow";arrow.setAttribute("aria-hidden", "true");
+        arrow.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>';
+        button.append(image, copy, arrow);
+        button.addEventListener("click", () => {
+          closeModal();
+          if (!card.classList.contains("open")) card.querySelector(".rc-head").click();
+          card.querySelector(".kitchen-btn").focus();
+          startKitchenMode(card);
+        });
+        list.append(button);
+      });
+      openModal("Modo Foco", "Uma receita, um passo de cada vez.", list);
+    } else {
+      searchInput.focus({preventScroll: true});
+    }
+    // Consume supported launch parameters so a reload does not reopen the picker.
+    if (kitchen) params.delete("mode");
+    if (params.get("view") === "index") params.delete("view");
+    const query = params.toString();
+    history.replaceState(null, "", location.pathname + (query ? "?" + query : "") + location.hash);
   }
 
   document.addEventListener("DOMContentLoaded", () => {
@@ -1032,8 +983,6 @@
     };
     window.addEventListener("hashchange", openLinkedRecipe);
     openLinkedRecipe();
-    initTimerSpeechObserver();
-    ensureKitchenVoiceToggle();
 
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker
@@ -1065,5 +1014,6 @@
     // Garante que os botões de timer sejam injetados em todas as receitas no início
     injectTimerButtons();
     restoreTimers();
+    initLaunchShortcuts();
   });
 })();

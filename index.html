@@ -4,16 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>El Guapo — Caderno de Receitas</title>
-    <link rel="stylesheet" href="assets/fonts.css?v=3.6" />
+    <link rel="stylesheet" href="assets/fonts.css?v=3.9" />
 
-    <link rel="stylesheet" href="style.css?v=3.6" />
-    <link rel="stylesheet" href="dark-theme.css?v=3.6" />
-    <link rel="stylesheet" href="theme-switch.css?v=3.6" />
-    <link rel="stylesheet" href="timer-player.css?v=3.6" />
-    <script>try { if (localStorage.getItem("eg-candlelight") === "true") document.documentElement.classList.add("candlelight"); } catch {}</script>
+    <link rel="stylesheet" href="style.css?v=3.9" />
+    <link rel="stylesheet" href="dark-theme.css?v=3.9" />
+    <link rel="stylesheet" href="theme-switch.css?v=3.9" />
+    <link rel="stylesheet" href="timer-player.css?v=3.9" />
+
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link rel="manifest" href="manifest.json" />
     <meta name="theme-color" content="#FFFDF8" />
+    <script>try { if (localStorage.getItem("eg-candlelight") === "true") { document.documentElement.classList.add("candlelight"); document.querySelector('meta[name="theme-color"]').content = "#241B20"; } } catch {}</script>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta
       name="apple-mobile-web-app-status-bar-style"
@@ -3023,9 +3024,11 @@
       aria-label="Temporizadores ativos"
     ></div>
 
-    <script src="ingredient-catalog.js?v=3.6"></script>
-    <script src="shopping-model.js?v=3.6"></script>
-    <script src="shopping-list.js?v=3.6"></script>
-    <script src="script.js?v=3.6"></script>
+    <script src="ingredient-catalog.js?v=3.9"></script>
+    <script src="shopping-model.js?v=3.9"></script>
+    <script src="shopping-list.js?v=3.9"></script>
+    <script src="timer-durations.js?v=3.9"></script>
+    <script src="recipe-scaling.js?v=3.9"></script>
+    <script src="script.js?v=3.9"></script>
   </body>
 </html>

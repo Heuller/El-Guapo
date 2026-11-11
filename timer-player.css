@@ -23,3 +23,19 @@ body:has(#timer-dock .timer-card){padding-bottom:calc(var(--timer-height,90px) +
 .kitchen-mode-overlay.active:has(~ #timer-dock .timer-card){padding-bottom:calc(var(--timer-height,90px) + var(--timer-bottom,24px) + 24px)}
 @media(max-width:600px){#timer-dock{left:16px;right:16px;width:calc(100% - 32px);max-width:none;padding:0}#timer-dock .timer-card{border-radius:16px}}
 @media print{#timer-dock{display:none}}
+.timer-choice{margin:12px 0;padding:16px;border:1px solid var(--line);border-radius:14px;background:var(--blush);color:var(--ink);font:14px/1.5 var(--ff-body);max-width:100%}
+.timer-choice fieldset{border:0;min-width:0;display:flex;flex-wrap:wrap;gap:12px}
+.timer-choice legend{font-weight:700;margin-bottom:12px}
+.timer-choice label{display:flex;flex-direction:column;gap:6px;flex:1 1 200px;min-width:0}
+.timer-choice select,.timer-choice input,.timer-choice button{min-height:44px;max-width:100%;padding:8px;border:1px solid var(--ink-soft);border-radius:10px;background:var(--paper);color:var(--ink);font:inherit}
+.timer-choice button{cursor:pointer}
+.timer-choice .timer-choice-start{background:var(--coral);color:var(--action-ink);border-color:var(--coral);font-weight:600}
+.timer-choice-error:empty{display:none}
+.recipe-scale-note{font:12px/1.6 var(--ff-body);color:var(--ink-soft);margin:12px 0}
+#timer-dock .timer-card.timer-highlight{outline:2px solid var(--terra);outline-offset:-2px}
+/* Keep injected controls below the instruction, outside the step-number column. */
+.rc-step > .timer-btn{grid-column:2;align-self:start;max-width:100%;white-space:normal;line-height:1.4}
+.rc-step > .timer-choice{grid-column:1 / -1;width:100%;box-sizing:border-box}
+.timer-choice fieldset{margin:0;padding:0}
+.timer-choice select{width:100%;min-width:0}
+.timer-choice label[hidden]{display:none}

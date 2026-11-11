@@ -1,0 +1,700 @@
+{
+  "schemaVersion": 1,
+  "recipes": {
+    "pizza-massa-base": {
+      "references": [
+        {
+          "selector": ".rc-step-text",
+          "index": 0,
+          "tokens": [
+            "200g",
+            "2g"
+          ]
+        },
+        {
+          "selector": ".rc-step-text",
+          "index": 1,
+          "tokens": [
+            "300g",
+            "125g"
+          ]
+        },
+        {
+          "selector": ".rc-step-text",
+          "index": 2,
+          "tokens": [
+            "3g"
+          ]
+        },
+        {
+          "selector": ".rc-note",
+          "index": 2,
+          "tokens": [
+            "5g",
+            "500g"
+          ]
+        },
+        {
+          "selector": ".rc-ing-group-name",
+          "index": 0,
+          "tokens": [
+            "500g"
+          ]
+        },
+        {
+          "selector": ".ing-pct",
+          "index": 2,
+          "tokens": [
+            "1,7g"
+          ]
+        }
+      ],
+      "reviewed": true,
+      "custom": [
+        {
+          "selector": ".rc-meta-value",
+          "index": 0,
+          "source": "2 pizzas",
+          "template": "{2} pizzas"
+        },
+        {
+          "selector": ".rc-step-text",
+          "index": 4,
+          "source": "2 porções",
+          "template": "{2} porções"
+        },
+        {
+          "selector": ".rc-step-text",
+          "index": 0,
+          "source": "(equivalente a uma ervilha)",
+          "template": "(pese o fermento conforme a quantidade desta escala)"
+        }
+      ]
+    },
+    "focaccia-massa-base": {
+      "references": [
+        {
+          "selector": ".rc-step-text",
+          "index": 0,
+          "tokens": [
+            "600g"
+          ]
+        },
+        {
+          "selector": ".rc-step-text",
+          "index": 1,
+          "tokens": [
+            "450g"
+          ]
+        },
+        {
+          "selector": ".ing-pct",
+          "index": 2,
+          "tokens": [
+            "≈54g"
+          ]
+        }
+      ],
+      "reviewed": true,
+      "custom": [
+        {
+          "selector": ".rc-meta-value",
+          "index": 0,
+          "source": "6–7 un.",
+          "template": "{6}–{7} un."
+        }
+      ]
+    },
+    "cuca-massa-base": {
+      "references": [
+        {
+          "selector": ".rc-step-text",
+          "index": 0,
+          "tokens": [
+            "600g"
+          ]
+        },
+        {
+          "selector": ".rc-step-text",
+          "index": 1,
+          "tokens": [
+            "420g"
+          ]
+        },
+        {
+          "selector": ".ing-pct",
+          "index": 2,
+          "tokens": [
+            "2 ovos grandes"
+          ]
+        },
+        {
+          "selector": ".ing-pct",
+          "index": 3,
+          "tokens": [
+            "2 gemas"
+          ]
+        }
+      ],
+      "reviewed": true,
+      "custom": [
+        {
+          "selector": ".rc-meta-value",
+          "index": 0,
+          "source": "1 forma",
+          "template": "{1} forma(s)"
+        },
+        {
+          "selector": ".rc-meta-value",
+          "index": 0,
+          "source": "ou 2 de",
+          "template": "ou {2} de"
+        }
+      ]
+    },
+    "bolo-pao-de-lo-padrao": {
+      "references": [
+        {
+          "selector": ".rc-ing-group-name",
+          "index": 0,
+          "tokens": [
+            "150g"
+          ]
+        },
+        {
+          "selector": ".ing-pct",
+          "index": 2,
+          "tokens": [
+            "4 ovos grandes"
+          ]
+        },
+        {
+          "selector": ".ing-pct",
+          "index": 3,
+          "tokens": [
+            "60ml"
+          ]
+        },
+        {
+          "selector": ".ing-pct",
+          "index": 4,
+          "tokens": [
+            "50ml"
+          ]
+        },
+        {
+          "selector": ".ing-pct",
+          "index": 5,
+          "tokens": [
+            "1 col. sopa"
+          ]
+        },
+        {
+          "selector": ".ing-pct",
+          "index": 6,
+          "tokens": [
+            "1 col. sopa"
+          ]
+        },
+        {
+          "selector": ".ing-pct",
+          "index": 7,
+          "tokens": [
+            "1 col. chá"
+          ]
+        }
+      ],
+      "reviewed": true,
+      "custom": [
+        {
+          "selector": ".rc-meta-value",
+          "index": 0,
+          "source": "2 discos",
+          "template": "{2} discos"
+        },
+        {
+          "selector": ".rc-meta-value",
+          "index": 0,
+          "source": "1 forma",
+          "template": "{1} forma(s)"
+        }
+      ]
+    },
+    "bolo-cenoura-gabriela": {
+      "references": [
+        {
+          "selector": ".ing-pct",
+          "index": 0,
+          "tokens": [
+            "4 unidades médias"
+          ]
+        },
+        {
+          "selector": ".ing-pct",
+          "index": 1,
+          "tokens": [
+            "1 xícara"
+          ]
+        },
+        {
+          "selector": ".ing-pct",
+          "index": 2,
+          "tokens": [
+            "3 unidades"
+          ]
+        },
+        {
+          "selector": ".ing-pct",
+          "index": 3,
+          "tokens": [
+            "2 xícaras"
+          ]
+        },
+        {
+          "selector": ".ing-pct",
+          "index": 4,
+          "tokens": [
+            "2½ xícaras"
+          ]
+        },
+        {
+          "selector": ".ing-pct",
+          "index": 5,
+          "tokens": [
+            "1 col. sopa"
+          ]
+        }
+      ],
+      "reviewed": true,
+      "custom": [
+        {
+          "selector": ".rc-meta-value",
+          "index": 0,
+          "source": "1 bolo",
+          "template": "{1} bolo(s)"
+        },
+        {
+          "selector": ".rc-meta-value",
+          "index": 0,
+          "source": "10–12 fatias",
+          "template": "{10}–{12} fatias"
+        },
+        {
+          "selector": ".rc-step-text",
+          "index": 0,
+          "source": "uma forma média",
+          "template": "{1} forma(s) média(s)"
+        }
+      ]
+    },
+    "bolo-pao-de-lo-chocolate": {
+      "references": [
+        {
+          "selector": ".rc-note",
+          "index": 1,
+          "tokens": [
+            "200g"
+          ]
+        },
+        {
+          "selector": ".rc-ing-group-name",
+          "index": 0,
+          "tokens": [
+            "130g"
+          ]
+        },
+        {
+          "selector": ".ing-pct",
+          "index": 2,
+          "tokens": [
+            "4 ovos grandes"
+          ]
+        },
+        {
+          "selector": ".ing-pct",
+          "index": 6,
+          "tokens": [
+            "1 col. sopa"
+          ]
+        }
+      ],
+      "reviewed": true,
+      "custom": [
+        {
+          "selector": ".rc-meta-value",
+          "index": 0,
+          "source": "2 discos",
+          "template": "{2} discos"
+        },
+        {
+          "selector": ".rc-meta-value",
+          "index": 0,
+          "source": "1 forma",
+          "template": "{1} forma(s)"
+        }
+      ]
+    },
+    "bolo-pao-de-mel": {
+      "references": [],
+      "reviewed": true,
+      "custom": [
+        {
+          "selector": ".rc-meta-value",
+          "index": 0,
+          "source": "1 bolo",
+          "template": "{1} bolo(s)"
+        },
+        {
+          "selector": ".rc-step-text",
+          "index": 4,
+          "source": "uma forma untada",
+          "template": "{1} forma(s) untada(s)"
+        }
+      ]
+    },
+    "bolo-prestigio": {
+      "references": [
+        {
+          "selector": ".rc-note",
+          "index": 1,
+          "tokens": [
+            "200g"
+          ]
+        },
+        {
+          "selector": ".ing-pct",
+          "index": 2,
+          "tokens": [
+            "4 ovos grandes"
+          ]
+        },
+        {
+          "selector": ".ing-pct",
+          "index": 6,
+          "tokens": [
+            "1 col. sopa"
+          ]
+        },
+        {
+          "selector": ".ing-pct",
+          "index": 10,
+          "tokens": [
+            "1 col. sopa"
+          ]
+        }
+      ],
+      "reviewed": true,
+      "custom": [
+        {
+          "selector": ".rc-meta-value",
+          "index": 0,
+          "source": "1 receita de massa + 2 recheios",
+          "template": "{1} receita(s) de massa + {2} porções de recheios"
+        },
+        {
+          "selector": ".rc-step-text",
+          "index": 11,
+          "source": "Meça o leite enchendo a caixinha de creme de leite já vazia — a medida prática garante aproximadamente 200g sem necessidade de balança extra.",
+          "template": "Pese aproximadamente {200}g de leite; a caixinha vazia é apenas uma referência de medida da receita base."
+        },
+        {
+          "selector": ".rc-note",
+          "index": 6,
+          "source": "Encher a caixinha de creme de leite vazia com leite integral é uma medida prática de alta precisão: a caixinha tem volume fixo de 200ml e leite integral tem densidade de ~1,03 g/ml, resultando em ~206g — praticamente os 200g da fórmula. A técnica elimina a necessidade de balança em campo e padroniza o recheio entre produções.",
+          "template": "A caixinha continua tendo volume fixo de 200ml e o leite mantém densidade aproximada de 1,03 g/ml. Para esta escala, pese {200}g de leite; não trate uma caixinha como o volume inteiro da receita ampliada ou reduzida."
+        }
+      ]
+    },
+    "pao-de-queijo-heuller": {
+      "references": [
+        {
+          "selector": ".rc-step-text",
+          "index": 0,
+          "tokens": [
+            "250g",
+            "10–12g"
+          ]
+        },
+        {
+          "selector": ".rc-step-text",
+          "index": 1,
+          "tokens": [
+            "150ml",
+            "100ml"
+          ]
+        },
+        {
+          "selector": ".rc-step-text",
+          "index": 4,
+          "tokens": [
+            "350g",
+            "50g"
+          ]
+        },
+        {
+          "selector": ".ing-pct",
+          "index": 6,
+          "tokens": [
+            "≈150–200g"
+          ]
+        }
+      ],
+      "reviewed": true,
+      "custom": [
+        {
+          "selector": ".rc-meta-value",
+          "index": 0,
+          "source": "~50 un.",
+          "template": "~{50} un."
+        },
+        {
+          "selector": ".rc-step-text",
+          "index": 3,
+          "source": "Se após 3 ovos a massa ainda estiver muito firme, adicione o quarto.",
+          "template": "Se após {3} ovos a massa ainda estiver muito firme, adicione mais ovo aos poucos, até {4} ovos no total."
+        }
+      ]
+    },
+    "pao-heuller-gabriela": {
+      "references": [
+        {
+          "selector": ".rc-step-text",
+          "index": 0,
+          "tokens": [
+            "5g"
+          ]
+        },
+        {
+          "selector": ".rc-note",
+          "index": 3,
+          "tokens": [
+            "30g"
+          ]
+        },
+        {
+          "selector": ".rc-ing-group-name",
+          "index": 0,
+          "tokens": [
+            "600g"
+          ]
+        }
+      ],
+      "reviewed": true,
+      "custom": [
+        {
+          "selector": ".rc-meta-value",
+          "index": 0,
+          "source": "600g",
+          "template": "{600}g"
+        }
+      ]
+    },
+    "arroz-doce-toffee-amburana": {
+      "references": [
+        {
+          "selector": ".rc-step-text",
+          "index": 1,
+          "tokens": [
+            "300g",
+            "40g"
+          ]
+        },
+        {
+          "selector": ".rc-step-text",
+          "index": 3,
+          "tokens": [
+            "395g"
+          ]
+        },
+        {
+          "selector": ".rc-step-text",
+          "index": 4,
+          "tokens": [
+            "30ml"
+          ]
+        }
+      ],
+      "reviewed": true,
+      "custom": [
+        {
+          "selector": ".rc-meta-value",
+          "index": 0,
+          "source": "11–12 potes",
+          "template": "{11}–{12} potes"
+        },
+        {
+          "selector": ".rc-step-text",
+          "index": 1,
+          "source": "o litro de leite",
+          "template": "{1} litro(s) de leite"
+        }
+      ]
+    },
+    "canjicada-el-guapo": {
+      "references": [
+        {
+          "selector": ".rc-step-text",
+          "index": 1,
+          "tokens": [
+            "5L"
+          ]
+        },
+        {
+          "selector": ".rc-step-text",
+          "index": 3,
+          "tokens": [
+            "80ml"
+          ]
+        }
+      ],
+      "reviewed": true,
+      "custom": [
+        {
+          "selector": ".rc-meta-value",
+          "index": 0,
+          "source": "2,5kg",
+          "template": "{2.5}kg"
+        },
+        {
+          "selector": ".rc-meta-value",
+          "index": 0,
+          "source": "~11 potes",
+          "template": "~{11} potes"
+        },
+        {
+          "selector": ".rc-ing-row > span:first-child",
+          "index": 0,
+          "source": "2 pacotes",
+          "template": "{2} pacotes"
+        }
+      ]
+    },
+    "bolo-panetone-el-guapo": {
+      "references": [
+        {
+          "selector": ".rc-step-text",
+          "index": 2,
+          "tokens": [
+            "50g"
+          ]
+        },
+        {
+          "selector": ".rc-step-text",
+          "index": 3,
+          "tokens": [
+            "100g",
+            "10g"
+          ]
+        },
+        {
+          "selector": ".rc-step-text",
+          "index": 4,
+          "tokens": [
+            "500g",
+            "150g",
+            "130g",
+            "30g",
+            "50g"
+          ]
+        },
+        {
+          "selector": ".rc-step-text",
+          "index": 7,
+          "tokens": [
+            "400g",
+            "50g",
+            "450g"
+          ]
+        },
+        {
+          "selector": ".rc-note",
+          "index": 0,
+          "tokens": [
+            "50g"
+          ]
+        },
+        {
+          "selector": ".ing-pct",
+          "index": 0,
+          "tokens": [
+            "600g"
+          ]
+        },
+        {
+          "selector": ".ing-pct",
+          "index": 3,
+          "tokens": [
+            "600g"
+          ]
+        }
+      ],
+      "reviewed": true,
+      "custom": [
+        {
+          "selector": ".rc-meta-value",
+          "index": 0,
+          "source": "1378g",
+          "template": "{1378}g"
+        },
+        {
+          "selector": ".rc-meta-value",
+          "index": 0,
+          "source": "450g",
+          "template": "{450}g"
+        },
+        {
+          "selector": ".rc-step-text",
+          "index": 2,
+          "source": "a meia semente de cumaru",
+          "template": "{0.5} semente(s) de cumaru"
+        },
+        {
+          "selector": ".rc-step-text",
+          "index": 2,
+          "source": "a pitada de noz-moscada",
+          "template": "{1} pitada(s) de noz-moscada"
+        }
+      ]
+    },
+    "bolo-banana-bread-el-guapo": {
+      "references": [
+        {
+          "selector": ".rc-ing-group-name",
+          "index": 1,
+          "tokens": [
+            "500g"
+          ]
+        },
+        {
+          "selector": ".ing-pct",
+          "index": 1,
+          "tokens": [
+            "~200g"
+          ]
+        }
+      ],
+      "reviewed": true,
+      "custom": [
+        {
+          "selector": ".rc-meta-value",
+          "index": 0,
+          "source": "1 forma inglesa",
+          "template": "{1} forma(s) inglesa(s)"
+        },
+        {
+          "selector": ".rc-step-text",
+          "index": 6,
+          "source": "uma forma de bolo inglês grande (ou duas médias)",
+          "template": "{1} forma(s) de bolo inglês grande (ou {2} médias)"
+        },
+        {
+          "selector": ".rc-step-text",
+          "index": 6,
+          "source": "as duas metades da banana extra",
+          "template": "{2} metade(s) de {1} banana(s) extra"
+        }
+      ]
+    }
+  },
+  "policy": "Explicit reviewed batch quantities; per-unit weights, dimensions, density, percentages, times and temperatures retained. Whole essence batches scale with recipe; yield remains unspecified."
+}

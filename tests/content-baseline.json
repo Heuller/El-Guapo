@@ -17,8 +17,8 @@
     "bolo-banana-bread-el-guapo"
   ],
   "files": {
-    "index.html": "1066e9e39cb63d952d7e4087baacdb78e6c067d60b65d7d558a55a2f686959f6",
-    "manifest.json": "f3eaf2a87efeeab688703337afd896c44bce2670b9f0b89f253e8c2e62c81430",
+    "index.html": "ef380b09edf59ddfc400444c69f9dfcf1f091dda92765c866e0fd761d8694bcc",
+    "manifest.json": "09db0be248cb963f340f4ec50dfa51b72463116ebb87449eb7217467eec636dc",
     "images/bolo-cenoura-gabriela.jpeg": "57caa020169c98b67f67268516995bbfd8ac85d995b60e9bee51989f9f7199b8",
     "images/el-guapo-img-01.webp": "42b8990d48541f965b55778ae02e70e36abbe8f1551326928136e08f970a3d84",
     "images/el-guapo-img-02.webp": "74a1bb7b060904d43c47afdf9abb3b0d2f582bfffbe9245ad282edf1c60e8942",
@@ -50,5 +50,5 @@
     "images/recipes/focaccia.jpg": "cf0ea4d8a8a0212b07da67aa399d0c75888236245bd0d77c2811ce24e5f0c761",
     "images/recipes/bolo-pao-de-mel.jpg": "587b81609b57ac5da5a6a27755e4dd00565d12427eb578024038fbda31f45068"
   },
-  "change": "Ess\u00eancia integrada ao panetone; brigadeiro apenas no Prest\u00edgio."
+  "change": "Essência integrada ao panetone; brigadeiro apenas no Prestígio."
 }

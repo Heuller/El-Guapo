@@ -15,7 +15,7 @@ const luminance=rgb=>{
 const ratio=(a,b)=>{const c=[luminance(a),luminance(b)].sort((x,y)=>x-y);return(c[1]+.05)/(c[0]+.05)};
 
 test('night preference persists on reload and switching back restores the approved light style',async()=>{
- assert.equal(await app.evaluate(`document.querySelector('.candle-toggle').getAttribute('aria-pressed')`),'true');
+ assert.equal(await app.evaluate(`String(document.querySelector('.candle-toggle').checked)`),'true');
  await app.load();
  assert.equal(await app.evaluate(`document.documentElement.classList.contains('candlelight')`),true);
  assert.equal(await app.evaluate(`getComputedStyle(document.body).backgroundColor`),'rgb(36, 27, 32)');
@@ -65,7 +65,7 @@ test('keyboard focus is visible and kitchen progress does not overlap its naviga
 test('night stylesheet and saved preference remain available after an offline reload',async()=>{
  await app.evaluate('navigator.serviceWorker.ready');
  await app.wait('!!navigator.serviceWorker.controller');
- assert.equal(await app.evaluate(`caches.open('el-guapo-v3.6').then(c=>c.keys()).then(keys=>keys.some(k=>new URL(k.url).pathname.endsWith('/dark-theme.css')))`),true);
+ assert.equal(await app.evaluate(`caches.open('el-guapo-v3.9').then(c=>c.keys()).then(keys=>keys.some(k=>new URL(k.url).pathname.endsWith('/dark-theme.css')))`),true);
  await app.send('Network.emulateNetworkConditions',{offline:true,latency:0,downloadThroughput:0,uploadThroughput:0});
  try {
   await app.load();

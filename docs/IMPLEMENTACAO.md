@@ -128,3 +128,13 @@ Substituído o controle anterior por checkbox nativo com role switch, baseado no
 ## Temporizador flutuante — miniplayer (local)
 
 Substituídos anel e tempo sobreposto por contador tabular independente, controles nativos e barra horizontal. CSS isolado em `timer-player.css`; temas preservados. Corrigido atraso de contagem em segundo plano com deadline; acrescentada persistência, ausente anteriormente, reutilizando o mapa/funções de timer. 82 testes aprovados e capturas nos dois temas e dispositivos. Ver `docs/TEMPORIZADOR.md` para detalhes e limites dos avisos. URLs/precache preparados em v3.6. Sem publicação.
+
+## Cruzamento de auditorias e retirada de voz — local
+
+Confirmados apontamentos adicionais: rótulos de timer repetidos entre receitas (exemplos Etapa 2 · 3min e Etapa 3 · 9min), parser que transforma o intervalo 1h a 1h30 da focaccia em 3600 segundos e theme-color fixo. Mise en place e atalhos PWA coincidem com a auditoria anterior; share_target exige integração não encontrada no projeto.
+
+Conforme pedido explícito, removidos botão de voz, leitura de etapas, observador de anúncios de timers e chamadas SpeechSynthesis. Preservado playBell (aviso sonoro não falado), timers e dados locais; a chave antiga de preferência de voz não é mais lida. README ajustado. Entradas e precache preparados em v3.7. Sintaxe, diff e 82 testes passaram. Não publicado. Os demais apontamentos foram verificados, não corrigidos nesta etapa de comparação.
+
+## Segunda entrega da auditoria
+
+Mise en place com checkboxes nativos; foco dos painéis filtra controles ocultos e circula com Tab/Shift+Tab. Atalhos PWA implementados para catálogo e seleção de receita do Modo Foco; declaração de recebimento POST `/share` removida por ausência de fluxo de importação. Cor do navegador sincronizada com o tema e preferência entre abas; sem `aria-pressed` no switch nativo. Cache preparado como v3.9. Evidências e limites em `docs/SEGUNDA-ENTREGA-CORRECOES.md`; sem publicação.

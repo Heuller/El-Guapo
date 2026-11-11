@@ -20,7 +20,7 @@ Detalhes da implementação em [docs/IMPLEMENTACAO.md](docs/IMPLEMENTACAO.md).
 - Adição de todos os ingredientes de uma receita e cálculo de subtotais e total em reais.
 - Sugestões de substituições de ingredientes chave quando algo está faltando.
 - Escalonamento de receitas com controles precisos de ½×, 1×, 1,5×, 2× e 3×.
-- Modo Cozinha com leitura de passos por voz e integração segura com temporizadores automáticos.
+- Modo Cozinha com passos individuais e temporizadores contextuais.
 - Notificações audíveis e temporizadores contextuais em etapas que mencionam tempo.
 - PWA habilitado com service worker para suporte offline e instalação.
 
@@ -31,7 +31,7 @@ Detalhes da implementação em [docs/IMPLEMENTACAO.md](docs/IMPLEMENTACAO.md).
 4. Marque o que já pegou, registre a quantidade de pacotes ou unidades e o preço unitário; os totais são atualizados automaticamente.
 5. Use os botões de escala para ajustar as quantidades da receita.
 6. Ative `Modo Foco na Cozinha` para ver os passos um a um.
-7. No modo cozinha, pressione `Voz: ON` para ouvir cada passo e receba alertas quando os temporizadores terminarem.
+7. Use os temporizadores contextuais para acompanhar os tempos de preparo; o aviso sonoro de conclusão permanece disponível.
 
 ## Local development
 ```bash
@@ -41,7 +41,7 @@ python3 -m http.server 8000
 Acesse `http://127.0.0.1:8000` no navegador.
 
 ## Deploy
-Aplicação estática compatível com hospedagem de arquivos estáticos. Esta revisão foi aplicada somente ao espaço de trabalho; a publicação deve ocorrer em uma etapa própria.
+Aplicação estática; a branch `main` está conectada ao Vercel em https://el-guapo.vercel.app/. Publicar exige autorização do usuário e aprovação dos testes de regressão.
 
 ## Testes de regressão
 
