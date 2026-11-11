@@ -65,7 +65,7 @@ test('keyboard focus is visible and kitchen progress does not overlap its naviga
 test('night stylesheet and saved preference remain available after an offline reload',async()=>{
  await app.evaluate('navigator.serviceWorker.ready');
  await app.wait('!!navigator.serviceWorker.controller');
- assert.equal(await app.evaluate(`caches.open('el-guapo-v3.12').then(c=>c.keys()).then(keys=>keys.some(k=>new URL(k.url).pathname.endsWith('/dark-theme.css')))`),true);
+ assert.equal(await app.evaluate(`caches.open('el-guapo-v3.13').then(c=>c.keys()).then(keys=>keys.some(k=>new URL(k.url).pathname.endsWith('/dark-theme.css')))`),true);
  await app.send('Network.emulateNetworkConditions',{offline:true,latency:0,downloadThroughput:0,uploadThroughput:0});
  try {
   await app.load();

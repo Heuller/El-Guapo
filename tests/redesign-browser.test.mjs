@@ -68,7 +68,7 @@ test('the updated offline cache includes every local illustration, font and navi
  await app.evaluate(`navigator.serviceWorker.ready`);
  await app.wait(`!!navigator.serviceWorker.controller`);
  const expected=await readFile(new URL('../content/recipe-images.json',import.meta.url),'utf8');
- const cached=await app.evaluate(`caches.open('el-guapo-v3.12').then(c=>c.keys()).then(keys=>keys.map(k=>new URL(k.url).pathname))`);
+ const cached=await app.evaluate(`caches.open('el-guapo-v3.13').then(c=>c.keys()).then(keys=>keys.map(k=>new URL(k.url).pathname))`);
  for(const image of JSON.parse(expected)) assert.ok(cached.includes('/'+image.src),image.src);
  for(const path of ['/assets/fonts.css','/assets/fonts/fraunces-600-normal.ttf','/assets/icons/house.svg']) assert.ok(cached.includes(path),path);
  await app.send('Network.emulateNetworkConditions',{offline:true,latency:0,downloadThroughput:0,uploadThroughput:0});

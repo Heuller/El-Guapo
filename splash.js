@@ -35,9 +35,9 @@
     if (ended || !ready || !artworkReady || !fontsReady) return;
     if (reduced.matches) { finish(true); return; }
     if (visibleSince === undefined) return;
-    // Let the 520ms entrance complete, then briefly hold the composition.
+    // Let the entrance and a full 1.2s hand cycle be perceived before exit.
     // This minimum is measured from its first frame, not from resource readiness.
-    const remaining = 900 - (performance.now() - visibleSince);
+    const remaining = 1700 - (performance.now() - visibleSince);
     if (remaining <= 0) { finish(); return; }
     if (minimumTimer === undefined) minimumTimer = setTimeout(() => {
       minimumTimer = undefined;
