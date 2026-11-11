@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "test": "node --test tests/*.test.mjs",
-    "check": "node --check script.js && node --check sw.js && node --check recipe-domain.js && node --check scripts/extract-recipes.mjs && node --check shopping-list.js && node --check ingredient-catalog.js && node --check shopping-model.js && node --check timer-durations.js && node --check recipe-scaling.js",
+    "check": "node --check script.js && node --check sw.js && node --check recipe-domain.js && node --check scripts/extract-recipes.mjs && node --check shopping-list.js && node --check ingredient-catalog.js && node --check shopping-model.js && node --check timer-durations.js && node --check recipe-scaling.js && node --check splash.js",
     "extract:recipes": "node scripts/extract-recipes.mjs"
   },
   "engines": {

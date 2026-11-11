@@ -1000,19 +1000,6 @@
         .catch((err) => console.warn("PWA falhou:", err));
     }
 
-    const splash = document.getElementById("splash");
-    if (splash) {
-      document.body.style.overflow = "hidden";
-      splash.classList.add("animate");
-      setTimeout(() => {
-        splash.classList.add("exiting");
-        setTimeout(() => {
-          document.body.style.overflow = "";
-          splash.remove();
-        }, 730);
-      }, 2800);
-    }
-
     const footerDate = document.getElementById("footer-date");
     if (footerDate) {
       const d = new Date(document.lastModified);
@@ -1025,5 +1012,6 @@
     injectTimerButtons();
     restoreTimers();
     initLaunchShortcuts();
+    document.dispatchEvent(new Event("eg:ready"));
   });
 })();

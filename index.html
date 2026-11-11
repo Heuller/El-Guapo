@@ -4,13 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>El Guapo — Caderno de Receitas</title>
-    <link rel="stylesheet" href="assets/fonts.css?v=3.10" />
+    <link rel="stylesheet" href="assets/fonts.css?v=3.11" />
 
-    <link rel="stylesheet" href="style.css?v=3.10" />
-    <link rel="stylesheet" href="dark-theme.css?v=3.10" />
-    <link rel="stylesheet" href="theme-switch.css?v=3.10" />
-    <link rel="stylesheet" href="timer-player.css?v=3.10" />
+    <link rel="stylesheet" href="style.css?v=3.11" />
+    <link rel="stylesheet" href="dark-theme.css?v=3.11" />
+    <link rel="stylesheet" href="theme-switch.css?v=3.11" />
+    <link rel="stylesheet" href="timer-player.css?v=3.11" />
 
+    <link rel="stylesheet" href="splash.css?v=3.11" />
+    <script src="splash.js?v=3.11"></script>
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link rel="manifest" href="manifest.json" />
     <meta name="theme-color" content="#FFFDF8" />
@@ -23,6 +25,21 @@
     <meta name="apple-mobile-web-app-title" content="El Guapo" />
   </head>
   <body>
+    <section id="splash" class="eg-splash" aria-label="Bem-vindo ao El Guapo">
+      <div class="eg-splash__cover">
+        <span class="eg-splash__ornament" aria-hidden="true">♥</span>
+        <p class="eg-splash__title">El Guapo</p>
+        <p class="eg-splash__slogan">Feito com o coração,<br />para conquistar o seu.</p>
+        <figure class="eg-splash__art"><img src="images/recipes/bolo-prestigio.jpg" alt="Bolo Prestígio com chocolate e coco sobre uma boleira marfim" width="1280" height="1280" fetchpriority="high" /></figure>
+        <p class="eg-splash__status" role="status">Abrindo seu caderno de receitas...</p>
+        <div class="eg-splash__loader" aria-hidden="true">
+          <!-- From Uiverse.io by Pradeepsaranbishnoi — MIT (assets/licenses/uiverse-hand-MIT.txt) -->
+          <div class="eg-splash__hand"><div class="eg-splash__finger"></div><div class="eg-splash__finger"></div><div class="eg-splash__finger"></div><div class="eg-splash__finger"></div><div class="eg-splash__palm"></div><div class="eg-splash__thumb"></div></div>
+        </div>
+        <p class="eg-splash__signature">DOCES, MASSAS E RECEITAS ARTESANAIS</p>
+        <span class="eg-splash__ornament" aria-hidden="true">♥</span>
+      </div>
+    </section>
     <a class="skip-link" href="#catalogo">Pular para as receitas</a>
     <nav class="nav" id="nav" aria-label="Navegação principal">
       <a href="#top" class="nav-brand" aria-label="El Guapo — início">El Guapo</a>
@@ -3024,11 +3041,11 @@
       aria-label="Temporizadores ativos"
     ></div>
 
-    <script src="ingredient-catalog.js?v=3.10"></script>
-    <script src="shopping-model.js?v=3.10"></script>
-    <script src="shopping-list.js?v=3.10"></script>
-    <script src="timer-durations.js?v=3.10"></script>
-    <script src="recipe-scaling.js?v=3.10"></script>
-    <script src="script.js?v=3.10"></script>
+    <script src="ingredient-catalog.js?v=3.11"></script>
+    <script src="shopping-model.js?v=3.11"></script>
+    <script src="shopping-list.js?v=3.11"></script>
+    <script src="timer-durations.js?v=3.11"></script>
+    <script src="recipe-scaling.js?v=3.11"></script>
+    <script src="script.js?v=3.11"></script>
   </body>
 </html>

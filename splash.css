@@ -1,0 +1,51 @@
+/* Doce Contemporâneo cover. Hand: Pradeepsaranbishnoi / tall-fish-38 (MIT).
+   Original geometry and timing retained. Full notice: assets/licenses/uiverse-hand-MIT.txt */
+.eg-splash { display:none; }
+html.eg-splash-pending .eg-splash {
+ --eg-cover-ink:#4A2532; --eg-cover-coral:#A53535; --eg-cover-hand:#E9B64E;
+ position:fixed; inset:0; z-index:10000; display:grid; place-items:center;
+ padding:calc(16px + env(safe-area-inset-top)) 20px calc(16px + env(safe-area-inset-bottom));
+ background:#FFFDF8; color:var(--eg-cover-ink); overflow:hidden;
+ opacity:1; transition:opacity 220ms ease; isolation:isolate;
+}
+html.candlelight .eg-splash { --eg-cover-ink:#F8EDE5; --eg-cover-coral:#F08A82; --eg-cover-hand:#DBB476; background:#241B20; }
+.eg-splash::before,.eg-splash::after { content:''; position:absolute; z-index:-1; width:200px; height:270px; border:1px solid #B38542; border-radius:48% 52% 60% 40%; opacity:.25; pointer-events:none; }
+.eg-splash::before { top:-160px; left:-90px; transform:rotate(35deg); background:#F8E3DF; }
+.eg-splash::after { bottom:-180px; right:-100px; transform:rotate(35deg); }
+html.candlelight .eg-splash::before { background:#392A31; }
+.eg-splash__cover { width:min(100%,560px); height:100%; max-height:820px; min-height:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:clamp(10px,2vh,20px); text-align:center; }
+.eg-splash__ornament { display:flex; align-items:center; justify-content:center; gap:16px; color:var(--eg-cover-coral); font-size:20px; line-height:1; }
+.eg-splash__ornament::before,.eg-splash__ornament::after { content:''; width:32px; height:1px; background:#B38542; }
+.eg-splash__title { margin:0; color:var(--eg-cover-ink); font-family:var(--ff-disp); font-style:italic; font-weight:600; font-size:clamp(52px,12vw,112px); line-height:1.06; letter-spacing:-.045em; }
+.eg-splash__slogan { margin:0; color:var(--eg-cover-coral); font-family:var(--ff-disp); font-style:italic; font-size:clamp(19px,4.5vw,28px); line-height:1.35; }
+.eg-splash__art { margin:0; flex:0 1 auto; min-height:0; width:min(100%,430px,40vh); aspect-ratio:1; background:#fff; border-radius:28px; overflow:hidden; }
+.eg-splash__art img { display:block; width:100%; height:100%; object-fit:contain; filter:none; }
+.eg-splash__status { margin:0; color:var(--eg-cover-ink); font:400 clamp(13px,2vw,15px)/1.5 var(--ff-body); }
+.eg-splash__signature { margin:clamp(4px,1.5vh,14px) 0 0; max-width:100%; color:var(--eg-cover-ink); font:500 9px/1.6 var(--ff-body); letter-spacing:.16em; }
+.eg-splash__loader { width:36px; height:26px; position:relative; flex-shrink:0; }
+.eg-splash__hand { --skin-color:var(--eg-cover-hand); --tap-speed:.6s; --tap-stagger:.1s; position:absolute; width:80px; height:60px; left:21px; top:4px; transform:scale(.18); transform-origin:0 0; }
+.eg-splash__hand::before { content:''; display:block; width:180%; height:75%; position:absolute; top:70%; right:20%; background:#000; border-radius:40px 10px; filter:blur(10px); opacity:.3; }
+.eg-splash__palm { display:block; width:100%; height:100%; position:absolute; top:0; left:0; background:var(--skin-color); border-radius:10px 40px; }
+.eg-splash__thumb { position:absolute; width:120%; height:38px; background:var(--skin-color); bottom:-18%; right:1%; transform-origin:calc(100% - 20px) 20px; transform:rotate(-20deg); border-radius:30px 20px 20px 10px; border-bottom:2px solid rgb(0 0 0 / .1); border-left:2px solid rgb(0 0 0 / .1); }
+.eg-splash__thumb::after { width:20%; height:60%; content:''; background:rgb(255 255 255 / .3); position:absolute; bottom:-8%; left:5px; border-radius:60% 10% 10% 30%; border-right:2px solid rgb(0 0 0 / .05); }
+.eg-splash__finger { position:absolute; width:80%; height:35px; background:var(--skin-color); bottom:32%; right:64%; transform-origin:100% 20px; animation-duration:calc(var(--tap-speed) * 2); animation-timing-function:ease-in-out; animation-iteration-count:infinite; transform:rotate(10deg); }
+.eg-splash__finger::before { content:''; position:absolute; width:140%; height:30px; background:var(--skin-color); bottom:8%; right:65%; transform-origin:calc(100% - 20px) 20px; transform:rotate(-60deg); border-radius:20px; }
+.eg-splash__finger:nth-child(1) { animation-delay:0s; filter:brightness(70%); animation-name:eg-tap-1; }
+.eg-splash__finger:nth-child(2) { animation-delay:var(--tap-stagger); filter:brightness(80%); animation-name:eg-tap-2; }
+.eg-splash__finger:nth-child(3) { animation-delay:calc(var(--tap-stagger) * 2); filter:brightness(90%); animation-name:eg-tap-3; }
+.eg-splash__finger:nth-child(4) { animation-delay:calc(var(--tap-stagger) * 3); filter:brightness(100%); animation-name:eg-tap-4; }
+@keyframes eg-tap-1 { 0%,50%,100% { transform:rotate(10deg) scale(.4) } 40% { transform:rotate(50deg) scale(.4) } }
+@keyframes eg-tap-2 { 0%,50%,100% { transform:rotate(10deg) scale(.6) } 40% { transform:rotate(50deg) scale(.6) } }
+@keyframes eg-tap-3 { 0%,50%,100% { transform:rotate(10deg) scale(.8) } 40% { transform:rotate(50deg) scale(.8) } }
+@keyframes eg-tap-4 { 0%,50%,100% { transform:rotate(10deg) scale(1) } 40% { transform:rotate(50deg) scale(1) } }
+@keyframes eg-cover-in { from { opacity:0; transform:translateY(6px) } to { opacity:1; transform:translateY(0) } }
+.eg-splash__title { animation:eg-cover-in 300ms ease both; }
+.eg-splash__slogan { animation:eg-cover-in 300ms 60ms ease both; }
+.eg-splash__art { animation:eg-cover-in 400ms 120ms ease both; }
+.eg-splash__status,.eg-splash__loader { animation:eg-cover-in 250ms 180ms ease both; }
+html.eg-splash-pending .eg-splash--leaving { opacity:0; pointer-events:none; }
+.eg-splash--leaving .eg-splash__finger { animation-play-state:paused; }
+@media(max-width:600px) { .eg-splash__art { width:min(100%,320px,38vh); border-radius:22px; } .eg-splash__hand { transform:scale(.165); left:20px; } .eg-splash__loader { width:34px; } }
+@media(max-height:650px) { .eg-splash__cover { gap:9px; } .eg-splash__ornament { font-size:15px; } .eg-splash__title { font-size:clamp(42px,10vw,64px); } .eg-splash__slogan { font-size:19px; } .eg-splash__art { width:min(100%,280px,32vh); } .eg-splash__signature { font-size:8px; margin-top:0; } }
+@media(max-height:440px) { .eg-splash__cover { gap:5px; } .eg-splash__ornament { display:none; } .eg-splash__title { font-size:36px; } .eg-splash__slogan { font-size:16px; line-height:1.2; } .eg-splash__art { width:26vh; } .eg-splash__signature { letter-spacing:.1em; } }
+@media(prefers-reduced-motion:reduce) { .eg-splash,.eg-splash * { animation:none!important; transition:none!important; } .eg-splash__finger:nth-child(1) { transform:rotate(10deg) scale(.4); } .eg-splash__finger:nth-child(2) { transform:rotate(10deg) scale(.6); } .eg-splash__finger:nth-child(3) { transform:rotate(10deg) scale(.8); } .eg-splash__finger:nth-child(4) { transform:rotate(10deg) scale(1); } }
