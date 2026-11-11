@@ -1,0 +1,36 @@
+{
+  "commit": "c9eb5075759c74fee6d5614623faa1ddc31d1a1f",
+  "recipeIds": [
+    "pizza-massa-base",
+    "focaccia-massa-base",
+    "cuca-massa-base",
+    "cuca-crumble-basico",
+    "bolo-pao-de-lo-padrao",
+    "bolo-cenoura-gabriela",
+    "bolo-pao-de-lo-chocolate",
+    "bolo-brigadeiro-el-guapo",
+    "bolo-prestigio",
+    "pao-de-queijo-heuller",
+    "pao-heuller-gabriela",
+    "bolo-panetone-el-guapo",
+    "bolo-banana-bread-el-guapo"
+  ],
+  "files": {
+    "index.html": "f346e38064c32a83eb3542b9ad45403090c7169c017551a9133645fc33093824",
+    "manifest.json": "34edb2a1e6a4041f9ec11883cf3a7e095356b025ec0d5474a3ae971a4ac39ef7",
+    "images/bolo-cenoura-gabriela.jpeg": "57caa020169c98b67f67268516995bbfd8ac85d995b60e9bee51989f9f7199b8",
+    "images/el-guapo-img-01.webp": "42b8990d48541f965b55778ae02e70e36abbe8f1551326928136e08f970a3d84",
+    "images/el-guapo-img-02.webp": "74a1bb7b060904d43c47afdf9abb3b0d2f582bfffbe9245ad282edf1c60e8942",
+    "images/el-guapo-img-03.webp": "12c99385457fdcdc152cd1d36427af7c6f4d085a49da81dc7e489346d19136dd",
+    "images/el-guapo-img-04.webp": "64e7f978f58d20c8df8ac704f6821aaefbcc19a318d828415d9f99b526020a04",
+    "images/el-guapo-img-05.webp": "972250b39e0a44d53c52d97a8cb20f4883babf28720f5f720b81cbdbed4ec4a1",
+    "images/el-guapo-img-06.webp": "88faa15059236098fcd0b38f9057a6bcce4d03c7855342378234cbfd85e6421e",
+    "images/el-guapo-img-07.webp": "2318d891a9d7140cc30cc1b1bef82e40cc621830a018883f5b4e5f68409e926d",
+    "images/el-guapo-img-08.webp": "4188e7be04626d18d13e90bb47ed83254f74744f16d8da8c076385d79d6939fb",
+    "images/el-guapo-img-09.webp": "83bc7f74b8c7a577a49e828745a7e41bb4e7baf1b037459c601cfeb6f46b471c",
+    "images/el-guapo-img-10.webp": "c0a23bf0fc3ac87a3d9a6b2f7cd76e7aafad7c0913f5b9b33ae7c432a1207b04",
+    "images/el-guapo-img-11.webp": "7d303ed1ee6ba35a5230363415aa5e7231a4f137c21e8e9ccd74f4afae9ebdb5",
+    "images/el-guapo-img-12.webp": "3f623bf9114f87f767231240e1b248bf9d026a4eff20c801a039633a45287ca7"
+  },
+  "change": "10/11/2026: Bolo Prestígio combines chocolate sponge, brigadeiro and coconut; remove standalone coconut and chocolate cuca/crumble at user request."
+}

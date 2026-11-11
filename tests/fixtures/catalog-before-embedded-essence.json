@@ -1,0 +1,4242 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "c9eb5075759c74fee6d5614623faa1ddc31d1a1f",
+  "recipes": [
+    {
+      "id": "pizza-massa-base",
+      "title": "Massa de Pizza El Guapo",
+      "sourceUrl": null,
+      "notes": [
+        {
+          "title": "Poolish: fermentação lática",
+          "content": "O poolish é um pré-fermento de hidratação 100% (partes iguais de farinha e água). Sua fermentação prolongada produz ácido lático — responsável pelo aroma suave e levemente adocicado — e gera extensibilidade superior na massa final. O glúten parcialmente degradado se abre sem resistência, os alvéolos ficam maiores e irregulares."
+        },
+        {
+          "title": "A hidratação define a pizza",
+          "content": "A quantidade de água em relação à farinha é a variável que mais impacta textura e comportamento: % Perfil & Resultado Esperado 55–60% Massa firme, fácil de manusear. Crosta densa e crocante. Ideal para fornos de temperatura moderada. 62–65% Esta receita. Equilíbrio entre extensibilidade e estrutura. Borda macia tipo \"pãozinho\". Funciona bem a 250°C+. 68–72% Alvéolos grandes e irregulares, miolo úmido. Exige mais técnica. Ideal para 350°C+ ou forno a lenha. 75%+ Napolitana contemporânea ou teglia. Casca fina, leopardização intensa. Alta complexidade técnica."
+        },
+        {
+          "title": "Fermento mínimo, tempo máximo",
+          "content": "Com apenas 5g de fermento fresco para 500g de farinha (1%), a massa evolui devagar — de propósito. Fermentações longas e frias geram complexidade de sabor e digestibilidade impossíveis de replicar com atalhos. Nunca aumente a quantidade de fermento para acelerar: você ganha tempo, mas perde o produto."
+        },
+        {
+          "title": "Maturação e enzimas",
+          "content": "A maturação na geladeira (24–48h) é distinta da fermentação. As amilases convertem amido em açúcares simples (responsáveis pela caramelização e leopardização no forno); as proteases fragmentam proteínas, gerando extensibilidade e melhorando a digestibilidade do produto final."
+        }
+      ],
+      "category": "Pizzas",
+      "tags": [
+        "Método Indireto · Poolish",
+        "65% hidratação",
+        "Borda Pãozinho",
+        "Fermentação Lática"
+      ],
+      "metadata": [
+        {
+          "label": "Rendimento",
+          "value": "2 pizzas ~435g"
+        },
+        {
+          "label": "Hidratação",
+          "value": "65%"
+        }
+      ],
+      "image": {
+        "src": "images/el-guapo-img-01.webp",
+        "alt": "Massa de Pizza El Guapo"
+      },
+      "ingredientGroups": [
+        {
+          "id": "pizza-massa-base-group-0",
+          "title": "Base (100% = 500g farinha)",
+          "ingredients": [
+            {
+              "id": "pizza-massa-base-ingredient-0-0",
+              "name": "Farinha W300+ ou Tipo 1 Forte",
+              "quantityText": "500g",
+              "detail": "100%",
+              "quantity": {
+                "kind": "amount",
+                "amount": 500,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "500g"
+              }
+            },
+            {
+              "id": "pizza-massa-base-ingredient-0-1",
+              "name": "Água",
+              "quantityText": "325g",
+              "detail": "65%",
+              "quantity": {
+                "kind": "amount",
+                "amount": 325,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "325g"
+              }
+            },
+            {
+              "id": "pizza-massa-base-ingredient-0-2",
+              "name": "Fermento biológico fresco",
+              "quantityText": "5g",
+              "detail": "1% · seco: 1,7g",
+              "quantity": {
+                "kind": "amount",
+                "amount": 5,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "5g"
+              }
+            },
+            {
+              "id": "pizza-massa-base-ingredient-0-3",
+              "name": "Mel ou açúcar",
+              "quantityText": "10g",
+              "detail": "2%",
+              "quantity": {
+                "kind": "amount",
+                "amount": 10,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "10g"
+              }
+            },
+            {
+              "id": "pizza-massa-base-ingredient-0-4",
+              "name": "Sal refinado",
+              "quantityText": "12g",
+              "detail": "2,4%",
+              "quantity": {
+                "kind": "amount",
+                "amount": 12,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "12g"
+              }
+            },
+            {
+              "id": "pizza-massa-base-ingredient-0-5",
+              "name": "Azeite de oliva",
+              "quantityText": "20g",
+              "detail": "4%",
+              "quantity": {
+                "kind": "amount",
+                "amount": 20,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "20g"
+              }
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "id": "pizza-massa-base-step-0",
+          "text": "Poolish — 18 a 24h antes. Em uma tigela, combine 200g de farinha, 200g de água em temperatura ambiente e 2g de fermento biológico fresco (equivalente a uma ervilha). Misture até homogeneizar. Cubra com filme plástico e deixe fermentar em temperatura ambiente por 18 a 24h. O poolish está no ponto quando tiver dobrado de volume, apresentar bolhas vivas na superfície e o centro começar a afundar levemente ao inclinar a tigela — sinal de que a atividade fermentativa está no pico. Não use além desse momento.",
+          "quantityReferences": [
+            {
+              "ingredientId": "pizza-massa-base-ingredient-0-0",
+              "amount": 200,
+              "unit": "g",
+              "sourceText": "200g de farinha"
+            },
+            {
+              "ingredientId": "pizza-massa-base-ingredient-0-1",
+              "amount": 200,
+              "unit": "g",
+              "sourceText": "200g de água"
+            },
+            {
+              "ingredientId": "pizza-massa-base-ingredient-0-2",
+              "amount": 2,
+              "unit": "g",
+              "sourceText": "2g de fermento"
+            }
+          ],
+          "reviewStatus": "quantity-references-reviewed"
+        },
+        {
+          "id": "pizza-massa-base-step-1",
+          "text": "Refresco — Mistura inicial. Na tigela da batedeira com gancho, combine os 300g de farinha restante com o mel. Adicione o poolish maturado e os 125g de água gelada. Misture em velocidade baixa por 2 a 3 minutos. A água gelada controla a temperatura final da massa durante o batimento, evitando que o glúten superaqueça e que o fermento se ative prematuramente.",
+          "quantityReferences": [
+            {
+              "ingredientId": "pizza-massa-base-ingredient-0-0",
+              "amount": 300,
+              "unit": "g",
+              "sourceText": "300g de farinha"
+            },
+            {
+              "ingredientId": "pizza-massa-base-ingredient-0-1",
+              "amount": 125,
+              "unit": "g",
+              "sourceText": "125g de água"
+            }
+          ],
+          "reviewStatus": "quantity-references-reviewed"
+        },
+        {
+          "id": "pizza-massa-base-step-2",
+          "text": "Sal e fermento de reforço. Adicione o sal e, em seguida, os 3g restantes de fermento fresco. Aumente para velocidade média e sove por 8 a 10 minutos, até a massa estar completamente lisa, elástica e se descolando das paredes. Teste do véu deve ser positivo. O fermento adicional garante o \"oven spring\" — o salto explosivo que infla a borda no forno.",
+          "quantityReferences": [
+            {
+              "ingredientId": "pizza-massa-base-ingredient-0-2",
+              "amount": 3,
+              "unit": "g",
+              "sourceText": "3g restantes de fermento"
+            }
+          ],
+          "reviewStatus": "quantity-references-reviewed"
+        },
+        {
+          "id": "pizza-massa-base-step-3",
+          "text": "Incorporação do azeite. Com a batedeira em velocidade baixa, adicione o azeite em fio fino. Bata por mais 2 a 3 minutos até a massa estar completamente lisa e levemente brilhante. O azeite age como amaciante do miolo — ele interrompe parcialmente a rede de glúten, tornando a massa mais extensível e o interior da pizza mais tenro.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "pizza-massa-base-step-4",
+          "text": "Descanso e boleamento. Cubra a massa e deixe descansar por 20 a 30 minutos. Divida em 2 porções de aproximadamente 435g. Boleie cada uma criando tensão superficial; feche a emenda para baixo com firmeza. A bola deve estar firme e com superfície totalmente lisa — essa tensão sustentará a estrutura ao longo de toda a maturação.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "pizza-massa-base-step-5",
+          "text": "Maturação longa. Disponha as bolas em recipientes individuais levemente untados com azeite. Leve à geladeira por 24 a 48h. Além da fermentação lenta, as enzimas da farinha trabalham continuamente: amilases degradam amido em açúcares simples; proteases fragmentam proteínas — gerando sabor, aroma e extensibilidade que nenhuma fermentação rápida consegue alcançar.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "pizza-massa-base-step-6",
+          "text": "Temperamento. Retire as bolas da geladeira com 2 a 3h de antecedência. Deixe em temperatura ambiente, cobertas, para que a massa relaxe e o glúten perca a tensão acumulada pelo frio. Tentar abrir uma massa gelada resulta em retração constante e risco de rasgo.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "pizza-massa-base-step-7",
+          "text": "Abertura à mão. Polvilhe a bancada com sêmola fina ou farinha. Com as mãos, pressione o centro da bola de dentro para fora, preservando a faixa de borda que formará o cornicione. Nunca use rolo: ele expulsa o CO₂ acumulado nos alvéolos e achata toda a estrutura construída durante a maturação.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "pizza-massa-base-step-8",
+          "text": "Assamento. Asse em forno a 250–300°C, preferencialmente sobre pedra refratária ou aço pré-aquecido por ao menos 45 minutos. A alta temperatura produz a leopardização (manchas escuras características) na borda e o oven spring explosivo. Tempo: 6 a 12 minutos conforme equipamento.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        }
+      ]
+    },
+    {
+      "id": "focaccia-massa-base",
+      "title": "Massa Base de Focaccia",
+      "sourceUrl": null,
+      "notes": [
+        {
+          "title": "Temperatura interna: 90°C",
+          "content": "O termômetro de alimentos é o instrumento mais confiável para confirmar o cozimento. A 90°C, o amido está completamente gelatinizado e a estrutura interna, firme. Não se guie apenas pela cor externa: uma superfície dourada pode esconder um interior ainda cru."
+        },
+        {
+          "title": "Fermentação lenta (cold retard)",
+          "content": "Após 30 minutos em temperatura ambiente, leve a massa à geladeira por 12 a 18h. A fermentação lenta produz ácidos orgânicos que aprofundam o sabor, melhoram a extensibilidade e geram uma casca mais complexa e aromática. Retire ao menos 1h antes de modelar."
+        },
+        {
+          "title": "Assamento e textura",
+          "content": "A focaccia exige calor intenso e direto. O azeite na assadeira não é apenas antiadesivo: ele frita levemente o fundo da massa, criando a sola dourada e levemente crocante que é a assinatura do produto. O azeite sobre a superfície retém umidade nos primeiros minutos e favorece a douração depois. Não economize em nenhum dos dois."
+        },
+        {
+          "title": "Farinha média/forte",
+          "content": "Proteínas entre 11% e 13% são o ideal (W 220–280). Farinha forte demais torna a massa elástica em excesso, dificultando o espalhamento na forma; fraca demais compromete a estrutura do miolo. Prefira farinhas indicadas para pão ou de uso profissional."
+        }
+      ],
+      "category": "Focaccias",
+      "tags": [
+        "Método direto",
+        "75% hidratação",
+        "Fermentação Longa",
+        "Miolo Macio"
+      ],
+      "metadata": [
+        {
+          "label": "Rendimento",
+          "value": "6–7 un. (WYDA D10)"
+        },
+        {
+          "label": "Preparo total",
+          "value": "4–6 h"
+        }
+      ],
+      "image": {
+        "src": "images/el-guapo-img-02.webp",
+        "alt": "Massa Base de Focaccia"
+      },
+      "ingredientGroups": [
+        {
+          "id": "focaccia-massa-base-group-0",
+          "title": "Massa — método direto",
+          "ingredients": [
+            {
+              "id": "focaccia-massa-base-ingredient-0-0",
+              "name": "Farinha de trigo",
+              "quantityText": "600g",
+              "detail": "100%",
+              "quantity": {
+                "kind": "amount",
+                "amount": 600,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "600g"
+              }
+            },
+            {
+              "id": "focaccia-massa-base-ingredient-0-1",
+              "name": "Leite integral gelado",
+              "quantityText": "450g",
+              "detail": "75% sobre a farinha",
+              "quantity": {
+                "kind": "amount",
+                "amount": 450,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "450g"
+              }
+            },
+            {
+              "id": "focaccia-massa-base-ingredient-0-2",
+              "name": "Gemas",
+              "quantityText": "3 un.",
+              "detail": "≈54g · 9%",
+              "quantity": {
+                "kind": "amount",
+                "amount": 3,
+                "unit": "un",
+                "approximate": false,
+                "annotation": null,
+                "source": "3 un."
+              }
+            },
+            {
+              "id": "focaccia-massa-base-ingredient-0-3",
+              "name": "Açúcar refinado",
+              "quantityText": "42g",
+              "detail": "7%",
+              "quantity": {
+                "kind": "amount",
+                "amount": 42,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "42g"
+              }
+            },
+            {
+              "id": "focaccia-massa-base-ingredient-0-4",
+              "name": "Manteiga sem sal, ponto pomada",
+              "quantityText": "50g",
+              "detail": "8%",
+              "quantity": {
+                "kind": "amount",
+                "amount": 50,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "50g"
+              }
+            },
+            {
+              "id": "focaccia-massa-base-ingredient-0-5",
+              "name": "Azeite de oliva",
+              "quantityText": "30g",
+              "detail": "5%",
+              "quantity": {
+                "kind": "amount",
+                "amount": 30,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "30g"
+              }
+            },
+            {
+              "id": "focaccia-massa-base-ingredient-0-6",
+              "name": "Sal refinado",
+              "quantityText": "12g",
+              "detail": "2%",
+              "quantity": {
+                "kind": "amount",
+                "amount": 12,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "12g"
+              }
+            },
+            {
+              "id": "focaccia-massa-base-ingredient-0-7",
+              "name": "Fermento biológico seco",
+              "quantityText": "2g",
+              "detail": "0,3%",
+              "quantity": {
+                "kind": "amount",
+                "amount": 2,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "2g"
+              }
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "id": "focaccia-massa-base-step-0",
+          "text": "Ingredientes secos. Na tigela da batedeira com gancho, misture os 600g de farinha, o açúcar e o fermento biológico seco. Reserve o sal para a etapa posterior.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "focaccia-massa-base-step-1",
+          "text": "Mistura inicial. Adicione os 450g de leite integral gelado e as gemas. Misture em velocidade baixa por 2 minutos para hidratar a farinha. O glúten se desenvolverá na próxima etapa.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "focaccia-massa-base-step-2",
+          "text": "Desenvolvimento do glúten. Adicione o sal e aumente para velocidade média. Sove por 8 a 10 minutos, até a massa estar lisa, elástica e se descolando das paredes — ainda levemente pegajosa, o que é normal nesta hidratação. Verifique o ponto de véu: estique um pedaço entre os dedos; deve formar membrana fina e translúcida sem rasgar.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "focaccia-massa-base-step-3",
+          "text": "Incorporação da manteiga e azeite. Com a batedeira em velocidade baixa, adicione a manteiga em 3 ou 4 porções, esperando a incorporação completa de cada uma. Em seguida, adicione o azeite em fio fino, aumentando levemente a velocidade. Bata até a massa voltar a ser completamente lisa, elástica e levemente brilhante.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "focaccia-massa-base-step-4",
+          "text": "Primeira fermentação (bulk). Forme uma bola, acomode em tigela untada com azeite, cubra e deixe fermentar em temperatura ambiente por 1h30 a 2h, até dobrar de volume. Para fermentação mais lenta e sabor mais complexo, após 30 minutos em temperatura ambiente, leve à geladeira por 12 a 18h.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "focaccia-massa-base-step-5",
+          "text": "Modelagem. Unte generosamente a assadeira com azeite. Transfira a massa e pressione com as pontas dos dedos até as bordas. Se resistir e encolher, aguarde 10 a 15 minutos e repita — o glúten precisa relaxar. A massa deve cobrir o fundo de forma uniforme.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "focaccia-massa-base-step-6",
+          "text": "Segunda fermentação. Cubra com filme plástico e deixe fermentar por mais 1h a 1h30 em temperatura ambiente, até a massa estar visivelmente levantada e abaulada. Esta etapa é responsável pela leveza e pela abertura do miolo.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "focaccia-massa-base-step-7",
+          "text": "Covinhas e cobertura. Com os dedos bem untados de azeite, faça as covinhas características pressionando com firmeza até quase tocar o fundo da assadeira. Regue toda a superfície com fio generoso de azeite. Aplique a cobertura desejada.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "focaccia-massa-base-step-8",
+          "text": "Assamento. Preaqueça o forno a 220°C por ao menos 20 minutos. Asse por 20 a 25 minutos, até a superfície estar bem dourada e as bordas desprendendo das laterais da forma. Para confirmar o cozimento interno, insira um termômetro no centro: ao atingir 90°C, a estrutura interna está pronta.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        }
+      ]
+    },
+    {
+      "id": "cuca-massa-base",
+      "title": "Cuca com Crumble",
+      "sourceUrl": null,
+      "replacesRecipeIds": [
+        "cuca-crumble-basico"
+      ],
+      "notes": [
+        {
+          "title": "Ponto de fermento e estrutura do miolo",
+          "content": "A segunda fermentação é o fator determinante na textura final. Fermento insuficiente: a farofa afunda durante o assamento, o miolo fica denso e pastoso na base. Fermento excessivo: a rede de glúten colapsa, a cuca murcha no forno. O sinal correto é massa abaulada além da borda da forma, toque macio e marca que retorna devagar ao pressionar."
+        },
+        {
+          "title": "Ovos inteiros + gemas — estrutura e riqueza",
+          "content": "A combinação não é acidental: as claras dos ovos inteiros fornecem estrutura proteica; as gemas adicionais entregam lecitina — emulsificante natural que distribui a gordura da manteiga de forma homogênea, gerando miolo sedoso e de cor dourada intensa. A proporção ovos/gemas explica diretamente a coloração característica da cuca após assada."
+        },
+        {
+          "title": "Farofa: estrutura e variações autorais",
+          "content": "A farofa clássica usa farinha, açúcar e manteiga fria em proporção 2:2:1, trabalhada em migalhas grossas com as pontas dos dedos. Manteiga fria é essencial — derretida cria cobertura pastosa que endurece ao resfriar. Variações El Guapo: canela e cardamomo na farofa; raspas de laranja incorporadas; substituição parcial da farinha por farinha de amêndoas para textura arenosa e aroma tostado."
+        }
+      ],
+      "category": "Cucas",
+      "tags": [
+        "Método direto",
+        "70% hidratação",
+        "Massa Enriquecida",
+        "Baunilha · Raspas Cítricas"
+      ],
+      "metadata": [
+        {
+          "label": "Rendimento",
+          "value": "1 forma 30×40cm ou 2 de 20×30cm"
+        },
+        {
+          "label": "Preparo total",
+          "value": "4–6h (ou 18h c/ cold retard)"
+        }
+      ],
+      "image": {
+        "src": "images/el-guapo-img-03.webp",
+        "alt": "Cuca com Crumble"
+      },
+      "ingredientGroups": [
+        {
+          "id": "cuca-massa-base-group-0",
+          "title": "Massa — método direto",
+          "ingredients": [
+            {
+              "id": "cuca-massa-base-ingredient-0-0",
+              "name": "Farinha de trigo",
+              "quantityText": "600g",
+              "detail": "100%",
+              "quantity": {
+                "kind": "amount",
+                "amount": 600,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "600g"
+              }
+            },
+            {
+              "id": "cuca-massa-base-ingredient-0-1",
+              "name": "Leite integral",
+              "quantityText": "420g",
+              "detail": "70% sobre a farinha",
+              "quantity": {
+                "kind": "amount",
+                "amount": 420,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "420g"
+              }
+            },
+            {
+              "id": "cuca-massa-base-ingredient-0-2",
+              "name": "Ovos inteiros",
+              "quantityText": "100g",
+              "detail": "16,7% · ~2 ovos grandes",
+              "quantity": {
+                "kind": "amount",
+                "amount": 100,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "100g"
+              }
+            },
+            {
+              "id": "cuca-massa-base-ingredient-0-3",
+              "name": "Gemas",
+              "quantityText": "36g",
+              "detail": "6% · ~2 gemas",
+              "quantity": {
+                "kind": "amount",
+                "amount": 36,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "36g"
+              }
+            },
+            {
+              "id": "cuca-massa-base-ingredient-0-4",
+              "name": "Açúcar refinado",
+              "quantityText": "120g",
+              "detail": "20%",
+              "quantity": {
+                "kind": "amount",
+                "amount": 120,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "120g"
+              }
+            },
+            {
+              "id": "cuca-massa-base-ingredient-0-5",
+              "name": "Manteiga sem sal, ponto pomada",
+              "quantityText": "90g",
+              "detail": "15%",
+              "quantity": {
+                "kind": "amount",
+                "amount": 90,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "90g"
+              }
+            },
+            {
+              "id": "cuca-massa-base-ingredient-0-6",
+              "name": "Fermento biológico seco",
+              "quantityText": "7g",
+              "detail": "1,17%",
+              "quantity": {
+                "kind": "amount",
+                "amount": 7,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "7g"
+              }
+            },
+            {
+              "id": "cuca-massa-base-ingredient-0-7",
+              "name": "Sal",
+              "quantityText": "8g",
+              "detail": "1,33%",
+              "quantity": {
+                "kind": "amount",
+                "amount": 8,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "8g"
+              }
+            },
+            {
+              "id": "cuca-massa-base-ingredient-0-8",
+              "name": "Baunilha",
+              "quantityText": "8–10g",
+              "detail": "1,3–1,7%",
+              "quantity": {
+                "kind": "range",
+                "amount": 8,
+                "max": 10,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "8–10g"
+              }
+            },
+            {
+              "id": "cuca-massa-base-ingredient-0-9",
+              "name": "Raspas de limão ou laranja",
+              "quantityText": "q.b.",
+              "detail": null,
+              "quantity": {
+                "kind": "text",
+                "text": "q.b."
+              }
+            }
+          ]
+        },
+        {
+          "id": "cuca-massa-base-group-1",
+          "title": "Farofa",
+          "ingredients": [
+            {
+              "id": "cuca-massa-base-ingredient-1-0",
+              "name": "Farinha de trigo",
+              "quantityText": "150g",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 150,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "150g"
+              }
+            },
+            {
+              "id": "cuca-massa-base-ingredient-1-1",
+              "name": "Açúcar",
+              "quantityText": "150g",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 150,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "150g"
+              }
+            },
+            {
+              "id": "cuca-massa-base-ingredient-1-2",
+              "name": "Manteiga",
+              "quantityText": "75g",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 75,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "75g"
+              }
+            }
+          ]
+        },
+        {
+          "id": "cuca-massa-base-group-2",
+          "title": "Aromáticos",
+          "ingredients": [
+            {
+              "id": "cuca-massa-base-ingredient-2-0",
+              "name": "Raspas de cítricos",
+              "quantityText": "a gosto",
+              "detail": null,
+              "quantity": {
+                "kind": "text",
+                "text": "a gosto"
+              }
+            },
+            {
+              "id": "cuca-massa-base-ingredient-2-1",
+              "name": "Especiarias",
+              "quantityText": "a gosto",
+              "detail": null,
+              "quantity": {
+                "kind": "text",
+                "text": "a gosto"
+              }
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "id": "cuca-massa-base-step-0",
+          "text": "Preparação dos secos. Na tigela da batedeira com gancho, combine os 600g de farinha de trigo, o açúcar e o fermento biológico seco. Misture brevemente para distribuir. Reserve o sal para a etapa posterior.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "cuca-massa-base-step-1",
+          "text": "Blend dos líquidos. Em tigela à parte, misture os 420g de leite, os ovos inteiros levemente batidos, as gemas, a baunilha e as raspas cítricas. Homogeneize e incorpore aos secos na etapa seguinte.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "cuca-massa-base-step-2",
+          "text": "Desenvolvimento do glúten. Adicione o blend de líquidos aos secos na batedeira. Misture em velocidade baixa por 2 a 3 minutos até a farinha hidratar completamente. Adicione o sal e aumente para velocidade média. Sove por 8 a 10 minutos, até a massa estar lisa, elástica e se descolando das paredes da tigela. Por ser altamente enriquecida, o glúten demora mais — respeite o tempo e faça o teste do véu ao final.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "cuca-massa-base-step-3",
+          "text": "Incorporação da manteiga. Reduza para velocidade baixa e adicione a manteiga em ponto pomada em 3 ou 4 porções, aguardando absorção completa de cada adição antes da próxima. A massa pode parecer que se desintegra nos primeiros momentos — é esperado. Após toda a manteiga absorvida, bata até a massa estar completamente lisa, sedosa e com leve brilho característico das massas de alto enriquecimento.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "cuca-massa-base-step-4",
+          "text": "Primeira fermentação. Forme uma bola, transfira para tigela levemente untada com manteiga e cubra com filme plástico. Fermente em temperatura ambiente por 1h30 a 2h, até dobrar de volume. Para sabor mais profundo e miolo de textura superior: após 20 minutos em temperatura ambiente, leve à geladeira por 12 a 18h (cold retard) — o frio retarda o fermento e ativa as enzimas que desenvolvem complexidade aromática.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "cuca-massa-base-step-5",
+          "text": "Secos. Combine a farinha de trigo, o açúcar, as raspas de cítricos e as especiarias a gosto em uma tigela. Misture até distribuir os aromáticos.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "cuca-massa-base-step-6",
+          "text": "Incorporação da manteiga fria. Adicione os cubos de manteiga gelada à mistura de secos. Com as pontas dos dedos — nunca as palmas, que transferem calor — pressione e esfregue a manteiga contra os secos em movimentos rápidos. O objetivo é uma farofa com migalhas de tamanhos variados: de pedaços do tamanho de uma ervilha a fragmentos mais finos. Não homogeneize demais — a irregularidade é a essência da textura da cuca.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "cuca-massa-base-step-7",
+          "text": "Ponto ideal. A farofa pronta não deve parecer areia fina nem ter pedaços de manteiga intactos e visíveis. O teste: ao apertar um punhado com força e soltar, ela mantém a forma por um segundo antes de desmanchar. Esse comportamento indica que a manteiga está distribuída corretamente — nem massuda nem solta demais para cobrir a massa fermentada.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "cuca-massa-base-step-8",
+          "text": "Refrigeração. Transfira para tigela coberta com filme plástico e leve à geladeira por no mínimo 30 minutos antes de usar. Fria, a farofa distribui melhor sobre a massa fermentada sem afundar durante a segunda fermentação ou nos primeiros minutos no forno. Pode ser preparado com até 3 dias de antecedência ou congelado cru por até 3 meses — aplique direto do freezer, sem descongelar.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "cuca-massa-base-step-9",
+          "text": "Modelagem na forma. Unte e enfarinhe a forma com esmero. Desgaseifique suavemente a massa na bancada e transfira para a forma. Com os dedos levemente untados, pressione do centro em direção às bordas até cobrir toda a superfície de forma uniforme. Se a massa retrair persistentemente, cubra e aguarde 10 a 15 minutos para o glúten relaxar; retome sem forçar.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "cuca-massa-base-step-10",
+          "text": "Segunda fermentação. Cubra com pano úmido ou filme levemente untado. Deixe fermentar em temperatura ambiente por 45 a 60 minutos, até a massa estar visivelmente abaulada, macia ao toque e ultrapassando levemente a borda da forma. O sinal de ponto ideal: ao pressionar com o dedo, a marca retorna devagar — a estrutura está firme o suficiente para suportar a farofa sem colapsar.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "cuca-massa-base-step-11",
+          "text": "Farofa e assamento. Distribua a farofa generosamente sobre a massa fermentada, pressionando levíssimamente para aderir sem compactar a estrutura. Asse em forno preaquecido a 180°C por 25 a 35 minutos, até a farofa estar uniformemente dourada. O termômetro deve marcar 88–92°C no centro da massa. Deixe repousar 15 minutos antes de desenformar — o miolo precisa de tempo para firmar.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        }
+      ]
+    },
+    {
+      "id": "bolo-pao-de-lo-padrao",
+      "title": "Pão de Ló Padrão",
+      "sourceUrl": null,
+      "notes": [
+        {
+          "title": "O vinagre como estabilizador",
+          "content": "O ácido acético do vinagre desnatura parcialmente as proteínas do ovo (ovalbumina), formando ligações mais estáveis entre as bolhas de ar incorporadas durante a batida. O resultado prático: a espuma tolera melhor o calor do forno sem colapsar nos primeiros minutos de assamento, gerando um miolo mais uniforme e com alveolagem mais regular."
+        },
+        {
+          "title": "Físico vs. químico — dois fermenos em um",
+          "content": "Este pão de ló usa duas fontes de crescimento simultâneas: o crescimento físico (ar incorporado nos ovos batidos, que se expande com o calor) e o crescimento químico (CO₂ liberado pelo fermento em pó ao reagir com a umidade e o calor). A combinação gera miolo mais leve, macio e com alvéolos menores e uniformes do que qualquer um dos dois métodos isolados."
+        },
+        {
+          "title": "Por que não bater após a farinha",
+          "content": "O glúten se desenvolve por agitação mecânica. Em um pão de ló, glúten desenvolvido é inimigo — cria estrutura rígida que resiste à expansão das bolhas e gera miolo borrachento. A incorporação dos secos com espátula e movimento suave mantém as cadeias de glúten curtas, garantindo textura leve e macia após assado."
+        }
+      ],
+      "category": "Bolos",
+      "tags": [
+        "Massa Aerada",
+        "Baunilha · Vinagre Estabilizador",
+        "Ponto de Fita",
+        "Base Universal"
+      ],
+      "metadata": [
+        {
+          "label": "Rendimento",
+          "value": "2 discos Ø20cm ou 1 forma 20×30cm"
+        },
+        {
+          "label": "Forno",
+          "value": "180°C · 25–30 min"
+        }
+      ],
+      "image": {
+        "src": "images/el-guapo-img-05.webp",
+        "alt": "Pão de Ló Padrão"
+      },
+      "ingredientGroups": [
+        {
+          "id": "bolo-pao-de-lo-padrao-group-0",
+          "title": "Fórmula (100% = 150g farinha)",
+          "ingredients": [
+            {
+              "id": "bolo-pao-de-lo-padrao-ingredient-0-0",
+              "name": "Farinha de trigo",
+              "quantityText": "150g",
+              "detail": "100%",
+              "quantity": {
+                "kind": "amount",
+                "amount": 150,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "150g"
+              }
+            },
+            {
+              "id": "bolo-pao-de-lo-padrao-ingredient-0-1",
+              "name": "Açúcar refinado",
+              "quantityText": "200g",
+              "detail": "133,3%",
+              "quantity": {
+                "kind": "amount",
+                "amount": 200,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "200g"
+              }
+            },
+            {
+              "id": "bolo-pao-de-lo-padrao-ingredient-0-2",
+              "name": "Ovos inteiros",
+              "quantityText": "200g",
+              "detail": "133,3% · ~4 ovos grandes",
+              "quantity": {
+                "kind": "amount",
+                "amount": 200,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "200g"
+              }
+            },
+            {
+              "id": "bolo-pao-de-lo-padrao-ingredient-0-3",
+              "name": "Leite integral",
+              "quantityText": "62g",
+              "detail": "41,3% · conv. de 60ml",
+              "quantity": {
+                "kind": "amount",
+                "amount": 62,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "62g"
+              }
+            },
+            {
+              "id": "bolo-pao-de-lo-padrao-ingredient-0-4",
+              "name": "Óleo de soja",
+              "quantityText": "46g",
+              "detail": "30,7% · conv. de 50ml",
+              "quantity": {
+                "kind": "amount",
+                "amount": 46,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "46g"
+              }
+            },
+            {
+              "id": "bolo-pao-de-lo-padrao-ingredient-0-5",
+              "name": "Fermento em pó químico",
+              "quantityText": "12g",
+              "detail": "8% · 1 col. sopa",
+              "quantity": {
+                "kind": "amount",
+                "amount": 12,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "12g"
+              }
+            },
+            {
+              "id": "bolo-pao-de-lo-padrao-ingredient-0-6",
+              "name": "Vinagre de álcool ou vinho branco",
+              "quantityText": "~15g",
+              "detail": "estabilizador · 1 col. sopa",
+              "quantity": {
+                "kind": "amount",
+                "amount": 15,
+                "unit": "g",
+                "approximate": true,
+                "annotation": null,
+                "source": "~15g"
+              }
+            },
+            {
+              "id": "bolo-pao-de-lo-padrao-ingredient-0-7",
+              "name": "Essência de baunilha",
+              "quantityText": "~5g",
+              "detail": "1 col. chá",
+              "quantity": {
+                "kind": "amount",
+                "amount": 5,
+                "unit": "g",
+                "approximate": true,
+                "annotation": null,
+                "source": "~5g"
+              }
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "id": "bolo-pao-de-lo-padrao-step-0",
+          "text": "Preparação dos secos. Peneire a farinha de trigo com o fermento em pó em tigela separada e reserve. Peneirar juntos garante que o fermento esteja distribuído de forma homogênea na farinha — caso contrário, áreas de concentração criam bolsas de CO₂ que deformam o miolo durante o assamento.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-pao-de-lo-padrao-step-1",
+          "text": "Ponto de fita — a base da estrutura. Na tigela da batedeira com globo, bata os ovos inteiros com o açúcar refinado e a baunilha em velocidade alta por 5 a 8 minutos, até a mistura atingir o ponto de fita: pálida, quase branca, triplicada em volume, e ao levantar o globo a massa cai em fita que mantém o traço por 3 a 4 segundos antes de se dissolver. Essa espuma de ovos é o único agente de crescimento físico da receita — trate com cuidado a partir daqui.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-pao-de-lo-padrao-step-2",
+          "text": "Vinagre — estabilização da espuma. Com a batedeira ainda em velocidade alta, adicione o vinagre e bata por mais 30 segundos. O ácido do vinagre reage com as proteínas do ovo, tornando a espuma mais estável e resistente ao colapso durante as próximas etapas. O sabor de vinagre desaparece completamente no forno — não há risco sensorial.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-pao-de-lo-padrao-step-3",
+          "text": "Incorporação dos líquidos. Reduza para velocidade mínima. Com o leite e o óleo pré-misturados em copo separado, adicione em fio fino e contínuo enquanto a batedeira trabalha. Em velocidade baixa, os líquidos se integram sem colapsar a estrutura aerada. Não bata mais do que o necessário para homogeneizar.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-pao-de-lo-padrao-step-4",
+          "text": "Dobrar os secos. Desligue a batedeira. Adicione a farinha peneirada em 2 adições, dobrando com espátula de silicone com movimentos lentos de baixo para cima — nunca circular, nunca com fouet. Pare imediatamente ao não ver mais manchas de farinha. Excesso de mistura desenvolve glúten, tornando o miolo borrachento. A ligeira variação na textura é intencional e correta.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-pao-de-lo-padrao-step-5",
+          "text": "Assar. Distribua a massa em formas untadas e enfarinhadas (ou forradas com papel manteiga). Leve ao forno preaquecido a 180°C. Não abra o forno nos primeiros 20 minutos — a variação de temperatura colapsa a estrutura física de espuma antes do glúten e do amido fixarem o miolo. Teste com palito a partir de 25 minutos; deve sair seco. Termômetro: 93–96°C no centro.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-pao-de-lo-padrao-step-6",
+          "text": "Resfriamento e corte. Retire do forno e deixe repousar 10 minutos na forma antes de desenformar. Transfira para grade e aguarde esfriar completamente — o corte quente comprime o miolo e gera superfícies irregulares que comprometem a montagem das camadas. Para corte limpo e uniforme, refrigere por 2h antes de fatiar com fio dental ou faca de serra.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        }
+      ]
+    },
+    {
+      "id": "bolo-cenoura-gabriela",
+      "title": "Bolo de Cenoura da Gabriela",
+      "sourceUrl": null,
+      "notes": [
+        {
+          "title": "Cenoura crua no liquidificador",
+          "content": "O processamento da cenoura crua com os líquidos cria uma emulsão estável e mantém a umidade no miolo. Não bata demais além do ponto homogêneo; excesso de ar pode gerar uma textura pouco uniforme e fissuras."
+        },
+        {
+          "title": "Óleo como fonte de suculência",
+          "content": "O óleo vegetal preserva a maciez do bolo de cenoura melhor que manteiga, porque não solidifica completamente ao esfriar. Use uma porção equilibrada para evitar massa gordurosa e garantir boa estrutura após o assado."
+        },
+        {
+          "title": "Casquinha vs. cremosa",
+          "content": "A cobertura de casquinha forma uma película brilhante e ligeiramente crocante, ideal para quem gosta de contraste de texturas. A versão cremosa deve ser aplicada morna, não quente, para não amolecer o bolo e para fixar com acabamento sedoso."
+        }
+      ],
+      "category": "Bolos",
+      "tags": [
+        "Cenoura + Óleo",
+        "Cobertura Casquinha ou Cremosa",
+        "Massa Úmida",
+        "Forno 180°C"
+      ],
+      "metadata": [
+        {
+          "label": "Rendimento",
+          "value": "1 bolo médio / 10–12 fatias"
+        },
+        {
+          "label": "Forno",
+          "value": "180°C · 40–50 min"
+        }
+      ],
+      "image": {
+        "src": "images/bolo-cenoura-gabriela.jpeg",
+        "alt": "Bolo de Cenoura da Gabriela"
+      },
+      "ingredientGroups": [
+        {
+          "id": "bolo-cenoura-gabriela-group-0",
+          "title": "Massa",
+          "ingredients": [
+            {
+              "id": "bolo-cenoura-gabriela-ingredient-0-0",
+              "name": "Cenouras picadas",
+              "quantityText": "400g",
+              "detail": "4 unidades médias",
+              "quantity": {
+                "kind": "amount",
+                "amount": 400,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "400g"
+              }
+            },
+            {
+              "id": "bolo-cenoura-gabriela-ingredient-0-1",
+              "name": "Óleo vegetal",
+              "quantityText": "200ml",
+              "detail": "1 xícara",
+              "quantity": {
+                "kind": "amount",
+                "amount": 200,
+                "unit": "ml",
+                "approximate": false,
+                "annotation": null,
+                "source": "200ml"
+              }
+            },
+            {
+              "id": "bolo-cenoura-gabriela-ingredient-0-2",
+              "name": "Ovos inteiros",
+              "quantityText": "150g",
+              "detail": "3 unidades",
+              "quantity": {
+                "kind": "amount",
+                "amount": 150,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "150g"
+              }
+            },
+            {
+              "id": "bolo-cenoura-gabriela-ingredient-0-3",
+              "name": "Açúcar refinado",
+              "quantityText": "400g",
+              "detail": "2 xícaras",
+              "quantity": {
+                "kind": "amount",
+                "amount": 400,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "400g"
+              }
+            },
+            {
+              "id": "bolo-cenoura-gabriela-ingredient-0-4",
+              "name": "Farinha de trigo",
+              "quantityText": "330g",
+              "detail": "2½ xícaras",
+              "quantity": {
+                "kind": "amount",
+                "amount": 330,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "330g"
+              }
+            },
+            {
+              "id": "bolo-cenoura-gabriela-ingredient-0-5",
+              "name": "Fermento em pó químico",
+              "quantityText": "12g",
+              "detail": "1 col. sopa",
+              "quantity": {
+                "kind": "amount",
+                "amount": 12,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "12g"
+              }
+            }
+          ]
+        },
+        {
+          "id": "bolo-cenoura-gabriela-group-1",
+          "title": "Cobertura Casquinha",
+          "ingredients": [
+            {
+              "id": "bolo-cenoura-gabriela-ingredient-1-0",
+              "name": "Açúcar refinado",
+              "quantityText": "1 xícara",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 1,
+                "unit": "xícara",
+                "approximate": false,
+                "annotation": null,
+                "source": "1 xícara"
+              }
+            },
+            {
+              "id": "bolo-cenoura-gabriela-ingredient-1-1",
+              "name": "Cacau em pó 50%",
+              "quantityText": "1 xícara",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 1,
+                "unit": "xícara",
+                "approximate": false,
+                "annotation": null,
+                "source": "1 xícara"
+              }
+            },
+            {
+              "id": "bolo-cenoura-gabriela-ingredient-1-2",
+              "name": "Leite integral",
+              "quantityText": "6 col. sopa",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 6,
+                "unit": "col. sopa",
+                "approximate": false,
+                "annotation": null,
+                "source": "6 col. sopa"
+              }
+            },
+            {
+              "id": "bolo-cenoura-gabriela-ingredient-1-3",
+              "name": "Manteiga sem sal",
+              "quantityText": "1 col. sopa",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 1,
+                "unit": "col. sopa",
+                "approximate": false,
+                "annotation": null,
+                "source": "1 col. sopa"
+              }
+            }
+          ]
+        },
+        {
+          "id": "bolo-cenoura-gabriela-group-2",
+          "title": "Cobertura Cremosa",
+          "ingredients": [
+            {
+              "id": "bolo-cenoura-gabriela-ingredient-2-0",
+              "name": "Manteiga sem sal",
+              "quantityText": "100g",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 100,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "100g"
+              }
+            },
+            {
+              "id": "bolo-cenoura-gabriela-ingredient-2-1",
+              "name": "Açúcar refinado",
+              "quantityText": "1½ xícara",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 1.5,
+                "unit": "xícara",
+                "approximate": false,
+                "annotation": null,
+                "source": "1½ xícara"
+              }
+            },
+            {
+              "id": "bolo-cenoura-gabriela-ingredient-2-2",
+              "name": "Cacau em pó 50%",
+              "quantityText": "1 xícara",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 1,
+                "unit": "xícara",
+                "approximate": false,
+                "annotation": null,
+                "source": "1 xícara"
+              }
+            },
+            {
+              "id": "bolo-cenoura-gabriela-ingredient-2-3",
+              "name": "Leite integral",
+              "quantityText": "3 xícaras",
+              "detail": null,
+              "quantity": {
+                "kind": "text",
+                "text": "3 xícaras"
+              }
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "id": "bolo-cenoura-gabriela-step-0",
+          "text": "Preaqueça o forno a 180°C e prepare uma forma média. Unte com manteiga e polvilhe farinha, ou forre com papel manteiga. Peneire a farinha e reserve para incorporar ao final.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-cenoura-gabriela-step-1",
+          "text": "Bata a massa líquida. No liquidificador, processe as cenouras picadas, os ovos, o óleo e o açúcar até obter mistura homogênea. A batida rápida extrai suco da cenoura e cria massa mais uniforme.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-cenoura-gabriela-step-2",
+          "text": "Incorpore a farinha. Transfira a mistura para uma tigela grande e adicione a farinha peneirada em duas etapas. Misture com espátula ou fouet delicadamente até a massa ficar uniforme.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-cenoura-gabriela-step-3",
+          "text": "Finalize com o fermento. Acrescente o fermento em pó e mexa apenas para incorporá-lo. Mexer demais ativa o glúten e reduz a maciez característica do bolo de cenoura.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-cenoura-gabriela-step-4",
+          "text": "Asse o bolo. Despeje a massa na forma preparada e leve ao forno preaquecido a 180°C. Asse por 40–50 minutos ou até o palito sair limpo no centro.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-cenoura-gabriela-step-5",
+          "text": "Prepare a cobertura casquinha. Em panela média, misture açúcar, cacau em pó, leite e manteiga. Leve ao fogo baixo, mexendo até começar a borbulhar. Conte 1 minuto e desligue. Despeje sobre o bolo imediatamente e deixe secar por cerca de 1 hora.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-cenoura-gabriela-step-6",
+          "text": "Prepare a cobertura cremosa. Bata a manteiga com o açúcar até ficar homogêneo. Adicione o cacau e o leite em etapas, misturando em fogo baixo até ganhar brilho e consistência cremosa. Aplique morna sobre o bolo para que fixe sem escorrer demais.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        }
+      ]
+    },
+    {
+      "id": "bolo-pao-de-lo-chocolate",
+      "title": "Pão de Ló de Chocolate",
+      "sourceUrl": null,
+      "notes": [
+        {
+          "title": "Água no lugar do leite — por que funciona melhor",
+          "content": "A caseína do leite forma ligações adicionais com o glúten, tornando o miolo ligeiramente mais firme. Em um pão de ló de chocolate, onde o cacau já contribui com gordura (manteiga de cacau) e fibras que endurecem a textura, usar água no lugar do leite compensa exatamente esse fator — a ausência de proteínas lácteas mantém o miolo macio e sedoso mesmo com o cacau."
+        },
+        {
+          "title": "Cacau puro vs. achocolatado",
+          "content": "Apenas cacau 100% — sem açúcar, sem leite, sem gordura vegetal adicionada. Achocolatado desequilibra a fórmula: adiciona açúcar não previsto, reduz a intensidade e compromete a coloração escura característica. O amargor do cacau puro é contrabalançado pelos 200g de açúcar e pela estrutura aerada dos ovos."
+        },
+        {
+          "title": "Bolo Prestígio — montagem completa",
+          "content": "Este pão de ló é a base do Bolo Prestígio El Guapo. Montagem: disco de pão de ló de chocolate → calda de chocolate leve (opcional) → camada generosa de Brigadeiro El Guapo → disco → camada de Recheio de Coco → disco → cobertura de ganache ou brigadeiro. Refrigerar a torta montada por 4h antes de servir."
+        }
+      ],
+      "category": "Bolos",
+      "tags": [
+        "Cacau + Água (sem lactose)",
+        "Massa Aerada · Perfil Intenso",
+        "Ponto de Fita",
+        "Base do Bolo Prestígio"
+      ],
+      "metadata": [
+        {
+          "label": "Rendimento",
+          "value": "2 discos Ø20cm ou 1 forma 20×30cm"
+        },
+        {
+          "label": "Forno",
+          "value": "180°C · 25–30 min"
+        }
+      ],
+      "image": {
+        "src": "images/el-guapo-img-06.webp",
+        "alt": "Pão de Ló de Chocolate"
+      },
+      "ingredientGroups": [
+        {
+          "id": "bolo-pao-de-lo-chocolate-group-0",
+          "title": "Fórmula (100% = 130g farinha)",
+          "ingredients": [
+            {
+              "id": "bolo-pao-de-lo-chocolate-ingredient-0-0",
+              "name": "Farinha de trigo",
+              "quantityText": "130g",
+              "detail": "100%",
+              "quantity": {
+                "kind": "amount",
+                "amount": 130,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "130g"
+              }
+            },
+            {
+              "id": "bolo-pao-de-lo-chocolate-ingredient-0-1",
+              "name": "Açúcar refinado",
+              "quantityText": "200g",
+              "detail": "153,8%",
+              "quantity": {
+                "kind": "amount",
+                "amount": 200,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "200g"
+              }
+            },
+            {
+              "id": "bolo-pao-de-lo-chocolate-ingredient-0-2",
+              "name": "Ovos inteiros",
+              "quantityText": "200g",
+              "detail": "153,8% · ~4 ovos grandes",
+              "quantity": {
+                "kind": "amount",
+                "amount": 200,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "200g"
+              }
+            },
+            {
+              "id": "bolo-pao-de-lo-chocolate-ingredient-0-3",
+              "name": "Água",
+              "quantityText": "60g",
+              "detail": "46,2% · sem lactose",
+              "quantity": {
+                "kind": "amount",
+                "amount": 60,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "60g"
+              }
+            },
+            {
+              "id": "bolo-pao-de-lo-chocolate-ingredient-0-4",
+              "name": "Óleo de soja",
+              "quantityText": "60g",
+              "detail": "46,2%",
+              "quantity": {
+                "kind": "amount",
+                "amount": 60,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "60g"
+              }
+            },
+            {
+              "id": "bolo-pao-de-lo-chocolate-ingredient-0-5",
+              "name": "Cacau em pó 100%",
+              "quantityText": "20g",
+              "detail": "15,4%",
+              "quantity": {
+                "kind": "amount",
+                "amount": 20,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "20g"
+              }
+            },
+            {
+              "id": "bolo-pao-de-lo-chocolate-ingredient-0-6",
+              "name": "Fermento em pó químico",
+              "quantityText": "12g",
+              "detail": "9,2% · 1 col. sopa",
+              "quantity": {
+                "kind": "amount",
+                "amount": 12,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "12g"
+              }
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "id": "bolo-pao-de-lo-chocolate-step-0",
+          "text": "Secos com cacau. Peneire a farinha de trigo, o cacau em pó e o fermento químico juntos em tigela separada. O cacau deve ser peneirado obrigatoriamente — sua tendência a formar grumos provoca manchas escuras irregulares no miolo se incorporado sem peneirar. Reserve.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-pao-de-lo-chocolate-step-1",
+          "text": "Ponto de fita. Na batedeira com globo, bata os ovos inteiros com o açúcar refinado em velocidade alta por 5 a 8 minutos até atingir ponto de fita: massa pálida, quase três vezes o volume inicial, traço que persiste por 3 a 4 segundos ao cair do globo. Sem leite ou manteiga nesta receita, os ovos são a única fonte de estrutura e umidade — o ponto de fita define a qualidade do miolo final.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-pao-de-lo-chocolate-step-2",
+          "text": "Líquidos. Reduza para velocidade mínima. Com a água e o óleo pré-misturados, adicione em fio fino e contínuo. A água (no lugar do leite) é escolha deliberada: sem caseínas, o glúten tem menos estrutura proteica para se desenvolver, resultando em miolo mais macio e sedoso — a textura ideal para um pão de ló que será cortado e recheado.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-pao-de-lo-chocolate-step-3",
+          "text": "Dobrar os secos com cacau. Desligue a batedeira. Adicione a farinha+cacau+fermento peneirados em 2 adições com espátula, dobrando de baixo para cima com delicadeza. A mistura vai escurecer rapidamente ao entrar o cacau — é o indicativo visual de que está sendo incorporado de forma homogênea. Pare assim que não houver mais traços de pó claro.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-pao-de-lo-chocolate-step-4",
+          "text": "Forma e forno. Divida a massa nas formas untadas e polvilhadas com cacau em pó — nunca farinha branca, que deixa borda esbranquiçada na lateral do disco. Leve ao forno preaquecido a 180°C por 25 a 30 minutos. Não abra nos primeiros 20 minutos. Teste com palito: seco ao centro. Termômetro: 93–96°C.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-pao-de-lo-chocolate-step-5",
+          "text": "Resfriamento. Aguarde 10 minutos na forma, desenformar na grade e resfriar completamente antes de manusear. Para o Bolo Prestígio, refrigere os discos por 2h antes de montar — o disco frio absorve a calda mais lentamente, distribuindo a umidade de forma uniforme pelo miolo sem encharcar.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        }
+      ]
+    },
+    {
+      "id": "bolo-brigadeiro-el-guapo",
+      "title": "Brigadeiro El Guapo",
+      "sourceUrl": null,
+      "notes": [
+        {
+          "title": "Chocolate + cacau — dupla de intensidade",
+          "content": "O chocolate meio amargo em barra entrega gordura (manteiga de cacau), que dá cremosidade e brilho, além de sabor. O cacau 70% em pó, adicionado separadamente, aprofunda a intensidade sem aumentar a gordura — sua concentração de compostos fenólicos é maior do que no chocolate em barra. A combinação produz um brigadeiro com perfil complexo: redondo, brilhante e profundamente achocolatado."
+        },
+        {
+          "title": "Ponto de recheio vs. ponto de enrolar",
+          "content": "O ponto de recheio (sulco que fecha lentamente) é 2 a 3 minutos antes do ponto de enrolar (desgruda completamente, massa seca). O creme de leite adicionado ao final recua ainda mais a consistência. Resultado: frio, o recheio é firme o suficiente para suportar o peso das camadas do bolo, mas macio o suficiente para não rachar ao cortar a fatia."
+        },
+        {
+          "title": "Bolo Prestígio — papel deste recheio",
+          "content": "No Bolo Prestígio El Guapo, este brigadeiro atua como a camada de sabor intenso que ancora a experiência: contrasta com a leveza do pão de ló de chocolate e complementa a doçura úmida do recheio de coco. A sequência de montagem ideal é: disco → brigadeiro → disco → coco → disco, garantindo que o corte revele camadas alternadas de chocolate e coco."
+        }
+      ],
+      "category": "Bolos",
+      "tags": [
+        "Recheio de Bolo",
+        "Chocolate Meio Amargo + Cacau 70%",
+        "Ganache-Brigadeiro",
+        "Base do Bolo Prestígio"
+      ],
+      "metadata": [
+        {
+          "label": "Rendimento",
+          "value": "recheio para 1 bolo de 3 camadas Ø20cm"
+        },
+        {
+          "label": "Preparo",
+          "value": "15–20 min + 2h geladeira"
+        }
+      ],
+      "image": {
+        "src": "images/el-guapo-img-07.webp",
+        "alt": "Brigadeiro El Guapo"
+      },
+      "ingredientGroups": [
+        {
+          "id": "bolo-brigadeiro-el-guapo-group-0",
+          "title": "Fórmula",
+          "ingredients": [
+            {
+              "id": "bolo-brigadeiro-el-guapo-ingredient-0-0",
+              "name": "Leite condensado",
+              "quantityText": "395g",
+              "detail": "base adocicada",
+              "quantity": {
+                "kind": "amount",
+                "amount": 395,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "395g"
+              }
+            },
+            {
+              "id": "bolo-brigadeiro-el-guapo-ingredient-0-1",
+              "name": "Creme de leite",
+              "quantityText": "200g",
+              "detail": "cremosidade · ajuste de textura",
+              "quantity": {
+                "kind": "amount",
+                "amount": 200,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "200g"
+              }
+            },
+            {
+              "id": "bolo-brigadeiro-el-guapo-ingredient-0-2",
+              "name": "Chocolate meio amargo em barra",
+              "quantityText": "80g",
+              "detail": "sabor + consistência",
+              "quantity": {
+                "kind": "amount",
+                "amount": 80,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "80g"
+              }
+            },
+            {
+              "id": "bolo-brigadeiro-el-guapo-ingredient-0-3",
+              "name": "Cacau em pó 70%",
+              "quantityText": "~8g",
+              "detail": "intensidade · 1 col. sopa",
+              "quantity": {
+                "kind": "amount",
+                "amount": 8,
+                "unit": "g",
+                "approximate": true,
+                "annotation": null,
+                "source": "~8g"
+              }
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "id": "bolo-brigadeiro-el-guapo-step-0",
+          "text": "Dissolver o cacau a frio. Em panela de fundo grosso fora do fogo, misture o leite condensado com o cacau em pó, mexendo com espátula até o cacau estar completamente dissolvido e sem grumos. Dissolver a frio é essencial — cacau em pó adicionado em leite condensado quente gruda no fundo da panela antes de se integrar, formando pontos pretos amargos no recheio final.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-brigadeiro-el-guapo-step-1",
+          "text": "Adicionar o chocolate. Pique o chocolate meio amargo em pedaços pequenos e uniformes e adicione à mistura de leite condensado e cacau. Leve ao fogo médio-baixo, mexendo constantemente com espátula de silicone — raspe o fundo e as laterais da panela de forma contínua para evitar queimar o açúcar do leite condensado, que carameliza rapidamente em fogo alto.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-brigadeiro-el-guapo-step-2",
+          "text": "Ponto de recheio. Cozinhe mexendo sempre por 8 a 12 minutos até atingir o ponto de recheio de bolo: a massa começa a desgrudar do fundo formando um sulco limpo que fecha lentamente. É um ponto mais mole que o brigadeiro de enrolar — a consistência deve lembrar uma ganache macia a quente. Ao esfriar e refrigerar, firma consideravelmente.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-brigadeiro-el-guapo-step-3",
+          "text": "Creme de leite e finalização. Retire do fogo. Adicione o creme de leite e misture vigorosamente até incorporar completamente — o creme de leite quente se integra sem talhar. Ele ajusta a consistência final do recheio: mais creme = mais mole e cremoso; menos = mais firme e denso. Cubra com filme plástico em contato com a superfície para evitar película.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-brigadeiro-el-guapo-step-4",
+          "text": "Resfriamento e uso. Deixe esfriar completamente em temperatura ambiente e refrigere por no mínimo 2 horas antes de usar. Frio, o brigadeiro firma e ganha consistência de recheio cremoso que não escorrega entre as camadas do bolo. Para consistência máxima de corte, refrigere o bolo montado por 4 horas após recheio.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        }
+      ]
+    },
+    {
+      "id": "bolo-pao-de-mel",
+      "title": "Bolo Pão de Mel",
+      "sourceUrl": "https://heuller.github.io/el-guapooo/",
+      "notes": [],
+      "category": "Bolos",
+      "tags": [
+        "Tradição e Sabor",
+        "Massa de mel e especiarias",
+        "Recheio de doce de leite",
+        "Cobertura de chocolate",
+        "Úmido, macio e perfumado"
+      ],
+      "metadata": [
+        {
+          "label": "Rendimento",
+          "value": "1 bolo estruturado"
+        },
+        {
+          "label": "Categoria",
+          "value": "Bolos"
+        }
+      ],
+      "image": {
+        "src": "images/bolo-pao-de-mel.jpg",
+        "alt": "Bolo Pão de Mel"
+      },
+      "ingredientGroups": [
+        {
+          "id": "bolo-pao-de-mel-group-0",
+          "title": "Massa (Pão de Ló Especiarias)",
+          "ingredients": [
+            {
+              "id": "bolo-pao-de-mel-ingredient-0-0",
+              "name": "Ovos",
+              "quantityText": "4 un.",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 4,
+                "unit": "un",
+                "approximate": false,
+                "annotation": null,
+                "source": "4 un."
+              }
+            },
+            {
+              "id": "bolo-pao-de-mel-ingredient-0-1",
+              "name": "Açúcar",
+              "quantityText": "200g",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 200,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "200g"
+              }
+            },
+            {
+              "id": "bolo-pao-de-mel-ingredient-0-2",
+              "name": "Farinha de trigo",
+              "quantityText": "140g",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 140,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "140g"
+              }
+            },
+            {
+              "id": "bolo-pao-de-mel-ingredient-0-3",
+              "name": "Mel",
+              "quantityText": "60g",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 60,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "60g"
+              }
+            },
+            {
+              "id": "bolo-pao-de-mel-ingredient-0-4",
+              "name": "Óleo",
+              "quantityText": "65ml",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 65,
+                "unit": "ml",
+                "approximate": false,
+                "annotation": null,
+                "source": "65ml"
+              }
+            },
+            {
+              "id": "bolo-pao-de-mel-ingredient-0-5",
+              "name": "Água quente",
+              "quantityText": "60ml",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 60,
+                "unit": "ml",
+                "approximate": false,
+                "annotation": null,
+                "source": "60ml"
+              }
+            },
+            {
+              "id": "bolo-pao-de-mel-ingredient-0-6",
+              "name": "Cacau em pó",
+              "quantityText": "10g",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 10,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "10g"
+              }
+            },
+            {
+              "id": "bolo-pao-de-mel-ingredient-0-7",
+              "name": "Canela em pó",
+              "quantityText": "2 col. café",
+              "detail": null,
+              "quantity": {
+                "kind": "text",
+                "text": "2 col. café"
+              }
+            },
+            {
+              "id": "bolo-pao-de-mel-ingredient-0-8",
+              "name": "Cravo em pó",
+              "quantityText": "1 col. café",
+              "detail": null,
+              "quantity": {
+                "kind": "text",
+                "text": "1 col. café"
+              }
+            },
+            {
+              "id": "bolo-pao-de-mel-ingredient-0-9",
+              "name": "Gengibre em pó (ou noz moscada)",
+              "quantityText": "1 col. café",
+              "detail": null,
+              "quantity": {
+                "kind": "text",
+                "text": "1 col. café"
+              }
+            },
+            {
+              "id": "bolo-pao-de-mel-ingredient-0-10",
+              "name": "Fermento químico para bolos",
+              "quantityText": "1 col. sopa rasa",
+              "detail": null,
+              "quantity": {
+                "kind": "text",
+                "text": "1 col. sopa rasa"
+              }
+            }
+          ]
+        },
+        {
+          "id": "bolo-pao-de-mel-group-1",
+          "title": "Calda de Infusão",
+          "ingredients": [
+            {
+              "id": "bolo-pao-de-mel-ingredient-1-0",
+              "name": "Água",
+              "quantityText": "240ml",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 240,
+                "unit": "ml",
+                "approximate": false,
+                "annotation": null,
+                "source": "240ml"
+              }
+            },
+            {
+              "id": "bolo-pao-de-mel-ingredient-1-1",
+              "name": "Açúcar",
+              "quantityText": "90g",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 90,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "90g"
+              }
+            },
+            {
+              "id": "bolo-pao-de-mel-ingredient-1-2",
+              "name": "Pau de canela",
+              "quantityText": "1 un.",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 1,
+                "unit": "un",
+                "approximate": false,
+                "annotation": null,
+                "source": "1 un."
+              }
+            },
+            {
+              "id": "bolo-pao-de-mel-ingredient-1-3",
+              "name": "Cravos-da-índia",
+              "quantityText": "5 un.",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 5,
+                "unit": "un",
+                "approximate": false,
+                "annotation": null,
+                "source": "5 un."
+              }
+            }
+          ]
+        },
+        {
+          "id": "bolo-pao-de-mel-group-2",
+          "title": "Recheio e Cobertura",
+          "ingredients": [
+            {
+              "id": "bolo-pao-de-mel-ingredient-2-0",
+              "name": "Doce de leite firme (recheio)",
+              "quantityText": "400g",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 400,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "400g"
+              }
+            },
+            {
+              "id": "bolo-pao-de-mel-ingredient-2-1",
+              "name": "Chocolate meio amargo (ganache)",
+              "quantityText": "300g",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 300,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "300g"
+              }
+            },
+            {
+              "id": "bolo-pao-de-mel-ingredient-2-2",
+              "name": "Creme de leite (ganache)",
+              "quantityText": "120g",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 120,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "120g"
+              }
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "id": "bolo-pao-de-mel-step-0",
+          "text": "Calda. Em uma panela, junte a água, o açúcar, a canela e os cravos. Leve ao fogo e deixe ferver até o açúcar dissolver por completo. Desligue, deixe esfriar e coe. Reserve.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-pao-de-mel-step-1",
+          "text": "Massa (Método Espumoso). Na batedeira, bata os ovos com o açúcar até obter um creme claro, fofo e volumoso (ponto de fita).",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-pao-de-mel-step-2",
+          "text": "Emulsão dos Líquidos. À parte, dissolva o mel e o cacau na água quente. Incorpore o óleo a esta mistura.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-pao-de-mel-step-3",
+          "text": "Incorporação. Adicione a mistura de líquidos ao creme de ovos de forma delicada. Peneire a farinha, as especiarias e o fermento. Envolva os ingredientes secos na massa utilizando uma espátula, com movimentos suaves de baixo para cima, para não perder a aeração.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-pao-de-mel-step-4",
+          "text": "Cozimento. Despeje a massa em uma forma untada e leve ao forno preaquecido a 180 °C por aproximadamente 35 a 40 minutos (faça o teste do palito).",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-pao-de-mel-step-5",
+          "text": "Ganache. Derreta o chocolate meio amargo (em banho-maria ou no micro-ondas em intervalos de 30 segundos). Incorpore o creme de leite e mexa vigorosamente até obter uma emulsão lisa e brilhante.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-pao-de-mel-step-6",
+          "text": "Montagem. Após o bolo esfriar, corte-o em camadas. Umedeça cada camada de massa de forma generosa com a calda de especiarias. Aplique uma camada uniforme do doce de leite firme. Cubra o bolo montado com a ganache de chocolate meio amargo.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        }
+      ]
+    },
+    {
+      "id": "bolo-prestigio",
+      "title": "Bolo Prestígio",
+      "sourceUrl": null,
+      "notes": [
+        {
+          "title": "Água no lugar do leite — por que funciona melhor",
+          "content": "A caseína do leite forma ligações adicionais com o glúten, tornando o miolo ligeiramente mais firme. Em um pão de ló de chocolate, onde o cacau já contribui com gordura (manteiga de cacau) e fibras que endurecem a textura, usar água no lugar do leite compensa exatamente esse fator — a ausência de proteínas lácteas mantém o miolo macio e sedoso mesmo com o cacau."
+        },
+        {
+          "title": "Cacau puro vs. achocolatado",
+          "content": "Apenas cacau 100% — sem açúcar, sem leite, sem gordura vegetal adicionada. Achocolatado desequilibra a fórmula: adiciona açúcar não previsto, reduz a intensidade e compromete a coloração escura característica. O amargor do cacau puro é contrabalançado pelos 200g de açúcar e pela estrutura aerada dos ovos."
+        },
+        {
+          "title": "Bolo Prestígio — montagem completa",
+          "content": "Este pão de ló é a base do Bolo Prestígio El Guapo. Montagem: disco de pão de ló de chocolate → calda de chocolate leve (opcional) → camada generosa de Brigadeiro El Guapo → disco → camada de Recheio de Coco → disco → cobertura de ganache ou brigadeiro. Refrigerar a torta montada por 4h antes de servir."
+        },
+        {
+          "title": "Chocolate + cacau — dupla de intensidade",
+          "content": "O chocolate meio amargo em barra entrega gordura (manteiga de cacau), que dá cremosidade e brilho, além de sabor. O cacau 70% em pó, adicionado separadamente, aprofunda a intensidade sem aumentar a gordura — sua concentração de compostos fenólicos é maior do que no chocolate em barra. A combinação produz um brigadeiro com perfil complexo: redondo, brilhante e profundamente achocolatado."
+        },
+        {
+          "title": "Ponto de recheio vs. ponto de enrolar",
+          "content": "O ponto de recheio (sulco que fecha lentamente) é 2 a 3 minutos antes do ponto de enrolar (desgruda completamente, massa seca). O creme de leite adicionado ao final recua ainda mais a consistência. Resultado: frio, o recheio é firme o suficiente para suportar o peso das camadas do bolo, mas macio o suficiente para não rachar ao cortar a fatia."
+        },
+        {
+          "title": "Bolo Prestígio — papel deste recheio",
+          "content": "No Bolo Prestígio El Guapo, este brigadeiro atua como a camada de sabor intenso que ancora a experiência: contrasta com a leveza do pão de ló de chocolate e complementa a doçura úmida do recheio de coco. A sequência de montagem ideal é: disco → brigadeiro → disco → coco → disco, garantindo que o corte revele camadas alternadas de chocolate e coco."
+        },
+        {
+          "title": "A caixinha como medida de precisão",
+          "content": "Encher a caixinha de creme de leite vazia com leite integral é uma medida prática de alta precisão: a caixinha tem volume fixo de 200ml e leite integral tem densidade de ~1,03 g/ml, resultando em ~206g — praticamente os 200g da fórmula. A técnica elimina a necessidade de balança em campo e padroniza o recheio entre produções."
+        },
+        {
+          "title": "Flocos vs. ralado fino",
+          "content": "O coco em flocos é a escolha correta para este recheio. O coco ralado fino se dissolve completamente durante o cozimento, perdendo textura e se tornando invisível no recheio final. Os flocos preservam estrutura após cozidos, criando pedaços que conferem mastigabilidade e identificação visual clara da camada de coco ao cortar o bolo."
+        },
+        {
+          "title": "Bolo Prestígio — papel deste recheio",
+          "content": "No Bolo Prestígio El Guapo, o recheio de coco é a contraposição sensorial do brigadeiro: onde o brigadeiro é denso, intenso e escuro, o coco é leve, adocicado e claro. A alternância das camadas cria contraste de sabor, textura e cor que define a experiência de cada fatia — o Prestígio existe exatamente nessa tensão entre os dois recheios."
+        }
+      ],
+      "category": "Bolos",
+      "tags": [
+        "Pão de Ló de Chocolate",
+        "Brigadeiro",
+        "Coco Cremoso"
+      ],
+      "metadata": [
+        {
+          "label": "Composição",
+          "value": "1 receita de massa + 2 recheios"
+        }
+      ],
+      "image": null,
+      "ingredientGroups": [
+        {
+          "id": "bolo-prestigio-group-0",
+          "title": "Massa — Pão de Ló de Chocolate",
+          "ingredients": [
+            {
+              "id": "bolo-prestigio-ingredient-0-0",
+              "name": "Farinha de trigo",
+              "quantityText": "130g",
+              "detail": "100%",
+              "quantity": {
+                "kind": "amount",
+                "amount": 130,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "130g"
+              }
+            },
+            {
+              "id": "bolo-prestigio-ingredient-0-1",
+              "name": "Açúcar refinado",
+              "quantityText": "200g",
+              "detail": "153,8%",
+              "quantity": {
+                "kind": "amount",
+                "amount": 200,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "200g"
+              }
+            },
+            {
+              "id": "bolo-prestigio-ingredient-0-2",
+              "name": "Ovos inteiros",
+              "quantityText": "200g",
+              "detail": "153,8% · ~4 ovos grandes",
+              "quantity": {
+                "kind": "amount",
+                "amount": 200,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "200g"
+              }
+            },
+            {
+              "id": "bolo-prestigio-ingredient-0-3",
+              "name": "Água",
+              "quantityText": "60g",
+              "detail": "46,2% · sem lactose",
+              "quantity": {
+                "kind": "amount",
+                "amount": 60,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "60g"
+              }
+            },
+            {
+              "id": "bolo-prestigio-ingredient-0-4",
+              "name": "Óleo de soja",
+              "quantityText": "60g",
+              "detail": "46,2%",
+              "quantity": {
+                "kind": "amount",
+                "amount": 60,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "60g"
+              }
+            },
+            {
+              "id": "bolo-prestigio-ingredient-0-5",
+              "name": "Cacau em pó 100%",
+              "quantityText": "20g",
+              "detail": "15,4%",
+              "quantity": {
+                "kind": "amount",
+                "amount": 20,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "20g"
+              }
+            },
+            {
+              "id": "bolo-prestigio-ingredient-0-6",
+              "name": "Fermento em pó químico",
+              "quantityText": "12g",
+              "detail": "9,2% · 1 col. sopa",
+              "quantity": {
+                "kind": "amount",
+                "amount": 12,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "12g"
+              }
+            }
+          ]
+        },
+        {
+          "id": "bolo-prestigio-group-1",
+          "title": "Brigadeiro El Guapo",
+          "ingredients": [
+            {
+              "id": "bolo-prestigio-ingredient-1-0",
+              "name": "Leite condensado",
+              "quantityText": "395g",
+              "detail": "base adocicada",
+              "quantity": {
+                "kind": "amount",
+                "amount": 395,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "395g"
+              }
+            },
+            {
+              "id": "bolo-prestigio-ingredient-1-1",
+              "name": "Creme de leite",
+              "quantityText": "200g",
+              "detail": "cremosidade · ajuste de textura",
+              "quantity": {
+                "kind": "amount",
+                "amount": 200,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "200g"
+              }
+            },
+            {
+              "id": "bolo-prestigio-ingredient-1-2",
+              "name": "Chocolate meio amargo em barra",
+              "quantityText": "80g",
+              "detail": "sabor + consistência",
+              "quantity": {
+                "kind": "amount",
+                "amount": 80,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "80g"
+              }
+            },
+            {
+              "id": "bolo-prestigio-ingredient-1-3",
+              "name": "Cacau em pó 70%",
+              "quantityText": "~8g",
+              "detail": "intensidade · 1 col. sopa",
+              "quantity": {
+                "kind": "amount",
+                "amount": 8,
+                "unit": "g",
+                "approximate": true,
+                "annotation": null,
+                "source": "~8g"
+              }
+            }
+          ]
+        },
+        {
+          "id": "bolo-prestigio-group-2",
+          "title": "Recheio de Coco Cremoso",
+          "ingredients": [
+            {
+              "id": "bolo-prestigio-ingredient-2-0",
+              "name": "Leite condensado",
+              "quantityText": "395g",
+              "detail": "base adocicada",
+              "quantity": {
+                "kind": "amount",
+                "amount": 395,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "395g"
+              }
+            },
+            {
+              "id": "bolo-prestigio-ingredient-2-1",
+              "name": "Creme de leite",
+              "quantityText": "200g",
+              "detail": "cremosidade final",
+              "quantity": {
+                "kind": "amount",
+                "amount": 200,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "200g"
+              }
+            },
+            {
+              "id": "bolo-prestigio-ingredient-2-2",
+              "name": "Leite integral",
+              "quantityText": "~200g",
+              "detail": "medido na caixinha do creme de leite",
+              "quantity": {
+                "kind": "amount",
+                "amount": 200,
+                "unit": "g",
+                "approximate": true,
+                "annotation": null,
+                "source": "~200g"
+              }
+            },
+            {
+              "id": "bolo-prestigio-ingredient-2-3",
+              "name": "Coco ralado em flocos",
+              "quantityText": "100g",
+              "detail": "textura + sabor",
+              "quantity": {
+                "kind": "amount",
+                "amount": 100,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "100g"
+              }
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "id": "bolo-prestigio-step-0",
+          "text": "Secos com cacau. Peneire a farinha de trigo, o cacau em pó e o fermento químico juntos em tigela separada. O cacau deve ser peneirado obrigatoriamente — sua tendência a formar grumos provoca manchas escuras irregulares no miolo se incorporado sem peneirar. Reserve.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-prestigio-step-1",
+          "text": "Ponto de fita. Na batedeira com globo, bata os ovos inteiros com o açúcar refinado em velocidade alta por 5 a 8 minutos até atingir ponto de fita: massa pálida, quase três vezes o volume inicial, traço que persiste por 3 a 4 segundos ao cair do globo. Sem leite ou manteiga nesta receita, os ovos são a única fonte de estrutura e umidade — o ponto de fita define a qualidade do miolo final.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-prestigio-step-2",
+          "text": "Líquidos. Reduza para velocidade mínima. Com a água e o óleo pré-misturados, adicione em fio fino e contínuo. A água (no lugar do leite) é escolha deliberada: sem caseínas, o glúten tem menos estrutura proteica para se desenvolver, resultando em miolo mais macio e sedoso — a textura ideal para um pão de ló que será cortado e recheado.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-prestigio-step-3",
+          "text": "Dobrar os secos com cacau. Desligue a batedeira. Adicione a farinha+cacau+fermento peneirados em 2 adições com espátula, dobrando de baixo para cima com delicadeza. A mistura vai escurecer rapidamente ao entrar o cacau — é o indicativo visual de que está sendo incorporado de forma homogênea. Pare assim que não houver mais traços de pó claro.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-prestigio-step-4",
+          "text": "Forma e forno. Divida a massa nas formas untadas e polvilhadas com cacau em pó — nunca farinha branca, que deixa borda esbranquiçada na lateral do disco. Leve ao forno preaquecido a 180°C por 25 a 30 minutos. Não abra nos primeiros 20 minutos. Teste com palito: seco ao centro. Termômetro: 93–96°C.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-prestigio-step-5",
+          "text": "Resfriamento. Aguarde 10 minutos na forma, desenformar na grade e resfriar completamente antes de manusear. Para o Bolo Prestígio, refrigere os discos por 2h antes de montar — o disco frio absorve a calda mais lentamente, distribuindo a umidade de forma uniforme pelo miolo sem encharcar.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-prestigio-step-6",
+          "text": "Dissolver o cacau a frio. Em panela de fundo grosso fora do fogo, misture o leite condensado com o cacau em pó, mexendo com espátula até o cacau estar completamente dissolvido e sem grumos. Dissolver a frio é essencial — cacau em pó adicionado em leite condensado quente gruda no fundo da panela antes de se integrar, formando pontos pretos amargos no recheio final.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-prestigio-step-7",
+          "text": "Adicionar o chocolate. Pique o chocolate meio amargo em pedaços pequenos e uniformes e adicione à mistura de leite condensado e cacau. Leve ao fogo médio-baixo, mexendo constantemente com espátula de silicone — raspe o fundo e as laterais da panela de forma contínua para evitar queimar o açúcar do leite condensado, que carameliza rapidamente em fogo alto.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-prestigio-step-8",
+          "text": "Ponto de recheio. Cozinhe mexendo sempre por 8 a 12 minutos até atingir o ponto de recheio de bolo: a massa começa a desgrudar do fundo formando um sulco limpo que fecha lentamente. É um ponto mais mole que o brigadeiro de enrolar — a consistência deve lembrar uma ganache macia a quente. Ao esfriar e refrigerar, firma consideravelmente.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-prestigio-step-9",
+          "text": "Creme de leite e finalização. Retire do fogo. Adicione o creme de leite e misture vigorosamente até incorporar completamente — o creme de leite quente se integra sem talhar. Ele ajusta a consistência final do recheio: mais creme = mais mole e cremoso; menos = mais firme e denso. Cubra com filme plástico em contato com a superfície para evitar película.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-prestigio-step-10",
+          "text": "Resfriamento e uso. Deixe esfriar completamente em temperatura ambiente e refrigere por no mínimo 2 horas antes de usar. Frio, o brigadeiro firma e ganha consistência de recheio cremoso que não escorrega entre as camadas do bolo. Para consistência máxima de corte, refrigere o bolo montado por 4 horas após recheio.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-prestigio-step-11",
+          "text": "Base líquida. Em panela de fundo grosso, combine o leite condensado com o leite integral. Meça o leite enchendo a caixinha de creme de leite já vazia — a medida prática garante aproximadamente 200g sem necessidade de balança extra. Misture os dois com espátula antes de levar ao fogo para homogeneizar as densidades distintas dos dois líquidos.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-prestigio-step-12",
+          "text": "Coco e cozimento. Adicione o coco ralado em flocos à panela com os líquidos. Leve ao fogo médio, mexendo constantemente com espátula. O coco absorve parte do líquido durante o cozimento, inchando e liberando os óleos naturais do coco na mistura — esse processo é visível pela mudança de cor do coco (mais translúcido e brilhante) e pelo aumento de viscosidade do recheio. Cozinhe por 5 a 8 minutos após começar a borbulhar.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-prestigio-step-13",
+          "text": "Ponto e finalização. O recheio está no ponto quando a espátula deixa um sulco no fundo que fecha lentamente — consistência de mingau encorpado. Retire do fogo e adicione o creme de leite, misturando vigorosamente. O creme de leite amolece a consistência final e adiciona a gordura de laticínio que equilibra a doçura intensa do leite condensado. Cubra com filme em contato com a superfície.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-prestigio-step-14",
+          "text": "Resfriamento. Deixe esfriar em temperatura ambiente e refrigere por no mínimo 2 horas. O recheio de coco firma substancialmente com o frio — o que parece mole quente transforma-se em recheio cremoso e encorpado após refrigerado, com textura ideal para suportar o peso do disco de bolo sem escorrer.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-prestigio-step-15",
+          "text": "Montagem do Bolo Prestígio. Com a massa e os dois recheios completamente frios, monte o bolo combinando os discos de pão de ló de chocolate com o recheio de coco e o brigadeiro. Refrigere o bolo montado por 4 horas antes de cortar, conforme a orientação do brigadeiro.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        }
+      ]
+    },
+    {
+      "id": "pao-de-queijo-heuller",
+      "title": "Pão de Queijo do Heuller",
+      "sourceUrl": null,
+      "notes": [
+        {
+          "title": "Gelatinização do amido",
+          "content": "O escaldamento é o coração da receita. Ao despejar o líquido fervente sobre os polvilhos, as moléculas de amilopectina absorvem água e incham, formando um gel viscoso e elástico. Essa estrutura é o que permite ao pão de queijo expandir sem farinha de trigo ou fermento."
+        },
+        {
+          "title": "Polvilho azedo vs. doce",
+          "content": "O polvilho azedo passa por fermentação natural, gerando ácidos que enfraquecem parcialmente a rede de amido — permitindo maior expansão e casca crocante. O polvilho doce traz densidade, elasticidade e o \"puxa-puxa\" interno. O blend 50/50 equilibra estrutura e leveza."
+        },
+        {
+          "title": "Escolha da gordura",
+          "content": "Óleo: casca mais crocante, sabor neutro. Banha: sabor tradicional e rústico. Manteiga: sabor amanteigado, reduz levemente a crocância. Recomendo banha para perfil rústico, ou blend óleo + manteiga (70/30) para equilibrar."
+        },
+        {
+          "title": "Harmonização com cervejas",
+          "content": "American Pale Ale (amargor corta a gordura), Witbier (notas cítricas complementam a acidez do queijo meia cura), Belgian Dubbel (maltado e frutado, equilibra a salinidade), Cream Ale (leve, refrescante, limpa o palato)."
+        }
+      ],
+      "category": "Quitanda",
+      "tags": [
+        "Método Escaldamento",
+        "Blend 50/50 Polvilhos",
+        "Queijo Curado",
+        "Crosta Crocante"
+      ],
+      "metadata": [
+        {
+          "label": "Rendimento",
+          "value": "~50 un. (30g)"
+        },
+        {
+          "label": "Dificuldade",
+          "value": "Média"
+        }
+      ],
+      "image": {
+        "src": "images/el-guapo-img-09.webp",
+        "alt": "Pão de Queijo do Heuller"
+      },
+      "ingredientGroups": [
+        {
+          "id": "pao-de-queijo-heuller-group-0",
+          "title": "A. Blend de Amidos (Estrutura)",
+          "ingredients": [
+            {
+              "id": "pao-de-queijo-heuller-ingredient-0-0",
+              "name": "Polvilho Azedo",
+              "quantityText": "250g",
+              "detail": "50% · expansão alveolar",
+              "quantity": {
+                "kind": "amount",
+                "amount": 250,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "250g"
+              }
+            },
+            {
+              "id": "pao-de-queijo-heuller-ingredient-0-1",
+              "name": "Polvilho Doce",
+              "quantityText": "250g",
+              "detail": "50% · elasticidade",
+              "quantity": {
+                "kind": "amount",
+                "amount": 250,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "250g"
+              }
+            },
+            {
+              "id": "pao-de-queijo-heuller-ingredient-0-2",
+              "name": "Sal Refinado",
+              "quantityText": "10–12g",
+              "detail": "2–2,4% · ajustar pelo queijo",
+              "quantity": {
+                "kind": "range",
+                "amount": 10,
+                "max": 12,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "10–12g"
+              }
+            }
+          ]
+        },
+        {
+          "id": "pao-de-queijo-heuller-group-1",
+          "title": "B. Escaldo (Líquidos + Gordura)",
+          "ingredients": [
+            {
+              "id": "pao-de-queijo-heuller-ingredient-1-0",
+              "name": "Leite Integral",
+              "quantityText": "150ml",
+              "detail": "30% · Maillard",
+              "quantity": {
+                "kind": "amount",
+                "amount": 150,
+                "unit": "ml",
+                "approximate": false,
+                "annotation": null,
+                "source": "150ml"
+              }
+            },
+            {
+              "id": "pao-de-queijo-heuller-ingredient-1-1",
+              "name": "Água",
+              "quantityText": "150ml",
+              "detail": "30% · vapor/expansão",
+              "quantity": {
+                "kind": "amount",
+                "amount": 150,
+                "unit": "ml",
+                "approximate": false,
+                "annotation": null,
+                "source": "150ml"
+              }
+            },
+            {
+              "id": "pao-de-queijo-heuller-ingredient-1-2",
+              "name": "Gordura (Óleo/Banha/Manteiga)",
+              "quantityText": "100ml",
+              "detail": "18–20% · sabor/textura",
+              "quantity": {
+                "kind": "amount",
+                "amount": 100,
+                "unit": "ml",
+                "approximate": false,
+                "annotation": null,
+                "source": "100ml"
+              }
+            }
+          ]
+        },
+        {
+          "id": "pao-de-queijo-heuller-group-2",
+          "title": "C. Liga e Sabor (Finalização)",
+          "ingredients": [
+            {
+              "id": "pao-de-queijo-heuller-ingredient-2-0",
+              "name": "Ovos Tipo Grande/Extra",
+              "quantityText": "3–4 un.",
+              "detail": "≈150–200g · emulsão",
+              "quantity": {
+                "kind": "range",
+                "amount": 3,
+                "max": 4,
+                "unit": "un",
+                "approximate": false,
+                "annotation": null,
+                "source": "3–4 un."
+              }
+            },
+            {
+              "id": "pao-de-queijo-heuller-ingredient-2-1",
+              "name": "Queijo Meia Cura / Canastra, ralado grosso",
+              "quantityText": "350g",
+              "detail": "70% · estrutura de sabor",
+              "quantity": {
+                "kind": "amount",
+                "amount": 350,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "350g"
+              }
+            },
+            {
+              "id": "pao-de-queijo-heuller-ingredient-2-2",
+              "name": "Queijo Parmesão, ralado fino",
+              "quantityText": "50g",
+              "detail": "10% · umami",
+              "quantity": {
+                "kind": "amount",
+                "amount": 50,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "50g"
+              }
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "id": "pao-de-queijo-heuller-step-0",
+          "text": "Preparação dos secos. Em uma tigela grande, combine os 250g de polvilho azedo, 250g de polvilho doce e o sal (10–12g, ajustando conforme a salinidade do queijo). Misture bem com um fouet para distribuir uniformemente. Reserve.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "pao-de-queijo-heuller-step-1",
+          "text": "Escaldo — Gelatinização. Em uma panela média, combine 150ml de leite integral, 150ml de água e 100ml de gordura. Leve ao fogo médio-alto e deixe ferver completamente — o líquido deve estar em ebulição vigorosa. Retire do fogo imediatamente e despeje sobre a mistura de polvilhos de uma só vez. Mexa vigorosamente com uma colher de pau até formar uma massa homogênea e pegajosa. O calor gelatiniza o amido, criando a estrutura elástica característica.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "pao-de-queijo-heuller-step-2",
+          "text": "Resfriamento parcial. Deixe a massa esfriar por 5 a 10 minutos, mexendo ocasionalmente, até estar morna ao toque. Se adicionar os ovos com a massa muito quente, eles cozinharão e a emulsão não se formará corretamente.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "pao-de-queijo-heuller-step-3",
+          "text": "Incorporação dos ovos. Adicione os ovos um de cada vez, misturando completamente antes do próximo. A massa começará firme e quebradiça, mas conforme os ovos são incorporados, ela se tornará lisa, elástica e levemente brilhante. Se após 3 ovos a massa ainda estiver muito firme, adicione o quarto.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "pao-de-queijo-heuller-step-4",
+          "text": "Adição dos queijos. Adicione os 350g de queijo meia cura ralado grosso e os 50g de parmesão ralado fino. Misture até distribuir uniformemente. Ajuste o sal neste momento se necessário, provando a massa crua.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "pao-de-queijo-heuller-step-5",
+          "text": "Ponto de hidratação visual. A massa deve estar homogênea, elástica e levemente pegajosa — não deve escorrer, mas também não deve estar seca ou quebradiça. Confie no tato: deve grudar levemente nas mãos untadas de óleo, mas se soltar com facilidade. Este é o ponto crítico da receita.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "pao-de-queijo-heuller-step-6",
+          "text": "Modelagem. Unte levemente as mãos com óleo. Porcione em bolinhas de 30g (coquetel) ou 50g (lanche). Role cada porção entre as palmas até formar esferas lisas e uniformes. Disponha em assadeira untada ou com papel manteiga, deixando espaço entre elas.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "pao-de-queijo-heuller-step-7",
+          "text": "Assamento. Preaqueça o forno a 200–220°C. Asse por 20 a 25 minutos (30g) ou 25 a 30 minutos (50g), até a superfície estar dourada e levemente rachada. Não abra o forno nos primeiros 15 minutos: a perda de vapor interrompe a expansão.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "pao-de-queijo-heuller-step-8",
+          "text": "Resfriamento e armazenamento. Deixe esfriar por 5 minutos antes de servir. Para armazenar, congele as bolinhas cruas em assadeira por 2h, transfira para sacos plásticos e asse direto do freezer, adicionando 5 minutos ao tempo de forno.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        }
+      ]
+    },
+    {
+      "id": "pao-heuller-gabriela",
+      "title": "Pão do Heuller e da Gabriela",
+      "sourceUrl": null,
+      "notes": [
+        {
+          "title": "Massa enriquecida",
+          "content": "Manteiga, ovos, açúcar e leite adicionam gordura, proteínas, lactose e sabor. A manteiga amaciante o miolo, os ovos dão estrutura e cor, o açúcar alimenta o fermento e favorece a douração, e o leite adiciona complexidade via Reação de Maillard pela lactose. Cada ingrediente tem papel técnico preciso."
+        },
+        {
+          "title": "A baunilha como âncora aromática",
+          "content": "Nesta receita, a baunilha não é apenas aromatizante — ela age como âncora sensorial, unificando os aromas da manteiga, do leite e dos ovos em uma experiência coesa. Use extrato natural ou fava em pasta para resultado notavelmente superior à essência artificial."
+        },
+        {
+          "title": "Cuidados com a manteiga",
+          "content": "Manteiga fria demais não se incorpora e a massa fica oleosa; derretida, acelera a fermentação e não oferece estrutura. O ponto ideal: a manteiga cede ao toque mas mantém a forma — textura de pasta de amendoim mole."
+        },
+        {
+          "title": "Possibilidades & Variações",
+          "content": "Esta massa é excelente base para pão de forma fatiado, rabanadas, torradas e pudim de pão. Para uma versão mais rústica, adicione raspas de limão siciliano e substitua 30g do açúcar por açúcar mascavo."
+        }
+      ],
+      "category": "Quitanda",
+      "tags": [
+        "Massa Enriquecida",
+        "Baunilha · Manteiga",
+        "~53% hidratação",
+        "Pão Doce Afetivo"
+      ],
+      "metadata": [
+        {
+          "label": "Base de farinha",
+          "value": "600g"
+        },
+        {
+          "label": "Hidratação aprox.",
+          "value": "~53%"
+        }
+      ],
+      "image": {
+        "src": "images/el-guapo-img-10.webp",
+        "alt": "Pão do Heuller e da Gabriela"
+      },
+      "ingredientGroups": [
+        {
+          "id": "pao-heuller-gabriela-group-0",
+          "title": "Fórmula (100% = 600g farinha)",
+          "ingredients": [
+            {
+              "id": "pao-heuller-gabriela-ingredient-0-0",
+              "name": "Farinha de trigo",
+              "quantityText": "600g",
+              "detail": "100%",
+              "quantity": {
+                "kind": "amount",
+                "amount": 600,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "600g"
+              }
+            },
+            {
+              "id": "pao-heuller-gabriela-ingredient-0-1",
+              "name": "Leite integral",
+              "quantityText": "320g",
+              "detail": "53,3%",
+              "quantity": {
+                "kind": "amount",
+                "amount": 320,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "320g"
+              }
+            },
+            {
+              "id": "pao-heuller-gabriela-ingredient-0-2",
+              "name": "Açúcar",
+              "quantityText": "60g",
+              "detail": "10%",
+              "quantity": {
+                "kind": "amount",
+                "amount": 60,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "60g"
+              }
+            },
+            {
+              "id": "pao-heuller-gabriela-ingredient-0-3",
+              "name": "Ovos",
+              "quantityText": "2 un.",
+              "detail": "≈16,7%",
+              "quantity": {
+                "kind": "amount",
+                "amount": 2,
+                "unit": "un",
+                "approximate": false,
+                "annotation": null,
+                "source": "2 un."
+              }
+            },
+            {
+              "id": "pao-heuller-gabriela-ingredient-0-4",
+              "name": "Manteiga sem sal, ponto pomada",
+              "quantityText": "80g",
+              "detail": "13,3%",
+              "quantity": {
+                "kind": "amount",
+                "amount": 80,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "80g"
+              }
+            },
+            {
+              "id": "pao-heuller-gabriela-ingredient-0-5",
+              "name": "Sal",
+              "quantityText": "12g",
+              "detail": "2%",
+              "quantity": {
+                "kind": "amount",
+                "amount": 12,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "12g"
+              }
+            },
+            {
+              "id": "pao-heuller-gabriela-ingredient-0-6",
+              "name": "Fermento biológico seco",
+              "quantityText": "5g",
+              "detail": "0,83%",
+              "quantity": {
+                "kind": "amount",
+                "amount": 5,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "5g"
+              }
+            },
+            {
+              "id": "pao-heuller-gabriela-ingredient-0-7",
+              "name": "Essência de baunilha",
+              "quantityText": "1 col. sopa",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 1,
+                "unit": "col. sopa",
+                "approximate": false,
+                "annotation": null,
+                "source": "1 col. sopa"
+              }
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "id": "pao-heuller-gabriela-step-0",
+          "text": "Ativação do fermento. Dissolva os 5g de fermento biológico seco no leite morno (entre 32°C e 38°C) com uma pitada do açúcar da receita. Aguarde 8 a 10 minutos até formar espuma ativa na superfície — sinal de que o fermento está vivo e pronto para trabalhar.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "pao-heuller-gabriela-step-1",
+          "text": "Mistura inicial. Na tigela da batedeira com gancho, combine a farinha, o açúcar restante e o sal. Misture os secos. Adicione os ovos levemente batidos, a essência de baunilha e o leite com fermento já ativado. Misture em velocidade baixa por 2 a 3 minutos, apenas até a farinha hidratar.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "pao-heuller-gabriela-step-2",
+          "text": "Desenvolvimento do glúten. Aumente para velocidade média e sove por 8 a 10 minutos, até a massa estar lisa, homogênea e se descolando das paredes da tigela. Por se tratar de uma massa enriquecida, o glúten se forma com mais lentidão — respeite o tempo de sovagem.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "pao-heuller-gabriela-step-3",
+          "text": "Incorporação da manteiga. Com a batedeira em velocidade baixa, adicione a manteiga em ponto pomada em 3 ou 4 porções, esperando a incorporação completa de cada uma. A massa pode parecer que desintegra nos primeiros momentos — continue batendo. Após toda a manteiga absorvida, bata até a massa voltar a ser completamente lisa e levemente brilhante.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "pao-heuller-gabriela-step-4",
+          "text": "Primeira fermentação. Forme uma bola, transfira para tigela levemente untada com manteiga, cubra com filme plástico e deixe fermentar em temperatura ambiente por 1h a 1h30, até dobrar de volume. Para sabor mais profundo, após 20 minutos em temperatura ambiente, leve à geladeira por 8 a 12h.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "pao-heuller-gabriela-step-5",
+          "text": "Modelagem. Desgaseifique suavemente a massa na bancada enfarinhada. Modele conforme o formato desejado: pão de forma, rolinhos (bolinhas de 60g) ou trança. Cubra e deixe descansar por 10 minutos antes da segunda fermentação.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "pao-heuller-gabriela-step-6",
+          "text": "Segunda fermentação. Cubra com filme plástico ou pano úmido e deixe fermentar por mais 45 a 60 minutos em temperatura ambiente, até o pão estar visivelmente crescido e o dedo deixar uma marca suave quando pressionado.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "pao-heuller-gabriela-step-7",
+          "text": "Pincelagem e assamento. Pincele suavemente com ovo batido ou leite para obter casca dourada e brilhante. Asse em forno preaquecido a 180°C por 25 a 35 minutos, até a casca estar uniformemente dourada. O termômetro deve marcar 88–92°C no centro.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "pao-heuller-gabriela-step-8",
+          "text": "Resfriamento. Retire do forno e deixe repousar na forma por 10 minutos. Em seguida, desenforme e deixe esfriar completamente sobre uma grade antes de fatiar — cortar o pão quente comprime o miolo ainda úmido, resultando em textura gomosa.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        }
+      ]
+    },
+    {
+      "id": "essencia-caseira-panetone",
+      "title": "Essência Caseira de Panetone",
+      "sourceUrl": null,
+      "notes": [],
+      "category": "Especiais",
+      "tags": [
+        "Cítricos",
+        "Mel e especiarias"
+      ],
+      "metadata": [],
+      "image": null,
+      "ingredientGroups": [
+        {
+          "id": "essencia-caseira-panetone-group-0",
+          "title": "Cítricos — usar as raspas",
+          "ingredients": [
+            {
+              "id": "essencia-caseira-panetone-ingredient-0-0",
+              "name": "Raspas de laranja Bahia",
+              "quantityText": "3 un.",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 3,
+                "unit": "un",
+                "approximate": false,
+                "annotation": null,
+                "source": "3 un."
+              }
+            },
+            {
+              "id": "essencia-caseira-panetone-ingredient-0-1",
+              "name": "Raspas de tangerina",
+              "quantityText": "2 un.",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 2,
+                "unit": "un",
+                "approximate": false,
+                "annotation": null,
+                "source": "2 un."
+              }
+            },
+            {
+              "id": "essencia-caseira-panetone-ingredient-0-2",
+              "name": "Raspas de limão siciliano",
+              "quantityText": "2 un.",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 2,
+                "unit": "un",
+                "approximate": false,
+                "annotation": null,
+                "source": "2 un."
+              }
+            },
+            {
+              "id": "essencia-caseira-panetone-ingredient-0-3",
+              "name": "Raspas de limão taiti",
+              "quantityText": "¼ un.",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 0.25,
+                "unit": "un",
+                "approximate": false,
+                "annotation": null,
+                "source": "¼ un."
+              }
+            }
+          ]
+        },
+        {
+          "id": "essencia-caseira-panetone-group-1",
+          "title": "Redução",
+          "ingredients": [
+            {
+              "id": "essencia-caseira-panetone-ingredient-1-0",
+              "name": "Fava de baunilha",
+              "quantityText": "½ un.",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 0.5,
+                "unit": "un",
+                "approximate": false,
+                "annotation": null,
+                "source": "½ un."
+              }
+            },
+            {
+              "id": "essencia-caseira-panetone-ingredient-1-1",
+              "name": "Canela em pau",
+              "quantityText": "1 pedaço",
+              "detail": null,
+              "quantity": {
+                "kind": "text",
+                "text": "1 pedaço"
+              }
+            },
+            {
+              "id": "essencia-caseira-panetone-ingredient-1-2",
+              "name": "Cravo-da-índia",
+              "quantityText": "3 un.",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 3,
+                "unit": "un",
+                "approximate": false,
+                "annotation": null,
+                "source": "3 un."
+              }
+            },
+            {
+              "id": "essencia-caseira-panetone-ingredient-1-3",
+              "name": "Cardamomo",
+              "quantityText": "2 bagas",
+              "detail": null,
+              "quantity": {
+                "kind": "text",
+                "text": "2 bagas"
+              }
+            },
+            {
+              "id": "essencia-caseira-panetone-ingredient-1-4",
+              "name": "Água",
+              "quantityText": "250ml",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 250,
+                "unit": "ml",
+                "approximate": false,
+                "annotation": null,
+                "source": "250ml"
+              }
+            },
+            {
+              "id": "essencia-caseira-panetone-ingredient-1-5",
+              "name": "Mel",
+              "quantityText": "150g",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 150,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "150g"
+              }
+            },
+            {
+              "id": "essencia-caseira-panetone-ingredient-1-6",
+              "name": "Destilado",
+              "quantityText": "125ml",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 125,
+                "unit": "ml",
+                "approximate": false,
+                "annotation": null,
+                "source": "125ml"
+              }
+            }
+          ]
+        },
+        {
+          "id": "essencia-caseira-panetone-group-2",
+          "title": "Depois de esfriar",
+          "ingredients": [
+            {
+              "id": "essencia-caseira-panetone-ingredient-2-0",
+              "name": "Semente de cumaru ralada",
+              "quantityText": "½ un.",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 0.5,
+                "unit": "un",
+                "approximate": false,
+                "annotation": null,
+                "source": "½ un."
+              }
+            },
+            {
+              "id": "essencia-caseira-panetone-ingredient-2-1",
+              "name": "Noz-moscada ralada",
+              "quantityText": "1 pitada",
+              "detail": null,
+              "quantity": {
+                "kind": "text",
+                "text": "1 pitada"
+              }
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "id": "essencia-caseira-panetone-step-0",
+          "text": "Preparação. Separe as raspas dos cítricos. Reserve o cumaru e a noz-moscada para acrescentar somente depois de esfriar.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "essencia-caseira-panetone-step-1",
+          "text": "Redução. Leve ao fogo as raspas, a baunilha, a canela, os cravos, o cardamomo, a água, o mel e o destilado. Cozinhe até reduzir, conforme a receita caseira. A fórmula não especifica tempo nem volume final de redução.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "essencia-caseira-panetone-step-2",
+          "text": "Finalização fria. Retire do fogo e deixe esfriar. Acrescente a meia semente de cumaru ralada e a pitada de noz-moscada ralada. No panetone, utilize 50g da essência pronta por receita.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        }
+      ]
+    },
+    {
+      "id": "arroz-doce-toffee-amburana",
+      "title": "Arroz Doce Toffee Amburana",
+      "sourceUrl": "https://heuller.github.io/el-guapooo/",
+      "notes": [
+        {
+          "title": "Por que não lavar o arroz?",
+          "content": "Manter o amido superficial do grão é essencial: é ele que confere a cremosidade natural ao arroz doce, dispensando amido de milho ou espessantes."
+        },
+        {
+          "title": "Cachaça Amburana",
+          "content": "A cachaça envelhecida em barris de amburana contribui com notas de baunilha, canela e cumarina. O álcool evapora com o calor residual, restando apenas o perfil aromático."
+        },
+        {
+          "title": "Ponto do Toffee",
+          "content": "O caramelo deve atingir um âmbar profundo (170–180 °C). Mais claro ficará sem sabor; mais escuro amargará. A adição da manteiga estabiliza o caramelo e evita cristalização."
+        }
+      ],
+      "category": "Especiais",
+      "tags": [
+        "Sobremesa de Colher",
+        "Caramelo Toffee",
+        "Cachaça Amburana",
+        "Servido Gelado"
+      ],
+      "metadata": [
+        {
+          "label": "Rendimento",
+          "value": "11–12 potes (220ml)"
+        },
+        {
+          "label": "Serviço",
+          "value": "Gelado"
+        }
+      ],
+      "image": {
+        "src": "images/arroz-doce-toffee-amburana.jpg",
+        "alt": "Arroz Doce Toffee Amburana"
+      },
+      "ingredientGroups": [
+        {
+          "id": "arroz-doce-toffee-amburana-group-0",
+          "title": "Fase 1 — O Cozimento (A Base)",
+          "ingredients": [
+            {
+              "id": "arroz-doce-toffee-amburana-ingredient-0-0",
+              "name": "Arroz Agulhinha (não lavar)",
+              "quantityText": "350g",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 350,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "350g"
+              }
+            },
+            {
+              "id": "arroz-doce-toffee-amburana-ingredient-0-1",
+              "name": "Água filtrada",
+              "quantityText": "1200ml",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 1200,
+                "unit": "ml",
+                "approximate": false,
+                "annotation": null,
+                "source": "1200ml"
+              }
+            },
+            {
+              "id": "arroz-doce-toffee-amburana-ingredient-0-2",
+              "name": "Canela em pau",
+              "quantityText": "2 un.",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 2,
+                "unit": "un",
+                "approximate": false,
+                "annotation": null,
+                "source": "2 un."
+              }
+            },
+            {
+              "id": "arroz-doce-toffee-amburana-ingredient-0-3",
+              "name": "Cravo-da-índia",
+              "quantityText": "5 un.",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 5,
+                "unit": "un",
+                "approximate": false,
+                "annotation": null,
+                "source": "5 un."
+              }
+            },
+            {
+              "id": "arroz-doce-toffee-amburana-ingredient-0-4",
+              "name": "Café solúvel",
+              "quantityText": "1 pitada",
+              "detail": null,
+              "quantity": {
+                "kind": "text",
+                "text": "1 pitada"
+              }
+            },
+            {
+              "id": "arroz-doce-toffee-amburana-ingredient-0-5",
+              "name": "Sal refinado",
+              "quantityText": "4g",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 4,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "4g"
+              }
+            }
+          ]
+        },
+        {
+          "id": "arroz-doce-toffee-amburana-group-1",
+          "title": "Fase 2 — Base Toffee e Creme Lácteo",
+          "ingredients": [
+            {
+              "id": "arroz-doce-toffee-amburana-ingredient-1-0",
+              "name": "Açúcar refinado",
+              "quantityText": "300g",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 300,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "300g"
+              }
+            },
+            {
+              "id": "arroz-doce-toffee-amburana-ingredient-1-1",
+              "name": "Manteiga",
+              "quantityText": "40g",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 40,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "40g"
+              }
+            },
+            {
+              "id": "arroz-doce-toffee-amburana-ingredient-1-2",
+              "name": "Leite integral (bem quente)",
+              "quantityText": "1000ml",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 1000,
+                "unit": "ml",
+                "approximate": false,
+                "annotation": null,
+                "source": "1000ml"
+              }
+            },
+            {
+              "id": "arroz-doce-toffee-amburana-ingredient-1-3",
+              "name": "Leite condensado",
+              "quantityText": "395g",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 395,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "395g"
+              }
+            },
+            {
+              "id": "arroz-doce-toffee-amburana-ingredient-1-4",
+              "name": "Creme de leite (caixinha)",
+              "quantityText": "200g",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 200,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "200g"
+              }
+            },
+            {
+              "id": "arroz-doce-toffee-amburana-ingredient-1-5",
+              "name": "Cachaça envelhecida em Amburana",
+              "quantityText": "30ml",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 30,
+                "unit": "ml",
+                "approximate": false,
+                "annotation": null,
+                "source": "30ml"
+              }
+            }
+          ]
+        },
+        {
+          "id": "arroz-doce-toffee-amburana-group-2",
+          "title": "Fase 3 — Finalização Aromática",
+          "ingredients": [
+            {
+              "id": "arroz-doce-toffee-amburana-ingredient-2-0",
+              "name": "Canela em pó",
+              "quantityText": "Q.B.",
+              "detail": null,
+              "quantity": {
+                "kind": "text",
+                "text": "Q.B."
+              }
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "id": "arroz-doce-toffee-amburana-step-0",
+          "text": "O Amaciamento do Grão. Em uma panela grande, coloque a água, o arroz, a canela em pau, os cravos, o café solúvel e o sal. Ligue o fogo médio, com a panela semitampada, e cozinhe até a água quase secar por completo e o grão estar extremamente macio (passando do ponto de um arroz salgado tradicional). Desligue, retire os cravos e as canelas em pau, e reserve.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "arroz-doce-toffee-amburana-step-1",
+          "text": "A Construção do Toffee. Enquanto o arroz cozinha, aqueça o litro de leite em outra leiteira. Em uma panela larga e de fundo grosso, coloque os 300g de açúcar em fogo médio-baixo. Derreta lentamente até atingir uma cor de caramelo âmbar profundo. Assim que atingir a cor desejada, incorpore os 40g de manteiga mexendo vigorosamente.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "arroz-doce-toffee-amburana-step-2",
+          "text": "O Deglace. Com cuidado (o choque térmico subirá vapor), despeje um terço do leite quente sobre o caramelo amanteigado. Mexa sem parar até dissolver os pedaços de açúcar cristalizado. Adicione o restante do leite. Você acabou de criar a base líquida de Leite Toffee.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "arroz-doce-toffee-amburana-step-3",
+          "text": "A Unificação e a Redução Visual. Despeje esse Leite Toffee quente diretamente na panela do arroz cozido e ligue em fogo baixo. Incorpore os 395g de leite condensado. Mexa constantemente, raspando o fundo, por 10 a 15 minutos. Atenção ao Ponto: Desligue o fogo quando a panela ainda apresentar a viscosidade de uma \"sopa bem grossa\" (quando a espátula nas costas da colher deixar um caminho limpo, mas ainda houver bastante líquido borbulhando). Não deixe secar.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "arroz-doce-toffee-amburana-step-4",
+          "text": "A Finalização de Alta Gastronomia (Fora do Fogo). Imediatamente após desligar o fogo, incorpore o creme de leite e os 30ml de cachaça Amburana. O calor residual evapora o álcool agressivo, travando as notas amadeiradas da bebida, enquanto a gordura fria do creme de leite interrompe o cozimento.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "arroz-doce-toffee-amburana-step-5",
+          "text": "O Porcionamento Seguro (Regra do Frio). Despeje o arroz doce ainda quente nos potinhos de 220ml. Deixe esfriar abertos na bancada por cerca de 1 hora até atingirem temperatura ambiente (isso evita a condensação de água na tampa). Faça uma chuva fina de canela em pó sobre a superfície de cada um, tampe hermeticamente e leve à geladeira a noite toda.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        }
+      ]
+    },
+    {
+      "id": "canjicada-el-guapo",
+      "title": "Canjicada El Guapo",
+      "sourceUrl": "https://heuller.github.io/el-guapooo/",
+      "notes": [
+        {
+          "title": "Proporção líquido:grão final",
+          "content": "2,29:1 — média calculada para textura cremosa com amido recalibrado proporcionalmente ao novo volume de líquido."
+        }
+      ],
+      "category": "Especiais",
+      "tags": [
+        "Festa Junina",
+        "Toffee, Café e Amburana",
+        "Tradicional"
+      ],
+      "metadata": [
+        {
+          "label": "Rendimento",
+          "value": "2,5kg (~11 potes de 220ml)"
+        },
+        {
+          "label": "Serviço",
+          "value": "Gelado"
+        }
+      ],
+      "image": {
+        "src": "images/canjicada-el-guapo.jpeg",
+        "alt": "Canjicada El Guapo"
+      },
+      "ingredientGroups": [
+        {
+          "id": "canjicada-el-guapo-group-0",
+          "title": "Fase 1 — O Grão",
+          "ingredients": [
+            {
+              "id": "canjicada-el-guapo-ingredient-0-0",
+              "name": "Canjica Vapza (2 pacotes)",
+              "quantityText": "1000g",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 1000,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "1000g"
+              }
+            }
+          ]
+        },
+        {
+          "id": "canjicada-el-guapo-group-1",
+          "title": "Fase 2 — Caramelo e Infusão do Grão",
+          "ingredients": [
+            {
+              "id": "canjicada-el-guapo-ingredient-1-0",
+              "name": "Açúcar refinado",
+              "quantityText": "350g",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 350,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "350g"
+              }
+            },
+            {
+              "id": "canjicada-el-guapo-ingredient-1-1",
+              "name": "Manteiga (com ou sem sal)",
+              "quantityText": "60g",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 60,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "60g"
+              }
+            },
+            {
+              "id": "canjicada-el-guapo-ingredient-1-2",
+              "name": "Leite integral (quente)",
+              "quantityText": "1300ml",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 1300,
+                "unit": "ml",
+                "approximate": false,
+                "annotation": null,
+                "source": "1300ml"
+              }
+            },
+            {
+              "id": "canjicada-el-guapo-ingredient-1-3",
+              "name": "Canela em pau",
+              "quantityText": "2 un. grandes",
+              "detail": null,
+              "quantity": {
+                "kind": "text",
+                "text": "2 un. grandes"
+              }
+            },
+            {
+              "id": "canjicada-el-guapo-ingredient-1-4",
+              "name": "Cravo-da-índia",
+              "quantityText": "5 un.",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 5,
+                "unit": "un",
+                "approximate": false,
+                "annotation": null,
+                "source": "5 un."
+              }
+            },
+            {
+              "id": "canjicada-el-guapo-ingredient-1-5",
+              "name": "Sal refinado",
+              "quantityText": "5g",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 5,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "5g"
+              }
+            }
+          ]
+        },
+        {
+          "id": "canjicada-el-guapo-group-2",
+          "title": "Fase 3 — Slurry Mocha",
+          "ingredients": [
+            {
+              "id": "canjicada-el-guapo-ingredient-2-0",
+              "name": "Leite condensado",
+              "quantityText": "590g",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 590,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "590g"
+              }
+            },
+            {
+              "id": "canjicada-el-guapo-ingredient-2-1",
+              "name": "Amido de milho",
+              "quantityText": "25g",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 25,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "25g"
+              }
+            },
+            {
+              "id": "canjicada-el-guapo-ingredient-2-2",
+              "name": "Café solúvel",
+              "quantityText": "3g",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 3,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "3g"
+              }
+            },
+            {
+              "id": "canjicada-el-guapo-ingredient-2-3",
+              "name": "Leite integral ou água fria",
+              "quantityText": "80ml",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 80,
+                "unit": "ml",
+                "approximate": false,
+                "annotation": null,
+                "source": "80ml"
+              }
+            }
+          ]
+        },
+        {
+          "id": "canjicada-el-guapo-group-3",
+          "title": "Fase 4 — Arremate Fora do Fogo",
+          "ingredients": [
+            {
+              "id": "canjicada-el-guapo-ingredient-3-0",
+              "name": "Creme de leite (caixinha)",
+              "quantityText": "400g",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 400,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "400g"
+              }
+            },
+            {
+              "id": "canjicada-el-guapo-ingredient-3-1",
+              "name": "Cachaça envelhecida em amburana",
+              "quantityText": "35g",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 35,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "35g"
+              }
+            },
+            {
+              "id": "canjicada-el-guapo-ingredient-3-2",
+              "name": "Raspas de laranja bahia",
+              "quantityText": "1 un.",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 1,
+                "unit": "un",
+                "approximate": false,
+                "annotation": null,
+                "source": "1 un."
+              }
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "id": "canjicada-el-guapo-step-0",
+          "text": "O Grão. Escorra bem na peneira. Lavar em água corrente é opcional — a embalagem só pede escorrer, e como a receita depende do amido de milho da Fase 3 para dar liga, lavar demais pode remover o pouco amido superficial disponível. Se houver espuma ou resíduo visível, um enxágue rápido e leve basta — não esfregue.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "canjicada-el-guapo-step-1",
+          "text": "Caramelo. Em panela grande de fundo grosso (capacidade mínima 5L), derreta o açúcar em fogo baixo até virar caramelo âmbar profundo, movimentando a panela pelas alças. Adicione a manteiga e mexa vigorosamente até incorporar por completo.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "canjicada-el-guapo-step-2",
+          "text": "Infusão e Cozimento. Despeje o leite quente aos poucos, mexendo sem parar até dissolver os blocos de açúcar cristalizado pelo choque térmico. Adicione a canela, o cravo e o sal. Junte a canjica escorrida. Cozinhe em fogo baixo, borbulhando suavemente, por exatos 15 minutos.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "canjicada-el-guapo-step-3",
+          "text": "Slurry Mocha. Após os 15 minutos de infusão do grão, adicione o leite condensado à panela e misture bem. À parte, dissolva o amido de milho e o café solúvel nos 80ml de líquido frio, formando uma pasta lisa. Com a panela ainda borbulhando, despeje a pasta, mexendo vigorosamente e raspando o fundo. Cozinhe por 3 minutos, até o creme engrossar e ganhar brilho. Assim que atingir a textura espessa, desligue o fogo imediatamente.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "canjicada-el-guapo-step-4",
+          "text": "Arremate Fora do Fogo. Incorpore o creme de leite, a cachaça e as raspas de laranja, nessa ordem, mexendo de baixo para cima.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "canjicada-el-guapo-step-5",
+          "text": "Descanso. Retire a canela em pau e o cravo. Tampe a panela e deixe descansar por 5 a 10 minutos antes de potear.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        }
+      ]
+    },
+    {
+      "id": "bolo-panetone-el-guapo",
+      "title": "Panetone El Guapo",
+      "sourceUrl": null,
+      "notes": [],
+      "category": "Especiais",
+      "tags": [
+        "Método Indireto · Esponja",
+        "Longa Fermentação",
+        "Aroma Artesanal",
+        "Duas opções de inclusões"
+      ],
+      "metadata": [
+        {
+          "label": "Massa base",
+          "value": "1378g + 450g de inclusões"
+        }
+      ],
+      "image": {
+        "src": "images/el-guapo-img-11.webp",
+        "alt": "Panetone El Guapo"
+      },
+      "ingredientGroups": [
+        {
+          "id": "bolo-panetone-el-guapo-group-0",
+          "title": "Esponja — retirada dos totais da receita",
+          "ingredients": [
+            {
+              "id": "bolo-panetone-el-guapo-ingredient-0-0",
+              "name": "Farinha de trigo",
+              "quantityText": "100g",
+              "detail": "parte dos 600g totais",
+              "quantity": {
+                "kind": "amount",
+                "amount": 100,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "100g"
+              }
+            },
+            {
+              "id": "bolo-panetone-el-guapo-ingredient-0-1",
+              "name": "Água",
+              "quantityText": "100g",
+              "detail": "toda a água da receita",
+              "quantity": {
+                "kind": "amount",
+                "amount": 100,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "100g"
+              }
+            },
+            {
+              "id": "bolo-panetone-el-guapo-ingredient-0-2",
+              "name": "Fermento biológico seco",
+              "quantityText": "10g",
+              "detail": "todo o fermento da receita",
+              "quantity": {
+                "kind": "amount",
+                "amount": 10,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "10g"
+              }
+            }
+          ]
+        },
+        {
+          "id": "bolo-panetone-el-guapo-group-1",
+          "title": "Massa principal — acrescentar à esponja",
+          "ingredients": [
+            {
+              "id": "bolo-panetone-el-guapo-ingredient-1-0",
+              "name": "Esponja preparada",
+              "quantityText": "toda",
+              "detail": null,
+              "quantity": {
+                "kind": "text",
+                "text": "toda"
+              }
+            },
+            {
+              "id": "bolo-panetone-el-guapo-ingredient-1-1",
+              "name": "Farinha de trigo",
+              "quantityText": "500g",
+              "detail": "restante dos 600g totais",
+              "quantity": {
+                "kind": "amount",
+                "amount": 500,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "500g"
+              }
+            },
+            {
+              "id": "bolo-panetone-el-guapo-ingredient-1-2",
+              "name": "Suco de laranja",
+              "quantityText": "150g",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 150,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "150g"
+              }
+            },
+            {
+              "id": "bolo-panetone-el-guapo-ingredient-1-3",
+              "name": "Essência natural caseira",
+              "quantityText": "50g",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 50,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "50g"
+              }
+            },
+            {
+              "id": "bolo-panetone-el-guapo-ingredient-1-4",
+              "name": "Gemas de ovos",
+              "quantityText": "130g",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 130,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "130g"
+              }
+            },
+            {
+              "id": "bolo-panetone-el-guapo-ingredient-1-5",
+              "name": "Açúcar",
+              "quantityText": "150g",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 150,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "150g"
+              }
+            },
+            {
+              "id": "bolo-panetone-el-guapo-ingredient-1-6",
+              "name": "Leite em pó",
+              "quantityText": "30g",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 30,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "30g"
+              }
+            },
+            {
+              "id": "bolo-panetone-el-guapo-ingredient-1-7",
+              "name": "Sal",
+              "quantityText": "8g",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 8,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "8g"
+              }
+            },
+            {
+              "id": "bolo-panetone-el-guapo-ingredient-1-8",
+              "name": "Manteiga",
+              "quantityText": "150g",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 150,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "150g"
+              }
+            }
+          ]
+        },
+        {
+          "id": "bolo-panetone-el-guapo-group-2",
+          "variant": "chocolate",
+          "title": "Opção 1 — Chocolate e castanhas",
+          "ingredients": [
+            {
+              "id": "bolo-panetone-el-guapo-ingredient-2-0",
+              "name": "Chocolate",
+              "quantityText": "400g",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 400,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "400g"
+              }
+            },
+            {
+              "id": "bolo-panetone-el-guapo-ingredient-2-1",
+              "name": "Castanhas de caju ou nozes",
+              "quantityText": "50g",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 50,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "50g"
+              }
+            }
+          ]
+        },
+        {
+          "id": "bolo-panetone-el-guapo-group-3",
+          "variant": "frutas",
+          "title": "Opção 2 — Frutas, cranberry e castanha",
+          "ingredients": [
+            {
+              "id": "bolo-panetone-el-guapo-ingredient-3-0",
+              "name": "Mistura de frutas cristalizadas, cranberry seco e castanha de caju",
+              "quantityText": "450g",
+              "detail": null,
+              "quantity": {
+                "kind": "amount",
+                "amount": 450,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "450g"
+              }
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "id": "bolo-panetone-el-guapo-step-0",
+          "text": "Esponja. Misture 100g de farinha de trigo, 100g de água e os 10g de fermento biológico seco. Cubra e deixe descansar por 30 a 45 minutos, até aumentar de volume e apresentar bolhas. Essas quantidades já fazem parte dos totais da receita.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-panetone-el-guapo-step-1",
+          "text": "Mistura inicial. Combine toda a esponja com os 500g de farinha restantes, 150g de suco de laranja, 130g de gemas, 150g de açúcar, 30g de leite em pó e 50g de essência natural caseira. Não acrescente mais água nem fermento. Misture em velocidade baixa por 3 a 5 minutos, até incorporar a farinha, e deixe descansar por 15 minutos.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-panetone-el-guapo-step-2",
+          "text": "Desenvolvimento do Glúten. Adicione o sal e ligue a batedeira em velocidade média. Bata por 8 a 10 minutos até a massa começar a desgrudar das laterais e apresentar boa elasticidade. Por ser uma massa enriquecida, o glúten se forma com mais lentidão — respeite o tempo de sovagem.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-panetone-el-guapo-step-3",
+          "text": "Incorporação da Manteiga. Reduza para velocidade baixa e adicione a manteiga em ponto pomada em 3 ou 4 adições, esperando a absorção completa de cada porção. A massa pode parecer que desintegra nos primeiros momentos — continue batendo. Após toda a manteiga absorvida, bata até a massa voltar a ser completamente lisa e levemente brilhante.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-panetone-el-guapo-step-4",
+          "text": "Adição das inclusões. Escolha apenas uma opção para a receita inteira: 400g de chocolate com 50g de castanhas de caju ou nozes; ou 450g no total da mistura de frutas cristalizadas, cranberry seco e castanha de caju. Adicione a opção escolhida em velocidade mínima e misture por apenas 1 minuto para distribuir sem rasgar o glúten.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-panetone-el-guapo-step-5",
+          "text": "Primeira Fermentação e Cold Retard. Transfira a massa para um recipiente untado com manteiga. Deixe descansar por 1h em temperatura ambiente e, em seguida, leve à geladeira (cold retard) a 4°C por 12 a 18 horas para desenvolver sabores complexos e estabilizar a manteiga.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-panetone-el-guapo-step-6",
+          "text": "Divisão e boleamento. Retire a massa fria da geladeira e porcione conforme a capacidade das formas. Boleie suavemente na bancada untada e deixe descansar por 20 minutos, coberta.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-panetone-el-guapo-step-7",
+          "text": "Segunda Fermentação. Coloque a massa boleada nas formas de panetone (formas de papel forneável). Deixe fermentar em local fechado e úmido (como forno desligado) por 2h a 3h, ou até que o topo da massa atinja a borda da forma.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-panetone-el-guapo-step-8",
+          "text": "Corte e assamento. Faça um corte em cruz no topo com lâmina afiada. Asse em forno preaquecido a 170°C. O tempo depende do peso de cada porção; a receita anterior usava 35 a 45 minutos para unidades de aproximadamente 500g, com temperatura interna de 90°C a 92°C.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-panetone-el-guapo-step-9",
+          "text": "Resfriamento de Cabeça para Baixo. Ao retirar do forno, transpasse duas hastes de metal (ou palitos de churrasco) na base do panetone e pendure-o de cabeça para baixo por no mínimo 4 horas antes de embalar ou servir. Isso evita que o topo colapse enquanto a estrutura de glúten e manteiga se estabiliza.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        }
+      ]
+    },
+    {
+      "id": "bolo-banana-bread-el-guapo",
+      "title": "Banana Bread El Guapo",
+      "sourceUrl": null,
+      "notes": [
+        {
+          "title": "Beurre Noisette (Reação de Maillard)",
+          "content": "O cozimento da manteiga carameliza os sólidos lácteos, criando compostos aromáticos de nozes e tostado que elevam o perfil sensorial do bolo de banana tradicional para um patamar profissional de alta confeitaria. O aroma amendoado é inconfundível."
+        },
+        {
+          "title": "A dupla Iogurte + Bicarbonato",
+          "content": "O bicarbonato de sódio necessita de acidez para reagir e liberar gás carbônico. O iogurte natural integral e o açúcar mascavo fornecem essa acidez, promovendo um crescimento uniforme, miolo macio e uma coloração escura e dourada belíssima através da alcalinização controlada da massa."
+        },
+        {
+          "title": "Aveia e Higroscopia",
+          "content": "A aveia em flocos finos e o melado de cana agem como agentes higroscópicos, retendo a umidade no miolo do bolo por muito mais tempo. Isso garante que o Banana Bread permaneça incrivelmente úmido por até 5 dias em temperatura ambiente, ideal para um produto de delivery."
+        },
+        {
+          "title": "Método Muffin e Textura",
+          "content": "O segredo do Banana Bread macio é não desenvolver glúten. A mistura deve ser rápida e com grumos. Bater em excesso desenvolve glúten, tornando o bolo duro e embatumado. Grumos na massa são desejáveis — indicam que você não bateu demais."
+        }
+      ],
+      "category": "Especiais",
+      "tags": [
+        "Beurre Noisette",
+        "Açúcar Mascavo",
+        "Textura Chewy",
+        "Iogurte Natural"
+      ],
+      "metadata": [
+        {
+          "label": "Rendimento",
+          "value": "1 forma inglesa grande (~1,2kg)"
+        },
+        {
+          "label": "Preparo",
+          "value": "20 min + 50–60 min forno"
+        }
+      ],
+      "image": {
+        "src": "images/el-guapo-img-12.webp",
+        "alt": "Banana Bread El Guapo"
+      },
+      "ingredientGroups": [
+        {
+          "id": "bolo-banana-bread-el-guapo-group-0",
+          "title": "A. Base Úmida e Aromática (Líquidos)",
+          "ingredients": [
+            {
+              "id": "bolo-banana-bread-el-guapo-ingredient-0-0",
+              "name": "Bananas maduras prata/nanica",
+              "quantityText": "800g",
+              "detail": "160% · bem tigradas/pretas",
+              "quantity": {
+                "kind": "amount",
+                "amount": 800,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "800g"
+              }
+            },
+            {
+              "id": "bolo-banana-bread-el-guapo-ingredient-0-1",
+              "name": "Manteiga sem sal (para Beurre Noisette)",
+              "quantityText": "250g",
+              "detail": "50% · reduz para ~200g após queima",
+              "quantity": {
+                "kind": "amount",
+                "amount": 250,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "250g"
+              }
+            },
+            {
+              "id": "bolo-banana-bread-el-guapo-ingredient-0-2",
+              "name": "Ovos integrais",
+              "quantityText": "6 un. (~330g)",
+              "detail": "66%",
+              "quantity": {
+                "kind": "amount",
+                "amount": 6,
+                "unit": "un",
+                "approximate": false,
+                "annotation": "(~330g)",
+                "source": "6 un. (~330g)"
+              }
+            },
+            {
+              "id": "bolo-banana-bread-el-guapo-ingredient-0-3",
+              "name": "Açúcar mascavo",
+              "quantityText": "350g",
+              "detail": "70% · umidade e acidez",
+              "quantity": {
+                "kind": "amount",
+                "amount": 350,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "350g"
+              }
+            },
+            {
+              "id": "bolo-banana-bread-el-guapo-ingredient-0-4",
+              "name": "Melado de cana ou mel",
+              "quantityText": "50g",
+              "detail": "10% · higroscopia",
+              "quantity": {
+                "kind": "amount",
+                "amount": 50,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "50g"
+              }
+            },
+            {
+              "id": "bolo-banana-bread-el-guapo-ingredient-0-5",
+              "name": "Iogurte natural integral",
+              "quantityText": "100g",
+              "detail": "20% · ativa bicarbonato",
+              "quantity": {
+                "kind": "amount",
+                "amount": 100,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "100g"
+              }
+            },
+            {
+              "id": "bolo-banana-bread-el-guapo-ingredient-0-6",
+              "name": "Extrato de baunilha de verdade",
+              "quantityText": "10g",
+              "detail": "2%",
+              "quantity": {
+                "kind": "amount",
+                "amount": 10,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "10g"
+              }
+            }
+          ]
+        },
+        {
+          "id": "bolo-banana-bread-el-guapo-group-1",
+          "title": "B. Secos (Estrutura — 100% = 500g Farinha)",
+          "ingredients": [
+            {
+              "id": "bolo-banana-bread-el-guapo-ingredient-1-0",
+              "name": "Farinha de trigo Tipo 1",
+              "quantityText": "500g",
+              "detail": "100%",
+              "quantity": {
+                "kind": "amount",
+                "amount": 500,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "500g"
+              }
+            },
+            {
+              "id": "bolo-banana-bread-el-guapo-ingredient-1-1",
+              "name": "Aveia em flocos finos",
+              "quantityText": "100g",
+              "detail": "20% · textura chewy",
+              "quantity": {
+                "kind": "amount",
+                "amount": 100,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "100g"
+              }
+            },
+            {
+              "id": "bolo-banana-bread-el-guapo-ingredient-1-2",
+              "name": "Canela em pó",
+              "quantityText": "5g",
+              "detail": "1%",
+              "quantity": {
+                "kind": "amount",
+                "amount": 5,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "5g"
+              }
+            },
+            {
+              "id": "bolo-banana-bread-el-guapo-ingredient-1-3",
+              "name": "Sal refinado",
+              "quantityText": "5g",
+              "detail": "1% · realçador de sabor",
+              "quantity": {
+                "kind": "amount",
+                "amount": 5,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "5g"
+              }
+            },
+            {
+              "id": "bolo-banana-bread-el-guapo-ingredient-1-4",
+              "name": "Fermento químico em pó",
+              "quantityText": "15g",
+              "detail": "3% · agente de crescimento",
+              "quantity": {
+                "kind": "amount",
+                "amount": 15,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "15g"
+              }
+            },
+            {
+              "id": "bolo-banana-bread-el-guapo-ingredient-1-5",
+              "name": "Bicarbonato de sódio",
+              "quantityText": "5g",
+              "detail": "1% · reage com acidez",
+              "quantity": {
+                "kind": "amount",
+                "amount": 5,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "5g"
+              }
+            }
+          ]
+        },
+        {
+          "id": "bolo-banana-bread-el-guapo-group-2",
+          "title": "C. Inclusões (Carga) e Topo",
+          "ingredients": [
+            {
+              "id": "bolo-banana-bread-el-guapo-ingredient-2-0",
+              "name": "Chocolate amargo (70%) picado ou em gotas",
+              "quantityText": "200g",
+              "detail": "40%",
+              "quantity": {
+                "kind": "amount",
+                "amount": 200,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "200g"
+              }
+            },
+            {
+              "id": "bolo-banana-bread-el-guapo-ingredient-2-1",
+              "name": "Nozes ou pecãs tostadas e picadas",
+              "quantityText": "100g",
+              "detail": "20%",
+              "quantity": {
+                "kind": "amount",
+                "amount": 100,
+                "unit": "g",
+                "approximate": false,
+                "annotation": null,
+                "source": "100g"
+              }
+            },
+            {
+              "id": "bolo-banana-bread-el-guapo-ingredient-2-2",
+              "name": "Banana extra cortada ao meio (longitudinal)",
+              "quantityText": "1 un.",
+              "detail": "decoração topo",
+              "quantity": {
+                "kind": "amount",
+                "amount": 1,
+                "unit": "un",
+                "approximate": false,
+                "annotation": null,
+                "source": "1 un."
+              }
+            },
+            {
+              "id": "bolo-banana-bread-el-guapo-ingredient-2-3",
+              "name": "Açúcar cristal ou demerara",
+              "quantityText": "a gosto",
+              "detail": "crosta crocante",
+              "quantity": {
+                "kind": "text",
+                "text": "a gosto"
+              }
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "id": "bolo-banana-bread-el-guapo-step-0",
+          "text": "Manteiga Noisette (Avelã). Derreta a manteiga em fogo médio. Deixe cozinhar mexendo de vez em quando até que os sólidos do leite precipitem, fiquem dourados/marrons no fundo e exalem um aroma amendoado de avelã. Transfira imediatamente para uma tigela fria para parar o cozimento e deixe amornar (não precisa solidificar, use líquida mas não fervendo).",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-banana-bread-el-guapo-step-1",
+          "text": "Mise en Place. Amasse as bananas grosseiramente com um garfo, deixando alguns pedaços para textura (ou processe se preferir uma massa lisa). Toste as nozes no forno a 160°C por 5 a 8 minutos apenas para liberar óleos essenciais. Pique grosseiramente após esfriar.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-banana-bread-el-guapo-step-2",
+          "text": "Mistura dos Líquidos. Em um bowl grande, misture a manteiga noisette morna, o açúcar mascavo, o melado, os ovos, o iogurte, a baunilha e as bananas amassadas. Bata com um fouet apenas para homogeneizar em uma emulsão grossa. Não bata em excesso.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-banana-bread-el-guapo-step-3",
+          "text": "Mistura dos Secos. Em outro recipiente, peneire a farinha, o fermento químico, o bicarbonato, a canela e o sal. Misture a aveia e as nozes picadas até distribuir uniformemente.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-banana-bread-el-guapo-step-4",
+          "text": "Incorporação (Método Muffin). Verta os líquidos sobre os secos (ou vice-versa, o que for mais prático). Misture com uma espátula ou pão duro fazendo movimentos de baixo para cima. Pare de misturar assim que a farinha sumir. É normal e desejável que a massa tenha grumos — se bater demais, o bolo ficará elástico e duro (embatumado).",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-banana-bread-el-guapo-step-5",
+          "text": "Carga Final. Adicione o chocolate amargo em gotas/picado e dê apenas duas ou três voltas para distribuir uniformemente sem desenvolver mais glúten.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-banana-bread-el-guapo-step-6",
+          "text": "Montagem e Decoração. Verta a massa em uma forma de bolo inglês grande (ou duas médias) untada e forrada com papel manteiga. Coloque as duas metades da banana extra sobre o topo da massa, com o lado cortado voltado para cima. Polvilhe açúcar demerara generosamente por toda a superfície para criar uma crosta caramelizada.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        },
+        {
+          "id": "bolo-banana-bread-el-guapo-step-7",
+          "text": "Assamento. Asse em forno pré-aquecido a 170°C por 50 a 60 minutos. O bolo estará pronto quando um palito inserido no centro sair limpo (exceto por chocolate derretido) e a temperatura interna atingir 92°C. Deixe esfriar por 15 minutos na forma antes de desenformar sobre uma grelha.",
+          "quantityReferences": [],
+          "reviewStatus": "pending"
+        }
+      ]
+    }
+  ]
+}

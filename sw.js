@@ -1,34 +1,62 @@
 /**
  * ═══════════════════════════════════════════════════════════════════
- * EL GUAPO SERVICE WORKER v2.0
+ * EL GUAPO SERVICE WORKER v3.2
  * Cache Strategy: Network-First para HTML, Cache-First para assets
  * Suporte offline completo + sincronização em background
  * ═══════════════════════════════════════════════════════════════════
  */
 
-const CACHE_NAME = 'el-guapo-v2.0';
-const ASSETS_CACHE = 'el-guapo-assets-v2.0';
-const RUNTIME_CACHE = 'el-guapo-runtime-v2.0';
+const CACHE_NAME = 'el-guapo-v3.2';
+const ASSETS_CACHE = 'el-guapo-assets-v3.2';
+const RUNTIME_CACHE = 'el-guapo-runtime-v3.2';
 
 const ASSETS_TO_CACHE = [
-    './',
-    './index.html',
-    './manifest.json',
-    './sw.js',
-    './style.css',
-    './script.js',
-    './images/el-guapo-img-01.webp',
-    './images/el-guapo-img-02.webp',
-    './images/el-guapo-img-03.webp',
-    './images/el-guapo-img-04.webp',
-    './images/el-guapo-img-05.webp',
-    './images/el-guapo-img-06.webp',
-    './images/el-guapo-img-07.webp',
-    './images/el-guapo-img-08.webp',
-    './images/el-guapo-img-09.webp',
-    './images/el-guapo-img-10.webp',
-    './images/el-guapo-img-11.webp',
-    './images/el-guapo-img-12.webp'
+    "./",
+    "./index.html",
+    "./manifest.json",
+    "./sw.js",
+    "./style.css",
+    "./script.js",
+    "./shopping-list.js",
+    "./ingredient-catalog.js",
+    "./shopping-model.js",
+    "./assets/fonts/DM-Sans-OFL.txt",
+    "./assets/fonts/Fraunces-OFL.txt",
+    "./assets/fonts/dm-sans-400-normal.ttf",
+    "./assets/fonts/dm-sans-500-normal.ttf",
+    "./assets/fonts/dm-sans-600-normal.ttf",
+    "./assets/fonts/dm-sans-700-normal.ttf",
+    "./assets/fonts/fraunces-400-italic.ttf",
+    "./assets/fonts/fraunces-400-normal.ttf",
+    "./assets/fonts/fraunces-600-italic.ttf",
+    "./assets/fonts/fraunces-600-normal.ttf",
+    "./assets/fonts/fraunces-700-normal.ttf",
+    "./assets/fonts.css",
+    "./assets/icons/LICENSE",
+    "./assets/icons/arrow-up-right.svg",
+    "./assets/icons/book-open.svg",
+    "./assets/icons/chef-hat.svg",
+    "./assets/icons/chevron-down.svg",
+    "./assets/icons/house.svg",
+    "./assets/icons/moon.svg",
+    "./assets/icons/search.svg",
+    "./assets/icons/shopping-bag.svg",
+    "./assets/icons/sun.svg",
+    "./assets/icons/x.svg",
+    "./images/recipes/arroz-doce.jpg",
+    "./images/recipes/banana-bread.jpg",
+    "./images/recipes/bolo-cenoura-gabriela.jpg",
+    "./images/recipes/bolo-pao-de-mel.jpg",
+    "./images/recipes/bolo-prestigio.jpg",
+    "./images/recipes/canjicada.jpg",
+    "./images/recipes/cuca-com-crumble.jpg",
+    "./images/recipes/focaccia.jpg",
+    "./images/recipes/massa-de-pizza.jpg",
+    "./images/recipes/panetone.jpg",
+    "./images/recipes/pao-de-lo-baunilha.jpg",
+    "./images/recipes/pao-de-lo-chocolate.jpg",
+    "./images/recipes/pao-de-queijo.jpg",
+    "./images/recipes/pao-heuller-gabriela.jpg"
 ];
 
 // Evento de instalação: cachear assets críticos
@@ -54,7 +82,8 @@ self.addEventListener('activate', (event) => {
         caches.keys().then((cacheNames) => {
             return Promise.all(
                 cacheNames.map((cacheName) => {
-                    if (cacheName !== CACHE_NAME) {
+                    if (cacheName.startsWith('el-guapo-') &&
+                        ![CACHE_NAME, ASSETS_CACHE, RUNTIME_CACHE].includes(cacheName)) {
                         console.log('Deletando cache antigo:', cacheName);
                         return caches.delete(cacheName);
                     }
@@ -154,4 +183,4 @@ self.addEventListener('message', (event) => {
     }
 });
 
-console.log('[SW] Service Worker v2.0 carregado com sucesso!');
+console.log('[SW] Service Worker v3.2 carregado com sucesso!');

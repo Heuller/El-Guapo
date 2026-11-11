@@ -48,7 +48,6 @@
     modalBody.appendChild(content);
     modalOverlay.classList.add("active");
     modalOverlay.setAttribute("aria-hidden", "false");
-    if (modalClose) modalClose.focus();
     enableFocusTrap(modalOverlay);
     toggleScroll(false);
   }
@@ -121,7 +120,7 @@
 
   function disableFocusTrap() {
     document.removeEventListener("focus", _keepFocus, true);
-    if (_prevFocus && typeof _prevFocus.focus === "function")
+    if (_prevFocus?.isConnected && typeof _prevFocus.focus === "function")
       _prevFocus.focus();
     _prevFocus = null;
     _trapContainer = null;
@@ -176,26 +175,6 @@
   document
     .querySelectorAll(".js-fade, .recipe-card")
     .forEach((el) => fadeObs.observe(el));
-
-  // Nav Link Ativa
-  const navLinks = document.querySelectorAll(".nav-links a");
-  const secObs = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          const id = e.target.getAttribute("id");
-          navLinks.forEach((a) =>
-            a.classList.toggle(
-              "nav-active",
-              a.getAttribute("href") === `#${id}`,
-            ),
-          );
-        }
-      });
-    },
-    { rootMargin: "-38% 0px -55% 0px" },
-  );
-  document.querySelectorAll("section[id]").forEach((s) => secObs.observe(s));
 
   /* ── 3. ACCORDION & INJEÇÃO DE COMPONENTES ── */
   document.addEventListener("click", (e) => {
@@ -267,39 +246,35 @@
   const searchClear = document.getElementById("search-clear");
 
   if (searchInput) {
+    let activeCategory = "all";
+    const normalizeSearch = (value) => value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
     const doSearch = () => {
-      const q = searchInput.value.trim().toLowerCase();
+      const q = normalizeSearch(searchInput.value.trim());
       if (searchClear) searchClear.style.display = q ? "block" : "none";
-
+      let count = 0;
       document.querySelectorAll(".recipe-card").forEach((card) => {
-        card.classList.toggle(
-          "search-hidden",
-          q.length > 0 && !card.textContent.toLowerCase().includes(q),
-        );
+        const matches = (!q || normalizeSearch(card.textContent).includes(q)) &&
+          (activeCategory === "all" || card.dataset.category === activeCategory);
+        card.classList.toggle("search-hidden", !matches);
+        if (matches) count++;
       });
-
-      document.querySelectorAll("section[id]").forEach((sec) => {
-        const wrap = sec.querySelector(".recipe-wrap");
-        if (!wrap) return;
-        const cards = wrap.querySelectorAll(".recipe-card");
-        const visible = [...cards].filter(
-          (c) => !c.classList.contains("search-hidden"),
-        );
-        let msg = wrap.querySelector(".search-no-results");
-
-        if (q && visible.length === 0 && cards.length > 0) {
-          if (!msg) {
-            msg = document.createElement("div");
-            msg.className = "section-empty search-no-results";
-            msg.innerHTML = `<span class="section-empty-line"></span><span class="section-empty-text">Nenhuma receita encontrada</span><span class="section-empty-line"></span>`;
-            wrap.appendChild(msg);
-          }
-          msg.style.display = "flex";
-        } else if (msg) {
-          msg.style.display = "none";
-        }
-      });
+      const countEl = document.getElementById("catalog-count");
+      if (countEl) countEl.textContent = `${count} ${count === 1 ? "receita" : "receitas"} no caderno`;
+      const empty = document.querySelector(".catalog-empty");
+      if (empty) empty.hidden = count > 0;
+      const featured = document.querySelector(".featured-recipe");
+      if (featured) featured.hidden = !!q || activeCategory !== "all";
     };
+    document.querySelectorAll(".category-filter").forEach((button) => {
+      button.addEventListener("click", () => {
+        activeCategory = button.dataset.category;
+        document.querySelectorAll(".category-filter").forEach((item) => {
+          item.classList.toggle("active", item === button);
+          item.setAttribute("aria-pressed", String(item === button));
+        });
+        doSearch();
+      });
+    });
 
     const debounce = (fn, wait = 120) => {
       let t;
@@ -702,264 +677,31 @@
   /* ── 8. LISTA DE COMPRAS & MISE EN PLACE ── */
   function getRecipeIngredients(card) {
     const ingredients = [];
-    card.querySelectorAll(".rc-ing-group").forEach((group) => {
+    card.querySelectorAll(".rc-ing-group").forEach((group, groupIndex) => {
+      if (group.hidden) return;
       const groupName =
         group.querySelector(".rc-ing-group-name")?.textContent || "";
-      group.querySelectorAll(".rc-ing-item").forEach((item) => {
+      group.querySelectorAll(".rc-ing-item").forEach((item, itemIndex) => {
         const name = item
           .querySelector(".rc-ing-row span:first-child")
           ?.childNodes[0]?.textContent.trim();
         const qty = item.querySelector(".rc-ing-qty")?.textContent.trim();
         if (name) {
-          ingredients.push({ group: groupName, name, qty });
+          ingredients.push({ group: groupName, name, qty,
+            baseQty: item.querySelector(".rc-ing-qty")?.getAttribute("data-orig") || qty,
+            scale: Number(card.querySelector(".rc-scale-btn--active")?.dataset.mult || 1),
+            sourceKey: `${groupIndex}-${itemIndex}`,
+            prepared: item.dataset.prepared === "true",
+          });
         }
       });
     });
     return ingredients;
   }
 
+  let shoppingList;
   function generateShoppingList(card) {
-    const recipeName = card.querySelector(".rc-name")?.textContent || "Receita";
-    const ingredients = getRecipeIngredients(card);
-
-    // Helpers para despensa e categorias
-    const pantry = getPantry();
-    const normalize = (s) =>
-      s
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/\p{Diacritic}/gu, "")
-        .trim();
-
-    function categorizeIngredient(name) {
-      const n = name.toLowerCase();
-      if (/leite|manteiga|iogurte|creme|queijo|nata|ricota/.test(n))
-        return "Laticínios";
-      if (/farinha|trigo|fermento|ovo|gema|clara/.test(n))
-        return "Padaria & Panificação";
-      if (/açúcar|mel|glucose|xarope|açucar|demerara/.test(n))
-        return "Açúcares & Doces";
-      if (
-        /sal|pimenta|canela|baunilha|essência|tempero|ervas|temperos?/.test(n)
-      )
-        return "Temperos";
-      if (/banana|laranja|limão|fruta|maçã|manga|uva|abacaxi/.test(n))
-        return "Frutas";
-      if (/noz|pecã|amêndra|castanha|amendoim|nozes|castanhas?/.test(n))
-        return "Oleaginosas";
-      if (/óleo|azeite|azeite|óleo|manteiga|gordura/.test(n))
-        return "Óleos & Gorduras";
-      if (/chocolate|cacau|cacau em pó/.test(n)) return "Chocolates & Cacau";
-      return "Outros";
-    }
-
-    const substitutions = {
-      "fermento biológico seco": [
-        {
-          name: "Fermento biológico fresco",
-          note: "Use 3× a massa: 1g seco ≈ 3g fresco",
-        },
-      ],
-      "fermento seco": [{ name: "Fermento fresco", note: "Use 3×" }],
-      "açúcar refinado": [
-        { name: "Açúcar demerara", note: "Sabor mais caramelado" },
-      ],
-      "leite integral": [
-        {
-          name: "Leite",
-          note: "Se tiver apenas vegetal, ajuste expectativa de sabor",
-        },
-      ],
-    };
-
-    function compareAvailability(reqQty, pantryItem) {
-      if (!pantryItem) return { available: false, label: "faltando" };
-      if (!reqQty || pantryItem.amount == null || !pantryItem.unit) {
-        return { available: true, label: "na despensa" };
-      }
-
-      const pantryValue = pantryItem.amount;
-      const pantryUnit = pantryItem.unit;
-      if (pantryUnit === reqQty.unit) {
-        if (pantryValue >= reqQty.value) {
-          return { available: true, label: "suficiente" };
-        }
-        return {
-          available: false,
-          label: `falta ${reqQty.value - pantryValue}${reqQty.unit}`,
-        };
-      }
-
-      if (
-        (pantryUnit === "g" && reqQty.unit === "kg") ||
-        (pantryUnit === "kg" && reqQty.unit === "g") ||
-        (pantryUnit === "ml" && reqQty.unit === "l") ||
-        (pantryUnit === "l" && reqQty.unit === "ml")
-      ) {
-        const normalizedReq =
-          reqQty.unit === "kg" ? reqQty.value * 1000 : reqQty.value;
-        const normalizedPantry =
-          pantryUnit === "kg" ? pantryValue * 1000 : pantryValue;
-        if (normalizedPantry >= normalizedReq) {
-          return { available: true, label: "suficiente" };
-        }
-        return {
-          available: false,
-          label: `falta ${Math.abs(normalizedReq - normalizedPantry)}g`,
-        };
-      }
-
-      return { available: true, label: "na despensa" };
-    }
-
-    // Construir estrutura por categorias
-    const buckets = {};
-    const missing = [];
-
-    ingredients.forEach((ing) => {
-      const cat = categorizeIngredient(ing.name);
-      buckets[cat] = buckets[cat] || [];
-      const nName = normalize(ing.name);
-      const reqQty = ing.qty ? parseQuantity(ing.qty) : null;
-      // Verifica na despensa por substring
-      const found = pantry.find(
-        (p) =>
-          normalize(p.name).includes(nName) ||
-          nName.includes(normalize(p.name)),
-      );
-      const availability = compareAvailability(reqQty, found);
-      const item = {
-        name: ing.name,
-        qty: ing.qty,
-        available: availability.available,
-        statusLabel: availability.label,
-      };
-      if (!availability.available) missing.push(item);
-      // Sugestões
-      const subKey = Object.keys(substitutions).find((k) => nName.includes(k));
-      if (subKey) item.suggestions = substitutions[subKey];
-      buckets[cat].push(item);
-    });
-
-    const container = document.createElement("div");
-    container.className = "shop-actions shop-actions--full";
-
-    const overview = document.createElement("div");
-    overview.className = "shop-overview";
-    overview.innerHTML = `<strong>${ingredients.length} item${ingredients.length === 1 ? "" : "s"}</strong> · ${missing.length} faltante${missing.length === 1 ? "" : "s"}`;
-
-    const listHtml = document.createElement("div");
-    listHtml.className = "shop-html-list shop-html-list--categorized";
-
-    Object.keys(buckets).forEach((cat) => {
-      const items = buckets[cat];
-      const catEl = document.createElement("div");
-      catEl.className = "shop-cat";
-      const head = document.createElement("div");
-      head.className = "shop-cat-head";
-      head.innerHTML = `<strong>${cat}</strong> <span style="color:var(--ink-soft); font-size:0.9rem">(${items.length})</span>`;
-      catEl.appendChild(head);
-
-      items.forEach((it) => {
-        const itEl = document.createElement("div");
-        itEl.className = `shop-item ${it.available ? "shop-item--available" : "shop-item--missing"}`;
-
-        const left = document.createElement("div");
-        left.className = "shop-item-meta";
-        left.innerHTML = `
-          <div class="shop-item-name">${it.name}</div>
-          ${it.suggestions ? `<div class="shop-item-suggestions">${it.suggestions.map((s) => `${s.name} (${s.note})`).join("<br>")}</div>` : ""}
-        `;
-
-        const right = document.createElement("div");
-        right.className = "shop-item-status-block";
-        right.innerHTML = `
-          <div class="shop-item-qty">${it.qty}</div>
-          <div class="shop-item-status">${it.statusLabel || (it.available ? "na despensa" : "faltando")}</div>
-        `;
-
-        itEl.appendChild(left);
-        itEl.appendChild(right);
-        catEl.appendChild(itEl);
-      });
-
-      listHtml.appendChild(catEl);
-    });
-
-    container.appendChild(overview);
-    container.appendChild(listHtml);
-
-    const actions = document.createElement("div");
-    actions.style.display = "flex";
-    actions.style.gap = "0.6rem";
-    actions.style.marginTop = "1rem";
-
-    const copyBtn = document.createElement("button");
-    copyBtn.className = "shop-copy-btn";
-    copyBtn.textContent = "Copiar lista";
-    copyBtn.addEventListener("click", () => {
-      const text =
-        `${recipeName} - Lista:\n` +
-        ingredients.map((i) => `- ${i.name}: ${i.qty}`).join("\n");
-      navigator.clipboard.writeText(text).then(() => {
-        copyBtn.textContent = "✓ Copiado";
-        setTimeout(() => (copyBtn.textContent = "Copiar lista"), 1500);
-      });
-    });
-
-    const addMissingBtn = document.createElement("button");
-    addMissingBtn.className = "shop-add-missing";
-    addMissingBtn.textContent =
-      missing.length > 0
-        ? `Adicionar ${missing.length} faltantes à despensa`
-        : "Todos os ingredientes estão na despensa";
-    addMissingBtn.disabled = missing.length === 0;
-    addMissingBtn.addEventListener("click", () => {
-      missing.forEach((it) => {
-        const qty = parseQuantity(it.qty);
-        addPantryItem({
-          name: it.name,
-          amount: qty?.value || null,
-          unit: qty?.unit || "",
-        });
-      });
-      addMissingBtn.textContent = "Adicionados ✓";
-      addMissingBtn.disabled = true;
-      setTimeout(
-        () =>
-          (addMissingBtn.textContent =
-            missing.length > 0
-              ? `Adicionar ${missing.length} faltantes à despensa`
-              : "Todos os ingredientes estão na despensa"),
-        1500,
-      );
-    });
-
-    const shareBtn = document.createElement("button");
-    shareBtn.className = "shop-share-btn";
-    shareBtn.textContent = "Compartilhar";
-    shareBtn.addEventListener("click", async () => {
-      const text =
-        `${recipeName} - Lista:\n` +
-        ingredients.map((i) => `- ${i.name}: ${i.qty}`).join("\n");
-      if (navigator.share) {
-        try {
-          await navigator.share({ title: `Lista: ${recipeName}`, text });
-        } catch (_) {}
-      } else {
-        navigator.clipboard.writeText(text).then(() => {
-          shareBtn.textContent = "Copiado para área de transferência";
-          setTimeout(() => (shareBtn.textContent = "Compartilhar"), 1500);
-        });
-      }
-    });
-
-    actions.appendChild(copyBtn);
-    actions.appendChild(addMissingBtn);
-    actions.appendChild(shareBtn);
-    container.appendChild(actions);
-
-    openModal("Lista de Compras", recipeName.toUpperCase(), container);
+    shoppingList.addRecipe(getRecipeIngredients(card), { recipeId: card.id, recipeTitle: card.querySelector(".rc-name")?.textContent || card.id, replacesRecipeIds: (card.dataset.replacesRecipes || "").split(" ").filter(Boolean) });
   }
 
   function startMiseEnPlace(card) {
@@ -996,17 +738,29 @@
       const head = card.querySelector(".rc-head");
       const rcBody = card.querySelector(".rc-body");
       const ingCol = card.querySelector(".rc-ingredients");
+      card.querySelectorAll('.rc-inclusion-options input[type="radio"]').forEach((input) => {
+        input.addEventListener("change", () => {
+          card.querySelectorAll(".rc-ing-group[data-variant]").forEach((group) => {
+            group.hidden = group.dataset.variant !== input.value;
+          });
+        });
+      });
 
       if (head && !head.querySelector(".kitchen-btn")) {
         const kitchenBtn = document.createElement("button");
         kitchenBtn.className = "kitchen-btn";
-        kitchenBtn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="kitchen-icon-svg"><path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/><path d="M12 18V2"/></svg>`;
+        kitchenBtn.innerHTML = `<img src="assets/icons/chef-hat.svg" alt="" width="19" height="19" /> Mãos à massa!`;
         kitchenBtn.title = "Modo Foco na Cozinha";
         kitchenBtn.addEventListener("click", (e) => {
           e.stopPropagation();
           startKitchenMode(card);
         });
-        head.appendChild(kitchenBtn);
+        // Keep the kitchen action next to the introduction without nesting a
+        // native button inside the accordion's button role.
+        const cover = document.createElement("div");
+        cover.className = "rc-cover";
+        head.before(cover);
+        cover.append(head, kitchenBtn);
       }
 
       if (ingCol) {
@@ -1014,12 +768,6 @@
         const qtyEls = ingCol.querySelectorAll(".rc-ing-qty");
         qtyEls.forEach((el) => {
           el.setAttribute("data-orig", el.textContent.trim());
-          const ingredientName =
-            el
-              .closest(".rc-ing-item")
-              .querySelector(".rc-ing-row span:first-child")
-              ?.childNodes[0]?.textContent.trim() || "";
-          el.dataset.ingredientName = ingredientName;
         });
 
         const scaler = document.createElement("div");
@@ -1034,31 +782,19 @@
                         <button class="rc-scale-btn" data-mult="3">3×</button>
                     </div>`;
 
-        const unitSwitcher = document.createElement("div");
-        unitSwitcher.className = "rc-unit-switcher";
-        unitSwitcher.innerHTML = `
-                    <span class="rc-unit-label">Unidades</span>
-                    <div class="rc-unit-controls">
-                        <button class="rc-unit-btn rc-unit-btn--active" data-unit="gramas">g</button>
-                        <button class="rc-unit-btn" data-unit="caseiro">caseiro</button>
-                    </div>`;
-
-        if (colLabel) {
-          colLabel.after(scaler);
-          scaler.after(unitSwitcher);
-        }
+        if (colLabel) colLabel.after(scaler);
 
         // Injeção de Ações Rápidas (Lista de Compras & Mise en Place)
         if (!ingCol.querySelector(".rc-quick-actions")) {
           const quickActions = document.createElement("div");
           quickActions.className = "rc-quick-actions";
           quickActions.innerHTML = `
-                        <button class="rc-action-btn rc-shop-btn" title="Gerar Lista de Compras">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-                            Lista de Compras
+                        <button class="rc-action-btn rc-shop-btn" title="Adicionar todos os ingredientes à lista de compras">
+                            <img src="assets/icons/shopping-bag.svg" alt="" width="16" height="16" />
+                            Adicionar todos à lista de compras
                         </button>
                         <button class="rc-action-btn rc-mise-btn" title="Mise en Place">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
+                            <img src="assets/icons/chef-hat.svg" alt="" width="16" height="16" />
                             Mise en Place
                         </button>
                     `;
@@ -1079,47 +815,6 @@
             });
         }
 
-        const unitButtons = unitSwitcher.querySelectorAll(".rc-unit-btn");
-        const getCurrentUnit = () =>
-          unitSwitcher.querySelector(".rc-unit-btn--active")?.dataset.unit ||
-          "gramas";
-
-        const getCurrentScale = () => {
-          const activeBtn = scaler.querySelector(".rc-scale-btn--active");
-          return activeBtn ? parseFloat(activeBtn.dataset.mult) : 1;
-        };
-
-        const applyUnitMode = (unit) => {
-          unitButtons.forEach((btn) =>
-            btn.classList.toggle(
-              "rc-unit-btn--active",
-              btn.dataset.unit === unit,
-            ),
-          );
-          if (card.id) {
-            localStorage.setItem(`eg-unit-mode-${card.id}`, unit);
-          }
-          const scale = getCurrentScale();
-          qtyEls.forEach((el) => {
-            el.textContent = renderIngredientQty(el, unit, scale);
-          });
-        };
-
-        unitButtons.forEach((btn) => {
-          btn.addEventListener("click", (e) => {
-            e.stopPropagation();
-            const unit = btn.dataset.unit;
-            applyUnitMode(unit);
-          });
-        });
-
-        if (card.id) {
-          const savedUnit = localStorage.getItem(`eg-unit-mode-${card.id}`);
-          if (savedUnit === "caseiro") {
-            applyUnitMode("caseiro");
-          }
-        }
-
         scaler.querySelectorAll(".rc-scale-btn").forEach((btn) => {
           btn.addEventListener("click", (e) => {
             e.stopPropagation();
@@ -1129,9 +824,8 @@
               .forEach((b) =>
                 b.classList.toggle("rc-scale-btn--active", b === btn),
               );
-            const unit = getCurrentUnit();
             qtyEls.forEach((el) => {
-              el.textContent = renderIngredientQty(el, unit, mult);
+              el.textContent = renderIngredientQty(el, mult);
             });
           });
         });
@@ -1148,7 +842,7 @@
                         <span class="rc-user-notes-toggle">${savedNote ? "editar" : "adicionar nota"}</span>
                     </div>
                     <div class="rc-user-notes-body${savedNote ? " open" : ""}">
-                        <textarea class="rc-user-notes-area" placeholder="Ajustes, variações...">${savedNote}</textarea>
+                        <textarea class="rc-user-notes-area" placeholder="Ajustes, variações..."></textarea>
                         <div class="rc-user-notes-actions">
                             <span class="rc-user-notes-saved">salvo</span>
                             <button class="rc-user-notes-save">salvar</button>
@@ -1159,6 +853,7 @@
         const nHead = notesSection.querySelector(".rc-user-notes-head");
         const nBody = notesSection.querySelector(".rc-user-notes-body");
         const nArea = notesSection.querySelector(".rc-user-notes-area");
+        nArea.value = savedNote;
         const nSave = notesSection.querySelector(".rc-user-notes-save");
         const nSaved = notesSection.querySelector(".rc-user-notes-saved");
         const nToggle = notesSection.querySelector(".rc-user-notes-toggle");
@@ -1181,81 +876,17 @@
     });
   }
 
-  function renderIngredientQty(el, unit, mult) {
+  function renderIngredientQty(el, mult) {
     const orig = el.getAttribute("data-orig");
-    if (!orig) return el.textContent.trim();
-    const ingredientName = el.dataset.ingredientName || "";
-    const scaled = scaleText(orig, mult);
-    return unit === "caseiro"
-      ? convertToHousehold(scaled, ingredientName)
-      : scaled;
-  }
-
-  function convertToHousehold(text, ingredientName) {
-    if (!text || /q\.b\.|a gosto|opcional|%/i.test(text)) return text;
-    const parsed = parseIngredientAmount(text);
-    if (!parsed) return text;
-    const { amount, unit, rest } = parsed;
-    const lowerName = ingredientName.toLowerCase();
-
-    const scale = (grams, divisor) => {
-      const qty = smartRound(grams / divisor);
-      if (qty >= 1.5)
-        return `${qty} ${divisor === 15 ? "colheres de sopa" : "xícaras"}`;
-      if (qty === 1)
-        return `${qty} ${divisor === 15 ? "colher de sopa" : "xícara"}`;
-      return `${smartRound((grams / divisor) * 2) / 2} ${divisor === 15 ? "colher de sopa" : "xícara"}`;
-    };
-
-    if (unit === "g" || unit === "kg") {
-      const grams = amount * (unit === "kg" ? 1000 : 1);
-      if (/farinha|trigo|trigo sarraceno|amido|aveia/.test(lowerName)) {
-        return `${scale(grams, 120)} de ${rest}`.trim();
-      }
-      if (/açúcar|cacau|cacau em pó|chocolate|açucar/.test(lowerName)) {
-        return `${scale(grams, 200)} de ${rest}`.trim();
-      }
-      if (/manteiga|margarina/.test(lowerName)) {
-        const tbsp = smartRound(grams / 14);
-        return `${tbsp} colher${tbsp === 1 ? "" : "es"} de sopa de ${rest}`.trim();
-      }
-      if (/fermento/.test(lowerName)) {
-        const tbsp = smartRound(grams / 12);
-        return `${tbsp} colher${tbsp === 1 ? "" : "es"} de sopa de ${rest}`.trim();
-      }
-      return `${scale(grams, 120)} de ${rest}`.trim();
-    }
-
-    if (unit === "ml" || unit === "l") {
-      const milliliters = amount * (unit === "l" ? 1000 : 1);
-      if (/leite|água|óleo|azeite|creme|licor/.test(lowerName)) {
-        const tbsp = smartRound(milliliters / 15);
-        return `${tbsp} colher${tbsp === 1 ? "" : "es"} de sopa de ${rest}`.trim();
-      }
-      const cups = smartRound(milliliters / 240);
-      return `${cups} xícara${cups === 1 ? "" : "s"} de ${rest}`.trim();
-    }
-
-    return text;
-  }
-
-  function parseIngredientAmount(text) {
-    const match = text.match(
-      /^(~?)([\d]+(?:[.,][\d]+)?)(?:\s*)(g|gr|gramas|kg|ml|l|xícara|xicaras|xícaras|colheres|colher|col\.|coluna)?(?:\s*)(.*)$/i,
-    );
-    if (!match) return null;
-    let amount = parseFloat(match[2].replace(",", "."));
-    let unit = (match[3] || "").toLowerCase();
-    const rest = match[4] ? match[4].trim() : "";
-    if (unit === "g" || unit === "gr" || unit === "gramas") unit = "g";
-    if (unit === "kg") unit = "kg";
-    if (unit === "ml") unit = "ml";
-    if (unit === "l") unit = "l";
-    return { amount, unit, rest };
+    return orig ? scaleText(orig, mult) : el.textContent.trim();
   }
 
   function scaleText(orig, mult) {
     if (!orig || /q\.b\.|a gosto|opcional|%/i.test(orig)) return orig;
+    // Kitchen fractions are used by the homemade essence (¼ citrus, ½ vanilla).
+    orig = orig.replace(/^(\d*)([¼½¾])/, (_, whole, fraction) =>
+      String(Number(whole || 0) + ({ "¼": 0.25, "½": 0.5, "¾": 0.75 })[fraction]),
+    );
     const rng = orig.match(
       /^(~?)([\d]+(?:[.,]\d+)?)\s*[–—-]\s*([\d]+(?:[.,]\d+)?)\s*([a-zA-Z.]*.*)?$/,
     );
@@ -1290,7 +921,8 @@
     const candleBtn = document.createElement("button");
     candleBtn.className = "candle-toggle";
     candleBtn.title = "Modo Luz de Vela";
-    candleBtn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path><circle cx="12" cy="12" r="4"></circle></svg>`;
+    candleBtn.innerHTML = `<img src="assets/icons/sun.svg" alt="" width="19" height="19" />`;
+    candleBtn.setAttribute("aria-label", "Alternar modo luz de vela");
 
     // Insere o botão no nav, antes dos links ou no final se não houver links
     const navLinks = nav.querySelector(".nav-links");
@@ -1302,191 +934,17 @@
 
     const isDark = localStorage.getItem("eg-candlelight") === "true";
     if (isDark) document.documentElement.classList.add("candlelight");
+    candleBtn.setAttribute("aria-pressed", String(isDark));
 
     candleBtn.addEventListener("click", () => {
       const active = document.documentElement.classList.toggle("candlelight");
       localStorage.setItem("eg-candlelight", active);
+      candleBtn.setAttribute("aria-pressed", String(active));
       if (navigator.vibrate) navigator.vibrate(10);
     });
   }
 
   /* ── 9. INICIALIZAÇÃO ── */
-  // Despensa: persistência simples
-  const PANTRY_KEY = "eg-pantry-v1";
-  function getPantry() {
-    try {
-      return JSON.parse(localStorage.getItem(PANTRY_KEY) || "[]");
-    } catch {
-      return [];
-    }
-  }
-  function savePantry(arr) {
-    localStorage.setItem(PANTRY_KEY, JSON.stringify(arr));
-  }
-  function parseQuantity(qty) {
-    if (!qty || typeof qty !== "string") return null;
-    const normalized = qty.replace(/[,·]/g, ".").trim();
-    const match = normalized.match(
-      /^([0-9]+(?:\.[0-9]+)?)\s*(g|kg|ml|l|un|unidade|unidades|colh(?:a|es)|x)?/i,
-    );
-    if (!match) return null;
-    let value = parseFloat(match[1]);
-    let unit = (match[2] || "").toLowerCase();
-    if (unit === "kg") {
-      value *= 1000;
-      unit = "g";
-    }
-    if (unit === "l") unit = "ml";
-    if (unit === "un" || unit === "unidade" || unit === "unidades") unit = "un";
-    if (unit === "colh" || unit.startsWith("colh")) unit = "colher";
-    return { value, unit: unit || "" };
-  }
-  function makePantryKey(item) {
-    const name = typeof item === "string" ? item : item?.name;
-    return String(name || "")
-      .trim()
-      .toLowerCase();
-  }
-  function addPantryItem(item) {
-    const p = getPantry();
-    const key = makePantryKey(item);
-    const existing = p.find((x) => makePantryKey(x) === key);
-    if (existing) {
-      if (item.amount && item.unit && existing.unit === item.unit) {
-        existing.amount = (existing.amount || 0) + item.amount;
-      }
-      if (item.amount && item.unit && !existing.unit) {
-        existing.amount = item.amount;
-        existing.unit = item.unit;
-      }
-      if (item.note) existing.note = item.note;
-    } else {
-      p.push({
-        name: item.name,
-        amount: item.amount || null,
-        unit: item.unit || "",
-        note: item.note || "",
-      });
-    }
-    savePantry(p);
-  }
-  function removePantryItem(name) {
-    const p = getPantry().filter(
-      (i) => makePantryKey(i.name) !== makePantryKey({ name }),
-    );
-    savePantry(p);
-  }
-
-  function openPantryModal() {
-    const container = document.createElement("div");
-    container.className = "pantry-modal";
-
-    const list = document.createElement("div");
-    list.className = "pantry-list";
-
-    const topbar = document.createElement("div");
-    topbar.className = "pantry-topbar";
-
-    const summary = document.createElement("div");
-    summary.className = "pantry-summary";
-
-    const clearBtn = document.createElement("button");
-    clearBtn.type = "button";
-    clearBtn.className = "pantry-clear";
-    clearBtn.textContent = "Limpar despensa";
-    clearBtn.addEventListener("click", () => {
-      if (!confirm("Tem certeza que deseja limpar todos os itens da despensa?"))
-        return;
-      savePantry([]);
-      render();
-    });
-
-    topbar.append(summary, clearBtn);
-
-    function formatItem(item) {
-      const amount =
-        item.amount != null
-          ? `${item.amount}${item.unit ? item.unit : ""}`
-          : "Quantidade não informada";
-      return `<div><strong>${item.name}</strong><div class="pantry-meta">${amount}${item.note ? ` · ${item.note}` : ""}</div></div>`;
-    }
-
-    function render() {
-      const pantryItems = getPantry();
-      list.innerHTML = "";
-      if (pantryItems.length === 0) {
-        list.innerHTML = `<div class="pantry-empty">Sua despensa está vazia. Adicione ingredientes para começar a acompanhar o estoque e comparar com suas receitas.</div>`;
-        clearBtn.disabled = true;
-        clearBtn.style.opacity = "0.6";
-      } else {
-        clearBtn.disabled = false;
-        clearBtn.style.opacity = "1";
-        pantryItems.forEach((item) => {
-          const row = document.createElement("div");
-          row.className = "pantry-row";
-          row.innerHTML = `<div class="pantry-item-info">${formatItem(item)}</div><div class="pantry-actions"><button type="button" class="pantry-remove">Remover</button></div>`;
-          row.querySelector(".pantry-remove").addEventListener("click", () => {
-            removePantryItem(item.name);
-            render();
-          });
-          list.appendChild(row);
-        });
-      }
-      summary.textContent = `Despensa — ${pantryItems.length} item${pantryItems.length === 1 ? "" : "s"}`;
-    }
-
-    const form = document.createElement("div");
-    form.className = "pantry-form";
-    form.innerHTML = `
-      <div class="pantry-field">
-        <label class="sr-only" for="pantry-name">Ingrediente</label>
-        <input id="pantry-name" class="pantry-input" type="text" placeholder="Ingrediente" aria-label="Ingrediente" />
-        <label class="sr-only" for="pantry-amount">Quantidade</label>
-        <input id="pantry-amount" class="pantry-input" type="text" placeholder="Quantidade" aria-label="Quantidade" />
-        <select id="pantry-unit" class="pantry-unit" aria-label="Unidade">
-          <option value="g">g</option>
-          <option value="kg">kg</option>
-          <option value="ml">ml</option>
-          <option value="l">l</option>
-          <option value="un">un</option>
-          <option value="colher">colher</option>
-        </select>
-      </div>
-      <button type="button" class="pantry-add btn--primary">Adicionar à despensa</button>
-    `;
-    const input = form.querySelector(".pantry-input#pantry-name");
-    const qtyInput = form.querySelector(".pantry-input#pantry-amount");
-    const unitSelect = form.querySelector(".pantry-unit");
-    const addBtn = form.querySelector(".pantry-add");
-
-    addBtn.addEventListener("click", () => {
-      const name = input.value.trim();
-      const unit = unitSelect.value;
-      const parsed = parseQuantity(qtyInput.value);
-      if (!name) return;
-      const payload = { name };
-      if (parsed && parsed.value > 0) {
-        payload.amount = parsed.value;
-        payload.unit = parsed.unit || unit;
-      } else if (qtyInput.value.trim() !== "") {
-        payload.amount = parseFloat(qtyInput.value.replace(",", ".")) || null;
-        payload.unit = unit;
-      }
-      addPantryItem(payload);
-      input.value = "";
-      qtyInput.value = "";
-      unitSelect.value = "g";
-      render();
-      input.focus();
-    });
-
-    render();
-    container.appendChild(topbar);
-    container.appendChild(list);
-    container.appendChild(form);
-    openModal("Despensa", "Itens salvos localmente", container);
-  }
-
   // Observador de timers para falar quando concluídos
   function initTimerSpeechObserver() {
     const dock = document.getElementById("timer-dock");
@@ -1537,38 +995,31 @@
     window.speechSynthesis.speak(utter);
   }
 
-  function initPantryButton() {
+  function initShoppingButton() {
     const nav = document.querySelector(".nav");
     if (!nav) return;
-    const existing = nav.querySelector(".nav-btn-pantry");
-    const makeInner = () => `
-      <span class="nav-btn-icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-          <path stroke="currentColor" d="M3 7h18M6 7v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7" />
-          <path stroke="currentColor" d="M9 7v-2a3 3 0 0 1 6 0v2" />
-        </svg>
-      </span>
-      <span class="nav-btn-label">Despensa</span>`;
+    const existing = nav.querySelector(".nav-btn-shopping");
+    const makeInner = () => `<span class="nav-btn-icon" aria-hidden="true"><img src="assets/icons/shopping-bag.svg" alt="" width="19" height="19" /></span><span class="nav-btn-label">Compras</span>`;
 
     if (existing) {
-      existing.className = "nav-btn-pantry btn btn--pill";
-      existing.setAttribute("aria-label", "Abrir despensa");
+      existing.className = "nav-btn-shopping btn btn--pill";
+      existing.setAttribute("aria-label", "Abrir lista de compras");
       existing.innerHTML = makeInner();
       existing.style.marginLeft = "";
       // remove any inline styles by rebuilding style attribute
       existing.removeAttribute("style");
       // remove old click handlers by cloning
       const clone = existing.cloneNode(true);
-      clone.addEventListener("click", () => openPantryModal());
+      clone.addEventListener("click", () => shoppingList.open());
       existing.parentNode.replaceChild(clone, existing);
       return;
     }
 
     const btn = document.createElement("button");
-    btn.className = "nav-btn-pantry btn btn--pill";
-    btn.setAttribute("aria-label", "Abrir despensa");
+    btn.className = "nav-btn-shopping btn btn--pill";
+    btn.setAttribute("aria-label", "Abrir lista de compras");
     btn.innerHTML = makeInner();
-    btn.addEventListener("click", () => openPantryModal());
+    btn.addEventListener("click", () => shoppingList.open());
     const navLinks = nav.querySelector(".nav-links");
     if (navLinks) navLinks.after(btn);
     else nav.appendChild(btn);
@@ -1593,9 +1044,40 @@
   }
 
   document.addEventListener("DOMContentLoaded", () => {
+    shoppingList = window.ElGuapoShopping.createUI(openModal);
     initRecipeCards();
     initCandlelightMode();
-    initPantryButton();
+    initShoppingButton();
+    document.querySelectorAll("[data-open-shopping]").forEach(button => button.addEventListener("click", () => shoppingList.open()));
+    document.querySelectorAll("[data-open-recipe]").forEach(link => link.addEventListener("click", () => {
+      const card = document.getElementById(link.dataset.openRecipe);
+      // Keep the hero link usable even after a previous search or category selection.
+      searchInput.value = "";
+      document.querySelector('[data-category="all"]').click();
+      if (!card.classList.contains("open")) card.querySelector(".rc-head").click();
+      requestAnimationFrame(() => { card.scrollIntoView({block:"start"}); card.querySelector(".rc-head").focus({preventScroll:true}); });
+    }));
+    document.querySelectorAll(".recipe-card").forEach(card => syncRecipeAccessibility(card, false));
+    const mobileLinks = document.querySelectorAll('.mobile-nav a, .nav-links a');
+    const updateMobileNav = () => {
+      const inCatalog = document.getElementById("catalogo").getBoundingClientRect().top < 180;
+      mobileLinks.forEach(link => {
+        if (link.hash === (inCatalog ? "#catalogo" : "#top")) link.setAttribute("aria-current", "location");
+        else link.removeAttribute("aria-current");
+      });
+    };
+    window.addEventListener("scroll", updateMobileNav, {passive:true});
+    updateMobileNav();
+    const openLinkedRecipe = () => {
+      const card = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+      if (!card?.classList.contains("recipe-card")) return;
+      searchInput.value = "";
+      document.querySelector('[data-category="all"]').click();
+      if (!card.classList.contains("open")) card.querySelector(".rc-head").click();
+      requestAnimationFrame(() => card.scrollIntoView({block:"start"}));
+    };
+    window.addEventListener("hashchange", openLinkedRecipe);
+    openLinkedRecipe();
     initTimerSpeechObserver();
     ensureKitchenVoiceToggle();
 

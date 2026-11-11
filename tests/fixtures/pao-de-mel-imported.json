@@ -1,0 +1,320 @@
+{
+  "id": "bolo-pao-de-mel",
+  "title": "Bolo Pão de Mel",
+  "chips": [
+    {
+      "label": "Tradição e Sabor",
+      "accent": false
+    },
+    {
+      "label": "Massa de mel e especiarias",
+      "accent": true
+    },
+    {
+      "label": "Recheio de doce de leite",
+      "accent": false
+    },
+    {
+      "label": "Cobertura de chocolate",
+      "accent": false
+    },
+    {
+      "label": "Úmido, macio e perfumado",
+      "accent": false
+    }
+  ],
+  "meta": [
+    {
+      "label": "Rendimento",
+      "value": "1 bolo estruturado"
+    },
+    {
+      "label": "Categoria",
+      "value": "Bolos"
+    }
+  ],
+  "image": "images/bolo-pao-de-mel.jpg",
+  "ingredients": [
+    {
+      "name": "Massa (Pão de Ló Especiarias)",
+      "items": [
+        {
+          "name": "Ovos",
+          "qty": "4 un.",
+          "weightInGrams": 200,
+          "nutrition": {
+            "calories": 143,
+            "carbs": 1.6,
+            "proteins": 13,
+            "totalFats": 8.9,
+            "saturatedFats": 2.7,
+            "fibers": 0,
+            "sodium": 168
+          }
+        },
+        {
+          "name": "Açúcar",
+          "qty": "200g",
+          "nutrition": {
+            "calories": 387,
+            "carbs": 100,
+            "proteins": 0,
+            "totalFats": 0,
+            "saturatedFats": 0,
+            "fibers": 0,
+            "sodium": 1
+          }
+        },
+        {
+          "name": "Farinha de trigo",
+          "qty": "140g",
+          "nutrition": {
+            "calories": 364,
+            "carbs": 76.3,
+            "proteins": 10.3,
+            "totalFats": 1,
+            "saturatedFats": 0.2,
+            "fibers": 2.7,
+            "sodium": 2
+          }
+        },
+        {
+          "name": "Mel",
+          "qty": "60g",
+          "nutrition": {
+            "calories": 304,
+            "carbs": 82.4,
+            "proteins": 0.3,
+            "totalFats": 0,
+            "saturatedFats": 0,
+            "fibers": 0.2,
+            "sodium": 4
+          }
+        },
+        {
+          "name": "Óleo",
+          "qty": "65ml",
+          "weightInGrams": 65,
+          "nutrition": {
+            "calories": 884,
+            "carbs": 0,
+            "proteins": 0,
+            "totalFats": 100,
+            "saturatedFats": 15,
+            "fibers": 0,
+            "sodium": 0
+          }
+        },
+        {
+          "name": "Água quente",
+          "qty": "60ml",
+          "weightInGrams": 60,
+          "nutrition": {
+            "calories": 0,
+            "carbs": 0,
+            "proteins": 0,
+            "totalFats": 0,
+            "saturatedFats": 0,
+            "fibers": 0,
+            "sodium": 0
+          }
+        },
+        {
+          "name": "Cacau em pó",
+          "qty": "10g",
+          "nutrition": {
+            "calories": 228,
+            "carbs": 58,
+            "proteins": 20,
+            "totalFats": 14,
+            "saturatedFats": 8,
+            "fibers": 33,
+            "sodium": 21
+          }
+        },
+        {
+          "name": "Canela em pó",
+          "qty": "2 col. café",
+          "weightInGrams": 10,
+          "nutrition": {
+            "calories": 0,
+            "carbs": 0,
+            "proteins": 0,
+            "totalFats": 0,
+            "saturatedFats": 0,
+            "fibers": 0,
+            "sodium": 0
+          }
+        },
+        {
+          "name": "Cravo em pó",
+          "qty": "1 col. café",
+          "weightInGrams": 5,
+          "nutrition": {
+            "calories": 0,
+            "carbs": 0,
+            "proteins": 0,
+            "totalFats": 0,
+            "saturatedFats": 0,
+            "fibers": 0,
+            "sodium": 0
+          }
+        },
+        {
+          "name": "Gengibre em pó (ou noz moscada)",
+          "qty": "1 col. café",
+          "weightInGrams": 5,
+          "nutrition": {
+            "calories": 0,
+            "carbs": 0,
+            "proteins": 0,
+            "totalFats": 0,
+            "saturatedFats": 0,
+            "fibers": 0,
+            "sodium": 0
+          }
+        },
+        {
+          "name": "Fermento químico para bolos",
+          "qty": "1 col. sopa rasa",
+          "weightInGrams": 15,
+          "nutrition": {
+            "calories": 53,
+            "carbs": 24.3,
+            "proteins": 0,
+            "totalFats": 0,
+            "saturatedFats": 0,
+            "fibers": 0,
+            "sodium": 14234
+          }
+        }
+      ]
+    },
+    {
+      "name": "Calda de Infusão",
+      "items": [
+        {
+          "name": "Água",
+          "qty": "240ml",
+          "weightInGrams": 240,
+          "nutrition": {
+            "calories": 0,
+            "carbs": 0,
+            "proteins": 0,
+            "totalFats": 0,
+            "saturatedFats": 0,
+            "fibers": 0,
+            "sodium": 0
+          }
+        },
+        {
+          "name": "Açúcar",
+          "qty": "90g",
+          "nutrition": {
+            "calories": 387,
+            "carbs": 100,
+            "proteins": 0,
+            "totalFats": 0,
+            "saturatedFats": 0,
+            "fibers": 0,
+            "sodium": 1
+          }
+        },
+        {
+          "name": "Pau de canela",
+          "qty": "1 un.",
+          "nutrition": {
+            "calories": 0,
+            "carbs": 0,
+            "proteins": 0,
+            "totalFats": 0,
+            "saturatedFats": 0,
+            "fibers": 0,
+            "sodium": 0
+          }
+        },
+        {
+          "name": "Cravos-da-índia",
+          "qty": "5 un.",
+          "nutrition": {
+            "calories": 0,
+            "carbs": 0,
+            "proteins": 0,
+            "totalFats": 0,
+            "saturatedFats": 0,
+            "fibers": 0,
+            "sodium": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "Recheio e Cobertura",
+      "items": [
+        {
+          "name": "Doce de leite firme (recheio)",
+          "qty": "400g",
+          "nutrition": {
+            "calories": 315,
+            "carbs": 60.1,
+            "proteins": 6.3,
+            "totalFats": 5.5,
+            "saturatedFats": 3.1,
+            "fibers": 0,
+            "sodium": 122
+          }
+        },
+        {
+          "name": "Chocolate meio amargo (ganache)",
+          "qty": "300g",
+          "nutrition": {
+            "calories": 536,
+            "carbs": 62.7,
+            "proteins": 5.2,
+            "totalFats": 29.8,
+            "saturatedFats": 18.2,
+            "fibers": 8.2,
+            "sodium": 15
+          }
+        },
+        {
+          "name": "Creme de leite (ganache)",
+          "qty": "120g",
+          "nutrition": {
+            "calories": 536,
+            "carbs": 62.7,
+            "proteins": 5.2,
+            "totalFats": 29.8,
+            "saturatedFats": 18.2,
+            "fibers": 8.2,
+            "sodium": 15
+          }
+        }
+      ]
+    }
+  ],
+  "steps": [
+    {
+      "text": "Calda. Em uma panela, junte a água, o açúcar, a canela e os cravos. Leve ao fogo e deixe ferver até o açúcar dissolver por completo. Desligue, deixe esfriar e coe. Reserve."
+    },
+    {
+      "text": "Massa (Método Espumoso). Na batedeira, bata os ovos com o açúcar até obter um creme claro, fofo e volumoso (ponto de fita)."
+    },
+    {
+      "text": "Emulsão dos Líquidos. À parte, dissolva o mel e o cacau na água quente. Incorpore o óleo a esta mistura."
+    },
+    {
+      "text": "Incorporação. Adicione a mistura de líquidos ao creme de ovos de forma delicada. Peneire a farinha, as especiarias e o fermento. Envolva os ingredientes secos na massa utilizando uma espátula, com movimentos suaves de baixo para cima, para não perder a aeração."
+    },
+    {
+      "text": "Cozimento. Despeje a massa em uma forma untada e leve ao forno preaquecido a 180 °C por aproximadamente 35 a 40 minutos (faça o teste do palito)."
+    },
+    {
+      "text": "Ganache. Derreta o chocolate meio amargo (em banho-maria ou no micro-ondas em intervalos de 30 segundos). Incorpore o creme de leite e mexa vigorosamente até obter uma emulsão lisa e brilhante."
+    },
+    {
+      "text": "Montagem. Após o bolo esfriar, corte-o em camadas. Umedeça cada camada de massa de forma generosa com a calda de especiarias. Aplique uma camada uniforme do doce de leite firme. Cubra o bolo montado com a ganache de chocolate meio amargo."
+    }
+  ],
+  "notes": []
+}

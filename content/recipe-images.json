@@ -1,0 +1,86 @@
+[
+  {
+    "recipeId": "bolo-panetone-el-guapo",
+    "src": "images/recipes/panetone.jpg",
+    "originalFilename": "700672.jpg",
+    "sha256": "be98fd6032bce4b56c83c9630e916d5db797fd947478b44b264bfa4bc8eabc4d"
+  },
+  {
+    "recipeId": "pizza-massa-base",
+    "src": "images/recipes/massa-de-pizza.jpg",
+    "originalFilename": "700673.jpg",
+    "sha256": "519f6fa339b521cfd4b0eae7e2827f56c8c5acc77c83f32fd08bde7abdc33f28"
+  },
+  {
+    "recipeId": "bolo-pao-de-lo-padrao",
+    "src": "images/recipes/pao-de-lo-baunilha.jpg",
+    "originalFilename": "700676.jpg",
+    "sha256": "9a16d1b8bfb3c6737a74fa942e237596489fa3e8548d144d20a4d6f58a210f6c"
+  },
+  {
+    "recipeId": "bolo-pao-de-lo-chocolate",
+    "src": "images/recipes/pao-de-lo-chocolate.jpg",
+    "originalFilename": "700687.jpg",
+    "sha256": "7bd41f4c5d1f1ab2617913c1a727cee7aa8d38369431114f2cfb6b45e6b6a597"
+  },
+  {
+    "recipeId": "focaccia-massa-base",
+    "src": "images/recipes/focaccia.jpg",
+    "originalFilename": "700722.jpg",
+    "sha256": "cf0ea4d8a8a0212b07da67aa399d0c75888236245bd0d77c2811ce24e5f0c761"
+  },
+  {
+    "recipeId": "cuca-massa-base",
+    "src": "images/recipes/cuca-com-crumble.jpg",
+    "originalFilename": "700725.jpg",
+    "sha256": "90a9f03cd1b95082b2338d2f03ecc37f03b425fed8476c109373148db5d36e4d"
+  },
+  {
+    "recipeId": "bolo-cenoura-gabriela",
+    "src": "images/recipes/bolo-cenoura-gabriela.jpg",
+    "originalFilename": "700735.jpg",
+    "sha256": "b28991de941d00516dc52587cfafc470eacdeb5d544eb381d1a455648183b31e"
+  },
+  {
+    "recipeId": "bolo-pao-de-mel",
+    "src": "images/recipes/bolo-pao-de-mel.jpg",
+    "originalFilename": "700736.jpg",
+    "sha256": "587b81609b57ac5da5a6a27755e4dd00565d12427eb578024038fbda31f45068"
+  },
+  {
+    "recipeId": "bolo-prestigio",
+    "src": "images/recipes/bolo-prestigio.jpg",
+    "originalFilename": "700737.jpg",
+    "sha256": "5c34ad58258311d8d81d90d11d691bcddbe24a00530be64f662844e2217bbdd8"
+  },
+  {
+    "recipeId": "pao-de-queijo-heuller",
+    "src": "images/recipes/pao-de-queijo.jpg",
+    "originalFilename": "700738.jpg",
+    "sha256": "952e1201938375280667c2f56cfb99c3e97541a37553f731081142ef961ecb2d"
+  },
+  {
+    "recipeId": "pao-heuller-gabriela",
+    "src": "images/recipes/pao-heuller-gabriela.jpg",
+    "originalFilename": "700739.jpg",
+    "sha256": "7bb1a43e770beb8563875839048c5c01759d5a001f91928294d946b950e4932e"
+  },
+  {
+    "recipeId": "bolo-banana-bread-el-guapo",
+    "src": "images/recipes/banana-bread.jpg",
+    "originalFilename": "700740.jpg",
+    "sha256": "2b6649f50f68fd5c524e9b765b83d078f33408b7df448b681b844c4f11e16c3a"
+  },
+  {
+    "recipeId": "arroz-doce-toffee-amburana",
+    "src": "images/recipes/arroz-doce.jpg",
+    "originalFilename": "700741.jpg",
+    "sha256": "223d543c79fada5f78ab2466400880205fd5b0255f9fcd8c93094c5de8e5fd25"
+  },
+  {
+    "recipeId": "canjicada-el-guapo",
+    "src": "images/recipes/canjicada.jpg",
+    "originalFilename": "700742.jpg",
+    "sha256": "d9e12b4a2cee7167820a94da8202a8da7b59407b709bd663ba193abf3339ff31"
+  }
+]

@@ -1,0 +1,407 @@
+[
+  {
+    "id": "bolo-pao-de-lo-chocolate",
+    "title": "Pão de Ló de Chocolate",
+    "category": "Bolos",
+    "tags": [
+      "Cacau + Água (sem lactose)",
+      "Massa Aerada · Perfil Intenso",
+      "Ponto de Fita",
+      "Base do Bolo Prestígio"
+    ],
+    "metadata": [
+      {
+        "label": "Rendimento",
+        "value": "2 discos Ø20cm ou 1 forma 20×30cm"
+      },
+      {
+        "label": "Forno",
+        "value": "180°C · 25–30 min"
+      }
+    ],
+    "image": {
+      "src": "images/el-guapo-img-06.webp",
+      "alt": "Pão de Ló de Chocolate"
+    },
+    "ingredientGroups": [
+      {
+        "id": "bolo-pao-de-lo-chocolate-group-0",
+        "title": "Fórmula (100% = 130g farinha)",
+        "ingredients": [
+          {
+            "id": "bolo-pao-de-lo-chocolate-ingredient-0-0",
+            "name": "Farinha de trigo",
+            "quantityText": "130g",
+            "detail": "100%",
+            "quantity": {
+              "kind": "amount",
+              "amount": 130,
+              "unit": "g",
+              "approximate": false,
+              "annotation": null,
+              "source": "130g"
+            }
+          },
+          {
+            "id": "bolo-pao-de-lo-chocolate-ingredient-0-1",
+            "name": "Açúcar refinado",
+            "quantityText": "200g",
+            "detail": "153,8%",
+            "quantity": {
+              "kind": "amount",
+              "amount": 200,
+              "unit": "g",
+              "approximate": false,
+              "annotation": null,
+              "source": "200g"
+            }
+          },
+          {
+            "id": "bolo-pao-de-lo-chocolate-ingredient-0-2",
+            "name": "Ovos inteiros",
+            "quantityText": "200g",
+            "detail": "153,8% · ~4 ovos grandes",
+            "quantity": {
+              "kind": "amount",
+              "amount": 200,
+              "unit": "g",
+              "approximate": false,
+              "annotation": null,
+              "source": "200g"
+            }
+          },
+          {
+            "id": "bolo-pao-de-lo-chocolate-ingredient-0-3",
+            "name": "Água",
+            "quantityText": "60g",
+            "detail": "46,2% · sem lactose",
+            "quantity": {
+              "kind": "amount",
+              "amount": 60,
+              "unit": "g",
+              "approximate": false,
+              "annotation": null,
+              "source": "60g"
+            }
+          },
+          {
+            "id": "bolo-pao-de-lo-chocolate-ingredient-0-4",
+            "name": "Óleo de soja",
+            "quantityText": "60g",
+            "detail": "46,2%",
+            "quantity": {
+              "kind": "amount",
+              "amount": 60,
+              "unit": "g",
+              "approximate": false,
+              "annotation": null,
+              "source": "60g"
+            }
+          },
+          {
+            "id": "bolo-pao-de-lo-chocolate-ingredient-0-5",
+            "name": "Cacau em pó 100%",
+            "quantityText": "20g",
+            "detail": "15,4%",
+            "quantity": {
+              "kind": "amount",
+              "amount": 20,
+              "unit": "g",
+              "approximate": false,
+              "annotation": null,
+              "source": "20g"
+            }
+          },
+          {
+            "id": "bolo-pao-de-lo-chocolate-ingredient-0-6",
+            "name": "Fermento em pó químico",
+            "quantityText": "12g",
+            "detail": "9,2% · 1 col. sopa",
+            "quantity": {
+              "kind": "amount",
+              "amount": 12,
+              "unit": "g",
+              "approximate": false,
+              "annotation": null,
+              "source": "12g"
+            }
+          }
+        ]
+      }
+    ],
+    "steps": [
+      {
+        "id": "bolo-pao-de-lo-chocolate-step-0",
+        "text": "Secos com cacau. Peneire a farinha de trigo, o cacau em pó e o fermento químico juntos em tigela separada. O cacau deve ser peneirado obrigatoriamente — sua tendência a formar grumos provoca manchas escuras irregulares no miolo se incorporado sem peneirar. Reserve.",
+        "quantityReferences": [],
+        "reviewStatus": "pending"
+      },
+      {
+        "id": "bolo-pao-de-lo-chocolate-step-1",
+        "text": "Ponto de fita. Na batedeira com globo, bata os ovos inteiros com o açúcar refinado em velocidade alta por 5 a 8 minutos até atingir ponto de fita: massa pálida, quase três vezes o volume inicial, traço que persiste por 3 a 4 segundos ao cair do globo. Sem leite ou manteiga nesta receita, os ovos são a única fonte de estrutura e umidade — o ponto de fita define a qualidade do miolo final.",
+        "quantityReferences": [],
+        "reviewStatus": "pending"
+      },
+      {
+        "id": "bolo-pao-de-lo-chocolate-step-2",
+        "text": "Líquidos. Reduza para velocidade mínima. Com a água e o óleo pré-misturados, adicione em fio fino e contínuo. A água (no lugar do leite) é escolha deliberada: sem caseínas, o glúten tem menos estrutura proteica para se desenvolver, resultando em miolo mais macio e sedoso — a textura ideal para um pão de ló que será cortado e recheado.",
+        "quantityReferences": [],
+        "reviewStatus": "pending"
+      },
+      {
+        "id": "bolo-pao-de-lo-chocolate-step-3",
+        "text": "Dobrar os secos com cacau. Desligue a batedeira. Adicione a farinha+cacau+fermento peneirados em 2 adições com espátula, dobrando de baixo para cima com delicadeza. A mistura vai escurecer rapidamente ao entrar o cacau — é o indicativo visual de que está sendo incorporado de forma homogênea. Pare assim que não houver mais traços de pó claro.",
+        "quantityReferences": [],
+        "reviewStatus": "pending"
+      },
+      {
+        "id": "bolo-pao-de-lo-chocolate-step-4",
+        "text": "Forma e forno. Divida a massa nas formas untadas e polvilhadas com cacau em pó — nunca farinha branca, que deixa borda esbranquiçada na lateral do disco. Leve ao forno preaquecido a 180°C por 25 a 30 minutos. Não abra nos primeiros 20 minutos. Teste com palito: seco ao centro. Termômetro: 93–96°C.",
+        "quantityReferences": [],
+        "reviewStatus": "pending"
+      },
+      {
+        "id": "bolo-pao-de-lo-chocolate-step-5",
+        "text": "Resfriamento. Aguarde 10 minutos na forma, desenformar na grade e resfriar completamente antes de manusear. Para o Bolo Prestígio, refrigere os discos por 2h antes de montar — o disco frio absorve a calda mais lentamente, distribuindo a umidade de forma uniforme pelo miolo sem encharcar.",
+        "quantityReferences": [],
+        "reviewStatus": "pending"
+      }
+    ]
+  },
+  {
+    "id": "bolo-brigadeiro-el-guapo",
+    "title": "Brigadeiro El Guapo",
+    "category": "Bolos",
+    "tags": [
+      "Recheio de Bolo",
+      "Chocolate Meio Amargo + Cacau 70%",
+      "Ganache-Brigadeiro",
+      "Base do Bolo Prestígio"
+    ],
+    "metadata": [
+      {
+        "label": "Rendimento",
+        "value": "recheio para 1 bolo de 3 camadas Ø20cm"
+      },
+      {
+        "label": "Preparo",
+        "value": "15–20 min + 2h geladeira"
+      }
+    ],
+    "image": {
+      "src": "images/el-guapo-img-07.webp",
+      "alt": "Brigadeiro El Guapo"
+    },
+    "ingredientGroups": [
+      {
+        "id": "bolo-brigadeiro-el-guapo-group-0",
+        "title": "Fórmula",
+        "ingredients": [
+          {
+            "id": "bolo-brigadeiro-el-guapo-ingredient-0-0",
+            "name": "Leite condensado",
+            "quantityText": "395g",
+            "detail": "base adocicada",
+            "quantity": {
+              "kind": "amount",
+              "amount": 395,
+              "unit": "g",
+              "approximate": false,
+              "annotation": null,
+              "source": "395g"
+            }
+          },
+          {
+            "id": "bolo-brigadeiro-el-guapo-ingredient-0-1",
+            "name": "Creme de leite",
+            "quantityText": "200g",
+            "detail": "cremosidade · ajuste de textura",
+            "quantity": {
+              "kind": "amount",
+              "amount": 200,
+              "unit": "g",
+              "approximate": false,
+              "annotation": null,
+              "source": "200g"
+            }
+          },
+          {
+            "id": "bolo-brigadeiro-el-guapo-ingredient-0-2",
+            "name": "Chocolate meio amargo em barra",
+            "quantityText": "80g",
+            "detail": "sabor + consistência",
+            "quantity": {
+              "kind": "amount",
+              "amount": 80,
+              "unit": "g",
+              "approximate": false,
+              "annotation": null,
+              "source": "80g"
+            }
+          },
+          {
+            "id": "bolo-brigadeiro-el-guapo-ingredient-0-3",
+            "name": "Cacau em pó 70%",
+            "quantityText": "~8g",
+            "detail": "intensidade · 1 col. sopa",
+            "quantity": {
+              "kind": "amount",
+              "amount": 8,
+              "unit": "g",
+              "approximate": true,
+              "annotation": null,
+              "source": "~8g"
+            }
+          }
+        ]
+      }
+    ],
+    "steps": [
+      {
+        "id": "bolo-brigadeiro-el-guapo-step-0",
+        "text": "Dissolver o cacau a frio. Em panela de fundo grosso fora do fogo, misture o leite condensado com o cacau em pó, mexendo com espátula até o cacau estar completamente dissolvido e sem grumos. Dissolver a frio é essencial — cacau em pó adicionado em leite condensado quente gruda no fundo da panela antes de se integrar, formando pontos pretos amargos no recheio final.",
+        "quantityReferences": [],
+        "reviewStatus": "pending"
+      },
+      {
+        "id": "bolo-brigadeiro-el-guapo-step-1",
+        "text": "Adicionar o chocolate. Pique o chocolate meio amargo em pedaços pequenos e uniformes e adicione à mistura de leite condensado e cacau. Leve ao fogo médio-baixo, mexendo constantemente com espátula de silicone — raspe o fundo e as laterais da panela de forma contínua para evitar queimar o açúcar do leite condensado, que carameliza rapidamente em fogo alto.",
+        "quantityReferences": [],
+        "reviewStatus": "pending"
+      },
+      {
+        "id": "bolo-brigadeiro-el-guapo-step-2",
+        "text": "Ponto de recheio. Cozinhe mexendo sempre por 8 a 12 minutos até atingir o ponto de recheio de bolo: a massa começa a desgrudar do fundo formando um sulco limpo que fecha lentamente. É um ponto mais mole que o brigadeiro de enrolar — a consistência deve lembrar uma ganache macia a quente. Ao esfriar e refrigerar, firma consideravelmente.",
+        "quantityReferences": [],
+        "reviewStatus": "pending"
+      },
+      {
+        "id": "bolo-brigadeiro-el-guapo-step-3",
+        "text": "Creme de leite e finalização. Retire do fogo. Adicione o creme de leite e misture vigorosamente até incorporar completamente — o creme de leite quente se integra sem talhar. Ele ajusta a consistência final do recheio: mais creme = mais mole e cremoso; menos = mais firme e denso. Cubra com filme plástico em contato com a superfície para evitar película.",
+        "quantityReferences": [],
+        "reviewStatus": "pending"
+      },
+      {
+        "id": "bolo-brigadeiro-el-guapo-step-4",
+        "text": "Resfriamento e uso. Deixe esfriar completamente em temperatura ambiente e refrigere por no mínimo 2 horas antes de usar. Frio, o brigadeiro firma e ganha consistência de recheio cremoso que não escorrega entre as camadas do bolo. Para consistência máxima de corte, refrigere o bolo montado por 4 horas após recheio.",
+        "quantityReferences": [],
+        "reviewStatus": "pending"
+      }
+    ]
+  },
+  {
+    "id": "bolo-recheio-coco",
+    "title": "Recheio de Coco El Guapo",
+    "category": "Bolos",
+    "tags": [
+      "Recheio de Bolo",
+      "Coco em Flocos · Cremoso",
+      "Leite Condensado + Creme de Leite",
+      "Base do Bolo Prestígio"
+    ],
+    "metadata": [
+      {
+        "label": "Rendimento",
+        "value": "recheio para 1 bolo de 3 camadas Ø20cm"
+      },
+      {
+        "label": "Preparo",
+        "value": "15–20 min + 2h geladeira"
+      }
+    ],
+    "image": {
+      "src": "images/el-guapo-img-08.webp",
+      "alt": "Recheio de Coco El Guapo"
+    },
+    "ingredientGroups": [
+      {
+        "id": "bolo-recheio-coco-group-0",
+        "title": "Fórmula",
+        "ingredients": [
+          {
+            "id": "bolo-recheio-coco-ingredient-0-0",
+            "name": "Leite condensado",
+            "quantityText": "395g",
+            "detail": "base adocicada",
+            "quantity": {
+              "kind": "amount",
+              "amount": 395,
+              "unit": "g",
+              "approximate": false,
+              "annotation": null,
+              "source": "395g"
+            }
+          },
+          {
+            "id": "bolo-recheio-coco-ingredient-0-1",
+            "name": "Creme de leite",
+            "quantityText": "200g",
+            "detail": "cremosidade final",
+            "quantity": {
+              "kind": "amount",
+              "amount": 200,
+              "unit": "g",
+              "approximate": false,
+              "annotation": null,
+              "source": "200g"
+            }
+          },
+          {
+            "id": "bolo-recheio-coco-ingredient-0-2",
+            "name": "Leite integral",
+            "quantityText": "~200g",
+            "detail": "medido na caixinha do creme de leite",
+            "quantity": {
+              "kind": "amount",
+              "amount": 200,
+              "unit": "g",
+              "approximate": true,
+              "annotation": null,
+              "source": "~200g"
+            }
+          },
+          {
+            "id": "bolo-recheio-coco-ingredient-0-3",
+            "name": "Coco ralado em flocos",
+            "quantityText": "100g",
+            "detail": "textura + sabor",
+            "quantity": {
+              "kind": "amount",
+              "amount": 100,
+              "unit": "g",
+              "approximate": false,
+              "annotation": null,
+              "source": "100g"
+            }
+          }
+        ]
+      }
+    ],
+    "steps": [
+      {
+        "id": "bolo-recheio-coco-step-0",
+        "text": "Base líquida. Em panela de fundo grosso, combine o leite condensado com o leite integral. Meça o leite enchendo a caixinha de creme de leite já vazia — a medida prática garante aproximadamente 200g sem necessidade de balança extra. Misture os dois com espátula antes de levar ao fogo para homogeneizar as densidades distintas dos dois líquidos.",
+        "quantityReferences": [],
+        "reviewStatus": "pending"
+      },
+      {
+        "id": "bolo-recheio-coco-step-1",
+        "text": "Coco e cozimento. Adicione o coco ralado em flocos à panela com os líquidos. Leve ao fogo médio, mexendo constantemente com espátula. O coco absorve parte do líquido durante o cozimento, inchando e liberando os óleos naturais do coco na mistura — esse processo é visível pela mudança de cor do coco (mais translúcido e brilhante) e pelo aumento de viscosidade do recheio. Cozinhe por 5 a 8 minutos após começar a borbulhar.",
+        "quantityReferences": [],
+        "reviewStatus": "pending"
+      },
+      {
+        "id": "bolo-recheio-coco-step-2",
+        "text": "Ponto e finalização. O recheio está no ponto quando a espátula deixa um sulco no fundo que fecha lentamente — consistência de mingau encorpado. Retire do fogo e adicione o creme de leite, misturando vigorosamente. O creme de leite amolece a consistência final e adiciona a gordura de laticínio que equilibra a doçura intensa do leite condensado. Cubra com filme em contato com a superfície.",
+        "quantityReferences": [],
+        "reviewStatus": "pending"
+      },
+      {
+        "id": "bolo-recheio-coco-step-3",
+        "text": "Resfriamento. Deixe esfriar em temperatura ambiente e refrigere por no mínimo 2 horas. O recheio de coco firma substancialmente com o frio — o que parece mole quente transforma-se em recheio cremoso e encorpado após refrigerado, com textura ideal para suportar o peso do disco de bolo sem escorrer.",
+        "quantityReferences": [],
+        "reviewStatus": "pending"
+      }
+    ]
+  }
+]

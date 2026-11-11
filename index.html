@@ -1,70 +1,15 @@
 <!doctype html>
-<!--
-╔══════════════════════════════════════════════════════════════════╗
-║  EL GUAPO — CADERNO DE RECEITAS  ·  v2.0                        ║
-║  Tendências de UI/Gastronomia Editorial 2026 Aplicadas:          ║
-║                                                                  ║
-║  1. EDITORIAL ORGANIC GRID                                       ║
-║     Colunas proporcionais dinâmicas (minmax), sem larguras fixas ║
-║     rígidas. Layout respira e contrai organicamente.             ║
-║                                                                  ║
-║  2. BAKER'S RATIO VISUALIZATION                                  ║
-║     Barras finas animadas via CSS custom property --fill.        ║
-║     Animam ao abrir o card. Elegância visual para dados          ║
-║     matemáticos de panificação.                                  ║
-║                                                                  ║
-║  3. FICHA TÉCNICA MODULAR                                        ║
-║     Chips/badges estruturados abaixo do título para exibir       ║
-║     método, hidratação, categoria e perfil de sabor.             ║
-║                                                                  ║
-║  4. MICRO-ANIMAÇÕES DE INTENÇÃO (Slow & Purposeful)             ║
-║     Easing longo (0.65–1.0s) com cubic-bezier orgânico.         ║
-║     Nenhuma animação "saltitante". Revela em cascata.            ║
-║                                                                  ║
-║  5. PALETA MINERAL REFINADA                                      ║
-║     Espresso mais profundo, papel mais complexo e aquecido,      ║
-║     terracota envelhecida, nenhum hex frio ou sintético.         ║
-║                                                                  ║
-║  6. NOTA-CARDS COM ACENTO DE BORDA                               ║
-║     Left-border em terracota nas notas técnicas. Hierarquia      ║
-║     visual clara sem elementos gráficos redundantes.             ║
-║                                                                  ║
-║  7. DENSIDADE CONTRASTANTE                                       ║
-║     Seções hero/sumário espaçosas; cards de receita densos.      ║
-║     A oscilação entre respiro e informação cria ritmo editorial. ║
-║                                                                  ║
-║  8. SCROLL NARRATIVE                                             ║
-║     Elementos revelados em sequência staggered ao entrar         ║
-║     na viewport — leitura que se desdobra naturalmente.          ║
-║                                                                  ║
-║  9. CLEAN CODE & MODULARITY (v5.0)                               ║
-║     CSS e JS desacoplados do index.html para melhor performance. ║
-╚══════════════════════════════════════════════════════════════════╝
--->
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>El Guapo — Caderno de Receitas</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Jost:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media = 'all'"
-    />
-    <noscript>
-      <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Jost:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet"
-      />
-    </noscript>
+    <link rel="stylesheet" href="assets/fonts.css" />
 
     <link rel="stylesheet" href="style.css" />
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link rel="manifest" href="manifest.json" />
-    <meta name="theme-color" content="#a85d22" />
+    <meta name="theme-color" content="#FFFDF8" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta
       name="apple-mobile-web-app-status-bar-style"
@@ -73,191 +18,59 @@
     <meta name="apple-mobile-web-app-title" content="El Guapo" />
   </head>
   <body>
-    <!-- ═══ SPLASH SCREEN ═══ -->
-    <div
-      id="splash"
-      class="splash"
-      role="status"
-      aria-label="Carregando El Guapo"
-    >
-      <div class="splash-inner">
-        <p class="splash-pre">Caderno de Receitas</p>
-        <div class="splash-logo">
-          <span class="splash-el">El</span>
-          <span class="splash-guapo">Guapo</span>
-        </div>
-        <div class="splash-rule">
-          <span class="splash-rule-line"></span>
-          <span class="splash-rule-mark"></span>
-          <span class="splash-rule-line"></span>
-        </div>
-        <p class="splash-tagline">
-          feito com o <strong>coração</strong><br />
-          para surpreender o seu
-        </p>
-      </div>
-      <div class="splash-progress"></div>
-    </div>
-
-    <!-- ═══ NAVEGAÇÃO ═══ -->
-    <nav
-      class="nav"
-      id="nav"
-      role="navigation"
-      aria-label="Navegação principal"
-    >
-      <a href="#top" class="nav-brand">El Guapo</a>
+    <a class="skip-link" href="#catalogo">Pular para as receitas</a>
+    <nav class="nav" id="nav" aria-label="Navegação principal">
+      <a href="#top" class="nav-brand" aria-label="El Guapo — início">El Guapo</a>
       <ul class="nav-links">
-        <li><a href="#pizzas">Pizzas</a></li>
-        <li><a href="#focaccias">Focaccias</a></li>
-        <li><a href="#cucas">Cucas</a></li>
-        <li><a href="#bolos">Bolos</a></li>
-        <li><a href="#quitanda">Quitanda</a></li>
-        <li><a href="#especiais">Especiais</a></li>
-      </ul>
-      <button
-        type="button"
-        class="nav-hamburger"
-        id="nav-hamburger"
-        aria-label="Abrir menu"
-        aria-expanded="false"
-      >
-        ☰
-      </button>
-    </nav>
-
-    <div
-      class="nav-drawer-overlay"
-      id="nav-drawer-overlay"
-      aria-hidden="true"
-    ></div>
-    <nav
-      class="nav-drawer"
-      id="nav-drawer"
-      aria-label="Menu mobile"
-      aria-hidden="true"
-    >
-      <div class="nav-drawer-top">
-        <a href="#top" class="nav-drawer-brand">El Guapo</a>
-        <button
-          type="button"
-          class="nav-drawer-close"
-          id="nav-drawer-close"
-          aria-label="Fechar menu"
-        >
-          ✕
-        </button>
-      </div>
-      <ul class="nav-drawer-links">
-        <li>
-          <a href="#pizzas"><span class="nav-drawer-num">01</span>Pizzas</a>
-        </li>
-        <li>
-          <a href="#focaccias"
-            ><span class="nav-drawer-num">02</span>Focaccias</a
-          >
-        </li>
-        <li>
-          <a href="#cucas"><span class="nav-drawer-num">03</span>Cucas</a>
-        </li>
-        <li>
-          <a href="#bolos"><span class="nav-drawer-num">04</span>Bolos</a>
-        </li>
-        <li>
-          <a href="#quitanda"><span class="nav-drawer-num">05</span>Quitanda</a>
-        </li>
-        <li>
-          <a href="#especiais"
-            ><span class="nav-drawer-num">06</span>Especiais</a
-          >
-        </li>
+        <li><a href="#top">Início</a></li>
+        <li><a href="#catalogo">Receitas</a></li>
       </ul>
     </nav>
-
-    <!-- ═══ HERO ═══ -->
-    <section class="hero" id="top">
-      <div class="hero-inner">
-        <p class="hero-pre">Caderno de Receitas</p>
-        <div class="hero-logo">
-          <span class="hero-logo-el">El</span>
-          <span class="hero-logo-guapo">Guapo</span>
+    <main id="main-content">
+      <section class="hero" id="top" aria-labelledby="welcome-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Receitas artesanais</p>
+          <h1 id="welcome-title">El Guapo</h1>
+          <p class="hero-slogan">Feito com o coração, para conquistar o seu.</p>
+          <p class="hero-description">Doces, massas e receitas para tirar do papel e levar ao forno.</p>
+          <div class="hero-actions">
+            <a class="primary-link" href="#catalogo">Quero cozinhar! <img src="assets/icons/arrow-up-right.svg" alt="" width="22" height="22" /></a>
+            <span class="hero-signoff">Com afeto, da nossa cozinha.</span>
+          </div>
         </div>
-        <div class="hero-rule">
-          <span class="hero-rule-line"></span>
-          <span class="hero-rule-mark"></span>
-          <span class="hero-rule-line"></span>
+        <div class="hero-feature">
+          <img class="hero-food" src="images/recipes/bolo-prestigio.jpg" alt="Bolo Prestígio com camadas de chocolate e coco, sobre uma boleira marfim" width="1280" height="1280" fetchpriority="high" />
+          <a class="hero-caption" href="#bolo-prestigio" data-open-recipe="bolo-prestigio"><span><span class="eyebrow">Uma doçura especial</span><strong>Bolo Prestígio</strong></span><img src="assets/icons/arrow-up-right.svg" alt="" width="24" height="24" /></a>
         </div>
-        <p class="hero-tagline">
-          cozinha artesanal · fermentação natural · ingredientes autorais
-        </p>
-      </div>
-      <div class="hero-scroll-cue">
-        <span class="scroll-cue-text">Explorar</span>
-        <span class="scroll-cue-line"></span>
-      </div>
-    </section>
-
-    <!-- ═══ SUMÁRIO ═══ -->
-    <section class="toc-section">
-      <span class="toc-label js-fade">Índice</span>
-      <div class="search-wrap js-fade" style="transition-delay: 0.05s">
-        <input
-          type="search"
-          class="search-input"
-          id="recipe-search"
-          placeholder="Buscar por ingrediente, método ou receita…"
-          autocomplete="off"
-          aria-label="Buscar receitas"
-        />
-        <button
-          type="button"
-          class="search-clear"
-          id="search-clear"
-          aria-label="Limpar busca"
-        >
-          ✕
-        </button>
-      </div>
-      <div class="toc-grid js-fade" style="transition-delay: 0.1s">
-        <a href="#pizzas" class="toc-card">
-          <span class="toc-card-num">01</span>
-          <span class="toc-card-name">Pizzas</span>
-          <span class="toc-card-sub">massas · molhos · montagem</span>
-          <span class="toc-card-arrow">→</span>
-        </a>
-        <a href="#focaccias" class="toc-card">
-          <span class="toc-card-num">02</span>
-          <span class="toc-card-name">Focaccias</span>
-          <span class="toc-card-sub">salgadas & doces</span>
-          <span class="toc-card-arrow">→</span>
-        </a>
-        <a href="#cucas" class="toc-card">
-          <span class="toc-card-num">03</span>
-          <span class="toc-card-name">Cucas</span>
-          <span class="toc-card-sub">massas &amp; coberturas</span>
-          <span class="toc-card-arrow">→</span>
-        </a>
-        <a href="#bolos" class="toc-card">
-          <span class="toc-card-num">04</span>
-          <span class="toc-card-name">Bolos</span>
-          <span class="toc-card-sub">massas & recheios</span>
-          <span class="toc-card-arrow">→</span>
-        </a>
-        <a href="#quitanda" class="toc-card">
-          <span class="toc-card-num">05</span>
-          <span class="toc-card-name">Quitanda</span>
-          <span class="toc-card-sub">padaria brasileira artesanal</span>
-          <span class="toc-card-arrow">→</span>
-        </a>
-        <a href="#especiais" class="toc-card">
-          <span class="toc-card-num">06</span>
-          <span class="toc-card-name">Especiais</span>
-          <span class="toc-card-sub">receitas premium & sazonais</span>
-          <span class="toc-card-arrow">→</span>
-        </a>
-      </div>
-    </section>
-
+      </section>
+      <section class="discovery" id="catalogo" aria-labelledby="discovery-title">
+        <div class="discovery-top">
+          <div><p class="eyebrow">Oi, chef! Vem se inspirar</p><h2 id="discovery-title">Qual é a vontade <em>de hoje?</em></h2></div>
+          <p class="collection-note">Um caderno, muitas possibilidades.<br />Escolha sua próxima delícia.</p>
+        </div>
+        <div class="discovery-tools">
+          <div class="search-wrap">
+            <img src="assets/icons/search.svg" alt="" width="21" height="21" />
+            <input type="search" class="search-input" id="recipe-search" placeholder="Ache sua próxima delícia…" autocomplete="off" aria-label="Buscar receitas por nome ou ingrediente" />
+            <button type="button" class="search-clear" id="search-clear" aria-label="Limpar busca"><img src="assets/icons/x.svg" alt="" width="20" height="20" /></button>
+          </div>
+          <div class="category-filters" role="group" aria-label="Filtrar receitas por categoria">
+            <button type="button" class="category-filter active" data-category="all" aria-pressed="true">Todas</button>
+            <button type="button" class="category-filter" data-category="sweet" aria-pressed="false">Doces</button>
+            <button type="button" class="category-filter" data-category="savory" aria-pressed="false">Salgados</button>
+          </div>
+        </div>
+        <aside class="featured-recipe" aria-labelledby="featured-title">
+          <h3 id="featured-title">Destaque da vez</h3>
+          <a class="featured-link" href="#bolo-prestigio" data-open-recipe="bolo-prestigio">
+            <img class="featured-food" src="images/recipes/bolo-prestigio.jpg" alt="Bolo Prestígio sobre uma boleira marfim" width="1280" height="1280" loading="lazy" />
+            <span class="featured-copy"><span class="eyebrow">Para adoçar o dia</span><strong>Bolo Prestígio</strong><span>Chocolate e coco em camadas.</span><span class="featured-cta">Conferir receita <img src="assets/icons/arrow-up-right.svg" alt="" width="17" height="17" /></span></span>
+          </a>
+        </aside>
+        <div class="catalog-heading"><h3>Para se aventurar</h3><span id="catalog-count" role="status" aria-live="polite">14 receitas no caderno</span></div>
+        <p class="catalog-empty" hidden>Nenhuma receita por aqui. Experimente outro ingrediente ou escolha outra categoria.</p>
+      </section>
+      <div class="catalog-grid" aria-label="Catálogo de receitas">
     <!-- ═══════════════════════════════════════════════════════════
      01 — PIZZAS
 ═══════════════════════════════════════════════════════════ -->
@@ -275,8 +88,15 @@
       </div>
 
       <div class="recipe-wrap">
-        <article class="recipe-card" id="pizza-massa-base">
+        <article class="recipe-card" data-category="savory" id="pizza-massa-base">
           <div class="rc-head" role="button" tabindex="0" aria-expanded="false">
+            <div class="rc-image">
+              <img
+                src="images/recipes/massa-de-pizza.jpg"
+                loading="lazy" decoding="async" width="1280" height="1280"
+                alt="Massa de Pizza El Guapo"
+              />
+            </div>
             <div class="rc-head-main">
               <h3 class="rc-name">Massa de Pizza El Guapo</h3>
               <div class="rc-chips">
@@ -296,17 +116,11 @@
                 <span class="rc-meta-value">65%</span>
               </div>
             </div>
-            <span class="rc-toggle" aria-hidden="true">+</span>
+            <span class="rc-toggle" aria-hidden="true"><img src="assets/icons/arrow-up-right.svg" alt="" width="22" height="22" /></span>
           </div>
 
           <div class="rc-body">
-            <div class="rc-image">
-              <img
-                src="images/el-guapo-img-01.webp"
-                loading="lazy"
-                alt="Massa de Pizza El Guapo"
-              />
-            </div>
+
             <div class="rc-body-inner">
               <div class="rc-ingredients">
                 <span class="rc-col-label">Fórmula Unificada</span>
@@ -615,310 +429,15 @@
       </div>
 
       <div class="recipe-wrap">
-        <article class="recipe-card" id="focaccia-massa-base">
-          <div class="rc-head" role="button" tabindex="0" aria-expanded="false">
-            <div class="rc-head-main">
-              <h3 class="rc-name">Massa Base de Focaccia</h3>
-              <div class="rc-chips">
-                <span class="rc-chip">Tangzhong</span>
-                <span class="rc-chip rc-chip--accent">75% hidratação</span>
-                <span class="rc-chip">Fermentação Longa</span>
-                <span class="rc-chip">Miolo Macio</span>
-              </div>
-            </div>
-            <div class="rc-meta">
-              <div class="rc-meta-item">
-                <span class="rc-meta-label">Rendimento</span>
-                <span class="rc-meta-value">6–7 un. (WYDA D10)</span>
-              </div>
-              <div class="rc-meta-item">
-                <span class="rc-meta-label">Preparo total</span>
-                <span class="rc-meta-value">4–6 h</span>
-              </div>
-            </div>
-            <span class="rc-toggle" aria-hidden="true">+</span>
-          </div>
-
-          <div class="rc-body">
-            <div class="rc-image">
-              <img
-                src="images/el-guapo-img-02.webp"
-                loading="lazy"
-                alt="Massa Base de Focaccia"
-              />
-            </div>
-            <div class="rc-body-inner">
-              <div class="rc-ingredients">
-                <span class="rc-col-label">Ingredientes</span>
-
-                <div class="rc-ing-group">
-                  <p class="rc-ing-group-name">Tangzhong</p>
-                  <ul>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span>Farinha de trigo</span>
-                        <span class="rc-ing-qty">50g</span>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span>Leite integral</span>
-                        <span class="rc-ing-qty">250g</span>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-
-                <div class="rc-ing-group">
-                  <p class="rc-ing-group-name">
-                    Massa Final (100% = 600g farinha)
-                  </p>
-                  <ul>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Farinha de trigo média/forte<small class="ing-pct"
-                            >550g restantes · 100%</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">550g</span>
-                      </div>
-                      <div class="baker-bar-wrap">
-                        <div class="baker-bar-fill" style="--fill: 100%"></div>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Leite integral gelado<small class="ing-pct"
-                            >200g restantes · 75%</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">200g</span>
-                      </div>
-                      <div class="baker-bar-wrap">
-                        <div class="baker-bar-fill" style="--fill: 75%"></div>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span>Tangzhong preparado</span>
-                        <span class="rc-ing-qty">todo</span>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Gemas<small class="ing-pct">≈54g · 9%</small></span
-                        >
-                        <span class="rc-ing-qty">3 un.</span>
-                      </div>
-                      <div class="baker-bar-wrap">
-                        <div class="baker-bar-fill" style="--fill: 9%"></div>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Açúcar refinado<small class="ing-pct"
-                            >7%</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">42g</span>
-                      </div>
-                      <div class="baker-bar-wrap">
-                        <div class="baker-bar-fill" style="--fill: 7%"></div>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Manteiga sem sal, ponto pomada<small class="ing-pct"
-                            >8%</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">50g</span>
-                      </div>
-                      <div class="baker-bar-wrap">
-                        <div class="baker-bar-fill" style="--fill: 8%"></div>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Azeite de oliva<small class="ing-pct"
-                            >5%</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">30g</span>
-                      </div>
-                      <div class="baker-bar-wrap">
-                        <div class="baker-bar-fill" style="--fill: 5%"></div>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Sal refinado<small class="ing-pct">2%</small></span
-                        >
-                        <span class="rc-ing-qty">12g</span>
-                      </div>
-                      <div class="baker-bar-wrap">
-                        <div class="baker-bar-fill" style="--fill: 2%"></div>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Fermento biológico seco<small class="ing-pct"
-                            >0,3%</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">2g</span>
-                      </div>
-                      <div class="baker-bar-wrap">
-                        <div class="baker-bar-fill" style="--fill: 0.3%"></div>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div class="rc-method">
-                <span class="rc-col-label">Modo de Preparo</span>
-
-                <div class="rc-step">
-                  <span class="rc-step-num">01</span>
-                  <p class="rc-step-text">
-                    <strong>Tangzhong.</strong> Dissolva com um fouet 50g de
-                    farinha em 250g de leite integral frio, fora do fogo, até
-                    não restar grumos. Leve ao fogo médio, mexendo sem parar. A
-                    mistura começará opaca e, ao atingir <strong>65°C</strong>,
-                    ficará levemente translúcida e adquirirá a consistência de
-                    um creme espesso — esse é o ponto exato de gelatinização.
-                    Retire do fogo imediatamente, cubra com filme plástico rente
-                    à superfície e deixe esfriar completamente antes de usar.
-                  </p>
-                </div>
-                <div class="rc-step">
-                  <span class="rc-step-num">02</span>
-                  <p class="rc-step-text">
-                    <strong>Ingredientes secos.</strong> Na tigela da batedeira
-                    com gancho, misture a farinha restante (550g), o açúcar e o
-                    fermento biológico seco. Reserve o sal para etapa posterior
-                    — o contato direto e prolongado entre sal e fermento pode
-                    comprometer a fermentação.
-                  </p>
-                </div>
-                <div class="rc-step">
-                  <span class="rc-step-num">03</span>
-                  <p class="rc-step-text">
-                    <strong>Mistura inicial.</strong> Adicione o leite integral
-                    gelado (200g), as gemas e o tangzhong completamente frio.
-                    Misture em velocidade baixa por 2 minutos para hidratar a
-                    farinha. O aspecto ainda será irregular — o glúten se
-                    desenvolverá na próxima etapa.
-                  </p>
-                </div>
-                <div class="rc-step">
-                  <span class="rc-step-num">04</span>
-                  <p class="rc-step-text">
-                    <strong>Desenvolvimento do glúten.</strong> Adicione o sal e
-                    aumente para velocidade média. Sove por 8 a 10 minutos, até
-                    a massa estar lisa, elástica e se descolando das paredes —
-                    ainda levemente pegajosa, o que é normal nesta hidratação.
-                    Verifique o ponto de véu: estique um pedaço entre os dedos;
-                    deve formar membrana fina e translúcida sem rasgar.
-                  </p>
-                </div>
-                <div class="rc-step">
-                  <span class="rc-step-num">05</span>
-                  <p class="rc-step-text">
-                    <strong>Incorporação da manteiga e azeite.</strong> Com a
-                    batedeira em velocidade baixa, adicione a manteiga em 3 ou 4
-                    porções, esperando a incorporação completa de cada uma. Em
-                    seguida, adicione o azeite em fio fino, aumentando levemente
-                    a velocidade. Bata até a massa voltar a ser completamente
-                    lisa, elástica e levemente brilhante.
-                  </p>
-                </div>
-                <div class="rc-step">
-                  <span class="rc-step-num">06</span>
-                  <p class="rc-step-text">
-                    <strong>Primeira fermentação (bulk).</strong> Forme uma
-                    bola, acomode em tigela untada com azeite, cubra e deixe
-                    fermentar em temperatura ambiente por 1h30 a 2h, até dobrar
-                    de volume. Para fermentação mais lenta e sabor mais
-                    complexo, após 30 minutos em temperatura ambiente, leve à
-                    geladeira por 12 a 18h.
-                  </p>
-                </div>
-                <div class="rc-step">
-                  <span class="rc-step-num">07</span>
-                  <p class="rc-step-text">
-                    <strong>Modelagem.</strong> Unte generosamente a assadeira
-                    com azeite. Transfira a massa e pressione com as pontas dos
-                    dedos até as bordas. Se resistir e encolher, aguarde 10 a 15
-                    minutos e repita — o glúten precisa relaxar. A massa deve
-                    cobrir o fundo de forma uniforme.
-                  </p>
-                </div>
-                <div class="rc-step">
-                  <span class="rc-step-num">08</span>
-                  <p class="rc-step-text">
-                    <strong>Segunda fermentação.</strong> Cubra com filme
-                    plástico e deixe fermentar por mais 1h a 1h30 em temperatura
-                    ambiente, até a massa estar visivelmente levantada e
-                    abaulada. Esta etapa é responsável pela leveza e pela
-                    abertura do miolo.
-                  </p>
-                </div>
-                <div class="rc-step">
-                  <span class="rc-step-num">09</span>
-                  <p class="rc-step-text">
-                    <strong>Covinhas e cobertura.</strong> Com os dedos bem
-                    untados de azeite, faça as covinhas características
-                    pressionando com firmeza até quase tocar o fundo da
-                    assadeira. Regue toda a superfície com fio generoso de
-                    azeite. Aplique a cobertura desejada.
-                  </p>
-                </div>
-                <div class="rc-step">
-                  <span class="rc-step-num">10</span>
-                  <p class="rc-step-text">
-                    <strong>Assamento.</strong> Preaqueça o forno a 220°C por ao
-                    menos 20 minutos. Asse por 20 a 25 minutos, até a superfície
-                    estar bem dourada e as bordas desprendendo das laterais da
-                    forma. Para confirmar o cozimento interno, insira um
-                    termômetro no centro: ao atingir <strong>90°C</strong>, a
-                    estrutura interna está pronta.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div class="rc-notes">
-              <span class="rc-notes-label"
-                >Notas Técnicas & Dicas de Preparo</span
-              >
-              <div class="rc-notes-grid">
-                <div class="rc-note">
-                  <span class="rc-note-title">O papel do tangzhong</span>
-                  A gelatinização do amido a 65°C permite que a farinha absorva
-                  até 3× mais líquido do que normalmente conseguiria, sem tornar
-                  a massa difícil de trabalhar. O resultado é um miolo
-                  excepcionalmente macio, úmido e que se mantém fresco por mais
-                  dias — fundamental para um produto de delivery.
-                </div>
-                <div class="rc-note">
+        <article class="recipe-card" data-category="savory" id="focaccia-massa-base"><div class="rc-head" role="button" tabindex="0" aria-expanded="false"><div class="rc-image"><img src="images/recipes/focaccia.jpg" alt="Massa Base de Focaccia" loading="lazy" decoding="async" width="1280" height="1280"></div>
+            <div class="rc-head-main"><h3 class="rc-name">Massa Base de Focaccia</h3><div class="rc-chips"><span class="rc-chip">Método direto</span><span class="rc-chip">75% hidratação</span><span class="rc-chip">Fermentação Longa</span><span class="rc-chip">Miolo Macio</span></div></div><div class="rc-meta"><div class="rc-meta-item"><span class="rc-meta-label">Rendimento</span><span class="rc-meta-value">6–7 un. (WYDA D10)</span></div><div class="rc-meta-item"><span class="rc-meta-label">Preparo total</span><span class="rc-meta-value">4–6 h</span></div></div><span class="rc-toggle" aria-hidden="true"><img src="assets/icons/arrow-up-right.svg" alt="" width="22" height="22" /></span></div><div class="rc-body"><div class="rc-body-inner"><div class="rc-ingredients"><span class="rc-col-label">Ingredientes</span><div class="rc-ing-group"><p class="rc-ing-group-name">Massa — método direto</p><ul><li class="rc-ing-item"><div class="rc-ing-row"><span>Farinha de trigo<small class="ing-pct">100%</small></span><span class="rc-ing-qty">600g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Leite integral gelado<small class="ing-pct">75% sobre a farinha</small></span><span class="rc-ing-qty">450g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Gemas<small class="ing-pct">≈54g · 9%</small></span><span class="rc-ing-qty">3 un.</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Açúcar refinado<small class="ing-pct">7%</small></span><span class="rc-ing-qty">42g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Manteiga sem sal, ponto pomada<small class="ing-pct">8%</small></span><span class="rc-ing-qty">50g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Azeite de oliva<small class="ing-pct">5%</small></span><span class="rc-ing-qty">30g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Sal refinado<small class="ing-pct">2%</small></span><span class="rc-ing-qty">12g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Fermento biológico seco<small class="ing-pct">0,3%</small></span><span class="rc-ing-qty">2g</span></div></li></ul></div></div><div class="rc-method"><span class="rc-col-label">Modo de Preparo</span><div class="rc-step"><span class="rc-step-num">01</span><p class="rc-step-text">Ingredientes secos. Na tigela da batedeira com gancho, misture os 600g de farinha, o açúcar e o fermento biológico seco. Reserve o sal para a etapa posterior.</p></div><div class="rc-step"><span class="rc-step-num">02</span><p class="rc-step-text">Mistura inicial. Adicione os 450g de leite integral gelado e as gemas. Misture em velocidade baixa por 2 minutos para hidratar a farinha. O glúten se desenvolverá na próxima etapa.</p></div><div class="rc-step"><span class="rc-step-num">03</span><p class="rc-step-text">Desenvolvimento do glúten. Adicione o sal e aumente para velocidade média. Sove por 8 a 10 minutos, até a massa estar lisa, elástica e se descolando das paredes — ainda levemente pegajosa, o que é normal nesta hidratação. Verifique o ponto de véu: estique um pedaço entre os dedos; deve formar membrana fina e translúcida sem rasgar.</p></div><div class="rc-step"><span class="rc-step-num">04</span><p class="rc-step-text">Incorporação da manteiga e azeite. Com a batedeira em velocidade baixa, adicione a manteiga em 3 ou 4 porções, esperando a incorporação completa de cada uma. Em seguida, adicione o azeite em fio fino, aumentando levemente a velocidade. Bata até a massa voltar a ser completamente lisa, elástica e levemente brilhante.</p></div><div class="rc-step"><span class="rc-step-num">05</span><p class="rc-step-text">Primeira fermentação (bulk). Forme uma bola, acomode em tigela untada com azeite, cubra e deixe fermentar em temperatura ambiente por 1h30 a 2h, até dobrar de volume. Para fermentação mais lenta e sabor mais complexo, após 30 minutos em temperatura ambiente, leve à geladeira por 12 a 18h.</p></div><div class="rc-step"><span class="rc-step-num">06</span><p class="rc-step-text">Modelagem. Unte generosamente a assadeira com azeite. Transfira a massa e pressione com as pontas dos dedos até as bordas. Se resistir e encolher, aguarde 10 a 15 minutos e repita — o glúten precisa relaxar. A massa deve cobrir o fundo de forma uniforme.</p></div><div class="rc-step"><span class="rc-step-num">07</span><p class="rc-step-text">Segunda fermentação. Cubra com filme plástico e deixe fermentar por mais 1h a 1h30 em temperatura ambiente, até a massa estar visivelmente levantada e abaulada. Esta etapa é responsável pela leveza e pela abertura do miolo.</p></div><div class="rc-step"><span class="rc-step-num">08</span><p class="rc-step-text">Covinhas e cobertura. Com os dedos bem untados de azeite, faça as covinhas características pressionando com firmeza até quase tocar o fundo da assadeira. Regue toda a superfície com fio generoso de azeite. Aplique a cobertura desejada.</p></div><div class="rc-step"><span class="rc-step-num">09</span><p class="rc-step-text">Assamento. Preaqueça o forno a 220°C por ao menos 20 minutos. Asse por 20 a 25 minutos, até a superfície estar bem dourada e as bordas desprendendo das laterais da forma. Para confirmar o cozimento interno, insira um termômetro no centro: ao atingir 90°C, a estrutura interna está pronta.</p></div></div></div><div class="rc-notes"><div class="rc-notes-grid"><div class="rc-note">
                   <span class="rc-note-title">Temperatura interna: 90°C</span>
                   O termômetro de alimentos é o instrumento mais confiável para
                   confirmar o cozimento. A 90°C, o amido está completamente
                   gelatinizado e a estrutura interna, firme. Não se guie apenas
                   pela cor externa: uma superfície dourada pode esconder um
                   interior ainda cru.
-                </div>
-                <div class="rc-note">
+                </div><div class="rc-note">
                   <span class="rc-note-title"
                     >Fermentação lenta (cold retard)</span
                   >
@@ -927,8 +446,7 @@
                   orgânicos que aprofundam o sabor, melhoram a extensibilidade e
                   geram uma casca mais complexa e aromática. Retire ao menos 1h
                   antes de modelar.
-                </div>
-                <div class="rc-note">
+                </div><div class="rc-note">
                   <span class="rc-note-title">Assamento e textura</span>
                   A focaccia exige calor intenso e direto. O azeite na assadeira
                   não é apenas antiadesivo: ele frita levemente o fundo da
@@ -936,19 +454,14 @@
                   assinatura do produto. O azeite sobre a superfície retém
                   umidade nos primeiros minutos e favorece a douração depois.
                   Não economize em nenhum dos dois.
-                </div>
-                <div class="rc-note">
+                </div><div class="rc-note">
                   <span class="rc-note-title">Farinha média/forte</span>
                   Proteínas entre 11% e 13% são o ideal (W 220–280). Farinha
                   forte demais torna a massa elástica em excesso, dificultando o
                   espalhamento na forma; fraca demais compromete a estrutura do
                   miolo. Prefira farinhas indicadas para pão ou de uso
                   profissional.
-                </div>
-              </div>
-            </div>
-          </div>
-        </article>
+                </div></div></div></div></article>
       </div>
     </section>
 
@@ -988,340 +501,8 @@
       </div>
       <div class="recipe-wrap">
         <!-- ─── Massa Base de Cuca ─── -->
-        <article class="recipe-card" id="cuca-massa-base">
-          <div class="rc-head" role="button" tabindex="0" aria-expanded="false">
-            <div class="rc-head-main">
-              <h3 class="rc-name">Massa Base de Cuca</h3>
-              <div class="rc-chips">
-                <span class="rc-chip">Tangzhong</span>
-                <span class="rc-chip rc-chip--accent">70% hidratação</span>
-                <span class="rc-chip">Massa Enriquecida</span>
-                <span class="rc-chip">Baunilha · Raspas Cítricas</span>
-              </div>
-            </div>
-            <div class="rc-meta">
-              <div class="rc-meta-item">
-                <span class="rc-meta-label">Rendimento</span>
-                <span class="rc-meta-value"
-                  >1 forma 30×40cm ou 2 de 20×30cm</span
-                >
-              </div>
-              <div class="rc-meta-item">
-                <span class="rc-meta-label">Preparo total</span>
-                <span class="rc-meta-value">4–6h (ou 18h c/ cold retard)</span>
-              </div>
-            </div>
-            <span class="rc-toggle" aria-hidden="true">+</span>
-          </div>
-          <div class="rc-body">
-            <div class="rc-image">
-              <img
-                src="images/el-guapo-img-03.webp"
-                loading="lazy"
-                alt="Massa Base de Cuca"
-              />
-            </div>
-            <div class="rc-body-inner">
-              <div class="rc-ingredients">
-                <span class="rc-col-label">Composição Analítica</span>
-
-                <div class="rc-ing-group">
-                  <p class="rc-ing-group-name">
-                    A. Tangzhong (retirado da fórmula principal)
-                  </p>
-                  <ul>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Farinha de trigo<small class="ing-pct"
-                            >parte dos 600g</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">40g</span>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Leite integral<small class="ing-pct"
-                            >parte dos 420g</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">200g</span>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-
-                <div class="rc-ing-group">
-                  <p class="rc-ing-group-name">
-                    B. Massa Principal (100% = 600g farinha)
-                  </p>
-                  <ul>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Farinha de trigo média/forte<small class="ing-pct"
-                            >100% · 560g na batedeira</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">600g</span>
-                      </div>
-                      <div class="baker-bar-wrap">
-                        <div class="baker-bar-fill" style="--fill: 100%"></div>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Leite integral<small class="ing-pct"
-                            >70% · 220g na batedeira</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">420g</span>
-                      </div>
-                      <div class="baker-bar-wrap">
-                        <div class="baker-bar-fill" style="--fill: 70%"></div>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Ovos inteiros<small class="ing-pct"
-                            >16,7% · ~2 ovos grandes</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">100g</span>
-                      </div>
-                      <div class="baker-bar-wrap">
-                        <div class="baker-bar-fill" style="--fill: 16.7%"></div>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Gemas<small class="ing-pct"
-                            >6% · ~2 gemas</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">36g</span>
-                      </div>
-                      <div class="baker-bar-wrap">
-                        <div class="baker-bar-fill" style="--fill: 6%"></div>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Açúcar refinado<small class="ing-pct"
-                            >20%</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">120g</span>
-                      </div>
-                      <div class="baker-bar-wrap">
-                        <div class="baker-bar-fill" style="--fill: 20%"></div>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Manteiga sem sal, ponto pomada<small class="ing-pct"
-                            >15%</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">90g</span>
-                      </div>
-                      <div class="baker-bar-wrap">
-                        <div class="baker-bar-fill" style="--fill: 15%"></div>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Fermento biológico seco<small class="ing-pct"
-                            >1,17%</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">7g</span>
-                      </div>
-                      <div class="baker-bar-wrap">
-                        <div class="baker-bar-fill" style="--fill: 1.17%"></div>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span>Sal<small class="ing-pct">1,33%</small></span>
-                        <span class="rc-ing-qty">8g</span>
-                      </div>
-                      <div class="baker-bar-wrap">
-                        <div class="baker-bar-fill" style="--fill: 1.33%"></div>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Baunilha<small class="ing-pct">1,3–1,7%</small></span
-                        >
-                        <span class="rc-ing-qty">8–10g</span>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span>Raspas de limão ou laranja</span>
-                        <span class="rc-ing-qty">q.b.</span>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div class="rc-method">
-                <span class="rc-col-label">Modo de Preparo</span>
-
-                <div class="rc-step">
-                  <span class="rc-step-num">01</span>
-                  <p class="rc-step-text">
-                    <strong>Tangzhong.</strong> Em uma panela pequena, dissolva
-                    os 40g de farinha nos 200g de leite integral frio, mexendo
-                    com fouet até não restar grumos. Leve ao fogo médio sem
-                    parar de mexer até a mistura atingir 65°C e transformar-se:
-                    de líquida e opaca a uma pasta cremosa e levemente
-                    translúcida — ponto de pudim leve. Retire imediatamente do
-                    fogo, cubra com filme plástico em contato direto com a
-                    superfície e deixe esfriar completamente antes de usar.
-                    Adicionado quente, compromete a atividade do fermento.
-                  </p>
-                </div>
-
-                <div class="rc-step">
-                  <span class="rc-step-num">02</span>
-                  <p class="rc-step-text">
-                    <strong>Preparação dos secos.</strong> Na tigela da
-                    batedeira com gancho, combine os 560g de farinha restante, o
-                    açúcar e o fermento biológico seco. Misture brevemente com
-                    fouet para distribuir o fermento de forma uniforme. Reserve
-                    o sal separado — adicionado depois, evita o contato direto
-                    com o fermento e a inibição prematura da fermentação.
-                  </p>
-                </div>
-
-                <div class="rc-step">
-                  <span class="rc-step-num">03</span>
-                  <p class="rc-step-text">
-                    <strong>Blend dos líquidos.</strong> Em tigela à parte,
-                    misture os 220g de leite morno (32–38°C), os ovos inteiros
-                    levemente batidos, as gemas, a baunilha, as raspas cítricas
-                    e o tangzhong já completamente frio. Homogeneize bem. A
-                    temperatura controlada dos líquidos garante que o fermento
-                    ative de forma progressiva, criando fermentação consistente
-                    sem picos bruscos de atividade.
-                  </p>
-                </div>
-
-                <div class="rc-step">
-                  <span class="rc-step-num">04</span>
-                  <p class="rc-step-text">
-                    <strong>Desenvolvimento do glúten.</strong> Adicione o blend
-                    de líquidos aos secos na batedeira. Misture em velocidade
-                    baixa por 2 a 3 minutos até a farinha hidratar
-                    completamente. Adicione o sal e aumente para velocidade
-                    média. Sove por 8 a 10 minutos, até a massa estar lisa,
-                    elástica e se descolando das paredes da tigela. Por ser
-                    altamente enriquecida, o glúten demora mais — respeite o
-                    tempo e faça o teste do véu ao final.
-                  </p>
-                </div>
-
-                <div class="rc-step">
-                  <span class="rc-step-num">05</span>
-                  <p class="rc-step-text">
-                    <strong>Incorporação da manteiga.</strong> Reduza para
-                    velocidade baixa e adicione a manteiga em ponto pomada em 3
-                    ou 4 porções, aguardando absorção completa de cada adição
-                    antes da próxima. A massa pode parecer que se desintegra nos
-                    primeiros momentos — é esperado. Após toda a manteiga
-                    absorvida, bata até a massa estar completamente lisa, sedosa
-                    e com leve brilho característico das massas de alto
-                    enriquecimento.
-                  </p>
-                </div>
-
-                <div class="rc-step">
-                  <span class="rc-step-num">06</span>
-                  <p class="rc-step-text">
-                    <strong>Primeira fermentação.</strong> Forme uma bola,
-                    transfira para tigela levemente untada com manteiga e cubra
-                    com filme plástico. Fermente em temperatura ambiente por
-                    1h30 a 2h, até dobrar de volume. Para sabor mais profundo e
-                    miolo de textura superior: após 20 minutos em temperatura
-                    ambiente, leve à geladeira por
-                    <strong>12 a 18h</strong> (cold retard) — o frio retarda o
-                    fermento e ativa as enzimas que desenvolvem complexidade
-                    aromática.
-                  </p>
-                </div>
-
-                <div class="rc-step">
-                  <span class="rc-step-num">07</span>
-                  <p class="rc-step-text">
-                    <strong>Modelagem na forma.</strong> Unte e enfarinhe a
-                    forma com esmero. Desgaseifique suavemente a massa na
-                    bancada e transfira para a forma. Com os dedos levemente
-                    untados, pressione do centro em direção às bordas até cobrir
-                    toda a superfície de forma uniforme. Se a massa retrair
-                    persistentemente, cubra e aguarde 10 a 15 minutos para o
-                    glúten relaxar; retome sem forçar.
-                  </p>
-                </div>
-
-                <div class="rc-step">
-                  <span class="rc-step-num">08</span>
-                  <p class="rc-step-text">
-                    <strong>Segunda fermentação.</strong> Cubra com pano úmido
-                    ou filme levemente untado. Deixe fermentar em temperatura
-                    ambiente por <strong>45 a 60 minutos</strong>, até a massa
-                    estar visivelmente abaulada, macia ao toque e ultrapassando
-                    levemente a borda da forma. O sinal de ponto ideal: ao
-                    pressionar com o dedo, a marca retorna devagar — a estrutura
-                    está firme o suficiente para suportar a farofa sem colapsar.
-                  </p>
-                </div>
-
-                <div class="rc-step">
-                  <span class="rc-step-num">09</span>
-                  <p class="rc-step-text">
-                    <strong>Farofa e assamento.</strong> Distribua a farofa
-                    generosamente sobre a massa fermentada, pressionando
-                    levíssimamente para aderir sem compactar a estrutura. Asse
-                    em forno preaquecido a <strong>180°C</strong> por 25 a 35
-                    minutos, até a farofa estar uniformemente dourada. O
-                    termômetro deve marcar <strong>88–92°C</strong> no centro da
-                    massa. Deixe repousar 15 minutos antes de desenformar — o
-                    miolo precisa de tempo para firmar.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div class="rc-notes">
-              <span class="rc-notes-label"
-                >Notas Técnicas &amp; Enriquecimento</span
-              >
-              <div class="rc-notes-grid">
-                <div class="rc-note">
-                  <span class="rc-note-title"
-                    >Tangzhong e a umidade do miolo</span
-                  >
-                  A gelatinização da farinha com leite a 65°C cria uma pasta
-                  capaz de reter <strong>3× mais água</strong> do que farinha
-                  hidratada a frio. Na cuca, isso se traduz em miolo
-                  excepcionalmente úmido que se mantém macio por 2 a 3 dias após
-                  o assamento — atributo crítico para um produto que precisa
-                  conservar qualidade. Sem tangzhong, a cuca resseca já na manhã
-                  seguinte.
-                </div>
-                <div class="rc-note">
+        <article class="recipe-card" data-category="sweet" id="cuca-massa-base" data-replaces-recipes="cuca-crumble-basico"><div class="rc-head" role="button" tabindex="0" aria-expanded="false"><div class="rc-image"><img src="images/recipes/cuca-com-crumble.jpg" alt="Cuca com Crumble" loading="lazy" decoding="async" width="1280" height="1280"></div>
+            <div class="rc-head-main"><h3 class="rc-name">Cuca com Crumble</h3><div class="rc-chips"><span class="rc-chip">Método direto</span><span class="rc-chip">70% hidratação</span><span class="rc-chip">Massa Enriquecida</span><span class="rc-chip">Baunilha · Raspas Cítricas</span></div></div><div class="rc-meta"><div class="rc-meta-item"><span class="rc-meta-label">Rendimento</span><span class="rc-meta-value">1 forma 30×40cm ou 2 de 20×30cm</span></div><div class="rc-meta-item"><span class="rc-meta-label">Preparo total</span><span class="rc-meta-value">4–6h (ou 18h c/ cold retard)</span></div></div><span class="rc-toggle" aria-hidden="true"><img src="assets/icons/arrow-up-right.svg" alt="" width="22" height="22" /></span></div><div class="rc-body"><div class="rc-body-inner"><div class="rc-ingredients"><span class="rc-col-label">Ingredientes</span><div class="rc-ing-group"><p class="rc-ing-group-name">Massa — método direto</p><ul><li class="rc-ing-item"><div class="rc-ing-row"><span>Farinha de trigo<small class="ing-pct">100%</small></span><span class="rc-ing-qty">600g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Leite integral<small class="ing-pct">70% sobre a farinha</small></span><span class="rc-ing-qty">420g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Ovos inteiros<small class="ing-pct">16,7% · ~2 ovos grandes</small></span><span class="rc-ing-qty">100g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Gemas<small class="ing-pct">6% · ~2 gemas</small></span><span class="rc-ing-qty">36g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Açúcar refinado<small class="ing-pct">20%</small></span><span class="rc-ing-qty">120g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Manteiga sem sal, ponto pomada<small class="ing-pct">15%</small></span><span class="rc-ing-qty">90g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Fermento biológico seco<small class="ing-pct">1,17%</small></span><span class="rc-ing-qty">7g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Sal<small class="ing-pct">1,33%</small></span><span class="rc-ing-qty">8g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Baunilha<small class="ing-pct">1,3–1,7%</small></span><span class="rc-ing-qty">8–10g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Raspas de limão ou laranja</span><span class="rc-ing-qty">q.b.</span></div></li></ul></div><div class="rc-ing-group"><p class="rc-ing-group-name">Farofa</p><ul><li class="rc-ing-item"><div class="rc-ing-row"><span>Farinha de trigo</span><span class="rc-ing-qty">150g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Açúcar</span><span class="rc-ing-qty">150g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Manteiga</span><span class="rc-ing-qty">75g</span></div></li></ul></div><div class="rc-ing-group"><p class="rc-ing-group-name">Aromáticos</p><ul><li class="rc-ing-item"><div class="rc-ing-row"><span>Raspas de cítricos</span><span class="rc-ing-qty">a gosto</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Especiarias</span><span class="rc-ing-qty">a gosto</span></div></li></ul></div></div><div class="rc-method"><span class="rc-col-label">Modo de Preparo</span><div class="rc-step"><span class="rc-step-num">01</span><p class="rc-step-text">Preparação dos secos. Na tigela da batedeira com gancho, combine os 600g de farinha de trigo, o açúcar e o fermento biológico seco. Misture brevemente para distribuir. Reserve o sal para a etapa posterior.</p></div><div class="rc-step"><span class="rc-step-num">02</span><p class="rc-step-text">Blend dos líquidos. Em tigela à parte, misture os 420g de leite, os ovos inteiros levemente batidos, as gemas, a baunilha e as raspas cítricas. Homogeneize e incorpore aos secos na etapa seguinte.</p></div><div class="rc-step"><span class="rc-step-num">03</span><p class="rc-step-text">Desenvolvimento do glúten. Adicione o blend de líquidos aos secos na batedeira. Misture em velocidade baixa por 2 a 3 minutos até a farinha hidratar completamente. Adicione o sal e aumente para velocidade média. Sove por 8 a 10 minutos, até a massa estar lisa, elástica e se descolando das paredes da tigela. Por ser altamente enriquecida, o glúten demora mais — respeite o tempo e faça o teste do véu ao final.</p></div><div class="rc-step"><span class="rc-step-num">04</span><p class="rc-step-text">Incorporação da manteiga. Reduza para velocidade baixa e adicione a manteiga em ponto pomada em 3 ou 4 porções, aguardando absorção completa de cada adição antes da próxima. A massa pode parecer que se desintegra nos primeiros momentos — é esperado. Após toda a manteiga absorvida, bata até a massa estar completamente lisa, sedosa e com leve brilho característico das massas de alto enriquecimento.</p></div><div class="rc-step"><span class="rc-step-num">05</span><p class="rc-step-text">Primeira fermentação. Forme uma bola, transfira para tigela levemente untada com manteiga e cubra com filme plástico. Fermente em temperatura ambiente por 1h30 a 2h, até dobrar de volume. Para sabor mais profundo e miolo de textura superior: após 20 minutos em temperatura ambiente, leve à geladeira por 12 a 18h (cold retard) — o frio retarda o fermento e ativa as enzimas que desenvolvem complexidade aromática.</p></div><h4 class="rc-col-label">Crumble — preparar durante o descanso da massa</h4><div class="rc-step"><span class="rc-step-num">06</span><p class="rc-step-text">Secos. Combine a farinha de trigo, o açúcar, as raspas de cítricos e as especiarias a gosto em uma tigela. Misture até distribuir os aromáticos.</p></div><div class="rc-step"><span class="rc-step-num">07</span><p class="rc-step-text">Incorporação da manteiga fria. Adicione os cubos de manteiga gelada à mistura de secos. Com as pontas dos dedos — nunca as palmas, que transferem calor — pressione e esfregue a manteiga contra os secos em movimentos rápidos. O objetivo é uma farofa com migalhas de tamanhos variados: de pedaços do tamanho de uma ervilha a fragmentos mais finos. Não homogeneize demais — a irregularidade é a essência da textura da cuca.</p></div><div class="rc-step"><span class="rc-step-num">08</span><p class="rc-step-text">Ponto ideal. A farofa pronta não deve parecer areia fina nem ter pedaços de manteiga intactos e visíveis. O teste: ao apertar um punhado com força e soltar, ela mantém a forma por um segundo antes de desmanchar. Esse comportamento indica que a manteiga está distribuída corretamente — nem massuda nem solta demais para cobrir a massa fermentada.</p></div><div class="rc-step"><span class="rc-step-num">09</span><p class="rc-step-text">Refrigeração. Transfira para tigela coberta com filme plástico e leve à geladeira por no mínimo 30 minutos antes de usar. Fria, a farofa distribui melhor sobre a massa fermentada sem afundar durante a segunda fermentação ou nos primeiros minutos no forno. Pode ser preparado com até 3 dias de antecedência ou congelado cru por até 3 meses — aplique direto do freezer, sem descongelar.</p></div><h4 class="rc-col-label">Massa — modelagem e finalização</h4><div class="rc-step"><span class="rc-step-num">10</span><p class="rc-step-text">Modelagem na forma. Unte e enfarinhe a forma com esmero. Desgaseifique suavemente a massa na bancada e transfira para a forma. Com os dedos levemente untados, pressione do centro em direção às bordas até cobrir toda a superfície de forma uniforme. Se a massa retrair persistentemente, cubra e aguarde 10 a 15 minutos para o glúten relaxar; retome sem forçar.</p></div><div class="rc-step"><span class="rc-step-num">11</span><p class="rc-step-text">Segunda fermentação. Cubra com pano úmido ou filme levemente untado. Deixe fermentar em temperatura ambiente por 45 a 60 minutos, até a massa estar visivelmente abaulada, macia ao toque e ultrapassando levemente a borda da forma. O sinal de ponto ideal: ao pressionar com o dedo, a marca retorna devagar — a estrutura está firme o suficiente para suportar a farofa sem colapsar.</p></div><div class="rc-step"><span class="rc-step-num">12</span><p class="rc-step-text">Farofa e assamento. Distribua a farofa generosamente sobre a massa fermentada, pressionando levíssimamente para aderir sem compactar a estrutura. Asse em forno preaquecido a 180°C por 25 a 35 minutos, até a farofa estar uniformemente dourada. O termômetro deve marcar 88–92°C no centro da massa. Deixe repousar 15 minutos antes de desenformar — o miolo precisa de tempo para firmar.</p></div></div></div><div class="rc-notes"><div class="rc-notes-grid"><div class="rc-note">
                   <span class="rc-note-title"
                     >Ponto de fermento e estrutura do miolo</span
                   >
@@ -1331,8 +512,7 @@
                   de glúten colapsa, a cuca murcha no forno. O sinal correto é
                   massa abaulada além da borda da forma, toque macio e marca que
                   retorna devagar ao pressionar.
-                </div>
-                <div class="rc-note">
+                </div><div class="rc-note">
                   <span class="rc-note-title"
                     >Ovos inteiros + gemas — estrutura e riqueza</span
                   >
@@ -1342,410 +522,19 @@
                   manteiga de forma homogênea, gerando miolo sedoso e de cor
                   dourada intensa. A proporção ovos/gemas explica diretamente a
                   coloração característica da cuca após assada.
-                </div>
-                <div class="rc-note">
+                </div><div class="rc-note">
                   <span class="rc-note-title"
                     >Farofa: estrutura e variações autorais</span
                   >
                   A farofa clássica usa farinha, açúcar e manteiga
-                  <strong>fria</strong> em proporção <strong>2:1:1</strong>,
+                  <strong>fria</strong> em proporção <strong>2:2:1</strong>,
                   trabalhada em migalhas grossas com as pontas dos dedos.
                   Manteiga fria é essencial — derretida cria cobertura pastosa
                   que endurece ao resfriar. Variações El Guapo: canela e
                   cardamomo na farofa; raspas de laranja incorporadas;
                   substituição parcial da farinha por farinha de amêndoas para
                   textura arenosa e aroma tostado.
-                </div>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <!-- ─── Massa de Cuca de Chocolate ─── -->
-        <article class="recipe-card" id="cuca-massa-chocolate">
-          <div class="rc-head" role="button" tabindex="0" aria-expanded="false">
-            <div class="rc-head-main">
-              <h3 class="rc-name">Massa de Cuca de Chocolate</h3>
-              <div class="rc-chips">
-                <span class="rc-chip">Tangzhong</span>
-                <span class="rc-chip rc-chip--accent"
-                  >75% hidratação · Cacau + Café</span
-                >
-                <span class="rc-chip">Massa Enriquecida</span>
-                <span class="rc-chip">Perfil Intenso &amp; Úmido</span>
-              </div>
-            </div>
-            <div class="rc-meta">
-              <div class="rc-meta-item">
-                <span class="rc-meta-label">Rendimento</span>
-                <span class="rc-meta-value"
-                  >1 forma 30×40cm ou 2 de 20×30cm</span
-                >
-              </div>
-              <div class="rc-meta-item">
-                <span class="rc-meta-label">Preparo total</span>
-                <span class="rc-meta-value">4–6h (ou 18h c/ cold retard)</span>
-              </div>
-            </div>
-            <span class="rc-toggle" aria-hidden="true">+</span>
-          </div>
-          <div class="rc-body">
-            <div class="rc-image">
-              <img
-                src="images/el-guapo-img-04.webp"
-                loading="lazy"
-                alt="Crumble de Chocolate"
-              />
-            </div>
-            <div class="rc-body-inner">
-              <div class="rc-ingredients">
-                <span class="rc-col-label">Composição Analítica</span>
-
-                <div class="rc-ing-group">
-                  <p class="rc-ing-group-name">
-                    A. Tangzhong (retirado da fórmula)
-                  </p>
-                  <ul>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Farinha de trigo<small class="ing-pct"
-                            >parte dos 560g</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">40g</span>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Leite integral<small class="ing-pct"
-                            >parte dos 420g</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">200g</span>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-
-                <div class="rc-ing-group">
-                  <p class="rc-ing-group-name">
-                    B. Massa Principal (100% = 560g farinha)
-                  </p>
-                  <ul>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Farinha de trigo média/forte<small class="ing-pct"
-                            >100% · 520g na batedeira</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">560g</span>
-                      </div>
-                      <div class="baker-bar-wrap">
-                        <div class="baker-bar-fill" style="--fill: 100%"></div>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Leite integral<small class="ing-pct"
-                            >75% · 220g na batedeira</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">420g</span>
-                      </div>
-                      <div class="baker-bar-wrap">
-                        <div class="baker-bar-fill" style="--fill: 75%"></div>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Ovos inteiros<small class="ing-pct"
-                            >17,9% · ~2 ovos grandes</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">100g</span>
-                      </div>
-                      <div class="baker-bar-wrap">
-                        <div class="baker-bar-fill" style="--fill: 17.9%"></div>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Gemas<small class="ing-pct"
-                            >6,4% · ~2 gemas</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">36g</span>
-                      </div>
-                      <div class="baker-bar-wrap">
-                        <div class="baker-bar-fill" style="--fill: 6.4%"></div>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Açúcar refinado<small class="ing-pct"
-                            >21,4%</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">120g</span>
-                      </div>
-                      <div class="baker-bar-wrap">
-                        <div class="baker-bar-fill" style="--fill: 21.4%"></div>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Cacau em pó 100%<small class="ing-pct"
-                            >6,3–8% · sem gordura residual</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">35–45g</span>
-                      </div>
-                      <div class="baker-bar-wrap">
-                        <div class="baker-bar-fill" style="--fill: 7.1%"></div>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Manteiga sem sal, ponto pomada<small class="ing-pct"
-                            >16,1%</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">90g</span>
-                      </div>
-                      <div class="baker-bar-wrap">
-                        <div class="baker-bar-fill" style="--fill: 16.1%"></div>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Fermento biológico seco<small class="ing-pct"
-                            >1,25%</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">7g</span>
-                      </div>
-                      <div class="baker-bar-wrap">
-                        <div class="baker-bar-fill" style="--fill: 1.25%"></div>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span>Sal<small class="ing-pct">1,43%</small></span>
-                        <span class="rc-ing-qty">8g</span>
-                      </div>
-                      <div class="baker-bar-wrap">
-                        <div class="baker-bar-fill" style="--fill: 1.43%"></div>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Café solúvel<small class="ing-pct"
-                            >0,7–1,1% · amplificador</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">4–6g</span>
-                      </div>
-                      <div class="baker-bar-wrap">
-                        <div class="baker-bar-fill" style="--fill: 0.89%"></div>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Baunilha<small class="ing-pct">1,4–1,8%</small></span
-                        >
-                        <span class="rc-ing-qty">8–10g</span>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span>Raspas de cítrico</span>
-                        <span class="rc-ing-qty">q.b. ou opcional</span>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div class="rc-method">
-                <span class="rc-col-label">Modo de Preparo</span>
-
-                <div class="rc-step">
-                  <span class="rc-step-num">01</span>
-                  <p class="rc-step-text">
-                    <strong>Tangzhong.</strong> Em uma panela pequena, dissolva
-                    os 40g de farinha nos 200g de leite integral frio com fouet
-                    até sumir os grumos. Leve ao fogo médio, mexendo sem parar,
-                    até atingir 65°C — de opaca e líquida a uma pasta cremosa
-                    levemente translúcida, ponto de pudim leve. Retire do fogo,
-                    cubra com filme plástico em contato com a superfície e deixe
-                    esfriar completamente antes de usar.
-                  </p>
-                </div>
-                <div class="rc-step">
-                  <span class="rc-step-num">02</span>
-                  <p class="rc-step-text">
-                    <strong>Secos com cacau e café.</strong> Na tigela da
-                    batedeira com gancho, peneire o cacau em pó e o café solúvel
-                    juntos diretamente sobre os 520g de farinha restante.
-                    Adicione o açúcar e o fermento biológico seco. Misture bem
-                    com fouet até o cacau estar homogeneamente incorporado —
-                    manchas de cacau não distribuídas resultam em cor e sabor
-                    irregulares. Reserve o sal separado para adicionar depois.
-                  </p>
-                </div>
-                <div class="rc-step">
-                  <span class="rc-step-num">03</span>
-                  <p class="rc-step-text">
-                    <strong>Blend dos líquidos.</strong> Em tigela à parte,
-                    misture os 220g de leite morno (32–38°C), os ovos inteiros
-                    levemente batidos, as gemas, a baunilha, as raspas cítricas
-                    se usar, e o tangzhong completamente frio. Homogeneize bem.
-                    O leite morno — não quente — garante ativação progressiva do
-                    fermento sem comprometer a rede de glúten ainda em formação.
-                  </p>
-                </div>
-                <div class="rc-step">
-                  <span class="rc-step-num">04</span>
-                  <p class="rc-step-text">
-                    <strong>Desenvolvimento do glúten.</strong> Adicione o blend
-                    de líquidos aos secos e misture em velocidade baixa por 2 a
-                    3 minutos até a farinha hidratar. Adicione o sal e aumente
-                    para velocidade média. Sove por 8 a 10 minutos. A presença
-                    do cacau — com sua gordura natural (manteiga de cacau) e
-                    fibras — reduz levemente a extensibilidade do glúten; por
-                    isso a base é 560g de farinha e não 600g. Faça o teste do
-                    véu ao final — a membrana pode ter coloração escura, o que é
-                    normal.
-                  </p>
-                </div>
-                <div class="rc-step">
-                  <span class="rc-step-num">05</span>
-                  <p class="rc-step-text">
-                    <strong>Incorporação da manteiga.</strong> Reduza para
-                    velocidade baixa e adicione a manteiga em ponto pomada em 3
-                    ou 4 porções, esperando absorção completa de cada adição.
-                    Após toda a manteiga incorporada, bata até a massa estar
-                    completamente lisa, sedosa e com brilho escuro
-                    característico. A manteiga distribui a gordura do cacau de
-                    forma homogênea, suavizando o perfil de sabor e
-                    intensificando o brilho do miolo após assado.
-                  </p>
-                </div>
-                <div class="rc-step">
-                  <span class="rc-step-num">06</span>
-                  <p class="rc-step-text">
-                    <strong>Primeira fermentação.</strong> Forme uma bola,
-                    transfira para tigela levemente untada e cubra com filme
-                    plástico. Para a cuca de chocolate, o
-                    <strong>cold retard de 12 a 18h</strong> é especialmente
-                    recomendado: o repouso prolongado no frio permite que os
-                    compostos aromáticos do cacau — fenólicos e ésteres — se
-                    integrem profundamente à massa, resultando em sabor mais
-                    complexo e menos "amargo de pó".
-                  </p>
-                </div>
-                <div class="rc-step">
-                  <span class="rc-step-num">07</span>
-                  <p class="rc-step-text">
-                    <strong>Modelagem na forma.</strong> Unte e enfarinhe a
-                    forma — ou use cacau em pó no lugar da farinha para não
-                    clarear as bordas. Desgaseifique suavemente e transfira a
-                    massa. Com os dedos levemente untados, pressione do centro
-                    em direção às bordas até cobrir toda a superfície de forma
-                    uniforme. Se retrair, cubra e aguarde 10 a 15 minutos para o
-                    glúten relaxar.
-                  </p>
-                </div>
-                <div class="rc-step">
-                  <span class="rc-step-num">08</span>
-                  <p class="rc-step-text">
-                    <strong>Segunda fermentação.</strong> Cubra e deixe
-                    fermentar em temperatura ambiente por
-                    <strong>45 a 60 minutos</strong>, até a massa estar
-                    visivelmente abaulada e ultrapassando levemente a borda da
-                    forma. O sinal de ponto ideal: ao pressionar com o dedo, a
-                    marca retorna devagar — a estrutura está firme o suficiente
-                    para suportar o crumble sem colapsar.
-                  </p>
-                </div>
-                <div class="rc-step">
-                  <span class="rc-step-num">09</span>
-                  <p class="rc-step-text">
-                    <strong>Crumble e assamento.</strong> Distribua
-                    generosamente o <strong>Crumble de Chocolate</strong> sobre
-                    a massa fermentada, pressionando levíssimamente para aderir
-                    sem compactar a estrutura. Asse em forno preaquecido a
-                    <strong>180°C</strong> por 25 a 35 minutos, até o crumble
-                    estar escuro e uniforme e o termômetro marcar
-                    <strong>88–92°C</strong> no centro. Aguarde 15 minutos antes
-                    de desenformar.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div class="rc-notes">
-              <span class="rc-notes-label"
-                >Notas Técnicas &amp; Enriquecimento</span
-              >
-              <div class="rc-notes-grid">
-                <div class="rc-note">
-                  <span class="rc-note-title"
-                    >Por que 560g e não 600g de farinha</span
-                  >
-                  O cacau em pó possui alto teor de fibras e gordura natural
-                  (manteiga de cacau) que interfere diretamente na hidratação da
-                  massa. Cada 10g de cacau absorve em torno de 7–10g de água
-                  equivalente. Com 35–45g de cacau na fórmula, a base de farinha
-                  é reduzida para 560g, mantendo a hidratação efetiva em 75% sem
-                  tornar a massa líquida demais para o formato de cuca.
-                </div>
-                <div class="rc-note">
-                  <span class="rc-note-title"
-                    >Café como amplificador de cacau</span
-                  >
-                  A adição de 4–6g de café solúvel não cria sabor de café
-                  perceptível na massa — em quantidade tão pequena, o café age
-                  como amplificador sensorial. Os compostos clorogênicos
-                  suprimem o limiar de percepção do amargor e realçam as notas
-                  frutadas e torradas do cacau, tornando o chocolate da cuca
-                  mais profundo e complexo. Técnica consolidada na confeitaria
-                  contemporânea.
-                </div>
-                <div class="rc-note">
-                  <span class="rc-note-title">A baunilha com o cacau</span>
-                  Mesmo em uma massa de chocolate, a baunilha não deve ser
-                  suprimida. Os compostos aromáticos da baunilha —
-                  principalmente a vanilina — ligam-se quimicamente aos do
-                  cacau, arredondando o amargor e amplificando a percepção de
-                  doçura sem adicionar açúcar. A baunilha é o emulsificante
-                  aromático invisível desta receita.
-                </div>
-                <div class="rc-note">
-                  <span class="rc-note-title">Cold retard e o cacau</span>
-                  A fermentação lenta no frio é ainda mais valiosa para a cuca
-                  de chocolate do que para a base clássica. As enzimas ativas
-                  durante o cold retard degradam parcialmente as proteínas do
-                  cacau, reduzindo a adstringência, integrando o amargor à massa
-                  e criando um perfil de sabor redondo e persistente que nenhuma
-                  fermentação rápida alcança.
-                </div>
-              </div>
-            </div>
-          </div>
-        </article>
+                </div></div></div></div></article>
       </div>
 
       <div class="subcat-header js-fade">
@@ -1756,411 +545,7 @@
 
       <div class="recipe-wrap">
         <!-- ─── Crumble Básico para Cucas ─── -->
-        <article class="recipe-card" id="cuca-crumble-basico">
-          <div class="rc-head" role="button" tabindex="0" aria-expanded="false">
-            <div class="rc-head-main">
-              <h3 class="rc-name">Crumble Básico para Cucas</h3>
-              <div class="rc-chips">
-                <span class="rc-chip">Farofa Clássica</span>
-                <span class="rc-chip rc-chip--accent">Manteiga Gelada</span>
-                <span class="rc-chip">Toque Cítrico &amp; Canela</span>
-                <span class="rc-chip">Cobertura Universal</span>
-              </div>
-            </div>
-            <div class="rc-meta">
-              <div class="rc-meta-item">
-                <span class="rc-meta-label">Rendimento</span>
-                <span class="rc-meta-value">cobertura para 1 forma grande</span>
-              </div>
-              <div class="rc-meta-item">
-                <span class="rc-meta-label">Preparo</span>
-                <span class="rc-meta-value"
-                  >10–15 min (+ 30 min geladeira)</span
-                >
-              </div>
-            </div>
-            <span class="rc-toggle" aria-hidden="true">+</span>
-          </div>
-          <div class="rc-body">
-            <div class="rc-body-inner">
-              <div class="rc-ingredients">
-                <span class="rc-col-label">Composição</span>
 
-                <div class="rc-ing-group">
-                  <p class="rc-ing-group-name">A. Estrutura</p>
-                  <ul>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Açúcar refinado<small class="ing-pct"
-                            >adoçante + crunch</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">510g</span>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Farinha de trigo<small class="ing-pct"
-                            >estrutura das migalhas</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">225g</span>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Manteiga sem sal, gelada e cubada<small
-                            class="ing-pct"
-                            >liga + textura</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">180g</span>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-                <div class="rc-ing-group">
-                  <p class="rc-ing-group-name">B. Aromáticos</p>
-                  <ul>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span>Raspas de limão siciliano ou tahiti</span>
-                        <span class="rc-ing-qty">q.b.</span>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span>Canela em pó</span>
-                        <span class="rc-ing-qty">q.b.</span>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div class="rc-method">
-                <span class="rc-col-label">Modo de Preparo</span>
-
-                <div class="rc-step">
-                  <span class="rc-step-num">01</span>
-                  <p class="rc-step-text">
-                    <strong>Secos.</strong> Combine o açúcar refinado, a farinha
-                    de trigo, a canela em pó e as raspas de limão em tigela
-                    ampla e fria — tirada da geladeira, se possível. Misture com
-                    fouet até os aromáticos estarem completamente distribuídos.
-                    A canela e as raspas tendem a grudar em blocos se não forem
-                    bem homogeneizadas nos secos antes da manteiga entrar.
-                  </p>
-                </div>
-                <div class="rc-step">
-                  <span class="rc-step-num">02</span>
-                  <p class="rc-step-text">
-                    <strong>Incorporação da manteiga fria.</strong> Adicione os
-                    cubos de manteiga gelada à mistura de secos. Com as pontas
-                    dos dedos — nunca as palmas, que transferem calor —
-                    pressione e esfregue a manteiga contra os secos em
-                    movimentos rápidos. O objetivo é uma farofa com migalhas de
-                    tamanhos variados: de pedaços do tamanho de uma ervilha a
-                    fragmentos mais finos. Não homogeneize demais — a
-                    irregularidade é a essência da textura da cuca.
-                  </p>
-                </div>
-                <div class="rc-step">
-                  <span class="rc-step-num">03</span>
-                  <p class="rc-step-text">
-                    <strong>Ponto ideal.</strong> A farofa pronta não deve
-                    parecer areia fina nem ter pedaços de manteiga intactos e
-                    visíveis. O teste: ao apertar um punhado com força e soltar,
-                    ela mantém a forma por um segundo antes de desmanchar. Esse
-                    comportamento indica que a manteiga está distribuída
-                    corretamente — nem massuda nem solta demais para cobrir a
-                    massa fermentada.
-                  </p>
-                </div>
-                <div class="rc-step">
-                  <span class="rc-step-num">04</span>
-                  <p class="rc-step-text">
-                    <strong>Refrigeração.</strong> Transfira para tigela coberta
-                    com filme plástico e leve à geladeira por no mínimo
-                    <strong>30 minutos</strong> antes de usar. Fria, a farofa
-                    distribui melhor sobre a massa fermentada sem afundar
-                    durante a segunda fermentação ou nos primeiros minutos no
-                    forno. Pode ser preparado com até 3 dias de antecedência ou
-                    <strong>congelado cru por até 3 meses</strong> — aplique
-                    direto do freezer, sem descongelar.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div class="rc-notes">
-              <span class="rc-notes-label"
-                >Notas Técnicas &amp; Enriquecimento</span
-              >
-              <div class="rc-notes-grid">
-                <div class="rc-note">
-                  <span class="rc-note-title"
-                    >Manteiga gelada é inegociável</span
-                  >
-                  A temperatura baixa garante que a manteiga se distribua em
-                  fragmentos sólidos na farofa. No forno, cada fragmento gelado
-                  derrete de forma progressiva, criando cavidades de vapor que
-                  produzem as camadas crocantes características. Manteiga em
-                  temperatura ambiente resulta em cobertura pastosa que endurece
-                  ao resfriar sem desenvolver textura — o erro mais comum no
-                  crumble caseiro.
-                </div>
-                <div class="rc-note">
-                  <span class="rc-note-title"
-                    >A irregularidade das migalhas</span
-                  >
-                  Migalhas de tamanhos distintos criam três experiências em um
-                  único crumble: as menores se fundem ao topo da massa durante o
-                  assamento, formando crosta dourada; as médias ficam crocantes
-                  e soltas; as maiores preservam interior cremoso com exterior
-                  crocante. Homogeneizar demais destrói esse contraste e achata
-                  a textura a uma única dimensão.
-                </div>
-                <div class="rc-note">
-                  <span class="rc-note-title"
-                    >Armazenamento e planejamento</span
-                  >
-                  O crumble cru congela perfeitamente por até 3 meses em saco
-                  fechado. Use direto do freezer sobre a massa fermentada — não
-                  precisa descongelar. O crumble já assado perde crocância
-                  rapidamente pela absorção de umidade do ambiente; produza e
-                  aplique sempre fresco ou congelado cru.
-                </div>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <!-- ─── Crumble de Chocolate ─── -->
-        <article class="recipe-card" id="cuca-crumble-chocolate">
-          <div class="rc-head" role="button" tabindex="0" aria-expanded="false">
-            <div class="rc-head-main">
-              <h3 class="rc-name">Crumble de Chocolate</h3>
-              <div class="rc-chips">
-                <span class="rc-chip">Farofa de Chocolate</span>
-                <span class="rc-chip rc-chip--accent"
-                  >Cacau + Café Solúvel</span
-                >
-                <span class="rc-chip">Açúcar Duplo</span>
-                <span class="rc-chip">Perfil Intenso</span>
-              </div>
-            </div>
-            <div class="rc-meta">
-              <div class="rc-meta-item">
-                <span class="rc-meta-label">Rendimento</span>
-                <span class="rc-meta-value">cobertura para 1 forma grande</span>
-              </div>
-              <div class="rc-meta-item">
-                <span class="rc-meta-label">Preparo</span>
-                <span class="rc-meta-value"
-                  >10–15 min (+ 30 min geladeira)</span
-                >
-              </div>
-            </div>
-            <span class="rc-toggle" aria-hidden="true">+</span>
-          </div>
-          <div class="rc-body">
-            <div class="rc-body-inner">
-              <div class="rc-ingredients">
-                <span class="rc-col-label">Composição</span>
-
-                <div class="rc-ing-group">
-                  <p class="rc-ing-group-name">A. Estrutura</p>
-                  <ul>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Açúcar refinado<small class="ing-pct"
-                            >crunch + caramelização</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">360g</span>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Açúcar mascavo<small class="ing-pct"
-                            >umidade + molasses</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">150g</span>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Farinha de trigo<small class="ing-pct"
-                            >estrutura das migalhas</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">225g</span>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Manteiga sem sal, gelada e cubada<small
-                            class="ing-pct"
-                            >liga + textura</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">180g</span>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-                <div class="rc-ing-group">
-                  <p class="rc-ing-group-name">B. Sabor &amp; Intensidade</p>
-                  <ul>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Cacau em pó 100%<small class="ing-pct"
-                            >sabor + cor</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">18–25g</span>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Café solúvel<small class="ing-pct"
-                            >amplificador</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">2–3g</span>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Canela em pó<small class="ing-pct"
-                            >um toque, não domine</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">q.b.</span>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Sal fino<small class="ing-pct"
-                            >contraste</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">2g</span>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div class="rc-method">
-                <span class="rc-col-label">Modo de Preparo</span>
-
-                <div class="rc-step">
-                  <span class="rc-step-num">01</span>
-                  <p class="rc-step-text">
-                    <strong>Secos com cacau e café.</strong> Peneire juntos o
-                    cacau em pó e o café solúvel sobre a mistura de açúcares
-                    (refinado + mascavo), farinha, sal e canela em tigela ampla
-                    e fria. Misture com fouet até o cacau estar completamente
-                    incorporado e a mistura ter cor escura e uniforme — manchas
-                    claras de farinha não distribuída comprometem a aparência e
-                    o sabor do crumble assado.
-                  </p>
-                </div>
-                <div class="rc-step">
-                  <span class="rc-step-num">02</span>
-                  <p class="rc-step-text">
-                    <strong>Incorporação da manteiga fria.</strong> Adicione os
-                    cubos de manteiga gelada à mistura de secos. Com as pontas
-                    dos dedos, pressione e esfregue em movimentos rápidos até
-                    obter migalhas irregulares. A combinação de açúcar mascavo,
-                    cacau e manteiga gelada produz um crumble visivelmente mais
-                    escuro, mais denso e com aroma intenso já a frio — diferente
-                    da aparência arenosa do crumble básico.
-                  </p>
-                </div>
-                <div class="rc-step">
-                  <span class="rc-step-num">03</span>
-                  <p class="rc-step-text">
-                    <strong>Ponto ideal.</strong> O crumble de chocolate está
-                    pronto quando apresentar migalhas de tamanhos variados, cor
-                    uniformemente escura e aroma expressivo de cacau com fundo
-                    de café. Ao apertar um punhado e soltar, mantém a forma por
-                    um segundo antes de desmanchar — mesmo comportamento do
-                    crumble básico, porém com textura ligeiramente mais densa
-                    pelo açúcar mascavo.
-                  </p>
-                </div>
-                <div class="rc-step">
-                  <span class="rc-step-num">04</span>
-                  <p class="rc-step-text">
-                    <strong>Refrigeração.</strong> Leve à geladeira por no
-                    mínimo <strong>30 minutos</strong> antes de aplicar sobre a
-                    massa fermentada. Pode ser preparado com até 3 dias de
-                    antecedência ou congelado cru. O açúcar mascavo absorve
-                    umidade do ambiente com velocidade maior que o refinado —
-                    aplique sempre frio ou <strong>direto do freezer</strong>.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div class="rc-notes">
-              <span class="rc-notes-label"
-                >Notas Técnicas &amp; Enriquecimento</span
-              >
-              <div class="rc-notes-grid">
-                <div class="rc-note">
-                  <span class="rc-note-title"
-                    >Açúcar duplo — refinado + mascavo</span
-                  >
-                  Os dois açúcares desempenham papéis distintos e
-                  complementares. O refinado fornece crocância por caramelização
-                  direta (sacarose pura); o mascavo, por conter melaço, é
-                  higroscópico — absorve umidade, gerando migalhas com interior
-                  mais denso e úmido por dentro com casca crocante por fora. A
-                  proporção 360g:150g privilegia a crocância mas preserva a
-                  riqueza do melaço.
-                </div>
-                <div class="rc-note">
-                  <span class="rc-note-title"
-                    >O trio de intensidade: cacau, café e sal</span
-                  >
-                  Cada ingrediente atua em camada distinta de percepção
-                  sensorial. O cacau entrega o sabor base. O café, em quantidade
-                  sublimiar, suprime o amargor excessivo e amplifica as notas
-                  torradas. O sal — apenas 2g — reduz a percepção do amargor e
-                  realça a doçura do mascavo pelo contraste, deixando o crumble
-                  mais redondo e menos agressivo ao paladar.
-                </div>
-                <div class="rc-note">
-                  <span class="rc-note-title"
-                    >Combinação com a Massa de Cuca de Chocolate</span
-                  >
-                  Aplicado sobre a Massa de Cuca de Chocolate, este crumble cria
-                  uma experiência em camadas: a massa traz umidade, leveza e o
-                  cacau integrado; o crumble traz intensidade concentrada,
-                  crocância e o contraste do mascavo. As duas preparações se
-                  completam porque operam em texturas e perfis de sabor opostos
-                  — não redundantes.
-                </div>
-              </div>
-            </div>
-          </div>
-        </article>
       </div>
     </section>
 
@@ -2201,8 +586,15 @@
 
       <div class="recipe-wrap">
         <!-- ─── Pão de Ló Padrão ─── -->
-        <article class="recipe-card" id="bolo-pao-de-lo-padrao">
+        <article class="recipe-card" data-category="sweet" id="bolo-pao-de-lo-padrao">
           <div class="rc-head" role="button" tabindex="0" aria-expanded="false">
+            <div class="rc-image">
+              <img
+                src="images/recipes/pao-de-lo-baunilha.jpg"
+                loading="lazy" decoding="async" width="1280" height="1280"
+                alt="Pão de Ló Padrão"
+              />
+            </div>
             <div class="rc-head-main">
               <h3 class="rc-name">Pão de Ló Padrão</h3>
               <div class="rc-chips">
@@ -2226,16 +618,10 @@
                 <span class="rc-meta-value">180°C · 25–30 min</span>
               </div>
             </div>
-            <span class="rc-toggle" aria-hidden="true">+</span>
+            <span class="rc-toggle" aria-hidden="true"><img src="assets/icons/arrow-up-right.svg" alt="" width="22" height="22" /></span>
           </div>
           <div class="rc-body">
-            <div class="rc-image">
-              <img
-                src="images/el-guapo-img-05.webp"
-                loading="lazy"
-                alt="Pão de Ló Padrão"
-              />
-            </div>
+
             <div class="rc-body-inner">
               <div class="rc-ingredients">
                 <span class="rc-col-label">Composição Analítica</span>
@@ -2482,8 +868,15 @@
         </article>
 
         <!-- ─── Bolo de Cenoura da Gabriela ─── -->
-        <article class="recipe-card" id="bolo-cenoura-gabriela">
+        <article class="recipe-card" data-category="sweet" id="bolo-cenoura-gabriela">
           <div class="rc-head" role="button" tabindex="0" aria-expanded="false">
+            <div class="rc-image">
+              <img
+                src="images/recipes/bolo-cenoura-gabriela.jpg"
+                loading="lazy" decoding="async" width="1280" height="1280"
+                alt="Bolo de Cenoura da Gabriela"
+              />
+            </div>
             <div class="rc-head-main">
               <h3 class="rc-name">Bolo de Cenoura da Gabriela</h3>
               <div class="rc-chips">
@@ -2505,16 +898,10 @@
                 <span class="rc-meta-value">180°C · 40–50 min</span>
               </div>
             </div>
-            <span class="rc-toggle" aria-hidden="true">+</span>
+            <span class="rc-toggle" aria-hidden="true"><img src="assets/icons/arrow-up-right.svg" alt="" width="22" height="22" /></span>
           </div>
           <div class="rc-body">
-            <div class="rc-image">
-              <img
-                src="images/bolo-cenoura-gabriela.jpeg"
-                loading="lazy"
-                alt="Bolo de Cenoura da Gabriela"
-              />
-            </div>
+
             <div class="rc-body-inner">
               <div class="rc-ingredients">
                 <span class="rc-col-label">Composição Analítica</span>
@@ -2756,8 +1143,15 @@
         </article>
 
         <!-- ─── Pão de Ló de Chocolate ─── -->
-        <article class="recipe-card" id="bolo-pao-de-lo-chocolate">
+        <article class="recipe-card" data-category="sweet" id="bolo-pao-de-lo-chocolate">
           <div class="rc-head" role="button" tabindex="0" aria-expanded="false">
+            <div class="rc-image">
+              <img
+                src="images/recipes/pao-de-lo-chocolate.jpg"
+                loading="lazy" decoding="async" width="1280" height="1280"
+                alt="Pão de Ló de Chocolate"
+              />
+            </div>
             <div class="rc-head-main">
               <h3 class="rc-name">Pão de Ló de Chocolate</h3>
               <div class="rc-chips">
@@ -2783,16 +1177,10 @@
                 <span class="rc-meta-value">180°C · 25–30 min</span>
               </div>
             </div>
-            <span class="rc-toggle" aria-hidden="true">+</span>
+            <span class="rc-toggle" aria-hidden="true"><img src="assets/icons/arrow-up-right.svg" alt="" width="22" height="22" /></span>
           </div>
           <div class="rc-body">
-            <div class="rc-image">
-              <img
-                src="images/el-guapo-img-06.webp"
-                loading="lazy"
-                alt="Pão de Ló de Chocolate"
-              />
-            </div>
+
             <div class="rc-body-inner">
               <div class="rc-ingredients">
                 <span class="rc-col-label">Composição Analítica</span>
@@ -3020,49 +1408,117 @@
 
       <div class="recipe-wrap">
         <!-- ─── Brigadeiro El Guapo ─── -->
-        <article class="recipe-card" id="bolo-brigadeiro-el-guapo">
+        <!-- Bolo Prestígio: composição das três receitas, conforme pedido de 10/11/2026. -->
+        <article class="recipe-card" data-category="sweet" id="bolo-pao-de-mel" data-source-url="https://heuller.github.io/el-guapooo/"><div class="rc-head" role="button" tabindex="0" aria-expanded="false"><div class="rc-image"><img src="images/recipes/bolo-pao-de-mel.jpg" alt="Bolo Pão de Mel" loading="lazy" decoding="async" width="1280" height="1280"></div>
+            <div class="rc-head-main"><h3 class="rc-name">Bolo Pão de Mel</h3><div class="rc-chips"><span class="rc-chip">Tradição e Sabor</span><span class="rc-chip">Massa de mel e especiarias</span><span class="rc-chip">Recheio de doce de leite</span><span class="rc-chip">Cobertura de chocolate</span><span class="rc-chip">Úmido, macio e perfumado</span></div></div><div class="rc-meta"><div class="rc-meta-item"><span class="rc-meta-label">Rendimento</span><span class="rc-meta-value">1 bolo estruturado</span></div><div class="rc-meta-item"><span class="rc-meta-label">Categoria</span><span class="rc-meta-value">Bolos</span></div></div><span class="rc-toggle" aria-hidden="true"><img src="assets/icons/arrow-up-right.svg" alt="" width="22" height="22" /></span></div><div class="rc-body"><div class="rc-body-inner"><div class="rc-ingredients"><span class="rc-col-label">Ingredientes</span><div class="rc-ing-group"><p class="rc-ing-group-name">Massa (Pão de Ló Especiarias)</p><ul><li class="rc-ing-item"><div class="rc-ing-row"><span>Ovos</span><span class="rc-ing-qty">4 un.</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Açúcar</span><span class="rc-ing-qty">200g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Farinha de trigo</span><span class="rc-ing-qty">140g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Mel</span><span class="rc-ing-qty">60g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Óleo</span><span class="rc-ing-qty">65ml</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Água quente</span><span class="rc-ing-qty">60ml</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Cacau em pó</span><span class="rc-ing-qty">10g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Canela em pó</span><span class="rc-ing-qty">2 col. café</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Cravo em pó</span><span class="rc-ing-qty">1 col. café</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Gengibre em pó (ou noz moscada)</span><span class="rc-ing-qty">1 col. café</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Fermento químico para bolos</span><span class="rc-ing-qty">1 col. sopa rasa</span></div></li></ul></div><div class="rc-ing-group"><p class="rc-ing-group-name">Calda de Infusão</p><ul><li class="rc-ing-item"><div class="rc-ing-row"><span>Água</span><span class="rc-ing-qty">240ml</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Açúcar</span><span class="rc-ing-qty">90g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Pau de canela</span><span class="rc-ing-qty">1 un.</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Cravos-da-índia</span><span class="rc-ing-qty">5 un.</span></div></li></ul></div><div class="rc-ing-group"><p class="rc-ing-group-name">Recheio e Cobertura</p><ul><li class="rc-ing-item"><div class="rc-ing-row"><span>Doce de leite firme (recheio)</span><span class="rc-ing-qty">400g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Chocolate meio amargo (ganache)</span><span class="rc-ing-qty">300g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Creme de leite (ganache)</span><span class="rc-ing-qty">120g</span></div></li></ul></div></div><div class="rc-method"><span class="rc-col-label">Modo de Preparo</span><div class="rc-step"><span class="rc-step-num">01</span><p class="rc-step-text">Calda. Em uma panela, junte a água, o açúcar, a canela e os cravos. Leve ao fogo e deixe ferver até o açúcar dissolver por completo. Desligue, deixe esfriar e coe. Reserve.</p></div><div class="rc-step"><span class="rc-step-num">02</span><p class="rc-step-text">Massa (Método Espumoso). Na batedeira, bata os ovos com o açúcar até obter um creme claro, fofo e volumoso (ponto de fita).</p></div><div class="rc-step"><span class="rc-step-num">03</span><p class="rc-step-text">Emulsão dos Líquidos. À parte, dissolva o mel e o cacau na água quente. Incorpore o óleo a esta mistura.</p></div><div class="rc-step"><span class="rc-step-num">04</span><p class="rc-step-text">Incorporação. Adicione a mistura de líquidos ao creme de ovos de forma delicada. Peneire a farinha, as especiarias e o fermento. Envolva os ingredientes secos na massa utilizando uma espátula, com movimentos suaves de baixo para cima, para não perder a aeração.</p></div><div class="rc-step"><span class="rc-step-num">05</span><p class="rc-step-text">Cozimento. Despeje a massa em uma forma untada e leve ao forno preaquecido a 180 °C por aproximadamente 35 a 40 minutos (faça o teste do palito).</p></div><div class="rc-step"><span class="rc-step-num">06</span><p class="rc-step-text">Ganache. Derreta o chocolate meio amargo (em banho-maria ou no micro-ondas em intervalos de 30 segundos). Incorpore o creme de leite e mexa vigorosamente até obter uma emulsão lisa e brilhante.</p></div><div class="rc-step"><span class="rc-step-num">07</span><p class="rc-step-text">Montagem. Após o bolo esfriar, corte-o em camadas. Umedeça cada camada de massa de forma generosa com a calda de especiarias. Aplique uma camada uniforme do doce de leite firme. Cubra o bolo montado com a ganache de chocolate meio amargo.</p></div></div></div></div></article>
+<article class="recipe-card" data-category="sweet" id="bolo-prestigio" data-replaces-recipes="bolo-brigadeiro-el-guapo">
           <div class="rc-head" role="button" tabindex="0" aria-expanded="false">
-            <div class="rc-head-main">
-              <h3 class="rc-name">Brigadeiro El Guapo</h3>
-              <div class="rc-chips">
-                <span class="rc-chip">Recheio de Bolo</span>
-                <span class="rc-chip rc-chip--accent"
-                  >Chocolate Meio Amargo + Cacau 70%</span
-                >
-                <span class="rc-chip">Ganache-Brigadeiro</span>
-                <span class="rc-chip rc-chip--warn"
-                  >Base do Bolo Prestígio</span
-                >
-              </div>
+            <div class="rc-image"><img src="images/recipes/bolo-prestigio.jpg" alt="Bolo Prestígio" loading="lazy" decoding="async" width="1280" height="1280" /></div><div class="rc-head-main"><h3 class="rc-name">Bolo Prestígio</h3>
+              <div class="rc-chips"><span class="rc-chip">Pão de Ló de Chocolate</span><span class="rc-chip">Brigadeiro</span><span class="rc-chip">Coco Cremoso</span></div>
             </div>
-            <div class="rc-meta">
-              <div class="rc-meta-item">
-                <span class="rc-meta-label">Rendimento</span>
-                <span class="rc-meta-value"
-                  >recheio para 1 bolo de 3 camadas Ø20cm</span
-                >
-              </div>
-              <div class="rc-meta-item">
-                <span class="rc-meta-label">Preparo</span>
-                <span class="rc-meta-value">15–20 min + 2h geladeira</span>
-              </div>
-            </div>
-            <span class="rc-toggle" aria-hidden="true">+</span>
+            <div class="rc-meta"><div class="rc-meta-item"><span class="rc-meta-label">Composição</span><span class="rc-meta-value">1 receita de massa + 2 recheios</span></div></div>
+            <span class="rc-toggle" aria-hidden="true"><img src="assets/icons/arrow-up-right.svg" alt="" width="22" height="22" /></span>
           </div>
-          <div class="rc-body">
-            <div class="rc-image">
-              <img
-                src="images/el-guapo-img-07.webp"
-                loading="lazy"
-                alt="Brigadeiro El Guapo"
-              />
-            </div>
-            <div class="rc-body-inner">
-              <div class="rc-ingredients">
-                <span class="rc-col-label">Composição</span>
-
-                <div class="rc-ing-group">
-                  <p class="rc-ing-group-name">Fórmula</p>
+          <div class="rc-body"><div class="rc-body-inner">
+            <div class="rc-ingredients"><span class="rc-col-label">Ingredientes por componente</span>
+<div class="rc-ing-group">
+                  <p class="rc-ing-group-name">Massa — Pão de Ló de Chocolate</p>
+                  <ul>
+                    <li class="rc-ing-item">
+                      <div class="rc-ing-row">
+                        <span
+                          >Farinha de trigo<small class="ing-pct"
+                            >100%</small
+                          ></span
+                        >
+                        <span class="rc-ing-qty">130g</span>
+                      </div>
+                      <div class="baker-bar-wrap">
+                        <div class="baker-bar-fill" style="--fill: 100%"></div>
+                      </div>
+                    </li>
+                    <li class="rc-ing-item">
+                      <div class="rc-ing-row">
+                        <span
+                          >Açúcar refinado<small class="ing-pct"
+                            >153,8%</small
+                          ></span
+                        >
+                        <span class="rc-ing-qty">200g</span>
+                      </div>
+                      <div class="baker-bar-wrap">
+                        <div class="baker-bar-fill" style="--fill: 100%"></div>
+                      </div>
+                    </li>
+                    <li class="rc-ing-item">
+                      <div class="rc-ing-row">
+                        <span
+                          >Ovos inteiros<small class="ing-pct"
+                            >153,8% · ~4 ovos grandes</small
+                          ></span
+                        >
+                        <span class="rc-ing-qty">200g</span>
+                      </div>
+                      <div class="baker-bar-wrap">
+                        <div class="baker-bar-fill" style="--fill: 100%"></div>
+                      </div>
+                    </li>
+                    <li class="rc-ing-item">
+                      <div class="rc-ing-row">
+                        <span
+                          >Água<small class="ing-pct"
+                            >46,2% · sem lactose</small
+                          ></span
+                        >
+                        <span class="rc-ing-qty">60g</span>
+                      </div>
+                      <div class="baker-bar-wrap">
+                        <div class="baker-bar-fill" style="--fill: 46.2%"></div>
+                      </div>
+                    </li>
+                    <li class="rc-ing-item">
+                      <div class="rc-ing-row">
+                        <span
+                          >Óleo de soja<small class="ing-pct"
+                            >46,2%</small
+                          ></span
+                        >
+                        <span class="rc-ing-qty">60g</span>
+                      </div>
+                      <div class="baker-bar-wrap">
+                        <div class="baker-bar-fill" style="--fill: 46.2%"></div>
+                      </div>
+                    </li>
+                    <li class="rc-ing-item">
+                      <div class="rc-ing-row">
+                        <span
+                          >Cacau em pó 100%<small class="ing-pct"
+                            >15,4%</small
+                          ></span
+                        >
+                        <span class="rc-ing-qty">20g</span>
+                      </div>
+                      <div class="baker-bar-wrap">
+                        <div class="baker-bar-fill" style="--fill: 15.4%"></div>
+                      </div>
+                    </li>
+                    <li class="rc-ing-item">
+                      <div class="rc-ing-row">
+                        <span
+                          >Fermento em pó químico<small class="ing-pct"
+                            >9,2% · 1 col. sopa</small
+                          ></span
+                        >
+                        <span class="rc-ing-qty">12g</span>
+                      </div>
+                      <div class="baker-bar-wrap">
+                        <div class="baker-bar-fill" style="--fill: 9.2%"></div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+<div class="rc-ing-group">
+                  <p class="rc-ing-group-name">Brigadeiro El Guapo</p>
                   <ul>
                     <li class="rc-ing-item">
                       <div class="rc-ing-row">
@@ -3106,162 +1562,8 @@
                     </li>
                   </ul>
                 </div>
-              </div>
-
-              <div class="rc-method">
-                <span class="rc-col-label">Modo de Preparo</span>
-
-                <div class="rc-step">
-                  <span class="rc-step-num">01</span>
-                  <p class="rc-step-text">
-                    <strong>Dissolver o cacau a frio.</strong> Em panela de
-                    fundo grosso fora do fogo, misture o leite condensado com o
-                    cacau em pó, mexendo com espátula até o cacau estar
-                    completamente dissolvido e sem grumos. Dissolver a frio é
-                    essencial — cacau em pó adicionado em leite condensado
-                    quente gruda no fundo da panela antes de se integrar,
-                    formando pontos pretos amargos no recheio final.
-                  </p>
-                </div>
-                <div class="rc-step">
-                  <span class="rc-step-num">02</span>
-                  <p class="rc-step-text">
-                    <strong>Adicionar o chocolate.</strong> Pique o chocolate
-                    meio amargo em pedaços pequenos e uniformes e adicione à
-                    mistura de leite condensado e cacau. Leve ao fogo
-                    médio-baixo, mexendo constantemente com espátula de silicone
-                    — raspe o fundo e as laterais da panela de forma contínua
-                    para evitar queimar o açúcar do leite condensado, que
-                    carameliza rapidamente em fogo alto.
-                  </p>
-                </div>
-                <div class="rc-step">
-                  <span class="rc-step-num">03</span>
-                  <p class="rc-step-text">
-                    <strong>Ponto de recheio.</strong> Cozinhe mexendo sempre
-                    por <strong>8 a 12 minutos</strong> até atingir o ponto de
-                    recheio de bolo: a massa começa a desgrudar do fundo
-                    formando um sulco limpo que fecha lentamente. É um ponto
-                    mais mole que o brigadeiro de enrolar — a consistência deve
-                    lembrar uma ganache macia a quente. Ao esfriar e refrigerar,
-                    firma consideravelmente.
-                  </p>
-                </div>
-                <div class="rc-step">
-                  <span class="rc-step-num">04</span>
-                  <p class="rc-step-text">
-                    <strong>Creme de leite e finalização.</strong> Retire do
-                    fogo. Adicione o creme de leite e misture vigorosamente até
-                    incorporar completamente — o creme de leite quente se
-                    integra sem talhar. Ele ajusta a consistência final do
-                    recheio: mais creme = mais mole e cremoso; menos = mais
-                    firme e denso. Cubra com filme plástico em contato com a
-                    superfície para evitar película.
-                  </p>
-                </div>
-                <div class="rc-step">
-                  <span class="rc-step-num">05</span>
-                  <p class="rc-step-text">
-                    <strong>Resfriamento e uso.</strong> Deixe esfriar
-                    completamente em temperatura ambiente e refrigere por
-                    <strong>no mínimo 2 horas</strong> antes de usar. Frio, o
-                    brigadeiro firma e ganha consistência de recheio cremoso que
-                    não escorrega entre as camadas do bolo. Para consistência
-                    máxima de corte, refrigere o bolo montado por 4 horas após
-                    recheio.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div class="rc-notes">
-              <span class="rc-notes-label"
-                >Notas Técnicas &amp; Enriquecimento</span
-              >
-              <div class="rc-notes-grid">
-                <div class="rc-note">
-                  <span class="rc-note-title"
-                    >Chocolate + cacau — dupla de intensidade</span
-                  >
-                  O chocolate meio amargo em barra entrega gordura (manteiga de
-                  cacau), que dá cremosidade e brilho, além de sabor. O cacau
-                  70% em pó, adicionado separadamente, aprofunda a intensidade
-                  sem aumentar a gordura — sua concentração de compostos
-                  fenólicos é maior do que no chocolate em barra. A combinação
-                  produz um brigadeiro com perfil complexo: redondo, brilhante e
-                  profundamente achocolatado.
-                </div>
-                <div class="rc-note">
-                  <span class="rc-note-title"
-                    >Ponto de recheio vs. ponto de enrolar</span
-                  >
-                  O ponto de recheio (sulco que fecha lentamente) é 2 a 3
-                  minutos antes do ponto de enrolar (desgruda completamente,
-                  massa seca). O creme de leite adicionado ao final recua ainda
-                  mais a consistência. Resultado: frio, o recheio é firme o
-                  suficiente para suportar o peso das camadas do bolo, mas macio
-                  o suficiente para não rachar ao cortar a fatia.
-                </div>
-                <div class="rc-note">
-                  <span class="rc-note-title"
-                    >Bolo Prestígio — papel deste recheio</span
-                  >
-                  No <strong>Bolo Prestígio El Guapo</strong>, este brigadeiro
-                  atua como a camada de sabor intenso que ancora a experiência:
-                  contrasta com a leveza do pão de ló de chocolate e complementa
-                  a doçura úmida do recheio de coco. A sequência de montagem
-                  ideal é: disco → brigadeiro → disco → coco → disco, garantindo
-                  que o corte revele camadas alternadas de chocolate e coco.
-                </div>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <!-- ─── Recheio de Coco El Guapo ─── -->
-        <article class="recipe-card" id="bolo-recheio-coco">
-          <div class="rc-head" role="button" tabindex="0" aria-expanded="false">
-            <div class="rc-head-main">
-              <h3 class="rc-name">Recheio de Coco El Guapo</h3>
-              <div class="rc-chips">
-                <span class="rc-chip">Recheio de Bolo</span>
-                <span class="rc-chip rc-chip--accent"
-                  >Coco em Flocos · Cremoso</span
-                >
-                <span class="rc-chip">Leite Condensado + Creme de Leite</span>
-                <span class="rc-chip rc-chip--warn"
-                  >Base do Bolo Prestígio</span
-                >
-              </div>
-            </div>
-            <div class="rc-meta">
-              <div class="rc-meta-item">
-                <span class="rc-meta-label">Rendimento</span>
-                <span class="rc-meta-value"
-                  >recheio para 1 bolo de 3 camadas Ø20cm</span
-                >
-              </div>
-              <div class="rc-meta-item">
-                <span class="rc-meta-label">Preparo</span>
-                <span class="rc-meta-value">15–20 min + 2h geladeira</span>
-              </div>
-            </div>
-            <span class="rc-toggle" aria-hidden="true">+</span>
-          </div>
-          <div class="rc-body">
-            <div class="rc-image">
-              <img
-                src="images/el-guapo-img-08.webp"
-                loading="lazy"
-                alt="Recheio de Coco El Guapo"
-              />
-            </div>
-            <div class="rc-body-inner">
-              <div class="rc-ingredients">
-                <span class="rc-col-label">Composição</span>
-
-                <div class="rc-ing-group">
-                  <p class="rc-ing-group-name">Fórmula</p>
+<div class="rc-ing-group">
+                  <p class="rc-ing-group-name">Recheio de Coco Cremoso</p>
                   <ul>
                     <li class="rc-ing-item">
                       <div class="rc-ing-row">
@@ -3304,14 +1606,142 @@
                       </div>
                     </li>
                   </ul>
-                </div>
-              </div>
-
-              <div class="rc-method">
-                <span class="rc-col-label">Modo de Preparo</span>
-
-                <div class="rc-step">
+                </div></div>
+            <div class="rc-method"><span class="rc-col-label">Modo de Preparo</span>
+<h4 class="rc-col-label">Massa — Pão de Ló de Chocolate</h4>
+<div class="rc-step">
                   <span class="rc-step-num">01</span>
+                  <p class="rc-step-text">
+                    <strong>Secos com cacau.</strong> Peneire a farinha de
+                    trigo, o cacau em pó e o fermento químico juntos em tigela
+                    separada. O cacau deve ser peneirado obrigatoriamente — sua
+                    tendência a formar grumos provoca manchas escuras
+                    irregulares no miolo se incorporado sem peneirar. Reserve.
+                  </p>
+                </div>
+<div class="rc-step">
+                  <span class="rc-step-num">02</span>
+                  <p class="rc-step-text">
+                    <strong>Ponto de fita.</strong> Na batedeira com globo, bata
+                    os ovos inteiros com o açúcar refinado em velocidade alta
+                    por <strong>5 a 8 minutos</strong> até atingir ponto de
+                    fita: massa pálida, quase três vezes o volume inicial, traço
+                    que persiste por 3 a 4 segundos ao cair do globo. Sem leite
+                    ou manteiga nesta receita, os ovos são a única fonte de
+                    estrutura e umidade — o ponto de fita define a qualidade do
+                    miolo final.
+                  </p>
+                </div>
+<div class="rc-step">
+                  <span class="rc-step-num">03</span>
+                  <p class="rc-step-text">
+                    <strong>Líquidos.</strong> Reduza para velocidade mínima.
+                    Com a água e o óleo pré-misturados, adicione em fio fino e
+                    contínuo. A água (no lugar do leite) é escolha deliberada:
+                    sem caseínas, o glúten tem menos estrutura proteica para se
+                    desenvolver, resultando em miolo mais macio e sedoso — a
+                    textura ideal para um pão de ló que será cortado e recheado.
+                  </p>
+                </div>
+<div class="rc-step">
+                  <span class="rc-step-num">04</span>
+                  <p class="rc-step-text">
+                    <strong>Dobrar os secos com cacau.</strong> Desligue a
+                    batedeira. Adicione a farinha+cacau+fermento peneirados em 2
+                    adições com espátula, dobrando de baixo para cima com
+                    delicadeza. A mistura vai escurecer rapidamente ao entrar o
+                    cacau — é o indicativo visual de que está sendo incorporado
+                    de forma homogênea. Pare assim que não houver mais traços de
+                    pó claro.
+                  </p>
+                </div>
+<div class="rc-step">
+                  <span class="rc-step-num">05</span>
+                  <p class="rc-step-text">
+                    <strong>Forma e forno.</strong> Divida a massa nas formas
+                    untadas e polvilhadas com <strong>cacau em pó</strong> —
+                    nunca farinha branca, que deixa borda esbranquiçada na
+                    lateral do disco. Leve ao forno preaquecido a
+                    <strong>180°C por 25 a 30 minutos</strong>. Não abra nos
+                    primeiros 20 minutos. Teste com palito: seco ao centro.
+                    Termômetro: 93–96°C.
+                  </p>
+                </div>
+<div class="rc-step">
+                  <span class="rc-step-num">06</span>
+                  <p class="rc-step-text">
+                    <strong>Resfriamento.</strong> Aguarde 10 minutos na forma,
+                    desenformar na grade e resfriar completamente antes de
+                    manusear. Para o <strong>Bolo Prestígio</strong>, refrigere
+                    os discos por 2h antes de montar — o disco frio absorve a
+                    calda mais lentamente, distribuindo a umidade de forma
+                    uniforme pelo miolo sem encharcar.
+                  </p>
+                </div>
+<h4 class="rc-col-label">Brigadeiro El Guapo</h4>
+<div class="rc-step">
+                  <span class="rc-step-num">07</span>
+                  <p class="rc-step-text">
+                    <strong>Dissolver o cacau a frio.</strong> Em panela de
+                    fundo grosso fora do fogo, misture o leite condensado com o
+                    cacau em pó, mexendo com espátula até o cacau estar
+                    completamente dissolvido e sem grumos. Dissolver a frio é
+                    essencial — cacau em pó adicionado em leite condensado
+                    quente gruda no fundo da panela antes de se integrar,
+                    formando pontos pretos amargos no recheio final.
+                  </p>
+                </div>
+<div class="rc-step">
+                  <span class="rc-step-num">08</span>
+                  <p class="rc-step-text">
+                    <strong>Adicionar o chocolate.</strong> Pique o chocolate
+                    meio amargo em pedaços pequenos e uniformes e adicione à
+                    mistura de leite condensado e cacau. Leve ao fogo
+                    médio-baixo, mexendo constantemente com espátula de silicone
+                    — raspe o fundo e as laterais da panela de forma contínua
+                    para evitar queimar o açúcar do leite condensado, que
+                    carameliza rapidamente em fogo alto.
+                  </p>
+                </div>
+<div class="rc-step">
+                  <span class="rc-step-num">09</span>
+                  <p class="rc-step-text">
+                    <strong>Ponto de recheio.</strong> Cozinhe mexendo sempre
+                    por <strong>8 a 12 minutos</strong> até atingir o ponto de
+                    recheio de bolo: a massa começa a desgrudar do fundo
+                    formando um sulco limpo que fecha lentamente. É um ponto
+                    mais mole que o brigadeiro de enrolar — a consistência deve
+                    lembrar uma ganache macia a quente. Ao esfriar e refrigerar,
+                    firma consideravelmente.
+                  </p>
+                </div>
+<div class="rc-step">
+                  <span class="rc-step-num">10</span>
+                  <p class="rc-step-text">
+                    <strong>Creme de leite e finalização.</strong> Retire do
+                    fogo. Adicione o creme de leite e misture vigorosamente até
+                    incorporar completamente — o creme de leite quente se
+                    integra sem talhar. Ele ajusta a consistência final do
+                    recheio: mais creme = mais mole e cremoso; menos = mais
+                    firme e denso. Cubra com filme plástico em contato com a
+                    superfície para evitar película.
+                  </p>
+                </div>
+<div class="rc-step">
+                  <span class="rc-step-num">11</span>
+                  <p class="rc-step-text">
+                    <strong>Resfriamento e uso.</strong> Deixe esfriar
+                    completamente em temperatura ambiente e refrigere por
+                    <strong>no mínimo 2 horas</strong> antes de usar. Frio, o
+                    brigadeiro firma e ganha consistência de recheio cremoso que
+                    não escorrega entre as camadas do bolo. Para consistência
+                    máxima de corte, refrigere o bolo montado por 4 horas após
+                    recheio.
+                  </p>
+                </div>
+<h4 class="rc-col-label">Recheio de Coco Cremoso</h4>
+<div class="rc-step">
+                  <span class="rc-step-num">12</span>
                   <p class="rc-step-text">
                     <strong>Base líquida.</strong> Em panela de fundo grosso,
                     combine o leite condensado com o leite integral. Meça o
@@ -3322,8 +1752,8 @@
                     dois líquidos.
                   </p>
                 </div>
-                <div class="rc-step">
-                  <span class="rc-step-num">02</span>
+<div class="rc-step">
+                  <span class="rc-step-num">13</span>
                   <p class="rc-step-text">
                     <strong>Coco e cozimento.</strong> Adicione o coco ralado em
                     flocos à panela com os líquidos. Leve ao fogo médio, mexendo
@@ -3335,8 +1765,8 @@
                     <strong>5 a 8 minutos</strong> após começar a borbulhar.
                   </p>
                 </div>
-                <div class="rc-step">
-                  <span class="rc-step-num">03</span>
+<div class="rc-step">
+                  <span class="rc-step-num">14</span>
                   <p class="rc-step-text">
                     <strong>Ponto e finalização.</strong> O recheio está no
                     ponto quando a espátula deixa um sulco no fundo que fecha
@@ -3347,8 +1777,8 @@
                     condensado. Cubra com filme em contato com a superfície.
                   </p>
                 </div>
-                <div class="rc-step">
-                  <span class="rc-step-num">04</span>
+<div class="rc-step">
+                  <span class="rc-step-num">15</span>
                   <p class="rc-step-text">
                     <strong>Resfriamento.</strong> Deixe esfriar em temperatura
                     ambiente e refrigere por <strong>no mínimo 2 horas</strong>.
@@ -3358,10 +1788,90 @@
                     o peso do disco de bolo sem escorrer.
                   </p>
                 </div>
+<div class="rc-step"><span class="rc-step-num">16</span><p class="rc-step-text"><strong>Montagem do Bolo Prestígio.</strong> Com a massa e os dois recheios completamente frios, monte o bolo combinando os discos de pão de ló de chocolate com o recheio de coco e o brigadeiro. Refrigere o bolo montado por 4 horas antes de cortar, conforme a orientação do brigadeiro.</p></div></div></div>
+<h4 class="rc-col-label">Massa — Pão de Ló de Chocolate</h4>
+<div class="rc-notes">
+              <span class="rc-notes-label"
+                >Notas Técnicas &amp; Enriquecimento</span
+              >
+              <div class="rc-notes-grid">
+                <div class="rc-note">
+                  <span class="rc-note-title"
+                    >Água no lugar do leite — por que funciona melhor</span
+                  >
+                  A caseína do leite forma ligações adicionais com o glúten,
+                  tornando o miolo ligeiramente mais firme. Em um pão de ló de
+                  chocolate, onde o cacau já contribui com gordura (manteiga de
+                  cacau) e fibras que endurecem a textura, usar água no lugar do
+                  leite compensa exatamente esse fator — a ausência de proteínas
+                  lácteas mantém o miolo macio e sedoso mesmo com o cacau.
+                </div>
+                <div class="rc-note">
+                  <span class="rc-note-title">Cacau puro vs. achocolatado</span>
+                  Apenas cacau 100% — sem açúcar, sem leite, sem gordura vegetal
+                  adicionada. Achocolatado desequilibra a fórmula: adiciona
+                  açúcar não previsto, reduz a intensidade e compromete a
+                  coloração escura característica. O amargor do cacau puro é
+                  contrabalançado pelos 200g de açúcar e pela estrutura aerada
+                  dos ovos.
+                </div>
+                <div class="rc-note">
+                  <span class="rc-note-title"
+                    >Bolo Prestígio — montagem completa</span
+                  >
+                  Este pão de ló é a base do
+                  <strong>Bolo Prestígio El Guapo</strong>. Montagem: disco de
+                  pão de ló de chocolate → calda de chocolate leve (opcional) →
+                  camada generosa de Brigadeiro El Guapo → disco → camada de
+                  Recheio de Coco → disco → cobertura de ganache ou brigadeiro.
+                  Refrigerar a torta montada por 4h antes de servir.
+                </div>
               </div>
             </div>
-
-            <div class="rc-notes">
+<h4 class="rc-col-label">Brigadeiro El Guapo</h4>
+<div class="rc-notes">
+              <span class="rc-notes-label"
+                >Notas Técnicas &amp; Enriquecimento</span
+              >
+              <div class="rc-notes-grid">
+                <div class="rc-note">
+                  <span class="rc-note-title"
+                    >Chocolate + cacau — dupla de intensidade</span
+                  >
+                  O chocolate meio amargo em barra entrega gordura (manteiga de
+                  cacau), que dá cremosidade e brilho, além de sabor. O cacau
+                  70% em pó, adicionado separadamente, aprofunda a intensidade
+                  sem aumentar a gordura — sua concentração de compostos
+                  fenólicos é maior do que no chocolate em barra. A combinação
+                  produz um brigadeiro com perfil complexo: redondo, brilhante e
+                  profundamente achocolatado.
+                </div>
+                <div class="rc-note">
+                  <span class="rc-note-title"
+                    >Ponto de recheio vs. ponto de enrolar</span
+                  >
+                  O ponto de recheio (sulco que fecha lentamente) é 2 a 3
+                  minutos antes do ponto de enrolar (desgruda completamente,
+                  massa seca). O creme de leite adicionado ao final recua ainda
+                  mais a consistência. Resultado: frio, o recheio é firme o
+                  suficiente para suportar o peso das camadas do bolo, mas macio
+                  o suficiente para não rachar ao cortar a fatia.
+                </div>
+                <div class="rc-note">
+                  <span class="rc-note-title"
+                    >Bolo Prestígio — papel deste recheio</span
+                  >
+                  No <strong>Bolo Prestígio El Guapo</strong>, este brigadeiro
+                  atua como a camada de sabor intenso que ancora a experiência:
+                  contrasta com a leveza do pão de ló de chocolate e complementa
+                  a doçura úmida do recheio de coco. A sequência de montagem
+                  ideal é: disco → brigadeiro → disco → coco → disco, garantindo
+                  que o corte revele camadas alternadas de chocolate e coco.
+                </div>
+              </div>
+            </div>
+<h4 class="rc-col-label">Recheio de Coco Cremoso</h4>
+<div class="rc-notes">
               <span class="rc-notes-label"
                 >Notas Técnicas &amp; Enriquecimento</span
               >
@@ -3398,9 +1908,7 @@
                   exatamente nessa tensão entre os dois recheios.
                 </div>
               </div>
-            </div>
-          </div>
-        </article>
+            </div></div></article>
       </div>
     </section>
 
@@ -3436,8 +1944,15 @@
 
       <div class="recipe-wrap">
         <!-- ─── Pão de Queijo do Heuller ─── -->
-        <article class="recipe-card" id="pao-de-queijo-heuller">
+        <article class="recipe-card" data-category="savory" id="pao-de-queijo-heuller">
           <div class="rc-head" role="button" tabindex="0" aria-expanded="false">
+            <div class="rc-image">
+              <img
+                src="images/recipes/pao-de-queijo.jpg"
+                loading="lazy" decoding="async" width="1280" height="1280"
+                alt="Pão de Queijo do Heuller"
+              />
+            </div>
             <div class="rc-head-main">
               <h3 class="rc-name">Pão de Queijo do Heuller</h3>
               <div class="rc-chips">
@@ -3459,16 +1974,10 @@
                 <span class="rc-meta-value">Média</span>
               </div>
             </div>
-            <span class="rc-toggle" aria-hidden="true">+</span>
+            <span class="rc-toggle" aria-hidden="true"><img src="assets/icons/arrow-up-right.svg" alt="" width="22" height="22" /></span>
           </div>
           <div class="rc-body">
-            <div class="rc-image">
-              <img
-                src="images/el-guapo-img-09.webp"
-                loading="lazy"
-                alt="Pão de Queijo do Heuller"
-              />
-            </div>
+
             <div class="rc-body-inner">
               <div class="rc-ingredients">
                 <span class="rc-col-label">Composição Analítica</span>
@@ -3749,8 +2258,15 @@
         </article>
 
         <!-- ─── Pão do Heuller e da Gabriela ─── -->
-        <article class="recipe-card" id="pao-heuller-gabriela">
+        <article class="recipe-card" data-category="savory" id="pao-heuller-gabriela">
           <div class="rc-head" role="button" tabindex="0" aria-expanded="false">
+            <div class="rc-image">
+              <img
+                src="images/recipes/pao-heuller-gabriela.jpg"
+                loading="lazy" decoding="async" width="1280" height="1280"
+                alt="Pão do Heuller e da Gabriela"
+              />
+            </div>
             <div class="rc-head-main">
               <h3 class="rc-name">Pão do Heuller e da Gabriela</h3>
               <div class="rc-chips">
@@ -3770,16 +2286,10 @@
                 <span class="rc-meta-value">~53%</span>
               </div>
             </div>
-            <span class="rc-toggle" aria-hidden="true">+</span>
+            <span class="rc-toggle" aria-hidden="true"><img src="assets/icons/arrow-up-right.svg" alt="" width="22" height="22" /></span>
           </div>
           <div class="rc-body">
-            <div class="rc-image">
-              <img
-                src="images/el-guapo-img-10.webp"
-                loading="lazy"
-                alt="Pão do Heuller e da Gabriela"
-              />
-            </div>
+
             <div class="rc-body-inner">
               <div class="rc-ingredients">
                 <span class="rc-col-label">Ingredientes</span>
@@ -4029,390 +2539,25 @@
       </div>
       <div class="recipe-wrap">
         <!-- ─── Panetone El Guapo ─── -->
-        <article class="recipe-card" id="bolo-panetone-el-guapo">
+
+<article class="recipe-card" data-category="sweet" id="arroz-doce-toffee-amburana" data-source-url="https://heuller.github.io/el-guapooo/"><div class="rc-head" role="button" tabindex="0" aria-expanded="false"><div class="rc-image"><img src="images/recipes/arroz-doce.jpg" alt="Arroz Doce Toffee Amburana" loading="lazy" decoding="async" width="1280" height="1280"></div>
+            <div class="rc-head-main"><h3 class="rc-name">Arroz Doce Toffee Amburana</h3><div class="rc-chips"><span class="rc-chip">Sobremesa de Colher</span><span class="rc-chip">Caramelo Toffee</span><span class="rc-chip">Cachaça Amburana</span><span class="rc-chip">Servido Gelado</span></div></div><div class="rc-meta"><div class="rc-meta-item"><span class="rc-meta-label">Rendimento</span><span class="rc-meta-value">11–12 potes (220ml)</span></div><div class="rc-meta-item"><span class="rc-meta-label">Serviço</span><span class="rc-meta-value">Gelado</span></div></div><span class="rc-toggle" aria-hidden="true"><img src="assets/icons/arrow-up-right.svg" alt="" width="22" height="22" /></span></div><div class="rc-body"><div class="rc-body-inner"><div class="rc-ingredients"><span class="rc-col-label">Ingredientes</span><div class="rc-ing-group"><p class="rc-ing-group-name">Fase 1 — O Cozimento (A Base)</p><ul><li class="rc-ing-item"><div class="rc-ing-row"><span>Arroz Agulhinha (não lavar)</span><span class="rc-ing-qty">350g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Água filtrada</span><span class="rc-ing-qty">1200ml</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Canela em pau</span><span class="rc-ing-qty">2 un.</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Cravo-da-índia</span><span class="rc-ing-qty">5 un.</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Café solúvel</span><span class="rc-ing-qty">1 pitada</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Sal refinado</span><span class="rc-ing-qty">4g</span></div></li></ul></div><div class="rc-ing-group"><p class="rc-ing-group-name">Fase 2 — Base Toffee e Creme Lácteo</p><ul><li class="rc-ing-item"><div class="rc-ing-row"><span>Açúcar refinado</span><span class="rc-ing-qty">300g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Manteiga</span><span class="rc-ing-qty">40g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Leite integral (bem quente)</span><span class="rc-ing-qty">1000ml</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Leite condensado</span><span class="rc-ing-qty">395g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Creme de leite (caixinha)</span><span class="rc-ing-qty">200g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Cachaça envelhecida em Amburana</span><span class="rc-ing-qty">30ml</span></div></li></ul></div><div class="rc-ing-group"><p class="rc-ing-group-name">Fase 3 — Finalização Aromática</p><ul><li class="rc-ing-item"><div class="rc-ing-row"><span>Canela em pó</span><span class="rc-ing-qty">Q.B.</span></div></li></ul></div></div><div class="rc-method"><span class="rc-col-label">Modo de Preparo</span><div class="rc-step"><span class="rc-step-num">01</span><p class="rc-step-text">O Amaciamento do Grão. Em uma panela grande, coloque a água, o arroz, a canela em pau, os cravos, o café solúvel e o sal. Ligue o fogo médio, com a panela semitampada, e cozinhe até a água quase secar por completo e o grão estar extremamente macio (passando do ponto de um arroz salgado tradicional). Desligue, retire os cravos e as canelas em pau, e reserve.</p></div><div class="rc-step"><span class="rc-step-num">02</span><p class="rc-step-text">A Construção do Toffee. Enquanto o arroz cozinha, aqueça o litro de leite em outra leiteira. Em uma panela larga e de fundo grosso, coloque os 300g de açúcar em fogo médio-baixo. Derreta lentamente até atingir uma cor de caramelo âmbar profundo. Assim que atingir a cor desejada, incorpore os 40g de manteiga mexendo vigorosamente.</p></div><div class="rc-step"><span class="rc-step-num">03</span><p class="rc-step-text">O Deglace. Com cuidado (o choque térmico subirá vapor), despeje um terço do leite quente sobre o caramelo amanteigado. Mexa sem parar até dissolver os pedaços de açúcar cristalizado. Adicione o restante do leite. Você acabou de criar a base líquida de Leite Toffee.</p></div><div class="rc-step"><span class="rc-step-num">04</span><p class="rc-step-text">A Unificação e a Redução Visual. Despeje esse Leite Toffee quente diretamente na panela do arroz cozido e ligue em fogo baixo. Incorpore os 395g de leite condensado. Mexa constantemente, raspando o fundo, por 10 a 15 minutos. Atenção ao Ponto: Desligue o fogo quando a panela ainda apresentar a viscosidade de uma &quot;sopa bem grossa&quot; (quando a espátula nas costas da colher deixar um caminho limpo, mas ainda houver bastante líquido borbulhando). Não deixe secar.</p></div><div class="rc-step"><span class="rc-step-num">05</span><p class="rc-step-text">A Finalização de Alta Gastronomia (Fora do Fogo). Imediatamente após desligar o fogo, incorpore o creme de leite e os 30ml de cachaça Amburana. O calor residual evapora o álcool agressivo, travando as notas amadeiradas da bebida, enquanto a gordura fria do creme de leite interrompe o cozimento.</p></div><div class="rc-step"><span class="rc-step-num">06</span><p class="rc-step-text">O Porcionamento Seguro (Regra do Frio). Despeje o arroz doce ainda quente nos potinhos de 220ml. Deixe esfriar abertos na bancada por cerca de 1 hora até atingirem temperatura ambiente (isso evita a condensação de água na tampa). Faça uma chuva fina de canela em pó sobre a superfície de cada um, tampe hermeticamente e leve à geladeira a noite toda.</p></div></div></div><div class="rc-notes"><span class="rc-notes-label">Notas</span><div class="rc-notes-grid"><div class="rc-note"><span class="rc-note-title">Por que não lavar o arroz?</span>Manter o amido superficial do grão é essencial: é ele que confere a cremosidade natural ao arroz doce, dispensando amido de milho ou espessantes.</div><div class="rc-note"><span class="rc-note-title">Cachaça Amburana</span>A cachaça envelhecida em barris de amburana contribui com notas de baunilha, canela e cumarina. O álcool evapora com o calor residual, restando apenas o perfil aromático.</div><div class="rc-note"><span class="rc-note-title">Ponto do Toffee</span>O caramelo deve atingir um âmbar profundo (170–180 °C). Mais claro ficará sem sabor; mais escuro amargará. A adição da manteiga estabiliza o caramelo e evita cristalização.</div></div></div></div></article>
+<article class="recipe-card" data-category="sweet" id="canjicada-el-guapo" data-source-url="https://heuller.github.io/el-guapooo/"><div class="rc-head" role="button" tabindex="0" aria-expanded="false"><div class="rc-image"><img src="images/recipes/canjicada.jpg" alt="Canjicada El Guapo" loading="lazy" decoding="async" width="1280" height="1280"></div>
+            <div class="rc-head-main"><h3 class="rc-name">Canjicada El Guapo</h3><div class="rc-chips"><span class="rc-chip">Festa Junina</span><span class="rc-chip">Toffee, Café e Amburana</span><span class="rc-chip">Tradicional</span></div></div><div class="rc-meta"><div class="rc-meta-item"><span class="rc-meta-label">Rendimento</span><span class="rc-meta-value">2,5kg (~11 potes de 220ml)</span></div><div class="rc-meta-item"><span class="rc-meta-label">Serviço</span><span class="rc-meta-value">Gelado</span></div></div><span class="rc-toggle" aria-hidden="true"><img src="assets/icons/arrow-up-right.svg" alt="" width="22" height="22" /></span></div><div class="rc-body"><div class="rc-body-inner"><div class="rc-ingredients"><span class="rc-col-label">Ingredientes</span><div class="rc-ing-group"><p class="rc-ing-group-name">Fase 1 — O Grão</p><ul><li class="rc-ing-item"><div class="rc-ing-row"><span>Canjica Vapza (2 pacotes)</span><span class="rc-ing-qty">1000g</span></div></li></ul></div><div class="rc-ing-group"><p class="rc-ing-group-name">Fase 2 — Caramelo e Infusão do Grão</p><ul><li class="rc-ing-item"><div class="rc-ing-row"><span>Açúcar refinado</span><span class="rc-ing-qty">350g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Manteiga (com ou sem sal)</span><span class="rc-ing-qty">60g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Leite integral (quente)</span><span class="rc-ing-qty">1300ml</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Canela em pau</span><span class="rc-ing-qty">2 un. grandes</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Cravo-da-índia</span><span class="rc-ing-qty">5 un.</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Sal refinado</span><span class="rc-ing-qty">5g</span></div></li></ul></div><div class="rc-ing-group"><p class="rc-ing-group-name">Fase 3 — Slurry Mocha</p><ul><li class="rc-ing-item"><div class="rc-ing-row"><span>Leite condensado</span><span class="rc-ing-qty">590g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Amido de milho</span><span class="rc-ing-qty">25g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Café solúvel</span><span class="rc-ing-qty">3g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Leite integral ou água fria</span><span class="rc-ing-qty">80ml</span></div></li></ul></div><div class="rc-ing-group"><p class="rc-ing-group-name">Fase 4 — Arremate Fora do Fogo</p><ul><li class="rc-ing-item"><div class="rc-ing-row"><span>Creme de leite (caixinha)</span><span class="rc-ing-qty">400g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Cachaça envelhecida em amburana</span><span class="rc-ing-qty">35g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Raspas de laranja bahia</span><span class="rc-ing-qty">1 un.</span></div></li></ul></div></div><div class="rc-method"><span class="rc-col-label">Modo de Preparo</span><div class="rc-step"><span class="rc-step-num">01</span><p class="rc-step-text">O Grão. Escorra bem na peneira. Lavar em água corrente é opcional — a embalagem só pede escorrer, e como a receita depende do amido de milho da Fase 3 para dar liga, lavar demais pode remover o pouco amido superficial disponível. Se houver espuma ou resíduo visível, um enxágue rápido e leve basta — não esfregue.</p></div><div class="rc-step"><span class="rc-step-num">02</span><p class="rc-step-text">Caramelo. Em panela grande de fundo grosso (capacidade mínima 5L), derreta o açúcar em fogo baixo até virar caramelo âmbar profundo, movimentando a panela pelas alças. Adicione a manteiga e mexa vigorosamente até incorporar por completo.</p></div><div class="rc-step"><span class="rc-step-num">03</span><p class="rc-step-text">Infusão e Cozimento. Despeje o leite quente aos poucos, mexendo sem parar até dissolver os blocos de açúcar cristalizado pelo choque térmico. Adicione a canela, o cravo e o sal. Junte a canjica escorrida. Cozinhe em fogo baixo, borbulhando suavemente, por exatos 15 minutos.</p></div><div class="rc-step"><span class="rc-step-num">04</span><p class="rc-step-text">Slurry Mocha. Após os 15 minutos de infusão do grão, adicione o leite condensado à panela e misture bem. À parte, dissolva o amido de milho e o café solúvel nos 80ml de líquido frio, formando uma pasta lisa. Com a panela ainda borbulhando, despeje a pasta, mexendo vigorosamente e raspando o fundo. Cozinhe por 3 minutos, até o creme engrossar e ganhar brilho. Assim que atingir a textura espessa, desligue o fogo imediatamente.</p></div><div class="rc-step"><span class="rc-step-num">05</span><p class="rc-step-text">Arremate Fora do Fogo. Incorpore o creme de leite, a cachaça e as raspas de laranja, nessa ordem, mexendo de baixo para cima.</p></div><div class="rc-step"><span class="rc-step-num">06</span><p class="rc-step-text">Descanso. Retire a canela em pau e o cravo. Tampe a panela e deixe descansar por 5 a 10 minutos antes de potear.</p></div></div></div><div class="rc-notes"><span class="rc-notes-label">Notas</span><div class="rc-notes-grid"><div class="rc-note"><span class="rc-note-title">Proporção líquido:grão final</span>2,29:1 — média calculada para textura cremosa com amido recalibrado proporcionalmente ao novo volume de líquido.</div></div></div></div></article>
+<article class="recipe-card" data-category="sweet" id="bolo-panetone-el-guapo" data-replaces-recipes="essencia-caseira-panetone"><div class="rc-head" role="button" tabindex="0" aria-expanded="false"><div class="rc-image"><img src="images/recipes/panetone.jpg" alt="Panetone El Guapo" loading="lazy" decoding="async" width="1280" height="1280"></div>
+            <div class="rc-head-main"><h3 class="rc-name">Panetone El Guapo</h3><div class="rc-chips"><span class="rc-chip">Método Indireto · Esponja</span><span class="rc-chip">Longa Fermentação</span><span class="rc-chip">Aroma Artesanal</span><span class="rc-chip">Duas opções de inclusões</span></div></div><div class="rc-meta"><div class="rc-meta-item"><span class="rc-meta-label">Massa base</span><span class="rc-meta-value">1378g + 450g de inclusões</span></div></div><span class="rc-toggle" aria-hidden="true"><img src="assets/icons/arrow-up-right.svg" alt="" width="22" height="22" /></span></div><div class="rc-body"><div class="rc-body-inner"><div class="rc-ingredients"><span class="rc-col-label">Ingredientes</span><div class="rc-ing-group"><p class="rc-ing-group-name">Esponja — retirada dos totais da receita</p><ul><li class="rc-ing-item"><div class="rc-ing-row"><span>Farinha de trigo<small class="ing-pct">parte dos 600g totais</small></span><span class="rc-ing-qty">100g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Água<small class="ing-pct">toda a água da receita</small></span><span class="rc-ing-qty">100g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Fermento biológico seco<small class="ing-pct">todo o fermento da receita</small></span><span class="rc-ing-qty">10g</span></div></li></ul></div><div class="rc-ing-group"><p class="rc-ing-group-name">Massa principal — acrescentar à esponja</p><ul><li class="rc-ing-item"><div class="rc-ing-row"><span>Esponja preparada</span><span class="rc-ing-qty">toda</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Farinha de trigo<small class="ing-pct">restante dos 600g totais</small></span><span class="rc-ing-qty">500g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Suco de laranja</span><span class="rc-ing-qty">150g</span></div></li><li class="rc-ing-item" data-prepared="true"><div class="rc-ing-row"><span>Essência natural caseira</span><span class="rc-ing-qty">50g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Gemas de ovos</span><span class="rc-ing-qty">130g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Açúcar</span><span class="rc-ing-qty">150g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Leite em pó</span><span class="rc-ing-qty">30g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Sal</span><span class="rc-ing-qty">8g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Manteiga</span><span class="rc-ing-qty">150g</span></div></li></ul></div><fieldset class="rc-inclusion-options"><legend>Escolha uma opção de inclusões</legend><label><input type="radio" name="panetone-inclusions" value="chocolate" checked> Chocolate e castanhas</label><label><input type="radio" name="panetone-inclusions" value="frutas"> Frutas, cranberry e castanha</label></fieldset>
+<div class="rc-ing-group" data-variant="chocolate"><p class="rc-ing-group-name">Opção 1 — Chocolate e castanhas</p><ul><li class="rc-ing-item"><div class="rc-ing-row"><span>Chocolate</span><span class="rc-ing-qty">400g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Castanhas de caju ou nozes</span><span class="rc-ing-qty">50g</span></div></li></ul></div>
+<div class="rc-ing-group" data-variant="frutas" hidden><p class="rc-ing-group-name">Opção 2 — Frutas, cranberry e castanha</p><ul><li class="rc-ing-item"><div class="rc-ing-row"><span>Mistura de frutas cristalizadas, cranberry seco e castanha de caju</span><span class="rc-ing-qty">450g</span></div></li></ul></div><h4 class="rc-col-label">Essência caseira — preparar uma receita e usar 50g na massa</h4><div class="rc-ing-group"><p class="rc-ing-group-name">Cítricos — usar as raspas</p><ul><li class="rc-ing-item"><div class="rc-ing-row"><span>Raspas de laranja Bahia</span><span class="rc-ing-qty">3 un.</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Raspas de tangerina</span><span class="rc-ing-qty">2 un.</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Raspas de limão siciliano</span><span class="rc-ing-qty">2 un.</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Raspas de limão taiti</span><span class="rc-ing-qty">¼ un.</span></div></li></ul></div><div class="rc-ing-group"><p class="rc-ing-group-name">Redução</p><ul><li class="rc-ing-item"><div class="rc-ing-row"><span>Fava de baunilha</span><span class="rc-ing-qty">½ un.</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Canela em pau</span><span class="rc-ing-qty">1 pedaço</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Cravo-da-índia</span><span class="rc-ing-qty">3 un.</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Cardamomo</span><span class="rc-ing-qty">2 bagas</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Água</span><span class="rc-ing-qty">250ml</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Mel</span><span class="rc-ing-qty">150g</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Destilado</span><span class="rc-ing-qty">125ml</span></div></li></ul></div><div class="rc-ing-group"><p class="rc-ing-group-name">Depois de esfriar</p><ul><li class="rc-ing-item"><div class="rc-ing-row"><span>Semente de cumaru ralada</span><span class="rc-ing-qty">½ un.</span></div></li><li class="rc-ing-item"><div class="rc-ing-row"><span>Noz-moscada ralada</span><span class="rc-ing-qty">1 pitada</span></div></li></ul></div></div><div class="rc-method"><span class="rc-col-label">Modo de Preparo</span><h4 class="rc-col-label">Preparo da essência caseira</h4><div class="rc-step"><span class="rc-step-num">01</span><p class="rc-step-text">Preparação. Separe as raspas dos cítricos. Reserve o cumaru e a noz-moscada para acrescentar somente depois de esfriar.</p></div><div class="rc-step"><span class="rc-step-num">02</span><p class="rc-step-text">Redução. Leve ao fogo as raspas, a baunilha, a canela, os cravos, o cardamomo, a água, o mel e o destilado. Cozinhe até reduzir, conforme a receita caseira. A fórmula não especifica tempo nem volume final de redução.</p></div><div class="rc-step"><span class="rc-step-num">03</span><p class="rc-step-text">Finalização fria. Retire do fogo e deixe esfriar. Acrescente a meia semente de cumaru ralada e a pitada de noz-moscada ralada. No panetone, utilize 50g da essência pronta por receita.</p></div><h4 class="rc-col-label">Preparo do panetone</h4><div class="rc-step"><span class="rc-step-num">04</span><p class="rc-step-text">Esponja. Misture 100g de farinha de trigo, 100g de água e os 10g de fermento biológico seco. Cubra e deixe descansar por 30 a 45 minutos, até aumentar de volume e apresentar bolhas. Essas quantidades já fazem parte dos totais da receita.</p></div><div class="rc-step"><span class="rc-step-num">05</span><p class="rc-step-text">Mistura inicial. Combine toda a esponja com os 500g de farinha restantes, 150g de suco de laranja, 130g de gemas, 150g de açúcar, 30g de leite em pó e 50g de essência natural caseira. Não acrescente mais água nem fermento. Misture em velocidade baixa por 3 a 5 minutos, até incorporar a farinha, e deixe descansar por 15 minutos.</p></div><div class="rc-step"><span class="rc-step-num">06</span><p class="rc-step-text">Desenvolvimento do Glúten. Adicione o sal e ligue a batedeira em velocidade média. Bata por 8 a 10 minutos até a massa começar a desgrudar das laterais e apresentar boa elasticidade. Por ser uma massa enriquecida, o glúten se forma com mais lentidão — respeite o tempo de sovagem.</p></div><div class="rc-step"><span class="rc-step-num">07</span><p class="rc-step-text">Incorporação da Manteiga. Reduza para velocidade baixa e adicione a manteiga em ponto pomada em 3 ou 4 adições, esperando a absorção completa de cada porção. A massa pode parecer que desintegra nos primeiros momentos — continue batendo. Após toda a manteiga absorvida, bata até a massa voltar a ser completamente lisa e levemente brilhante.</p></div><div class="rc-step"><span class="rc-step-num">08</span><p class="rc-step-text">Adição das inclusões. Escolha apenas uma opção para a receita inteira: 400g de chocolate com 50g de castanhas de caju ou nozes; ou 450g no total da mistura de frutas cristalizadas, cranberry seco e castanha de caju. Adicione a opção escolhida em velocidade mínima e misture por apenas 1 minuto para distribuir sem rasgar o glúten.</p></div><div class="rc-step"><span class="rc-step-num">09</span><p class="rc-step-text">Primeira Fermentação e Cold Retard. Transfira a massa para um recipiente untado com manteiga. Deixe descansar por 1h em temperatura ambiente e, em seguida, leve à geladeira (cold retard) a 4°C por 12 a 18 horas para desenvolver sabores complexos e estabilizar a manteiga.</p></div><div class="rc-step"><span class="rc-step-num">10</span><p class="rc-step-text">Divisão e boleamento. Retire a massa fria da geladeira e porcione conforme a capacidade das formas. Boleie suavemente na bancada untada e deixe descansar por 20 minutos, coberta.</p></div><div class="rc-step"><span class="rc-step-num">11</span><p class="rc-step-text">Segunda Fermentação. Coloque a massa boleada nas formas de panetone (formas de papel forneável). Deixe fermentar em local fechado e úmido (como forno desligado) por 2h a 3h, ou até que o topo da massa atinja a borda da forma.</p></div><div class="rc-step"><span class="rc-step-num">12</span><p class="rc-step-text">Corte e assamento. Faça um corte em cruz no topo com lâmina afiada. Asse em forno preaquecido a 170°C. O tempo depende do peso de cada porção; a receita anterior usava 35 a 45 minutos para unidades de aproximadamente 500g, com temperatura interna de 90°C a 92°C.</p></div><div class="rc-step"><span class="rc-step-num">13</span><p class="rc-step-text">Resfriamento de Cabeça para Baixo. Ao retirar do forno, transpasse duas hastes de metal (ou palitos de churrasco) na base do panetone e pendure-o de cabeça para baixo por no mínimo 4 horas antes de embalar ou servir. Isso evita que o topo colapse enquanto a estrutura de glúten e manteiga se estabiliza.</p></div></div></div><div class="rc-notes"><div class="rc-note"><span class="rc-note-title">Quantidade de essência</span>Prepare a fórmula completa de essência descrita acima e use 50g na massa do panetone. O rendimento final da essência depende da redução e não está definido nesta receita. A lista de compras considera os ingredientes de um lote completo.</div></div></div></article>
+        <!-- ─── Banana Bread El Guapo ─── -->
+        <article class="recipe-card" data-category="sweet" id="bolo-banana-bread-el-guapo">
           <div class="rc-head" role="button" tabindex="0" aria-expanded="false">
-            <div class="rc-head-main">
-              <h3 class="rc-name">Panetone El Guapo</h3>
-              <div class="rc-chips">
-                <span class="rc-chip">Método Indireto · Esponja</span>
-                <span class="rc-chip rc-chip--accent">Longa Fermentação</span>
-                <span class="rc-chip">Aroma Artesanal</span>
-                <span class="rc-chip">Gotas de Chocolate</span>
-              </div>
-            </div>
-            <div class="rc-meta">
-              <div class="rc-meta-item">
-                <span class="rc-meta-label">Rendimento</span>
-                <span class="rc-meta-value">2 panetones de 500g</span>
-              </div>
-              <div class="rc-meta-item">
-                <span class="rc-meta-label">Preparo total</span>
-                <span class="rc-meta-value">1h + 12–18h fermentação</span>
-              </div>
-            </div>
-            <span class="rc-toggle" aria-hidden="true">+</span>
-          </div>
-          <div class="rc-body">
             <div class="rc-image">
               <img
-                src="images/el-guapo-img-11.webp"
-                loading="lazy"
-                alt="Panetone El Guapo"
+                src="images/recipes/banana-bread.jpg"
+                loading="lazy" decoding="async" width="1280" height="1280"
+                alt="Banana Bread El Guapo"
               />
             </div>
-            <div class="rc-body-inner">
-              <div class="rc-ingredients">
-                <span class="rc-col-label">Composição</span>
-
-                <div class="rc-ing-group">
-                  <p class="rc-ing-group-name">Esponja (Pré-fermento)</p>
-                  <ul>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Farinha de trigo<small class="ing-pct"
-                            >25%</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">100g</span>
-                      </div>
-                      <div class="baker-bar-wrap">
-                        <div class="baker-bar-fill" style="--fill: 25%"></div>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Suco de laranja Bahia ou água gelada<small
-                            class="ing-pct"
-                            >25%</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">100g</span>
-                      </div>
-                      <div class="baker-bar-wrap">
-                        <div class="baker-bar-fill" style="--fill: 25%"></div>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Fermento biológico seco<small class="ing-pct"
-                            >2,5% · ou 30g fresco</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">10g</span>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-
-                <div class="rc-ing-group">
-                  <p class="rc-ing-group-name">
-                    Massa Principal (100% = 400g Farinha)
-                  </p>
-                  <ul>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Esponja preparada<small class="ing-pct"
-                            >base fermentada</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">toda</span>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Farinha de trigo W300+ ou Tipo 1 Forte<small
-                            class="ing-pct"
-                            >75%</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">300g</span>
-                      </div>
-                      <div class="baker-bar-wrap">
-                        <div class="baker-bar-fill" style="--fill: 75%"></div>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Gemas de ovos<small class="ing-pct"
-                            >22,5%</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">5 un. (~90g)</span>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Suco de Laranja Bahia gelado<small class="ing-pct"
-                            >25%</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">100g</span>
-                      </div>
-                      <div class="baker-bar-wrap">
-                        <div class="baker-bar-fill" style="--fill: 25%"></div>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Açúcar refinado ou demerara<small class="ing-pct"
-                            >25%</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">100g</span>
-                      </div>
-                      <div class="baker-bar-wrap">
-                        <div class="baker-bar-fill" style="--fill: 25%"></div>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Leite em pó integral<small class="ing-pct"
-                            >5% · confere maciez</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">20g</span>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Mel de abelha ou glucose<small class="ing-pct"
-                            >3,75% · higroscopia</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">15g</span>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Sal refinado<small class="ing-pct"
-                            >1,25%</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">5g</span>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Manteiga sem sal ponto pomada<small class="ing-pct"
-                            >25%</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">100g</span>
-                      </div>
-                      <div class="baker-bar-wrap">
-                        <div class="baker-bar-fill" style="--fill: 25%"></div>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Extrato de baunilha de verdade<small class="ing-pct"
-                            >1,25% · 1 col. chá</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">5g</span>
-                      </div>
-                    </li>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Raspas de 1 laranja Bahia e 1 limão siciliano<small
-                            class="ing-pct"
-                            >aroma cítrico</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">ou 5g essência</span>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-
-                <div class="rc-ing-group">
-                  <p class="rc-ing-group-name">Carga (Inclusões)</p>
-                  <ul>
-                    <li class="rc-ing-item">
-                      <div class="rc-ing-row">
-                        <span
-                          >Gotas de chocolate meio amargo ou frutas
-                          cristalizadas<small class="ing-pct"
-                            >62,5%</small
-                          ></span
-                        >
-                        <span class="rc-ing-qty">250g</span>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div class="rc-method">
-                <span class="rc-col-label">Modo de Preparo</span>
-
-                <div class="rc-step">
-                  <span class="rc-step-num">01</span>
-                  <p class="rc-step-text">
-                    <strong>Esponja (Pré-fermento).</strong> Misture os 100g de
-                    farinha, o fermento seco e o suco de laranja (ou água) até
-                    homogeneizar. Cubra e deixe descansar em temperatura
-                    ambiente por 30 a 45 minutos, até dobrar de volume e ficar
-                    cheia de bolhas — sinal de que a esponja está ativa e
-                    pronta.
-                  </p>
-                </div>
-                <div class="rc-step">
-                  <span class="rc-step-num">02</span>
-                  <p class="rc-step-text">
-                    <strong>Autólise e Mistura Inicial.</strong> Na tigela da
-                    batedeira, combine a esponja, o restante da farinha (300g),
-                    as gemas, o suco de laranja restante, o açúcar, o leite em
-                    pó, o mel e os aromatizantes (baunilha e raspas cítricas).
-                    Misture em velocidade baixa por 3 a 5 minutos até incorporar
-                    toda a farinha. Deixe descansar por 15 minutos.
-                  </p>
-                </div>
-                <div class="rc-step">
-                  <span class="rc-step-num">03</span>
-                  <p class="rc-step-text">
-                    <strong>Desenvolvimento do Glúten.</strong> Adicione o sal e
-                    ligue a batedeira em velocidade média. Bata por 8 a 10
-                    minutos até a massa começar a desgrudar das laterais e
-                    apresentar boa elasticidade. Por ser uma massa enriquecida,
-                    o glúten se forma com mais lentidão — respeite o tempo de
-                    sovagem.
-                  </p>
-                </div>
-                <div class="rc-step">
-                  <span class="rc-step-num">04</span>
-                  <p class="rc-step-text">
-                    <strong>Incorporação da Manteiga.</strong> Reduza para
-                    velocidade baixa e adicione a manteiga em ponto pomada em 3
-                    ou 4 adições, esperando a absorção completa de cada porção.
-                    A massa pode parecer que desintegra nos primeiros momentos —
-                    continue batendo. Após toda a manteiga absorvida, bata até a
-                    massa voltar a ser completamente lisa e levemente brilhante.
-                  </p>
-                </div>
-                <div class="rc-step">
-                  <span class="rc-step-num">05</span>
-                  <p class="rc-step-text">
-                    <strong>Adição da Carga.</strong> Reduza para a velocidade
-                    mínima e adicione as gotas de chocolate (ou frutas
-                    cristalizadas). Misture por apenas 1 minuto para distribuir
-                    uniformemente sem rasgar o glúten.
-                  </p>
-                </div>
-                <div class="rc-step">
-                  <span class="rc-step-num">06</span>
-                  <p class="rc-step-text">
-                    <strong>Primeira Fermentação e Cold Retard.</strong>
-                    Transfira a massa para um recipiente untado com manteiga.
-                    Deixe descansar por 1h em temperatura ambiente e, em
-                    seguida, leve à geladeira (cold retard) a 4°C por 12 a 18
-                    horas para desenvolver sabores complexos e estabilizar a
-                    manteiga.
-                  </p>
-                </div>
-                <div class="rc-step">
-                  <span class="rc-step-num">07</span>
-                  <p class="rc-step-text">
-                    <strong>Divisão e Boleamento.</strong> Retire a massa fria
-                    da geladeira, divida em duas porções de aproximadamente
-                    500g. Boleie suavemente na bancada untada com manteiga e
-                    deixe descansar por 20 minutos coberta.
-                  </p>
-                </div>
-                <div class="rc-step">
-                  <span class="rc-step-num">08</span>
-                  <p class="rc-step-text">
-                    <strong>Segunda Fermentação.</strong> Coloque a massa
-                    boleada nas formas de panetone (formas de papel forneável).
-                    Deixe fermentar em local fechado e úmido (como forno
-                    desligado) por 2h a 3h, ou até que o topo da massa atinja a
-                    borda da forma.
-                  </p>
-                </div>
-                <div class="rc-step">
-                  <span class="rc-step-num">09</span>
-                  <p class="rc-step-text">
-                    <strong>Corte e Assamento.</strong> Faça um corte em cruz
-                    ("X") delicado no topo com uma lâmina afiada e coloque uma
-                    colher de chá de manteiga no centro. Asse em forno
-                    pré-aquecido a 170°C por 35 a 45 minutos (temperatura
-                    interna de 90°C a 92°C).
-                  </p>
-                </div>
-                <div class="rc-step">
-                  <span class="rc-step-num">10</span>
-                  <p class="rc-step-text">
-                    <strong>Resfriamento de Cabeça para Baixo.</strong> Ao
-                    retirar do forno, transpasse duas hastes de metal (ou
-                    palitos de churrasco) na base do panetone e pendure-o de
-                    cabeça para baixo por no mínimo 4 horas antes de embalar ou
-                    servir. Isso evita que o topo colapse enquanto a estrutura
-                    de glúten e manteiga se estabiliza.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div class="rc-notes">
-              <span class="rc-notes-label"
-                >Notas Técnicas &amp; Enriquecimento</span
-              >
-              <div class="rc-notes-grid">
-                <div class="rc-note">
-                  <span class="rc-note-title"
-                    >O papel da esponja de laranja</span
-                  >
-                  O uso de suco de laranja na esponja reduz o pH da massa,
-                  favorecendo a atividade das leveduras e conferindo uma acidez
-                  suave que melhora a conservação natural do panetone, além de
-                  aportar um aroma cítrico profundo desde a base da fermentação.
-                </div>
-                <div class="rc-note">
-                  <span class="rc-note-title">Manteiga em ponto pomada</span>
-                  Adicionar a manteiga gelada impediria o desenvolvimento do
-                  glúten e quebraria a temperatura da massa. Em ponto pomada,
-                  ela se emulsifica perfeitamente na rede de glúten já formada,
-                  garantindo a textura desfiada clássica e a estrutura alveolada
-                  do panetone.
-                </div>
-                <div class="rc-note">
-                  <span class="rc-note-title">Resfriamento invertido</span>
-                  Devido à alta quantidade de gordura (manteiga e gemas) e
-                  açúcar, a estrutura do panetone quente é extremamente frágil.
-                  Pendurá-lo de cabeça para baixo alonga os alvéolos e garante
-                  que ele permaneça alto e fofinho após esfriar completamente.
-                </div>
-                <div class="rc-note">
-                  <span class="rc-note-title"
-                    >Harmonização com cervejas artesanais</span
-                  >
-                  O Panetone El Guapo combina perfeitamente com cervejas de
-                  trigo belgas (Witbier), cervejas de frutas cítricas ou até
-                  mesmo cervejas escuras suaves (Porter). O aroma cítrico e a
-                  doçura controlada do panetone criam uma experiência sensorial
-                  harmoniosa com bebidas artesanais.
-                </div>
-              </div>
-            </div>
-          </div>
-        </article>
-        <!-- ─── Banana Bread El Guapo ─── -->
-        <article class="recipe-card" id="bolo-banana-bread-el-guapo">
-          <div class="rc-head" role="button" tabindex="0" aria-expanded="false">
             <div class="rc-head-main">
               <h3 class="rc-name">Banana Bread El Guapo</h3>
               <div class="rc-chips">
@@ -4434,16 +2579,10 @@
                 <span class="rc-meta-value">20 min + 50–60 min forno</span>
               </div>
             </div>
-            <span class="rc-toggle" aria-hidden="true">+</span>
+            <span class="rc-toggle" aria-hidden="true"><img src="assets/icons/arrow-up-right.svg" alt="" width="22" height="22" /></span>
           </div>
           <div class="rc-body">
-            <div class="rc-image">
-              <img
-                src="images/el-guapo-img-12.webp"
-                loading="lazy"
-                alt="Banana Bread El Guapo"
-              />
-            </div>
+
             <div class="rc-body-inner">
               <div class="rc-ingredients">
                 <span class="rc-col-label">Composição</span>
@@ -4782,25 +2921,17 @@
       </div>
     </section>
 
-    <!-- ═══ BOTÃO ÍNDICE PERSISTENTE ═══ -->
-    <a href="#top" class="idx-btn" id="idx-btn" aria-label="Voltar ao índice"
-      >↑ Índice</a
-    >
-
-    <!-- ═══ RODAPÉ ═══ -->
-    <footer class="footer">
-      <div class="footer-left">
-        <span class="footer-brand">El Guapo</span>
-        <span class="footer-sub"
-          >Heuller &amp; Gabriela · Ribeirão Preto, SP</span
-        >
-        <span class="footer-version" id="footer-date"></span>
       </div>
-      <span class="footer-version"
-        >Caderno de Receitas · Uso Interno · v2.1</span
-      >
+    </main>
+    <footer class="footer">
+      <div class="footer-left"><a class="footer-brand" href="#top">El Guapo</a><span class="footer-sub">Heuller &amp; Gabriela · Ribeirão Preto, SP</span></div>
+      <p>Para quem ama a boa cozinha.</p><span class="footer-version" id="footer-date"></span>
     </footer>
-
+    <nav class="mobile-nav" aria-label="Atalhos de navegação">
+      <a href="#top"><img src="assets/icons/house.svg" alt="" width="22" height="22" /><span>Início</span></a>
+      <a href="#catalogo"><img src="assets/icons/book-open.svg" alt="" width="22" height="22" /><span>Receitas</span></a>
+      <button type="button" data-open-shopping><img src="assets/icons/shopping-bag.svg" alt="" width="22" height="22" /><span>Compras</span></button>
+    </nav>
     <!-- ═══ SCRIPTS ═══ -->
     <!-- ═══ MODAL PARA MISE EN PLACE E LISTA DE COMPRAS ═══ -->
     <div id="modal-overlay" class="modal-overlay" aria-hidden="true">
@@ -4888,6 +3019,9 @@
       aria-label="Temporizadores ativos"
     ></div>
 
+    <script src="ingredient-catalog.js"></script>
+    <script src="shopping-model.js"></script>
+    <script src="shopping-list.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
