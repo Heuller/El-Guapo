@@ -1,117 +1,105 @@
-# Auditoria comparativa — El Guapo / Doce Contemporâneo
+# Cacau & Vinho — revisão exclusiva do tema escuro
 
-**Resultado:** validação visual aprovada após duas rodadas de ajustes. Nenhuma divergência crítica ou importante permanece aberta nos estados examinados. As capturas finais estão disponíveis para revisão do usuário; nenhuma alteração foi publicada.
+**Resultado técnico: aprovado para revisão visual do usuário.** O novo tema está apenas no espaço de trabalho. Não houve commit, push ou publicação nesta revisão. O tema claro aprovado foi preservado.
 
-## Referência e método
+## Fonte e evidências
 
-Referência original: [docs/design-reference/doce-contemporaneo.jpg](docs/design-reference/doce-contemporaneo.jpg), recebida como `701475.jpg`. Embora descrita na mensagem como PNG, o arquivo recebido é JPEG, de **1280 × 848 pixels**; foi preservado sem conversão. SHA-256: `a4fbe9c8c6cc280b77d1fac2d53b38489564713499250c64698b928e490fa5fc`.
+- Referência: [Cacau & Vinho](docs/design-reference/cacau-vinho.jpg), arquivo original `701512.jpg`, **1280 × 853 px**, preservado sem edição.
+- Relatório anterior do tema claro: [arquivo histórico](docs/design-qa-doce-contemporaneo.md).
+- Capturas anteriores: `test-results/cacau-vinho/before/{light,dark}/`. O roteiro usa a versão publicada `9b144bb` como base do HTML e service worker.
+- Capturas finais: `test-results/cacau-vinho/after/{light,dark}/`.
+- Chromium local, perfis isolados, fontes e imagens completamente carregadas. Mobile **390 × 844**, tablet **820 × 1180**, desktop **1440 × 1000 CSS px**; screenshots nas mesmas dimensões, deviceScaleFactor **1**. Responsividade e posição do CTA também testadas a **320 px**.
+- 42 capturas por rodada: sete estados, três viewports e dois temas. Estados: início, descoberta, grade de cartões, receita aberta, compras, total de compras e modo cozinha com a primeira etapa efetivamente carregada.
+- Sem molduras de celular no produto. Nos comparativos, apenas os recortes da referência excluem as molduras; são redimensionados proporcionalmente. A referência comunica linguagem visual, não um layout com medidas exatas.
 
-O bloqueio anterior de comparação foi resolvido com esse arquivo. O [relatório anterior](docs/design-qa-before-reference.md) foi arquivado como histórico, não representa o resultado atual.
+## Comparativos conjuntos inspecionados
 
-As capturas anteriores, explicitamente indicadas pelo usuário, foram abertas e preservadas em `test-results/redesign/before/`. A auditoria comparou essas capturas com a imagem original **no mesmo arquivo de comparação**, antes das correções. Novas capturas foram feitas no Chromium local após cada rodada. As composições finais foram abertas e inspecionadas, incluindo detalhes de alimentos, texto e controles.
+Cada arquivo reúne a referência, o tema escuro anterior, a nova implementação e o tema claro. Os arquivos foram abertos antes da conclusão. As comparações de desktop reúnem os dois temas no mesmo viewport e estado. O painel de componentes permite ler cartões, campos, totais e navegação do modo cozinha em escala maior.
 
-A prancha contém três celulares em perspectiva e não especifica uma interface desktop. Os recortes da referência foram retificados apenas nas evidências, sem alterar imagens do aplicativo. Não se reproduziram molduras, inclinações, adesivos ou o fundo publicitário. Não se apresenta esta avaliação como um comparativo de pixels idênticos.
+- [Mobile — início](test-results/cacau-vinho/comparisons/mobile-home.png)
+- [Mobile — catálogo](test-results/cacau-vinho/comparisons/mobile-catalog.png)
+- [Mobile — receita aberta](test-results/cacau-vinho/comparisons/mobile-recipe.png)
+- [Desktop — claro e escuro, início e receita](test-results/cacau-vinho/comparisons/desktop-themes.png)
+- [Detalhes — cartões, compras e modo cozinha](test-results/cacau-vinho/comparisons/night-components.png)
 
-### Normalização
+![Referência, antes, Cacau & Vinho e claro aprovado — início](test-results/cacau-vinho/comparisons/mobile-home.png)
 
-| Artefato | Dimensões e tratamento |
-|---|---|
-| Prancha original | 1280 × 848 px; cópia integral preservada |
-| Conteúdo das três telas da referência | Retificação por quadriláteros para 350 × 800 px, removendo a maior parte das molduras; coordenadas em `scripts/compare-redesign.py` |
-| Mobile da aplicação | 390 × 844 CSS px; screenshot 390 × 844 px; deviceScaleFactor 1 |
-| Tablet da aplicação | 820 × 1180 CSS px; screenshot 820 × 1180 px; deviceScaleFactor 1 |
-| Desktop da aplicação | 1440 × 1000 CSS px; screenshot 1440 × 1000 px; deviceScaleFactor 1 |
-| Largura adicional | Controles e overflow testados a 320 px |
-| Composições | Mobile 1500 × 980; desktop 1750 × 1180; detalhes 1280 × 960 px. Painéis reduzidos proporcionalmente, sem deformar screenshots |
+![Referência e temas — catálogo](test-results/cacau-vinho/comparisons/mobile-catalog.png)
 
-A ampliação dos recortes não recupera detalhes perdidos no JPEG. As proporções, cores e fontes foram avaliadas como linguagem visual; não foram inventadas medidas exatas de margens ou nomes de fontes a partir da prancha.
+![Referência e temas — receita](test-results/cacau-vinho/comparisons/mobile-recipe.png)
 
-## Evidências lado a lado
+![Comparação desktop entre temas](test-results/cacau-vinho/comparisons/desktop-themes.png)
 
-- Antes: [mobile](test-results/redesign/comparisons/mobile-before.png) · [desktop](test-results/redesign/comparisons/desktop-before.png) · [detalhes](test-results/redesign/comparisons/details-before.png).
-- Após a primeira rodada: [mobile](test-results/redesign/comparisons/mobile-after.png) · [desktop](test-results/redesign/comparisons/desktop-after.png). Capturas individuais dessa rodada em `test-results/redesign/iteration-1/`.
-- Finais: [mobile](test-results/redesign/comparisons/mobile-final.png) · [desktop](test-results/redesign/comparisons/desktop-final.png) · [detalhes de receita e alimentos](test-results/redesign/comparisons/details-final.png).
+![Detalhes dos componentes noturnos](test-results/cacau-vinho/comparisons/night-components.png)
 
-![Referência e interface mobile — comparativo final](test-results/redesign/comparisons/mobile-final.png)
+## Achados e correções
 
-![Referência e adaptação desktop — comparativo final](test-results/redesign/comparisons/desktop-final.png)
-
-![Detalhes de tipografia, alimentos, cartões e receita](test-results/redesign/comparisons/details-final.png)
-
-## Classificação das divergências
-
-Crítica = bloqueia uso, esconde controles essenciais ou compromete seriamente a apresentação. Importante = altera a hierarquia, a personalidade ou a clareza dos componentes. Cosmética = diferença pequena ou adaptação intencional, sem prejuízo de uso.
-
-**Críticas: nenhuma identificada.**
-
-| ID / gravidade | Evidência anterior e impacto | Correção e evidência final |
+| Prioridade | Antes / impacto | Correção e evidência final |
 |---|---|---|
-| I1 — importante / P1 | No comparativo mobile anterior, o título e o CTA antecediam uma ilustração menor e encaixotada. A abertura parecia uma landing page genérica, enquanto a referência apresenta o alimento como protagonista. | No celular, ilustração de 300 px de altura antes do título; receita identificada com link discreto. CTA permanece visível no viewport de 390 × 844. Ver `mobile-final.png` e `mobile-home.png`. |
-| I2 — importante / P1 | Hero com grande superfície blush e um segundo cartão branco ao redor da imagem; na receita, branco da imagem contrastava com a área cream. O alimento parecia um asset inserido em caixas sucessivas. | Hero e capa de receita em superfície branca contínua, molduras e divisores reduzidos; imagens originais inteiras. No modo escuro, área branca com cantos suaves é intencional para preservar a arte. Ver comparativos mobile, desktop e detalhes finais. |
-| I3 — importante / P2 | O catálogo começava diretamente na grade; faltava o destaque horizontal, um dos componentes mais reconhecíveis da referência. A composição ficava uniforme e repetitiva. | “Destaque da vez” com Prestígio real, superfície pêssego, ilustração e texto em duas colunas. Abre a receita existente e desaparece com busca/filtro ativo, evitando contradizer os resultados. Ver `mobile-catalog.png`. |
-| I4 — importante / P2 | A receita desktop tinha uma grande faixa vazia à direita e o botão de cozinhar abaixo da imagem, distante do título. | Capa compartilhada com ilustração à esquerda e título, chips, composição e CTA à direita. Botão independente do controle de expansão, com hit-test e Enter verificados. No celular, segue abaixo do conteúdo introdutório. Ver `desktop-recipe.png` e `mobile-recipe.png`. |
-| I5 — importante / P2 | Itálico de destaque em coral muito escuro e navegação mobile monocromática reduziam a vivacidade da referência. | Coral `#D14943` apenas em títulos grandes, preservando contraste; seleção mobile usa mostarda com ícone escuro e rótulo legível. Textos pequenos mantêm variantes escuras. Ver comparativo mobile final. |
-| I6 — importante / P2, detectada na primeira rodada | A alteração de composição expôs legenda clara sobre área branca no modo escuro; o filtro do ícone invertia também seu realce amarelo. Evidência: `iteration-1/mobile-dark.png`. | Legenda escura independente do tema; ícone ativo não passa por inversão. Área da ilustração com cantos suaves. Evidência: `mobile-dark.png`; cores e filtro verificados no teste de interface. |
+| P1 — imagens | Branco das ilustrações encostava diretamente nos blocos escuros, com integração fraca entre foto e texto. | Áreas brancas editoriais com passe-partout creme em hero, destaque e cartões. Nome/link sobre rodapé creme no hero. O branco dos arquivos não foi removido nem tingido. Ver comparativos de início, catálogo e receita. |
+| P1 — hierarquia noturna | Muitas superfícies se confundiam num mesmo vinho; a identidade dependia quase exclusivamente da mudança de fundo. | Tokens separados para fundo cacau, navegação, cartões vinho, áreas rebaixadas e superfícies elevadas. Creme, coral e dourado recuperam a hierarquia editorial. Ver comparação desktop e painel de componentes. |
+| P2 — altura do hero mobile | Ilustração de 300 px e bloco externo prolongavam a entrada até o CTA. | Somente no escuro, imagem de 230 px, margens ajustadas e retirada do grande bloco externo no celular. CTA acima da navegação em 320 e 390 px. Ver início mobile. |
+| P2 — fechar receita | Ícone claro sobre o branco da imagem tinha pouca visibilidade. | Controle de fechar com área vinho circular e ícone claro, independente da arte. Ver receita mobile. |
+| P2 — controles e foco | Bordas, campos e estados ativos não tinham um sistema noturno consistente. | Campos elevados, bordas identificáveis, seleção coral, navegação dourada e foco de teclado visível. Ver catálogo, compras e testes de contraste. |
+| P2 — modo cozinha | A primeira captura revelou contador de progresso sobreposto aos botões. | Rodapé noturno em duas linhas: botões na primeira, progresso na segunda. Conteúdo em superfície vinho, sem alterar etapas. Captura final mostra texto carregado e controles separados. |
 
-## Fidelidade por superfície
+Não restam achados P0/P1/P2 abertos nos estados examinados. A aceitação estética final pertence ao usuário.
 
-| Superfície | Avaliação final |
-|---|---|
-| Cores | Wine, Coral, Mustard, Blush e Cream do briefing permanecem nos tokens. O destaque pêssego e a mostarda recuperam a personalidade sem usar o rosa do fundo publicitário como fundo geral. Amostras aproximadas dos círculos do JPEG: vinho `#4C2433`, coral `#FA695D`, mostarda `#F0B257`, cream `#FCF1E9`; pequenas diferenças para os tokens escritos são esperadas pela compressão e tratamento da prancha. |
-| Tipografia | Fraunces local em títulos e itálicos; DM Sans local na interface. Hierarquia e alternância serifada/sem serifa correspondem à direção. Família exata da prancha não é comprovável; a equivalência é aceita, conforme o briefing original. Títulos reais quebram linhas sem truncamento nos viewports examinados. |
-| Proporções e espaçamentos | Mobile prioriza alimento, título e ação; descoberta distingue destaque e grade. Desktop usa largura disponível em duas colunas, sem ampliar uma tela de telefone. Os comparativos finais mostram menos caixas e melhor proximidade entre título e CTA. |
-| Cartões | Grade com bordas discretas, alimento inteiro e nome legível. Destaque pêssego diferencia a descoberta. Chips de composição usam blush e informação real. Não se acrescentaram etiquetas fictícias de “Novo” ou avaliações. |
-| Navegação | Atalhos existentes de Início, Receitas e Compras preservados. Seleção mobile clara com mostarda e `aria-current`; navegação desktop com estado ativo. Favoritos e menus fictícios não foram acrescentados. |
-| Ilustrações | Todas as 14 imagens originais permanecem byte a byte, comprovadas por SHA-256. `object-fit: contain`, sem filtros nos alimentos, sem recortes de pratos, deformações ou substituições. O branco da arte se integra à área branca da interface clara. As sombras são as originais das ilustrações. |
-| Conteúdo | Catálogo, fórmulas, nomes, unidades, etapas e regras de compras preservados. A referência de bolo com cerejas não virou uma receita fictícia; as imagens fornecidas continuam associadas ao catálogo aprovado. |
+## Superfícies de fidelidade
 
-### Contraste e acessibilidade observável
+**Tipografia e conteúdo:** Fraunces e DM Sans locais permanecem idênticas às do tema claro. Nome “El Guapo”, slogan oficial e texto de apoio preservados. Creme nos títulos, coral nos itálicos e dourado em rótulos e estados ativos. Nenhuma receita, medida, etapa ou regra de compra foi alterada.
 
-Texto de ações coral usa `#3F1C29`, mais escuro que Wine; texto pequeno coral usa `#A53535`; o novo coral expressivo é restrito aos títulos grandes. Neutro `#775C65` sobre cream tem 5,90:1; dourado escuro sobre blush, 6,16:1. Controles conservam foco visível, nomes acessíveis e áreas de toque existentes. Imagens têm texto alternativo. Movimento reduzido, teclado e retorno de foco dos modais permanecem verificados.
+**Espaçamento e proporções:** entrada mais curta no mobile noturno; no desktop, apresentação editorial em duas colunas. Busca, filtros e botões mantêm áreas de toque e hierarquia. Cartões separam a área clara da ilustração e a legenda vinho. Sem overflow nas capturas mobile, tablet e desktop ou nos testes adicionais a 320 px.
 
-Não se afirma conformidade integral de acessibilidade com base nas imagens. Leitor de tela, zoom do navegador e dispositivos físicos não foram avaliados nesta rodada.
+**Cores e tokens:** `dark-theme.css` contém exclusivamente seletores ligados a `html.candlelight`. Fundo `#241B20`; navegação `#2E2229`; cartão `#392A31`; área rebaixada `#30242B`; superfície elevada `#49353E`; texto `#F8EDE5`; secundário `#D6BFC4`; coral `#F08A82`; dourado `#DBB476`. Não há fundo preto puro. Bordas e campos usam tons intermediários, sem blur ou gradientes adicionados.
 
-## Diferenças cosméticas e adaptações aceitas
+**Imagens:** arquivos originais e associações do catálogo preservados. `object-fit: contain`, `opacity: 1`, `filter: none`, `mix-blend-mode: normal` verificados nas ilustrações. A moldura creme é uma superfície ao redor do arquivo, não uma transformação da imagem. Filtros de contraste existentes nos ícones da interface não são aplicados a alimentos.
 
-- **C1 / P3:** wordmark textual existente preservado. Não foi redesenhado o logotipo para imitar a combinação dourada da prancha; isso exigiria uma decisão de marca separada.
-- **C2 / P3:** fonte equivalente sugerida pelo briefing, sem alegar identificação exata da fonte da imagem. Peso, itálico, hierarquia e contraste foram priorizados.
-- **C3 / P3:** ícones Lucide uniformes e alvos de toque maiores que os controles minúsculos da prancha. Legibilidade e funcionamento prevalecem sobre a densidade publicitária.
-- Adaptação intencional: abertura e catálogo integram a mesma página, receitas expandem no acervo e desktop usa colunas. São decisões coerentes com a arquitetura existente; não são telas fictícias nem molduras de apresentação.
-- Adesivo “Hmm!”, estrelas, inclinações e sombras de celulares não foram reproduzidos. A personalidade vem da comida, tipografia, cores e ritmo editorial.
+**Componentes:** cabeçalho e navegação inferior com superfícies próprias; campos e filtros distinguem estados; ingredientes, método e notas usam níveis de superfície; compras mantêm totais e controles; modo cozinha tem texto e navegação legíveis. O tema continua associado à preferência existente `eg-candlelight`.
 
-## Fluxo examinado e saúde final
+## Preservação do claro
 
-1. **Início — aprovado:** ilustração protagonista, hierarquia editorial, chamada clara e imagem sem caixa interna excessiva. Captura: [mobile](test-results/redesign/mobile-home.png), [desktop](test-results/redesign/desktop-home.png).
-2. **Descoberta — aprovado:** busca, filtros, destaque e grade têm hierarquia distinta; destaque respeita filtros e abre receita real. Captura: [mobile](test-results/redesign/mobile-catalog.png), [tablet](test-results/redesign/tablet-catalog.png).
-3. **Receita — aprovado:** alimento completo, título, composição e ação próximos; conteúdo e controles de receita preservados. Captura: [mobile](test-results/redesign/mobile-recipe.png), [desktop](test-results/redesign/desktop-recipe.png).
-4. **Compras e tema — aprovado nos cenários testados:** lista, valores e foco dos modais preservados; tema escuro sem alterar a aparência dos alimentos. Capturas: [compras](test-results/redesign/mobile-shopping.png), [escuro](test-results/redesign/mobile-dark.png).
+`style.css`, `script.js` e `content/recipes.json` são **byte a byte idênticos** aos da versão publicada `9b144bb`. A mudança no HTML é de carregamento: novo stylesheet escuro e URLs de versão, sem alteração do conteúdo.
 
-## Histórico de validação
+A comparação de **21 estados claros correspondentes** encontrou **zero diferenças** nos estilos calculados, cores, tipografia e dimensões dos seletores examinados. Evidência: [light-preservation.json](test-results/cacau-vinho/comparisons/light-preservation.json). Um teste adicional desabilita o novo stylesheet no tema claro e confirma que a apresentação permanece igual. Não se afirma identidade binária de todas as capturas PNG: rasterização de imagens e barras de rolagem do navegador podem variar entre execuções.
 
-- Rodada inicial: comparação dos artefatos anteriores com o original em arquivos conjuntos. I1–I5 identificadas; resultado ainda bloqueado para QA visual.
-- Primeira correção: composição, destaque, superfícies, capa de receita e acentos ajustados. Novas capturas comparadas com a referência (`*-after.png`); I6 detectada no modo escuro.
-- Segunda correção: contraste da legenda, realce noturno e escala do alimento no mobile ajustados. Novas capturas no mesmo viewport/estado; comparativos `*-final.png` e detalhes inspecionados. Nenhuma divergência P0/P1/P2 permaneceu aberta.
-- `npm run check`: passou. `npm test`: **70/70 passaram**, incluindo os dois testes novos de destaque/filtros e composição/acesso ao modo cozinha. Testes existentes cobrem fórmulas, imagens, compras, preços, escala, foco, persistência e offline.
-- 320, 390, 820 e 1440 px: verificações sem overflow horizontal. 390, 820 e 1440 px: capturas finais renderizadas; todas as 14 ilustrações carregadas; fontes locais carregadas. Zero erros de execução/console nos cenários de captura e testes novos.
-- Service worker v3.1 para invalidar a apresentação anterior. Chaves de dados e regras de negócio não foram alteradas.
-- `git diff --check`: passou. Sem commit, push ou publicação.
+## Contraste medido
 
-## Reprodução e checklist
+| Combinação | Razão |
+|---|---:|
+| Texto creme / fundo cacau | 14,56:1 |
+| Texto creme / cartão vinho | 11,77:1 |
+| Texto secundário / cartão | 7,81:1 |
+| Coral / cartão | 5,59:1 |
+| Texto escuro / botão coral | 6,29:1 |
+| Dourado / fundo | 8,62:1 |
+| Borda do campo / busca | 4,10:1 |
 
-Requer Node/Chromium para testes e capturas; Pillow para compor evidências. Nenhuma dependência foi adicionada ao aplicativo.
+Os pares de texto testados superam 4,5:1; a borda testada supera 3:1. O foco foi percorrido por teclado e verificado como visível. Disabled possui tratamento distinto e não foi contado como texto ativo. Estas verificações não constituem auditoria integral WCAG: leitor de tela, dispositivos físicos e todas as combinações possíveis de dados não foram testados.
+
+## Histórico e validação
+
+1. Registrados os dois temas da versão publicada antes da alteração.
+2. Implementado stylesheet independente, sem tocar o CSS claro, scripts de negócio ou dados.
+3. Primeira revisão de capturas: ajustado o rodapé do modo cozinha e corrigido o roteiro para esperar a etapa carregar antes de fotografar.
+4. Capturadas novamente as mesmas telas; comparativos conjuntos e detalhes abertos e revisados. Resultado final sem divergência importante pendente.
+5. **77 testes passaram**, incluindo persistência após recarga, retorno ao claro, isolamento do CSS noturno, contraste, foco, posicionamento do CTA, apresentação dos alimentos, rodapé do modo cozinha e funcionamento noturno offline. A suíte existente continua validando receitas, imagens originais, compras, preços, escala e atualização de cache legado.
+6. Zero erros de execução/console nas capturas finais e nos testes específicos. Sintaxe e diff verificados.
+
+Service worker e URLs de entrada preparados como **v3.4** para que uma futura publicação não reutilize arquivos de versões anteriores. O stylesheet noturno está no precache. Nada foi enviado ao GitHub ou à Vercel nesta revisão.
+
+Reprodução:
 
 ```bash
 npm run check
 npm test
-node scripts/capture-redesign.mjs
-python3 scripts/compare-redesign.py final
+node scripts/capture-themes.mjs before
+node scripts/capture-themes.mjs after
+python3 scripts/compare-night.py
 ```
 
-- [x] Original e capturas anteriores abertos.
-- [x] Comparativos conjuntos mobile, desktop e detalhes criados e inspecionados.
-- [x] Divergências classificadas e importantes corrigidas.
-- [x] Novas capturas, teste funcional completo e revisão após correções.
-- [x] Report atualizado, inclusive limitações e diferenças aceitas.
-- [ ] Publicação — não solicitada; permanece para decisão posterior do usuário.
+As capturas `before` usam `9b144bb`; os roteiros exigem Chromium e, para compor evidências, Pillow. Nenhuma biblioteca foi adicionada à aplicação.
+
+**Checklist:** referência aberta; início/catálogo/receita capturados nos dois temas; detalhes de componentes inspecionados; claro preservado; testes concluídos; alterações aguardando revisão visual, sem publicação.
 
 final result: passed

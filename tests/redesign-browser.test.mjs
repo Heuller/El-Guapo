@@ -68,7 +68,7 @@ test('the updated offline cache includes every local illustration, font and navi
  await app.evaluate(`navigator.serviceWorker.ready`);
  await app.wait(`!!navigator.serviceWorker.controller`);
  const expected=await readFile(new URL('../content/recipe-images.json',import.meta.url),'utf8');
- const cached=await app.evaluate(`caches.open('el-guapo-v3.3').then(c=>c.keys()).then(keys=>keys.map(k=>new URL(k.url).pathname))`);
+ const cached=await app.evaluate(`caches.open('el-guapo-v3.5').then(c=>c.keys()).then(keys=>keys.map(k=>new URL(k.url).pathname))`);
  for(const image of JSON.parse(expected)) assert.ok(cached.includes('/'+image.src),image.src);
  for(const path of ['/assets/fonts.css','/assets/fonts/fraunces-600-normal.ttf','/assets/icons/house.svg']) assert.ok(cached.includes(path),path);
  await app.send('Network.emulateNetworkConditions',{offline:true,latency:0,downloadThroughput:0,uploadThroughput:0});
@@ -92,7 +92,7 @@ test('food leads the mobile welcome and the desktop kitchen action stays visible
  await app.send('Emulation.setDeviceMetricsOverride',{width:390,height:844,deviceScaleFactor:1,mobile:true});
  assert.equal(await app.evaluate(`document.querySelector('.hero-food').getBoundingClientRect().bottom<document.querySelector('#welcome-title').getBoundingClientRect().top`),true);
  await app.evaluate(`document.querySelector('.candle-toggle').click()`);
- assert.equal(await app.evaluate(`getComputedStyle(document.querySelector('.hero-caption strong')).color`),'rgb(63, 28, 41)');
+ assert.equal(await app.evaluate(`getComputedStyle(document.querySelector('.hero-caption strong')).color`),'rgb(74, 37, 50)');
  assert.equal(await app.evaluate(`getComputedStyle(document.querySelector('.mobile-nav [aria-current] img')).filter`),'none');
  await app.evaluate(`document.querySelector('.candle-toggle').click()`);
  await app.send('Emulation.setDeviceMetricsOverride',{width:1440,height:1000,deviceScaleFactor:1,mobile:false});

@@ -110,3 +110,17 @@ Entradas CSS/JS agora usam URLs versionadas (`?v=3.3`), com os mesmos endereços
 Validação: 72 testes aprovados, incluindo troca de CSS legado para o atual em uma única recarga com worker antigo ainda ativo, preservação de dados locais e impedimento de ativação com precache incompleto. Evidências em `test-results/cache-update/legacy-broken.png` e `upgraded-mobile.png`. Sintaxe e diff passaram.
 
 Em próximas versões, atualizar conjuntamente o identificador das URLs CSS/JS no HTML e precache e a versão dos caches. Não reutilizar URLs de arquivos de entrada alterados entre versões da aplicação.
+
+## Tema noturno Cacau & Vinho — revisão local, sem publicação
+
+Criado `dark-theme.css`, inteiramente limitado a `html.candlelight`, com cacau, vinho, creme, coral e dourado. Áreas claras emolduram as ilustrações originais, sem filtros ou transparência. Hero mobile noturno mais curto; navegação, catálogo, receita, compras e modo cozinha revisados. Progresso do modo cozinha ocupa uma linha própria no tema escuro.
+
+`style.css`, `script.js` e dados de receitas permanecem idênticos aos publicados. 21 estados claros comparados sem diferença de estilos/dimensões; teste confirma que desabilitar o novo stylesheet não altera o tema claro. 77 testes passaram, incluindo contraste, foco, preferência persistente e offline. Evidências e comparativos em `test-results/cacau-vinho/`, descritos no novo `design-qa.md`. Relatório anterior preservado em `docs/design-qa-doce-contemporaneo.md`.
+
+HTML e precache preparados com URLs v3.4 e stylesheet noturno, respeitando a correção de cache legado. Sem commit, push ou deploy; aguardando a revisão das capturas pelo usuário.
+
+## Interruptor animado de tema
+
+Substituído o controle anterior por checkbox nativo com role switch, baseado no componente de RiccardoRapelli/Uiverse (MIT, atribuição no código). Desenho 60×34 px dentro de área interativa 60×44 px. CSS isolado em `theme-switch.css`; sol, lua, crateras, raios, nuvens e estrelas preservados, com rotação definida e movimento reduzido respeitado. Mantida a chave `eg-candlelight`; checked deriva do tema real. Preferência aplicada no head antes da renderização. URLs/precache preparados em v3.5, sem publicação.
+
+77 testes existentes passaram; teste específico adicional verifica dimensões, Espaço, persistência e movimento reduzido. Capturas dos cabeçalhos em `test-results/theme-switch/`, mobile e desktop nos dois estados. Licença original consultada em https://uiverse.io/RiccardoRapelli/jolly-chicken-91 e preservada em `assets/licenses/`.

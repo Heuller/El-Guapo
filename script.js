@@ -918,26 +918,38 @@
     const nav = document.querySelector(".nav");
     if (!nav) return;
 
-    const candleBtn = document.createElement("button");
-    candleBtn.className = "candle-toggle";
-    candleBtn.title = "Modo Luz de Vela";
-    candleBtn.innerHTML = `<img src="assets/icons/sun.svg" alt="" width="19" height="19" />`;
-    candleBtn.setAttribute("aria-label", "Alternar modo luz de vela");
+    // Adapted from Uiverse.io by RiccardoRapelli: jolly-chicken-91 (MIT).
+    const candleBtn = document.createElement("input");
+    candleBtn.type = "checkbox";
+    candleBtn.id = "el-guapo-theme-input";
+    candleBtn.className = "candle-toggle eg-ts-input";
+    candleBtn.setAttribute("role", "switch");
+    candleBtn.setAttribute("aria-label", "Alternar tema claro e escuro");
+    const switchLabel = document.createElement("label");
+    switchLabel.className = "el-guapo-theme-switch";
+    switchLabel.htmlFor = candleBtn.id;
+    const decoration = document.createElement("span");
+    decoration.className = "eg-ts-slider";
+    decoration.setAttribute("aria-hidden", "true");
+    decoration.innerHTML = `<span class="eg-ts-sun-moon"><svg class="eg-ts-moon-dot" style="left:10px;top:3px;width:6px;height:6px" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"/></svg><svg class="eg-ts-moon-dot" style="left:2px;top:10px;width:10px;height:10px" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"/></svg><svg class="eg-ts-moon-dot" style="left:16px;top:18px;width:3px;height:3px" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"/></svg><svg class="eg-ts-light-ray" style="left:-8px;top:-8px;width:43px;height:43px" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"/></svg><svg class="eg-ts-light-ray" style="left:-14px;top:-14px;width:55px;height:55px" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"/></svg><svg class="eg-ts-light-ray" style="left:-18px;top:-18px;width:60px;height:60px" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"/></svg><svg class="eg-ts-cloud-dark" style="left:30px;top:15px;width:40px;height:40px" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"/></svg><svg class="eg-ts-cloud-dark" style="left:44px;top:10px;width:20px;height:20px" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"/></svg><svg class="eg-ts-cloud-dark" style="left:18px;top:24px;width:30px;height:30px" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"/></svg><svg class="eg-ts-cloud-light" style="left:36px;top:18px;width:40px;height:40px" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"/></svg><svg class="eg-ts-cloud-light" style="left:48px;top:14px;width:20px;height:20px" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"/></svg><svg class="eg-ts-cloud-light" style="left:22px;top:26px;width:30px;height:30px" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"/></svg></span><span class="eg-ts-stars"><svg class="eg-ts-star" style="left:3px;top:2px;width:20px;height:20px;animation-delay:0.3s" viewBox="0 0 20 20"><path d="M0 10 C10 10 10 10 0 10 C10 10 10 10 10 20 C10 10 10 10 20 10 C10 10 10 10 10 0 C10 10 10 10 0 10Z"/></svg><svg class="eg-ts-star" style="left:3px;top:16px;width:6px;height:6px;animation-delay:0s" viewBox="0 0 20 20"><path d="M0 10 C10 10 10 10 0 10 C10 10 10 10 10 20 C10 10 10 10 20 10 C10 10 10 10 10 0 C10 10 10 10 0 10Z"/></svg><svg class="eg-ts-star" style="left:10px;top:20px;width:12px;height:12px;animation-delay:0.6s" viewBox="0 0 20 20"><path d="M0 10 C10 10 10 10 0 10 C10 10 10 10 10 20 C10 10 10 10 20 10 C10 10 10 10 10 0 C10 10 10 10 0 10Z"/></svg><svg class="eg-ts-star" style="left:18px;top:0px;width:18px;height:18px;animation-delay:1.3s" viewBox="0 0 20 20"><path d="M0 10 C10 10 10 10 0 10 C10 10 10 10 10 20 C10 10 10 10 20 10 C10 10 10 10 10 0 C10 10 10 10 0 10Z"/></svg></span>`;
+    switchLabel.append(candleBtn, decoration);
 
     // Insere o botão no nav, antes dos links ou no final se não houver links
     const navLinks = nav.querySelector(".nav-links");
     if (navLinks) {
-      navLinks.before(candleBtn);
+      navLinks.before(switchLabel);
     } else {
-      nav.appendChild(candleBtn);
+      nav.appendChild(switchLabel);
     }
 
     const isDark = localStorage.getItem("eg-candlelight") === "true";
     if (isDark) document.documentElement.classList.add("candlelight");
+    candleBtn.checked = isDark;
     candleBtn.setAttribute("aria-pressed", String(isDark));
 
-    candleBtn.addEventListener("click", () => {
-      const active = document.documentElement.classList.toggle("candlelight");
+    candleBtn.addEventListener("change", () => {
+      const active = candleBtn.checked;
+      document.documentElement.classList.toggle("candlelight", active);
       localStorage.setItem("eg-candlelight", active);
       candleBtn.setAttribute("aria-pressed", String(active));
       if (navigator.vibrate) navigator.vibrate(10);

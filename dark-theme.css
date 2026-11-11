@@ -1,0 +1,294 @@
+/* Cacau & Vinho. Every declaration is scoped to the existing night preference.
+   The approved light stylesheet and original food artwork remain untouched. */
+html.candlelight {
+  color-scheme: dark;
+  --night-bg: #241B20;
+  --night-nav: #2E2229;
+  --night-surface: #392A31;
+  --night-inset: #30242B;
+  --night-raised: #49353E;
+  --night-text: #F8EDE5;
+  --night-muted: #D6BFC4;
+  --night-placeholder: #C4A8B1;
+  --night-border: #765863;
+  --night-border-soft: #5C424D;
+  --night-control-border: #A8848E;
+  --night-coral: #F08A82;
+  --night-gold: #DBB476;
+  --night-photo-mat: #F8EDE5;
+  --night-photo-white: #FFFFFF;
+  --night-on-photo: #4A2532;
+  --night-on-action: #351F27;
+  --cream: var(--night-bg);
+  --blush: var(--night-surface);
+  --rose: var(--night-raised);
+  --white: var(--night-photo-white);
+  --wine: var(--night-text);
+  --ink: var(--night-text);
+  --ink-soft: var(--night-muted);
+  --coral: var(--night-coral);
+  --coral-ink: var(--night-coral);
+  --display-accent: var(--night-coral);
+  --mustard: var(--night-gold);
+  --mustard-ink: var(--night-gold);
+  --terra: var(--night-coral);
+  --terra-light: var(--night-gold);
+  --dark: var(--night-inset);
+  --dark-warm: var(--night-raised);
+  --feature-surface: var(--night-raised);
+  --line: var(--night-border);
+  --line-faint: var(--night-border-soft);
+  --action-ink: var(--night-on-action);
+  --focus-outline: 3px solid var(--night-gold);
+}
+
+html.candlelight .nav,
+html.candlelight .mobile-nav {
+  background: var(--night-nav);
+  border-color: var(--night-border-soft);
+}
+html.candlelight .nav-btn-shopping,
+html.candlelight .candle-toggle {
+  background: var(--night-surface);
+  border: 1px solid var(--night-border);
+  color: var(--night-text);
+}
+html.candlelight .candle-toggle[aria-pressed="true"] {
+  border-color: var(--night-gold);
+}
+html.candlelight .hero {
+  background: var(--night-surface);
+  border: 1px solid var(--night-border-soft);
+  min-height: 490px;
+  padding: 32px 36px;
+  gap: 44px;
+}
+/* The cream mat frames an untouched white image canvas; it never tints the food. */
+html.candlelight .hero-feature {
+  background: var(--night-photo-white);
+  border: 8px solid var(--night-photo-mat);
+  border-radius: 24px;
+}
+html.candlelight .hero-food { height: 340px; }
+html.candlelight .hero-caption {
+  background: var(--night-photo-mat);
+  color: var(--night-on-photo);
+  padding: 12px 10px 5px;
+}
+html.candlelight .hero-caption strong { color: var(--night-on-photo); }
+html.candlelight .hero-caption .eyebrow { color: var(--gold-ink); }
+html.candlelight .hero-caption:focus-visible {
+  outline-color: var(--night-on-photo);
+  outline-offset: -3px;
+}
+html.candlelight .hero-signoff { color: var(--night-muted); }
+html.candlelight .search-wrap {
+  background: var(--night-surface);
+  border-color: var(--night-control-border);
+}
+html.candlelight .search-wrap:focus-within {
+  outline-color: var(--night-gold);
+}
+html.candlelight .search-input::placeholder,
+html.candlelight .rc-user-notes-area::placeholder,
+html.candlelight .market-fields input::placeholder,
+html.candlelight .market-add-form input::placeholder {
+  color: var(--night-placeholder);
+  opacity: 1;
+}
+html.candlelight .category-filter {
+  background: var(--night-surface);
+  color: var(--night-muted);
+  border-color: var(--night-border-soft);
+}
+html.candlelight .category-filter.active {
+  background: var(--night-coral);
+  color: var(--night-on-action);
+  border-color: var(--night-coral);
+}
+html.candlelight .featured-link { border: 1px solid var(--night-border); }
+html.candlelight .featured-food {
+  background: var(--night-photo-white);
+  border: 5px solid var(--night-photo-mat);
+  border-radius: 17px;
+}
+html.candlelight .featured-cta img,
+html.candlelight .rc-mise-btn img { filter: invert(.92); }
+
+html.candlelight .recipe-card {
+  background: var(--night-surface);
+  border-color: var(--night-border-soft);
+}
+html.candlelight .recipe-card.open { border-color: var(--night-border); }
+html.candlelight .rc-image {
+  background: var(--night-photo-white);
+  border: 6px solid var(--night-photo-mat);
+  border-radius: 18px;
+  overflow: hidden;
+}
+html.candlelight .rc-head:focus-visible {
+  outline-color: var(--night-gold);
+  outline-offset: -3px;
+  box-shadow: inset 0 0 0 6px var(--night-surface);
+}
+html.candlelight .recipe-card.open .rc-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--night-surface);
+}
+html.candlelight .recipe-card.open .rc-chip {
+  background: var(--night-raised);
+  color: var(--night-text);
+}
+html.candlelight .rc-ingredients,
+html.candlelight .rc-user-notes { background: var(--night-inset); }
+html.candlelight .rc-method { background: var(--night-surface); }
+html.candlelight .rc-notes { background: var(--night-raised); }
+html.candlelight .rc-note { border-left-color: var(--night-gold); }
+html.candlelight .rc-action-btn { border-color: var(--night-border); }
+html.candlelight .rc-mise-btn {
+  background: var(--night-surface);
+  color: var(--night-text);
+}
+html.candlelight .rc-scale-btn--active {
+  background: var(--night-coral);
+  color: var(--night-on-action);
+}
+html.candlelight .primary-link,
+html.candlelight .recipe-card.open .kitchen-btn,
+html.candlelight .rc-shop-btn,
+html.candlelight .kitchen-mode-btn,
+html.candlelight .market-copy,
+html.candlelight .market-add-form button {
+  background: var(--night-coral);
+  color: var(--night-on-action);
+  border-color: var(--night-coral);
+}
+html.candlelight .rc-action-btn:hover,
+html.candlelight .market-auto:hover {
+  background: var(--night-raised);
+  color: var(--night-text);
+  border-color: var(--night-gold);
+}
+html.candlelight .rc-user-notes-area,
+html.candlelight .market-fields input,
+html.candlelight .market-add-form input,
+html.candlelight .market-package {
+  color: var(--night-text);
+  background: var(--night-inset);
+  border-color: var(--night-control-border);
+}
+html.candlelight .rc-user-notes-area:focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: 3px;
+}
+html.candlelight .modal-overlay { background: rgb(36 27 32 / .8); }
+html.candlelight .modal-content {
+  background: var(--night-surface);
+  border-color: var(--night-border);
+  box-shadow: none;
+}
+html.candlelight .market-summary {
+  background: var(--night-raised);
+  border-top-color: var(--night-gold);
+}
+html.candlelight .market-auto {
+  background: var(--night-raised);
+  color: var(--night-text);
+}
+html.candlelight .market-check input { accent-color: var(--night-coral); }
+html.candlelight .market-remove,
+html.candlelight .market-calculation summary { color: var(--night-coral); }
+html.candlelight .market-fields input[aria-invalid="true"],
+html.candlelight .market-package[aria-invalid="true"] {
+  border-color: var(--night-coral);
+}
+html.candlelight .kitchen-mode-overlay { background: var(--night-bg); }
+html.candlelight .kitchen-mode-content {
+  max-width: 860px;
+  padding: clamp(20px, 4vw, 40px);
+  background: var(--night-surface);
+  border: 1px solid var(--night-border-soft);
+  border-radius: 24px;
+}
+html.candlelight .kitchen-mode-step-number { color: var(--night-gold); font-size: 28px; }
+html.candlelight .kitchen-mode-step-text { margin-bottom: 0; max-width: 100%; }
+html.candlelight .kitchen-mode-footer {
+  background: var(--night-nav);
+  border-top: 1px solid var(--night-border-soft);
+}
+html.candlelight .kitchen-voice-toggle,
+html.candlelight .kitchen-mode-close {
+  color: var(--night-text);
+  background: var(--night-surface);
+  border: 1px solid var(--night-border);
+  border-radius: 12px;
+}
+html.candlelight .kitchen-mode-btn:disabled {
+  background: var(--night-raised);
+  color: var(--night-muted);
+  border-color: var(--night-border-soft);
+}
+html.candlelight .timer-card { border-color: var(--night-border); }
+html.candlelight .mobile-nav [aria-current] { color: var(--night-gold); }
+html.candlelight .mobile-nav [aria-current] img {
+  background: var(--night-gold);
+  box-shadow: 0 0 0 4px var(--night-gold);
+  filter: none;
+}
+/* No image compositing or color treatment is used on food artwork. */
+html.candlelight .hero-food,
+html.candlelight .featured-food,
+html.candlelight .rc-image img {
+  filter: none;
+  opacity: 1;
+  mix-blend-mode: normal;
+  object-fit: contain;
+}
+@media (max-width: 900px) {
+  html.candlelight .hero { padding: 28px; gap: 26px; min-height: 440px; }
+  html.candlelight .hero-food { height: 290px; }
+}
+@media (max-width: 600px) {
+  html.candlelight .hero {
+    padding: 0;
+    gap: 18px;
+    min-height: 0;
+    background: transparent;
+    border: 0;
+  }
+  html.candlelight .hero-feature { border-width: 6px; border-radius: 22px; }
+  html.candlelight .hero-food { height: 230px; }
+  html.candlelight .hero-caption { padding: 5px 8px; }
+  html.candlelight .hero-slogan { margin-bottom: 14px; }
+  html.candlelight .hero-actions { margin-top: 20px; }
+  html.candlelight .featured-food { border-width: 4px; }
+  html.candlelight .rc-image { border-width: 5px; border-radius: 16px; }
+  html.candlelight .kitchen-mode-content { margin-top: 3rem; }
+}
+
+/* Progress occupies its own row so it never collides with the kitchen buttons. */
+html.candlelight .kitchen-mode-footer {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 180px));
+  gap: 8px 16px;
+  justify-content: center;
+  padding: 16px 24px;
+}
+html.candlelight #kitchen-mode-prev { grid-column: 1; grid-row: 1; }
+html.candlelight #kitchen-mode-next { grid-column: 2; grid-row: 1; }
+html.candlelight .kitchen-mode-progress {
+  position: static;
+  grid-column: 1 / -1;
+  grid-row: 2;
+  font-size: 12px;
+}
+html.candlelight .kitchen-mode-btn {
+  border-radius: 14px;
+  padding: 12px 20px;
+  font-size: 16px;
+}

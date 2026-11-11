@@ -1,0 +1,23 @@
+/* Adapted from Uiverse.io by RiccardoRapelli, jolly-chicken-91. MIT.
+   https://uiverse.io/RiccardoRapelli/jolly-chicken-91 */
+.el-guapo-theme-switch{position:relative;display:inline-block;width:60px;height:44px;flex:0 0 60px;order:3;cursor:pointer}
+.el-guapo-theme-switch .eg-ts-input{position:absolute;inset:0;width:60px;height:44px;opacity:0;margin:0;padding:0;z-index:2;cursor:pointer;border:0}
+.el-guapo-theme-switch .eg-ts-slider{position:absolute;inset:5px 0;background:#2196f3;border-radius:34px;overflow:hidden;isolation:isolate;transition:background-color 400ms;pointer-events:none}
+.el-guapo-theme-switch .eg-ts-sun-moon{position:absolute;width:26px;height:26px;left:4px;bottom:4px;background:#ffeb00;border-radius:50%;transition:transform 400ms,background-color 400ms;z-index:1}
+.el-guapo-theme-switch svg{position:absolute;display:block;max-width:none}
+.el-guapo-theme-switch .eg-ts-moon-dot{opacity:0;fill:#929292;transition:opacity 400ms;z-index:4}
+.el-guapo-theme-switch .eg-ts-light-ray{fill:white;opacity:.1;z-index:-1;transition:opacity 400ms}
+.el-guapo-theme-switch .eg-ts-cloud-light{fill:#eee;animation:eg-ts-cloud 6s infinite}
+.el-guapo-theme-switch .eg-ts-cloud-dark{fill:#ccc;animation:eg-ts-cloud 6s 1s infinite}
+.el-guapo-theme-switch .eg-ts-stars{position:absolute;inset:0;transform:translateY(-32px);opacity:0;transition:transform 400ms,opacity 400ms}
+.el-guapo-theme-switch .eg-ts-star{fill:white;animation:eg-ts-twinkle 2s infinite}
+.el-guapo-theme-switch .eg-ts-input:checked+.eg-ts-slider{background:#080b15}
+.el-guapo-theme-switch .eg-ts-input:checked+.eg-ts-slider .eg-ts-sun-moon{transform:translateX(26px);background:white;animation:eg-ts-rotate 600ms ease-in-out both}
+.el-guapo-theme-switch .eg-ts-input:checked+.eg-ts-slider .eg-ts-moon-dot{opacity:1}
+.el-guapo-theme-switch .eg-ts-input:checked+.eg-ts-slider .eg-ts-light-ray{opacity:0}
+.el-guapo-theme-switch .eg-ts-input:checked+.eg-ts-slider .eg-ts-stars{opacity:1;transform:translateY(0)}
+.el-guapo-theme-switch .eg-ts-input:focus-visible+.eg-ts-slider{outline:3px solid var(--ink);outline-offset:3px}
+@keyframes eg-ts-cloud{0%,100%{transform:translateX(0)}40%{transform:translateX(4px)}80%{transform:translateX(-4px)}}
+@keyframes eg-ts-twinkle{0%,100%{transform:scale(1)}40%{transform:scale(1.2)}80%{transform:scale(.8)}}
+@keyframes eg-ts-rotate{from{transform:translateX(26px) rotate(0)}to{transform:translateX(26px) rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.el-guapo-theme-switch *{animation:none!important;transition:none!important}}
