@@ -11,13 +11,14 @@
   }
   root.classList.add('eg-splash-pending');
   let ended = false, ready = false, artworkReady = false, fontsReady = false;
-  let exitTimer;
+  let exitTimer, minimumTimer, visibleSince;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const abort = new AbortController();
   const remove = () => {
     root.classList.remove('eg-splash-pending');
     document.getElementById('splash')?.remove();
     clearTimeout(exitTimer);
+    clearTimeout(minimumTimer);
     abort.abort();
   };
   function finish(immediate = false) {
@@ -30,7 +31,19 @@
     splash.setAttribute('aria-hidden', 'true');
     exitTimer = setTimeout(remove, 220);
   }
-  function maybeFinish() { if (ready && artworkReady && fontsReady) finish(); }
+  function maybeFinish() {
+    if (ended || !ready || !artworkReady || !fontsReady) return;
+    if (reduced.matches) { finish(true); return; }
+    if (visibleSince === undefined) return;
+    // Let the 520ms entrance complete, then briefly hold the composition.
+    // This minimum is measured from its first frame, not from resource readiness.
+    const remaining = 900 - (performance.now() - visibleSince);
+    if (remaining <= 0) { finish(); return; }
+    if (minimumTimer === undefined) minimumTimer = setTimeout(() => {
+      minimumTimer = undefined;
+      maybeFinish();
+    }, remaining);
+  }
   // Includes the 220ms exit; does not depend on transitionend or app script success.
   const safety = setTimeout(() => finish(), 1780);
   document.addEventListener('eg:ready', () => { ready = true; maybeFinish(); }, {once:true,signal:abort.signal});
@@ -40,6 +53,7 @@
     const splash = document.getElementById('splash');
     if (ended) { remove(); return; }
     if (!splash) { finish(true); return; }
+    requestAnimationFrame(() => { visibleSince = performance.now(); maybeFinish(); });
     splash.addEventListener('pointerdown', () => finish(true), {signal:abort.signal});
     const image = splash.querySelector('img');
     image.decode().then(() => { artworkReady = true; maybeFinish(); }, () => finish(true));

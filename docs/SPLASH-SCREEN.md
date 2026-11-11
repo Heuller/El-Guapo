@@ -2,7 +2,7 @@
 
 ## Publicação anterior
 
-A ordenação alfabética foi publicada primeiro, no commit `e022091`, com Vercel confirmado como sucesso e JavaScript v3.10 verificado no domínio público. Hero e destaque continuam apontando para o Bolo Prestígio. A splash descrita abaixo está somente no workspace, sem commit, push ou deploy, conforme o briefing.
+A ordenação alfabética foi publicada primeiro, no commit `e022091`, com Vercel confirmado como sucesso e JavaScript v3.10 verificado no domínio público. Hero e destaque continuam apontando para o Bolo Prestígio. A splash foi publicada posteriormente no commit `c819e81`. Esta revisão de duração foi autorizada pelo usuário após medir a versão publicada.
 
 ## Inspeção e composição
 
@@ -17,7 +17,7 @@ O código original de https://uiverse.io/Pradeepsaranbishnoi/tall-fish-38 foi co
 - `splash.js` executa no cabeçalho. Se houver preferência de sessão, hash ou um atalho PWA conhecido, a apresentação é pulada.
 - Primeira visita da sessão é registrada em `sessionStorage`, na chave nova `eg-splash-seen-v1`. Nenhuma chave de compras, receitas, anotações, tema ou temporizadores é migrada ou apagada.
 - O aplicativo inicializa normalmente. Ao terminar catálogo, controles, restauração dos timers e atalhos, emite `eg:ready`.
-- A saída depende desse sinal, da decodificação da foto principal e das duas fontes usadas na capa. Não espera outras fotos ou o cache completo do service worker. Não existe duração mínima artificial: em cache quente, a apresentação pode ser muito breve.
+- A saída depende desse sinal, da decodificação da foto principal e das duas fontes usadas na capa. Não espera outras fotos ou o cache completo do service worker. Após a revisão do usuário, a apresentação tem permanência mínima de 900ms desde o primeiro frame após DOMContentLoaded, seguida do fade de 220ms (aproximadamente 1,12s no fluxo normal). O prazo mínimo não reinicia quando os recursos ficam prontos. Erros, interação e movimento reduzido continuam liberando imediatamente.
 - Saída em 220ms; watchdog inicia a saída em 1.780ms, para concluir em aproximadamente 2s mesmo sem prontidão. Falha na foto ou fontes libera imediatamente. Os limites dependem da disponibilidade do event loop do navegador, não são garantia de tempo real durante travamentos do processo.
 - Tab, Escape, foco ou toque liberam a interface imediatamente. Não há foco preso, porcentagem inventada ou alteração de scroll/estilos do body. Ao sair, os dedos são pausados e o nó completo é removido; não sobra overlay capturando eventos.
 - Sem JavaScript, a splash fica oculta por padrão. Se o script principal falhar, o watchdog da splash ainda pode liberar o conteúdo HTML.
@@ -41,8 +41,13 @@ Não foi testado aparelho físico nem a splash nativa gerada pelo sistema operac
 
 ## Arquivos alterados
 
-Produção: `index.html`, `script.js`, `sw.js`, novos `splash.js`, `splash.css` e `assets/licenses/uiverse-hand-MIT.txt`. Cache preparado para v3.11, incluindo os recursos novos.
+Produção: `index.html`, `script.js`, `sw.js`, novos `splash.js`, `splash.css` e `assets/licenses/uiverse-hand-MIT.txt`. Cache preparado para v3.12, incluindo os recursos novos.
 
 Validação: `package.json`, `tests/content-baseline.json`, `tests/service-worker.test.mjs`, `tests/cache-upgrade-browser.test.mjs`, `tests/dark-theme-browser.test.mjs`, `tests/redesign-browser.test.mjs`, novo `tests/splash-browser.test.mjs` e `scripts/capture-splash.mjs`. Os testes existentes receberam apenas a nova versão dos recursos e o hash do HTML; conteúdo, fórmulas e imagens do catálogo não mudaram.
 
-Documentação: este relatório. A versão pública permanece em v3.10 até a revisão das capturas e autorização para publicar a splash.
+Documentação: este relatório. A atualização de duração está autorizada para publicação em v3.12.
+
+
+## Revisão do tempo de apresentação
+
+A medição da versão v3.11 em produção mostrou 0,42–0,50s na abertura comum e cerca de 1,8s em rede lenta. A saída começava antes de a entrada do bolo (520ms) terminar. A pedido do usuário, o fluxo comum agora respeita 900ms de apresentação antes do fade, mantendo o watchdog de aproximadamente 2s, atalhos e links diretos sem splash e ausência de repetição na mesma sessão. Movimento reduzido não recebe essa permanência mínima. Novo teste cobre prontidão tardia sem adicionar outra espera e Escape durante a permanência. A suíte agora reúne 124 testes.

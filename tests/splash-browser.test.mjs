@@ -11,13 +11,13 @@ beforeEach(async()=>{
  await a.evaluate(`sessionStorage.clear();localStorage.clear()`);
 });
 async function install(code){hook=(await a.send('Page.addScriptToEvaluateOnNewDocument',{source:code})).identifier;}
-const hold=`(()=>{const original=HTMLImageElement.prototype.decode;window.__originalDecode=original;HTMLImageElement.prototype.decode=function(){return this.closest('#splash')?new Promise(resolve=>window.__releaseCover=resolve):original.call(this)};document.addEventListener('eg:ready',()=>window.__appReady=true,{once:true})})()`;
+const hold=`(()=>{const original=HTMLImageElement.prototype.decode;window.__originalDecode=original;HTMLImageElement.prototype.decode=function(){return this.closest('#splash')?new Promise(resolve=>window.__releaseCover=resolve):original.call(this)};document.addEventListener('eg:ready',()=>window.__appReady=true,{once:true});document.addEventListener('DOMContentLoaded',()=>requestAnimationFrame(()=>window.__coverFrame=performance.now()),{once:true})})()`;
 async function nav(suffix=''){const url=await a.evaluate(`location.origin+'/' + ${JSON.stringify(suffix)}`);await a.send('Page.navigate',{url});await a.wait(`document.readyState==='complete'&&!!document.querySelector('.candle-toggle')`);}
 const exists=()=>a.evaluate(`!!document.querySelector('#splash')`);
-test('first session waits for essential artwork and readiness, then exits without a fixed brand delay; reload and internal actions do not replay',async()=>{
+test('first session waits for essential artwork and readiness, allows the entrance to complete before exiting; reload and internal actions do not replay',async()=>{
  await install(hold);await nav();assert.equal(await a.evaluate(`document.documentElement.classList.contains('eg-splash-pending')&&window.__appReady`),true);
  assert.equal(await a.evaluate(`sessionStorage.getItem('eg-splash-seen-v1')`),'true');
- const before=await a.evaluate('performance.now()');await a.evaluate(`window.__releaseCover()`);await a.wait(`!document.querySelector('#splash')`);assert.ok(await a.evaluate('performance.now()')-before<700);
+ const before=await a.evaluate('performance.now()');await a.evaluate(`window.__releaseCover()`);await a.wait(`!document.querySelector('#splash')`);assert.ok(await a.evaluate('performance.now()')-before<1500);assert.ok(await a.evaluate('performance.now()-window.__coverFrame')>=1100);
  await a.evaluate(`document.querySelector('.candle-toggle').click();document.querySelector('#pizza-massa-base .rc-head').click();document.querySelector('#pizza-massa-base [data-mult="2"]').click();document.querySelector('#pizza-massa-base .kitchen-btn').click();document.querySelector('#kitchen-mode-close').click();document.querySelector('.nav-btn-shopping').click();document.querySelector('#modal-close').click()`);assert.equal(await exists(),false);
  await nav();assert.equal(await exists(),false);
  await a.evaluate('sessionStorage.clear()');await nav();assert.equal(await exists(),true);await a.evaluate(`window.__releaseCover()`);await a.wait(`!document.querySelector('#splash')`);
@@ -57,4 +57,9 @@ test('slow network still releases the cover and leaves the initialized recipe co
   assert.ok(await a.evaluate(`!window.__coverEnd||window.__coverEnd-window.__coverStart<2400`));
   await a.evaluate(`document.querySelector('#pizza-massa-base .rc-head').click();document.querySelector('#pizza-massa-base [data-mult="2"]').click()`);assert.equal(await a.evaluate(`document.querySelector('#pizza-massa-base .rc-ing-qty').textContent`),'1000 g');
  }finally{await a.send('Network.setBypassServiceWorker',{bypass:false});await a.send('Network.setCacheDisabled',{cacheDisabled:false});}
+});
+test('late artwork readiness does not add another minimum and keyboard can bypass the presentation hold',async()=>{
+ await install(hold);await nav();await a.wait('performance.now()-window.__coverFrame>=1000');
+ const before=await a.evaluate('performance.now()');await a.evaluate('window.__releaseCover()');await a.wait(`!document.querySelector('#splash')`);assert.ok(await a.evaluate('performance.now()')-before<650);
+ await a.evaluate('sessionStorage.clear()');await nav();await a.evaluate('window.__releaseCover()');await a.send('Input.dispatchKeyEvent',{type:'keyDown',key:'Escape',code:'Escape',windowsVirtualKeyCode:27});assert.equal(await exists(),false);
 });
