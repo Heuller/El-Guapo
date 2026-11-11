@@ -12,7 +12,7 @@ self.addEventListener('fetch',e=>{if(e.request.method!=='GET')return;e.respondWi
 const legacyCSS='/* cached before redesign */ body{background:#ede4d1} .nav-brand{letter-spacing:8px;text-transform:uppercase}.hero{min-height:100vh}';
 
 test('an existing visitor upgrades from cached legacy CSS in one reload without losing local data',async()=>{
- const html=(await readFile(new URL('../index.html',import.meta.url),'utf8')).replaceAll('?v=3.5','');
+ const html=(await readFile(new URL('../index.html',import.meta.url),'utf8')).replaceAll('?v=3.6','');
  const app=await browser({overrides:{'index.html':html,'style.css':legacyCSS,'sw.js':legacyWorker}});
  try {
   await app.send('Emulation.setDeviceMetricsOverride',{width:390,height:844,deviceScaleFactor:1,mobile:true});

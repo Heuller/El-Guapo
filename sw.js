@@ -1,27 +1,31 @@
 /**
  * ═══════════════════════════════════════════════════════════════════
- * EL GUAPO SERVICE WORKER v3.5
+ * EL GUAPO SERVICE WORKER v3.6
  * Cache Strategy: Network-First para HTML, Cache-First para assets
  * Suporte offline completo + sincronização em background
  * ═══════════════════════════════════════════════════════════════════
  */
 
-const CACHE_NAME = 'el-guapo-v3.5';
-const ASSETS_CACHE = 'el-guapo-assets-v3.5';
-const RUNTIME_CACHE = 'el-guapo-runtime-v3.5';
+const CACHE_NAME = 'el-guapo-v3.6';
+const ASSETS_CACHE = 'el-guapo-assets-v3.6';
+const RUNTIME_CACHE = 'el-guapo-runtime-v3.6';
 
 const ASSETS_TO_CACHE = [
     "./",
     "./index.html",
     "./manifest.json",
     "./sw.js",
-    "./style.css?v=3.5",
-    "./dark-theme.css?v=3.5",
-    "./theme-switch.css?v=3.5",
-    "./script.js?v=3.5",
-    "./shopping-list.js?v=3.5",
-    "./ingredient-catalog.js?v=3.5",
-    "./shopping-model.js?v=3.5",
+    "./style.css?v=3.6",
+    "./dark-theme.css?v=3.6",
+    "./theme-switch.css?v=3.6",
+    "./timer-player.css?v=3.6",
+    "./assets/icons/clock.svg",
+    "./assets/icons/pause.svg",
+    "./assets/icons/play.svg",
+    "./script.js?v=3.6",
+    "./shopping-list.js?v=3.6",
+    "./ingredient-catalog.js?v=3.6",
+    "./shopping-model.js?v=3.6",
     "./assets/fonts/DM-Sans-OFL.txt",
     "./assets/fonts/Fraunces-OFL.txt",
     "./assets/fonts/dm-sans-400-normal.ttf",
@@ -33,7 +37,7 @@ const ASSETS_TO_CACHE = [
     "./assets/fonts/fraunces-600-italic.ttf",
     "./assets/fonts/fraunces-600-normal.ttf",
     "./assets/fonts/fraunces-700-normal.ttf",
-    "./assets/fonts.css?v=3.5",
+    "./assets/fonts.css?v=3.6",
     "./assets/icons/LICENSE",
     "./assets/icons/arrow-up-right.svg",
     "./assets/icons/book-open.svg",
@@ -191,4 +195,4 @@ self.addEventListener('message', (event) => {
     }
 });
 
-console.log('[SW] Service Worker v3.5 carregado com sucesso!');
+console.log('[SW] Service Worker v3.6 carregado com sucesso!');

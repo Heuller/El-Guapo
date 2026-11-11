@@ -216,7 +216,7 @@
       if (head) {
         e.preventDefault();
         head.click();
-      } else if (timerCard) {
+      } else if (timerCard && !e.target.closest("button")) {
         e.preventDefault();
         timerCard.click();
       }
@@ -417,13 +417,10 @@
 
   /* ── 7. TIMERS CONTEXTUAIS ── */
   function fmtTime(secs) {
-    if (secs <= 0) return "0s";
-    const h = Math.floor(secs / 3600);
-    const m = Math.floor((secs % 3600) / 60);
-    const s = secs % 60;
-    if (h > 0) return `${h}h${m > 0 ? " " + m + "min" : ""}`;
-    if (m > 0) return `${m}min${s > 0 ? " " + s + "s" : ""}`;
-    return `${s}s`;
+    const n = Math.max(0, Math.ceil(secs));
+    const parts = [Math.floor(n / 60) % 60, n % 60].map(v => String(v).padStart(2, "0"));
+    if (n >= 3600) parts.unshift(String(Math.floor(n / 3600)).padStart(2, "0"));
+    return parts.join(":");
   }
 
   function playBell() {
@@ -447,149 +444,93 @@
     } catch (_) {}
   }
 
-  function launchTimer(seconds, label) {
-    // Se o usuário clicar em um timer que já existe com o mesmo label, pausar/retomar
-    for (const [tid, tObj] of timerMap.entries()) {
-      if (tObj.label === label) {
-        if (tObj.paused) {
-          resumeTimer(tid);
-        } else {
-          pauseTimer(tid);
-        }
-        return;
-      }
+  const TIMER_KEY = "eg-timers-v1";
+  function saveTimers() {
+    try { localStorage.setItem(TIMER_KEY, JSON.stringify([...timerMap.values()].map(t => ({id:t.id,label:t.label,totalSeconds:t.totalSeconds,remaining:t.remaining,paused:t.paused,deadline:t.deadline,done:t.done})))); } catch (_) {}
+  }
+  function launchTimer(seconds, label, saved = null) {
+    if (!Number.isFinite(seconds) || seconds <= 0) return;
+    for (const [id,t] of timerMap) if (t.label === label && !saved) {
+      if (!t.done) t.paused ? resumeTimer(id) : pauseTimer(id);
+      return;
     }
-
-    // Criar novo timer (suporta múltiplos agora)
-    const id = `t${Date.now()}`;
-    const circumference = 2 * Math.PI * 17;
-
+    const id = saved?.id || `t${Date.now()}-${Math.random().toString(36).slice(2,8)}`;
     const card = document.createElement("div");
-    card.className = "timer-card";
-    card.id = id;
-    card.setAttribute("role", "status");
-    card.setAttribute("aria-live", "polite");
-    card.setAttribute("tabindex", "0");
-    card.innerHTML = `
-            <div class="timer-ring-wrap" aria-hidden="true">
-                <svg class="timer-ring-svg" viewBox="0 0 42 42">
-                    <circle class="timer-ring-bg" cx="21" cy="21" r="17"/>
-                    <circle class="timer-ring-progress" cx="21" cy="21" r="17"
-                        stroke-dasharray="${circumference.toFixed(2)}"
-                        stroke-dashoffset="0"/>
-                </svg>
-                <span class="timer-ring-time">${fmtTime(seconds)}</span>
-            </div>
-            <div class="timer-info">
-                <span class="timer-label">${label}</span>
-                <span class="timer-status" aria-label="Tempo restante">${fmtTime(seconds)}</span>
-            </div>
-            <button class="timer-cancel" aria-label="Cancelar timer ${label}" title="Cancelar">×</button>`;
-
-    if (timerDock) timerDock.appendChild(card);
-
-    // Ao clicar no card, pausa/retoma
-    card.addEventListener("click", (e) => {
-      if (e.target.closest(".timer-cancel")) return;
-      const tObj = timerMap.get(id);
-      if (tObj) {
-        if (tObj.paused) resumeTimer(id);
-        else pauseTimer(id);
-      }
-    });
-
-    const timerObj = {
-      id,
-      label,
-      totalSeconds: seconds,
-      remaining: seconds,
-      paused: false,
-      interval: null,
-      circumference,
-    };
-
-    timerMap.set(id, timerObj);
-    startTimerInterval(id);
-
-    const cancelBtn = card.querySelector(".timer-cancel");
-    cancelBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      removeTimer(id);
-    });
+    card.className = "timer-card"; card.id = id;
+    card.setAttribute("role", "group"); card.setAttribute("aria-label", `Temporizador: ${label}`);
+    card.innerHTML = `<img class="timer-clock" src="assets/icons/clock.svg" alt="" width="18" height="18" />
+      <div class="timer-info"><span class="timer-label"></span><span class="timer-time" role="timer" aria-live="off"></span><span class="timer-status" role="status" aria-live="polite"></span></div>
+      <button type="button" class="timer-pause" aria-label="Pausar temporizador"><img src="assets/icons/pause.svg" alt="" width="20" height="20" /></button>
+      <button type="button" class="timer-cancel" aria-label="Encerrar temporizador"><img src="assets/icons/x.svg" alt="" width="20" height="20" /></button>
+      <progress class="timer-progress" max="1" value="1" aria-label="Tempo restante"></progress>`;
+    card.querySelector('.timer-label').textContent = label;
+    timerDock?.append(card);
+    const t = {id,label,totalSeconds:seconds,remaining:saved?.remaining ?? seconds,paused:saved?.paused ?? false,deadline:saved?.deadline ?? Date.now()+seconds*1000,done:saved?.done ?? false,interval:null};
+    timerMap.set(id,t);
+    card.querySelector('.timer-pause').addEventListener('click',()=>t.paused?resumeTimer(id):pauseTimer(id));
+    card.querySelector('.timer-cancel').addEventListener('click',()=>removeTimer(id));
+    if (t.done) { updateTimerUI(id); setTimeout(()=>removeTimer(id),30000); }
+    else startTimerInterval(id);
+    saveTimers();
   }
-
+  function tickTimer(id) {
+    const t = timerMap.get(id); if (!t || t.done) return;
+    if (!t.paused) t.remaining = Math.max(0, Math.ceil((t.deadline-Date.now())/1000));
+    if (t.remaining === 0) {
+      t.done = true; clearInterval(t.interval);
+      updateTimerUI(id); saveTimers(); playBell();
+      setTimeout(()=>removeTimer(id),30000);
+    } else updateTimerUI(id);
+  }
   function startTimerInterval(id) {
-    const tObj = timerMap.get(id);
-    if (!tObj) return;
-
-    tObj.interval = setInterval(() => {
-      if (tObj.paused) return;
-
-      tObj.remaining--;
-      updateTimerUI(id);
-
-      if (tObj.remaining <= 0) {
-        clearInterval(tObj.interval);
-        const card = document.getElementById(id);
-        if (card) {
-          card.classList.add("timer-done");
-          card.querySelector(".timer-status").textContent = "Concluído!";
-        }
-        playBell();
-        // Remove automaticamente após 30s se concluído
-        setTimeout(() => removeTimer(id), 30000);
-      }
-    }, 1000);
+    const t = timerMap.get(id); if (!t) return;
+    clearInterval(t.interval); tickTimer(id);
+    if (!t.done) t.interval = setInterval(()=>tickTimer(id),250);
   }
-
   function updateTimerUI(id) {
-    const tObj = timerMap.get(id);
-    const card = document.getElementById(id);
-    if (!tObj || !card) return;
-
-    const progressEl = card.querySelector(".timer-ring-progress");
-    const timeEl = card.querySelector(".timer-ring-time");
-    const statusEl = card.querySelector(".timer-status");
-
-    const progress = tObj.remaining / tObj.totalSeconds;
-    const offset = tObj.circumference * (1 - progress);
-
-    if (progressEl) progressEl.style.strokeDashoffset = offset.toFixed(2);
-    if (timeEl) timeEl.textContent = fmtTime(tObj.remaining);
-    if (statusEl)
-      statusEl.textContent = tObj.paused ? "Pausado" : fmtTime(tObj.remaining);
+    const t = timerMap.get(id), card = document.getElementById(id); if (!t || !card) return;
+    card.querySelector('.timer-time').textContent = fmtTime(t.remaining);
+    const status = t.done ? 'Concluído!' : t.paused ? 'Pausado' : 'Em andamento';
+    const statusEl = card.querySelector('.timer-status');
+    if (statusEl.textContent !== status) statusEl.textContent = status;
+    card.querySelector('.timer-progress').value = Math.max(0,Math.min(1,t.remaining/t.totalSeconds));
+    const button = card.querySelector('.timer-pause'); button.disabled = t.done;
+    button.setAttribute('aria-label',t.paused?'Retomar temporizador':'Pausar temporizador');
+    button.querySelector('img').src = `assets/icons/${t.paused?'play':'pause'}.svg`;
+    card.classList.toggle('paused',t.paused); card.classList.toggle('timer-done',t.done);
   }
-
   function pauseTimer(id) {
-    const tObj = timerMap.get(id);
-    if (!tObj) return;
-    tObj.paused = true;
-    const card = document.getElementById(id);
-    if (card) card.classList.add("paused");
-    updateTimerUI(id);
+    const t = timerMap.get(id); if (!t || t.done) return;
+    tickTimer(id); if(t.done) return;
+    t.paused = true; updateTimerUI(id); saveTimers();
   }
-
   function resumeTimer(id) {
-    const tObj = timerMap.get(id);
-    if (!tObj) return;
-    tObj.paused = false;
-    const card = document.getElementById(id);
-    if (card) card.classList.remove("paused");
-    updateTimerUI(id);
+    const t = timerMap.get(id); if (!t || t.done) return;
+    t.deadline = Date.now()+t.remaining*1000; t.paused = false;
+    updateTimerUI(id); saveTimers();
   }
-
   function removeTimer(id) {
-    const tObj = timerMap.get(id);
-    if (!tObj) return;
-
-    clearInterval(tObj.interval);
-    const card = document.getElementById(id);
-    if (card) {
-      card.classList.add("timer-removing");
-      setTimeout(() => card.remove(), 340);
-    }
-    timerMap.delete(id);
+    const t=timerMap.get(id); if(!t)return;
+    clearInterval(t.interval); document.getElementById(id)?.remove(); timerMap.delete(id); saveTimers();
   }
+  function restoreTimers() {
+    try {
+      const items = JSON.parse(localStorage.getItem(TIMER_KEY)||'[]');
+      if (Array.isArray(items)) items.slice(0,30).forEach(t=>{
+        if(t && typeof t.id==='string' && /^t[\w-]+$/.test(t.id) && typeof t.label==='string' && Number.isFinite(t.totalSeconds) && t.totalSeconds>0 && t.totalSeconds<=86400 && Number.isFinite(t.remaining) && t.remaining>=0 && t.remaining<=t.totalSeconds && typeof t.paused==='boolean' && typeof t.done==='boolean' && !timerMap.has(t.id) && Number.isFinite(t.deadline)) launchTimer(t.totalSeconds,t.label,t);
+      });
+    } catch (_) {}
+    const layout = () => {
+      const nav=document.querySelector('.mobile-nav'), kitchen=document.querySelector('.kitchen-mode-footer');
+      const offset=Math.max(nav?.getBoundingClientRect().height||0,kitchen?.getBoundingClientRect().height||0);
+      document.documentElement.style.setProperty('--timer-bottom', `${offset?offset+10:24}px`);
+      document.documentElement.style.setProperty('--timer-height', `${timerDock?.getBoundingClientRect().height||0}px`);
+    };
+    const observer = new ResizeObserver(layout);
+    [timerDock,document.querySelector('.mobile-nav'),document.querySelector('.kitchen-mode-footer')].filter(Boolean).forEach(e=>observer.observe(e));
+    window.addEventListener('resize',layout); layout();
+  }
+  document.addEventListener('visibilitychange',()=>{ if(!document.hidden)timerMap.forEach(t=>tickTimer(t.id)); });
 
   function injectTimerButtons(root) {
     const scope = root || document;
@@ -656,7 +597,8 @@
         const btn = document.createElement("button");
         btn.className = "timer-btn";
         btn.setAttribute("data-seconds", foundTime);
-        btn.setAttribute("data-label", timeLabel);
+        const stepNumber = stepEl.closest(".rc-step")?.querySelector(".rc-step-num")?.textContent.trim() || (stepEl.id === "kitchen-mode-step-text" ? String(currentStepIndex + 1) : "");
+        btn.setAttribute("data-label", stepNumber ? `Etapa ${Number(stepNumber) || stepNumber} · ${timeLabel}` : timeLabel);
         btn.innerHTML = `<svg class="timer-btn-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> <span>ativar timer: ${timeLabel}</span>`;
 
         if (stepEl.id === "kitchen-mode-step-text") {
@@ -1122,5 +1064,6 @@
 
     // Garante que os botões de timer sejam injetados em todas as receitas no início
     injectTimerButtons();
+    restoreTimers();
   });
 })();

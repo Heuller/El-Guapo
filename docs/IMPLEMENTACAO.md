@@ -124,3 +124,7 @@ HTML e precache preparados com URLs v3.4 e stylesheet noturno, respeitando a cor
 Substituído o controle anterior por checkbox nativo com role switch, baseado no componente de RiccardoRapelli/Uiverse (MIT, atribuição no código). Desenho 60×34 px dentro de área interativa 60×44 px. CSS isolado em `theme-switch.css`; sol, lua, crateras, raios, nuvens e estrelas preservados, com rotação definida e movimento reduzido respeitado. Mantida a chave `eg-candlelight`; checked deriva do tema real. Preferência aplicada no head antes da renderização. URLs/precache preparados em v3.5, sem publicação.
 
 77 testes existentes passaram; teste específico adicional verifica dimensões, Espaço, persistência e movimento reduzido. Capturas dos cabeçalhos em `test-results/theme-switch/`, mobile e desktop nos dois estados. Licença original consultada em https://uiverse.io/RiccardoRapelli/jolly-chicken-91 e preservada em `assets/licenses/`.
+
+## Temporizador flutuante — miniplayer (local)
+
+Substituídos anel e tempo sobreposto por contador tabular independente, controles nativos e barra horizontal. CSS isolado em `timer-player.css`; temas preservados. Corrigido atraso de contagem em segundo plano com deadline; acrescentada persistência, ausente anteriormente, reutilizando o mapa/funções de timer. 82 testes aprovados e capturas nos dois temas e dispositivos. Ver `docs/TEMPORIZADOR.md` para detalhes e limites dos avisos. URLs/precache preparados em v3.6. Sem publicação.
